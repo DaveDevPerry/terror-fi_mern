@@ -37,7 +37,8 @@ const StyledAlbumCard = styled.li`
 	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 	border-radius: 0.5rem;
 	img.album-cover-artwork {
-		width: 15%;
+		width: 20%;
+		/* width: 15%; */
 		aspect-ratio: 1501 / 2376;
 	}
 	.album-info-container {

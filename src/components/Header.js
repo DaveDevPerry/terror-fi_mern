@@ -45,7 +45,7 @@ const StyledHeader = styled.header`
 	flex-direction: row;
 	padding: 1rem;
 	position: relative;
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 	.page-heading {
 		font-family: 'BadSignal';
 		font-size: 4rem;

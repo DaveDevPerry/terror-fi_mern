@@ -18,6 +18,7 @@ function App() {
 			<GlobalStyles />
 			<StateContext>
 				<div className='App'>
+					<div className='background'></div>
 					<BrowserRouter>
 						<AnimatedRoutes
 							user={user}

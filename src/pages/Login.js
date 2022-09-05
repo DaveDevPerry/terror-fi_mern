@@ -81,6 +81,7 @@ const StyledLogin = styled(motion.div)`
 	flex: 1;
 	justify-content: space-between;
 	align-items: center;
+	/* position: relative; */
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
 		border: 2px solid ${({ theme }) => theme.bgGrey};
@@ -88,7 +89,8 @@ const StyledLogin = styled(motion.div)`
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
-		margin-top: 10rem;
+		margin-top: 5rem;
+		/* margin-top: 10rem; */
 		border-radius: 0.5rem;
 		position: relative;
 		h1#brand {
@@ -114,7 +116,8 @@ const StyledLogin = styled(motion.div)`
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
-		margin-bottom: 10rem;
+		margin-bottom: 5rem;
+		/* margin-bottom: 10rem; */
 		border-radius: 0.5rem;
 		position: relative;
 		.launch-btn {
@@ -139,19 +142,23 @@ const StyledLogin = styled(motion.div)`
 		flex-direction: column;
 		row-gap: 1rem;
 		padding: 2rem;
-		background: ${({ theme }) => theme.white};
+		background: ${({ theme }) => theme.bgCircle};
+		border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+		/* background: ${({ theme }) => theme.white}; */
 		border-radius: 4px;
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		h3 {
 			text-align: center;
 			margin: 0;
-			color: ${({ theme }) => theme.txtDarkGrey};
+			/* color: ${({ theme }) => theme.txtDarkGrey}; */
+			color: ${({ theme }) => theme.white};
 		}
 		input {
 			padding: 0.8rem 1rem;
 			margin: 0;
 			font-size: 1.8rem;
-			color: ${({ theme }) => theme.txtGrey};
+			/* color: ${({ theme }) => theme.txtGrey}; */
+			color: ${({ theme }) => theme.white};
 			flex: 1;
 			&:focus {
 				outline: none;
@@ -170,7 +177,8 @@ const StyledLogin = styled(motion.div)`
 	}
 	p {
 		text-align: center;
-		color: ${({ theme }) => theme.txtDarkGrey};
+		/* color: ${({ theme }) => theme.txtDarkGrey}; */
+		color: ${({ theme }) => theme.white};
 		a {
 			color: ${({ theme }) => theme.secondaryColor};
 			text-decoration: none;
@@ -179,7 +187,8 @@ const StyledLogin = styled(motion.div)`
 	label,
 	input {
 		display: block;
-		color: ${({ theme }) => theme.txtGrey};
+		/* color: ${({ theme }) => theme.txtGrey}; */
+		color: ${({ theme }) => theme.white};
 	}
 	input {
 		padding: 10px;

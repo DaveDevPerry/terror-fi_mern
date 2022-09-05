@@ -43,7 +43,9 @@ const StyledAppDetails = styled.div`
 	justify-content: space-between;
 	padding: 2rem 1rem;
 	padding-bottom: 3rem;
-	background: ${({ theme }) => theme.white};
+	/* background: ${({ theme }) => theme.white}; */
+	background: ${({ theme }) => theme.bgCircle};
+	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 	border-radius: 4px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 	transition: all 200ms linear;
@@ -94,8 +96,10 @@ const Brand = styled.div`
 	font-weight: lighter;
 	text-align: center;
 	line-height: 1;
+	color: ${({ theme }) => theme.txtGrey};
 	span {
 		font-weight: bolder;
+		/* color: ${({ theme }) => theme.txtGrey}; */
 	}
 	span:last-child {
 		color: ${({ theme }) => theme.red};

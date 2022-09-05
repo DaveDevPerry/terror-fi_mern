@@ -1,6 +1,9 @@
 export const lightTheme = {
 	primaryColor: '#d71313',
 	secondaryColor: '#f2f0f0',
+	error: '#e7195a',
+	bgError: '#ffefef',
+	borderGrey: '#ddd',
 	bgGrey: '#36383a',
 	bgLightGrey: '#e3e3e3',
 	white: '#ffffff',
@@ -21,6 +24,9 @@ export const lightTheme = {
 export const darkTheme = {
 	primaryColor: '#d71313',
 	secondaryColor: '#f2f0f0',
+	error: '#e7195a',
+	bgError: '#ffefef',
+	borderGrey: '#ddd',
 	bgGrey: '#36383a',
 	white: '#ffffff',
 	txtGrey: '#a8a6a6',

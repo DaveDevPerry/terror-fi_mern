@@ -1,9 +1,22 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
+// import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import playerContext from '../context/playerContext';
 // import ProgressBar from './ProgressBar';
 
-function Controls() {
+function Controls({
+	dur,
+	setDur,
+	currentTime,
+	setCurrentTime,
+	fmtMSS,
+	handleProgress,
+	audio,
+	stateVolume,
+	setStateVolume,
+	toggleAudio,
+	handleVolume,
+}) {
 	// Global State
 	const {
 		currentSong,
@@ -20,30 +33,30 @@ function Controls() {
 		songslist,
 	} = useContext(playerContext);
 
-	const audio = useRef('audio_tag');
+	// const audio = useRef('audio_tag');
 
 	// self State
-	const [stateVolume, setStateVolume] = useState(0.3);
-	const [dur, setDur] = useState(0);
-	const [currentTime, setCurrentTime] = useState(0);
+	// const [stateVolume, setStateVolume] = useState(0.3);
+	// const [dur, setDur] = useState(0);
+	// const [currentTime, setCurrentTime] = useState(0);
 
-	const fmtMSS = (s) => {
-		return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + ~~s;
-	};
+	// const fmtMSS = (s) => {
+	// 	return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + ~~s;
+	// };
 
-	const toggleAudio = () =>
-		audio.current.paused ? audio.current.play() : audio.current.pause();
+	// const toggleAudio = () =>
+	// 	audio.current.paused ? audio.current.play() : audio.current.pause();
 
-	const handleVolume = (q) => {
-		setStateVolume(q);
-		audio.current.volume = q;
-	};
+	// const handleVolume = (q) => {
+	// 	setStateVolume(q);
+	// 	audio.current.volume = q;
+	// };
 
-	const handleProgress = (e) => {
-		let compute = (e.target.value * dur) / 100;
-		setCurrentTime(compute);
-		audio.current.currentTime = compute;
-	};
+	// const handleProgress = (e) => {
+	// 	let compute = (e.target.value * dur) / 100;
+	// 	setCurrentTime(compute);
+	// 	audio.current.currentTime = compute;
+	// };
 
 	useEffect(() => {
 		audio.current.volume = stateVolume;
@@ -56,7 +69,7 @@ function Controls() {
 	return (
 		<StyledControls className='controls'>
 			<div className='upper-container'>
-				<div className='progressb'>
+				{/* <div className='progressb'>
 					<span className='currentT'>{fmtMSS(currentTime)}</span>
 					<input
 						onChange={handleProgress}
@@ -67,13 +80,7 @@ function Controls() {
 					/>
 
 					<span className='totalT'>{fmtMSS(dur)}</span>
-					{/* <div className='songMeta'>
-						<span className='songtitle'>{songslist[currentSong].title}</span>
-						<span className='songartistName'>
-							{songslist[currentSong].artistName}
-						</span>
-					</div> */}
-				</div>
+				</div> */}
 				<div className='songMeta'>
 					<span className='songtitle'>{songslist[currentSong].title}</span>
 					<span className='songartistName'>
@@ -190,7 +197,7 @@ const StyledControls = styled.div`
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		.progressb {
+		/* .progressb {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -204,7 +211,7 @@ const StyledControls = styled.div`
 				width: 35px;
 				margin: 0 1rem;
 			}
-		}
+		} */
 		.songMeta {
 			width: 100%;
 			display: flex;
@@ -213,15 +220,20 @@ const StyledControls = styled.div`
 			flex-direction: column;
 			flex: 1 1;
 			.songtitle {
-				font-size: 1.125em;
-				font-weight: 600;
+				font-size: 1.8rem;
+				/* font-size: 1.125em; */
+				/* font-weight: 600; */
 				width: 100%;
 				text-align: center;
 			}
 			.songartistName {
-				font-size: 0.8em;
+				font-size: 1.4rem;
+				/* font-size: 0.8em; */
 				width: 100%;
 				text-align: center;
+				color: ${({ theme }) => theme.primaryColor};
+				font-weight: 800;
+				text-transform: uppercase;
 			}
 		}
 	}
@@ -235,10 +247,13 @@ const StyledControls = styled.div`
 			display: flex;
 			align-content: center;
 			overflow: hidden;
-			width: 40%;
+			/* width: 40%; */
+			/* width: 40%; */
+			width: 8rem;
 			transition: all 500ms;
 			&:hover {
-				width: 40%;
+				/* width: 40%; */
+				width: 8rem;
 			}
 		}
 		.volum {
@@ -265,8 +280,13 @@ const StyledControls = styled.div`
 			display: none;
 		}
 		.musicControls {
-			width: 60%;
+			/* width: 60%; */
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			text-align: center;
+			flex: 1;
+			column-gap: 1.4rem;
 			span {
 				cursor: pointer;
 				&:hover {
@@ -291,7 +311,7 @@ const StyledControls = styled.div`
 			}
 			.prev {
 				/* background: #4aa9de; */
-				background-color: ${({ theme }) => theme.primaryColor};
+				/* background-color: ${({ theme }) => theme.primaryColor}; */
 				border-radius: 1rem 0 0px 1rem;
 				padding-left: 15px;
 				padding-right: 1rem;
@@ -300,7 +320,7 @@ const StyledControls = styled.div`
 			}
 			.next {
 				/* background: #4aa9de; */
-				background-color: ${({ theme }) => theme.primaryColor};
+				/* background-color: ${({ theme }) => theme.primaryColor}; */
 				border-radius: 0px 1rem 1rem 0px;
 				padding-right: 15px;
 				padding-left: 1rem;
@@ -311,7 +331,8 @@ const StyledControls = styled.div`
 		.plsoptions {
 			display: flex;
 			justify-content: space-evenly;
-			width: 40%;
+			/* width: 40%; */
+			width: 8rem;
 			span {
 				cursor: pointer;
 				z-index: 29;

@@ -76,6 +76,9 @@ const StyledPlaylist = styled.div`
 	flex: 1;
 	overflow-y: scroll;
 	z-index: 1;
+	/* border: 2px solid green; */
+	/* padding: 0 1rem; */
+	margin: 0 1rem;
 	&.no_drag {
 		-webkit-app-region: no-drag;
 	}

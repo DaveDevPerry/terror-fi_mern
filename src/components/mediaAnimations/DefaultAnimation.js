@@ -43,7 +43,8 @@ const StyledDefaultAnimation = styled(motion.div)`
 	transition: 0.5s ease linear;
 	.default-cover {
 		// width: 100%;
-		height: 20rem;
+		height: 15rem;
+		/* height: 20rem; */
 		// object-fit: cover;
 		border-radius: 2rem;
 		margin: 0;
