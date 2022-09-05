@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import styled from 'styled-components';
@@ -9,12 +9,33 @@ import Header from '../components/Header';
 import AlbumCard from '../components/AlbumCard';
 import { useStateContext } from '../lib/context';
 import { log } from '../helper';
+import playerContext from '../context/playerContext';
+// import PlayerState from '../context/PlayerState';
+// import playerContext from '../context/playerContext';
+// import playerReducer from '../context/playerReducer';
 // import { log } from '../helper';
 
 const Library = ({ theme }) => {
 	const { logout } = useLogout();
 	// const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
+	// const { songslist } = playerContext();
+	// const { songslist } = playerReducer()
+	const {
+		// currentSong,
+		// songs,
+		// nextSong,
+		// prevSong,
+		// repeat,
+		// random,
+		// playing,
+		// toggleRandom,
+		// toggleRepeat,
+		// togglePlaying,
+		// handleEnd,
+		setAlbumSongs,
+		songslist,
+	} = useContext(playerContext);
 
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -27,11 +48,18 @@ const Library = ({ theme }) => {
 		// navigate('/landing');
 	};
 
-	const handleClick = (albumId) => {
+	const handleClick = (trackId) => {
 		// temp navigate - will navigate and play selected album clicked by user
 		// set songs array 	SET_SONGS_ARRAY - songsSet
 		// log(e.target, 'album chosen');
 		// log(albumId 'album chosen');
+		log(trackId, 'albumn id library');
+		log(songslist, 'songslist library');
+		const clonedList = [...songslist];
+		clonedList.filter((obj) => obj.albumId === trackId);
+		log(clonedList, 'clonedList library');
+		setAlbumSongs(clonedList);
+		// set
 		navigate('/player');
 	};
 
@@ -39,6 +67,8 @@ const Library = ({ theme }) => {
 		log('signing out');
 		logout();
 	};
+
+	log(songslist, 'songslist library');
 	return (
 		<StyledLibrary
 			initial={{ width: 0 }}
@@ -48,7 +78,12 @@ const Library = ({ theme }) => {
 			<Header handleBackClick={handleBackClick} />
 			<ul className='album-list'>
 				{album_list.map((album, index) => (
-					<AlbumCard key={index} handleClick={handleClick} album={album} />
+					<AlbumCard
+						key={index}
+						handleClick={handleClick}
+						album={album}
+						// onClick={(e) => setAlbumSongs}
+					/>
 				))}
 			</ul>
 

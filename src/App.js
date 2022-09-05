@@ -6,6 +6,7 @@ import { lightTheme, darkTheme } from './components/Themes';
 import AnimatedRoutes from './AnimatedRoutes';
 import { useAuthContext } from './hooks/useAuthContext';
 import { StateContext } from './lib/context';
+// import PlayerState from './context/PlayerState';
 
 function App() {
 	const { user } = useAuthContext();
@@ -17,6 +18,7 @@ function App() {
 		<ThemeProvider theme={themeMode}>
 			<GlobalStyles />
 			<StateContext>
+				{/* <PlayerState> */}
 				<div className='App'>
 					<div className='background'></div>
 					<BrowserRouter>
@@ -27,6 +29,7 @@ function App() {
 						/>
 					</BrowserRouter>
 				</div>
+				{/* </PlayerState> */}
 			</StateContext>
 		</ThemeProvider>
 	);

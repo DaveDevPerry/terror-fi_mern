@@ -2,6 +2,7 @@ export const song_list = [
 	{
 		title: '(Not So) Hot',
 		artistName: 'Spoilt Bratz',
+		albumId: 0,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/01 (Not So) Hot.mp3',
 		artworkUrl: '/assets/01 (Not So) Hot.webp',
@@ -9,6 +10,7 @@ export const song_list = [
 	{
 		title: 'You Talk Too Much',
 		artistName: 'Spoilt Bratz',
+		albumId: 0,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/02 You Talk Too Much.mp3',
 		artworkUrl: '/assets/02 You Talk Too Much.webp',
@@ -16,6 +18,7 @@ export const song_list = [
 	{
 		title: 'I Could Die',
 		artistName: 'Spoilt Bratz',
+		albumId: 0,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/03 I Could Die.mp3',
 		artworkUrl: '/assets/03 I Could Die.webp',
@@ -23,6 +26,7 @@ export const song_list = [
 	{
 		title: "She's A Drag",
 		artistName: 'Spoilt Bratz',
+		albumId: 0,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: "/music/04 She's A Drag.mp3",
 		artworkUrl: "/assets/04 She's A Drag.webp",
@@ -30,6 +34,7 @@ export const song_list = [
 	{
 		title: 'Pain Reliever',
 		artistName: 'Spoilt Bratz',
+		albumId: 2,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/01 Pain Reliever.mp3',
 		artworkUrl: '/assets/01 Pain Reliever.webp',
@@ -37,6 +42,7 @@ export const song_list = [
 	{
 		title: 'Past Times',
 		artistName: 'Spoilt Bratz',
+		albumId: 2,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/02 Past Times.mp3',
 		artworkUrl: '/assets/02 Past Times.webp',
@@ -44,6 +50,7 @@ export const song_list = [
 	{
 		title: 'Ignorance',
 		artistName: 'Spoilt Bratz',
+		albumId: 2,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/03 Ignorance.mp3',
 		artworkUrl: '/assets/03 Ignorance.webp',
@@ -51,6 +58,7 @@ export const song_list = [
 	{
 		title: 'Sex Doll Love Cramp',
 		artistName: 'Spoilt Bratz',
+		albumId: 1,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/01 Sex Doll Love Cramp.mp3',
 		artworkUrl: '/assets/01 Sex Doll Love Cramp.webp',
@@ -58,6 +66,7 @@ export const song_list = [
 	{
 		title: 'Going Down Again',
 		artistName: 'Spoilt Bratz',
+		albumId: 1,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/02 Going Down Again.mp3',
 		artworkUrl: '/assets/02 Going Down Again.webp',
@@ -65,6 +74,7 @@ export const song_list = [
 	{
 		title: 'Stuck In A Rut',
 		artistName: 'Spoilt Bratz',
+		albumId: 1,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: '/music/03 Stuck In A Rut.mp3',
 		artworkUrl: '/assets/03 Stuck In A Rut.webp',
@@ -72,38 +82,39 @@ export const song_list = [
 	{
 		title: "Crawlin' On Broken Glass",
 		artistName: 'Spoilt Bratz',
+		albumId: 1,
 		albumTitle: 'Spoilt Bratz Demo Tape',
 		fileUrl: "/music/04 Crawlin' On Broken Glass.mp3",
 		artworkUrl: "/assets/04 Crawlin' On Broken Glass.webp",
 	},
-	{
-		title: 'Brand New Toy',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Demo Tape',
-		fileUrl: '/music/01 Brand New Toy.mp3',
-		artworkUrl: '/assets/01 Brand New Toy.webp',
-	},
-	{
-		title: 'Human Error',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Demo Tape',
-		fileUrl: '/music/02 Human Error.mp3',
-		artworkUrl: '/assets/02 Human Error.webp',
-	},
-	{
-		title: 'Pain Reliever',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Demo Tape',
-		fileUrl: '/music/03 Pain Reliever.mp3',
-		artworkUrl: '/assets/03 Pain Reliever.webp',
-	},
-	{
-		title: 'The Pilgrims Rest',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Demo Tape',
-		fileUrl: '/music/04 The Pilgrims Rest.mp3',
-		artworkUrl: '/assets/04 The Pilgrims Rest.webp',
-	},
+	// {
+	// 	title: 'Brand New Toy',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Demo Tape',
+	// 	fileUrl: '/music/01 Brand New Toy.mp3',
+	// 	artworkUrl: '/assets/01 Brand New Toy.webp',
+	// },
+	// {
+	// 	title: 'Human Error',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Demo Tape',
+	// 	fileUrl: '/music/02 Human Error.mp3',
+	// 	artworkUrl: '/assets/02 Human Error.webp',
+	// },
+	// {
+	// 	title: 'Pain Reliever',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Demo Tape',
+	// 	fileUrl: '/music/03 Pain Reliever.mp3',
+	// 	artworkUrl: '/assets/03 Pain Reliever.webp',
+	// },
+	// {
+	// 	title: 'The Pilgrims Rest',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Demo Tape',
+	// 	fileUrl: '/music/04 The Pilgrims Rest.mp3',
+	// 	artworkUrl: '/assets/04 The Pilgrims Rest.webp',
+	// },
 	// {
 	// 	title: 'Urban Space Crime',
 	// 	artistName: 'Spoilt Bratz',
@@ -125,25 +136,25 @@ export const song_list = [
 	// 	fileUrl: '/music/03 Jason.mp3',
 	// 	artworkUrl: '/assets/03 Jason.webp',
 	// },
-	{
-		title: 'Bring Your Daughter To The Slaughter',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Live',
-		fileUrl: '/music/14 Bring Your Daughter To The Slaughter.mp3',
-		artworkUrl: '/assets/14 Bring Your Daughter To The Slaughter.webp',
-	},
-	{
-		title: "Keep On Movin'",
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Live',
-		fileUrl: "/music/09 Keep On Movin'.mp3",
-		artworkUrl: "/assets/09 Keep On Movin'.webp",
-	},
-	{
-		title: 'Under the Moon of Love',
-		artistName: 'Terrorvision',
-		albumTitle: 'Terrorvision Live',
-		fileUrl: '/music/01 Under the Moon of Love.mp3',
-		artworkUrl: '/assets/01 Under the Moon of Love.webp',
-	},
+	// {
+	// 	title: 'Bring Your Daughter To The Slaughter',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Live',
+	// 	fileUrl: '/music/14 Bring Your Daughter To The Slaughter.mp3',
+	// 	artworkUrl: '/assets/14 Bring Your Daughter To The Slaughter.webp',
+	// },
+	// {
+	// 	title: "Keep On Movin'",
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Live',
+	// 	fileUrl: "/music/09 Keep On Movin'.mp3",
+	// 	artworkUrl: "/assets/09 Keep On Movin'.webp",
+	// },
+	// {
+	// 	title: 'Under the Moon of Love',
+	// 	artistName: 'Terrorvision',
+	// 	albumTitle: 'Terrorvision Live',
+	// 	fileUrl: '/music/01 Under the Moon of Love.mp3',
+	// 	artworkUrl: '/assets/01 Under the Moon of Love.webp',
+	// },
 ];

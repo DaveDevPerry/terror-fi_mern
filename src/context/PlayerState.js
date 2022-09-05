@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { log } from '../helper';
 import playerContext from './playerContext';
 import playerReducer from './playerReducer';
 import { song_list } from './songs';
@@ -10,6 +11,7 @@ import {
 	TOGGLE_REPEAT,
 	TOGGLE_PLAYING,
 	SET_SONGS_ARRAY,
+	SET_ALBUM_SONGS_ARRAY,
 } from './types';
 
 const PlayerState = (props) => {
@@ -23,6 +25,13 @@ const PlayerState = (props) => {
 		audio: null,
 	};
 	const [state, dispatch] = useReducer(playerReducer, initialState);
+
+	// Set album songs
+	const setAlbumSongs = (albumTracks) => {
+		log(albumTracks, 'albumTracks');
+		// log(state.songslist, 'songslist in player state');
+		dispatch({ type: SET_ALBUM_SONGS_ARRAY, data: albumTracks });
+	};
 
 	// Set songs array
 	const songsSet = (songArr) =>
@@ -96,6 +105,7 @@ const PlayerState = (props) => {
 				togglePlaying,
 				handleEnd,
 				songsSet,
+				setAlbumSongs,
 			}}
 		>
 			{props.children}

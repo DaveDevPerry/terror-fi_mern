@@ -1,9 +1,11 @@
+import { log } from '../helper';
 import {
 	SET_CURRENT_SONG,
 	TOGGLE_RANDOM,
 	TOGGLE_REPEAT,
 	TOGGLE_PLAYING,
 	SET_SONGS_ARRAY,
+	SET_ALBUM_SONGS_ARRAY,
 } from './types';
 
 export default (state, action) => {
@@ -12,6 +14,13 @@ export default (state, action) => {
 			return {
 				...state,
 				songs: action.data,
+			};
+		case SET_ALBUM_SONGS_ARRAY:
+			log(action.data, 'action data in player reducer');
+			log({ ...state }, 'action data in player reducer');
+			return {
+				// ...state,
+				// songs: action.data,
 			};
 		case SET_CURRENT_SONG:
 			return {

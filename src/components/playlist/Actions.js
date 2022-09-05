@@ -1,4 +1,5 @@
 import React from 'react';
+import { log } from '../../helper';
 // import playerContext from '../../context/playerContext'
 
 // // Hooks
