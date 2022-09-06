@@ -1,25 +1,27 @@
 // import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useStateContext } from '../lib/context';
+// import { useStateContext } from '../lib/context';
 import MediaMenu from './MediaMenu';
-import { IoMenu, IoChevronBack } from 'react-icons/io5';
-import { useLocation } from 'react-router-dom';
-import { log } from '../helper';
+import { IoSettingsOutline } from 'react-icons/io5';
+// import { IoMenu } from 'react-icons/io5';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { NavLink, useLocation } from 'react-router-dom';
+// import { log } from '../helper';
 // import { AnimatePresence } from 'framer-motion';
 
-const Header = ({ handleBackClick }) => {
+const LibraryHeader = ({ handleBackClick }) => {
 	const location = useLocation();
-	const { menuStatus, setMenuStatus } = useStateContext();
+	// const { menuStatus, setMenuStatus } = useStateContext();
 
-	const handleMenu = () => {
-		log(menuStatus, 'menu status');
-		setMenuStatus(!menuStatus);
-	};
+	// const handleMenu = () => {
+	// 	log(menuStatus, 'menu status');
+	// 	setMenuStatus(!menuStatus);
+	// };
 
 	return (
-		<StyledHeader>
+		<StyledLibraryHeader>
 			<div className='circle-wrapper' id='t-back-btn' onClick={handleBackClick}>
-				<IoChevronBack className='fas fa-angle-left' />
+				<BiLogOutCircle className='fas fa-angle-left' />
 				{/* <IoChevronBack className='fas fa-angle-left' /> */}
 			</div>
 			{location.pathname === '/library' && (
@@ -30,17 +32,20 @@ const Header = ({ handleBackClick }) => {
 					terror<span id='hyphen'>-</span>fi
 				</h5>
 			)}
-			<div className='circle-wrapper' id='menu' onClick={handleMenu}>
-				<IoMenu className='fas fa-bars' id='media-burger' />
-			</div>
+			<NavLink to='/settings' className='circle-wrapper'>
+				<IoSettingsOutline className='settings-icon' />
+			</NavLink>
+			{/* <div className='circle-wrapper' onClick={handleSettings}>
+			<IoSettingsOutline className='settings-icon' />
+			</div> */}
 
 			{/* <AnimatePresence> */}
 			<MediaMenu />
 			{/* </AnimatePresence> */}
-		</StyledHeader>
+		</StyledLibraryHeader>
 	);
 };
-const StyledHeader = styled.header`
+const StyledLibraryHeader = styled.header`
 	/* height: 8rem; */
 	width: 100%;
 	display: flex;
@@ -73,6 +78,7 @@ const StyledHeader = styled.header`
 		background-color: ${({ theme }) => theme.bgCircle};
 		border: 0.3rem solid ${({ theme }) => theme.primaryColor};
 		transition: 0.2s;
+
 		.fa-angle-left {
 			font-size: 3rem;
 			transition: 0.2s;
@@ -80,6 +86,11 @@ const StyledHeader = styled.header`
 		.fa-bars {
 			font-size: 2.2rem;
 			transition: 0.2s;
+		}
+		.settings-icon {
+			/* color: ${({ theme }) => theme.txtDarkGrey}; */
+			font-size: 3rem;
+			color: ${({ theme }) => theme.white};
 		}
 		/* &:hover {
 			transition: 0.2s;
@@ -91,13 +102,43 @@ const StyledHeader = styled.header`
 			}
 		} */
 	}
-	#menu {
-		position: relative;
-		#media-burger {
-			z-index: 50;
-			pointer-events: none;
+	/* .circle-wrapper-hidden {
+		height: 5rem;
+		width: 5rem;
+		display: grid;
+		place-content: center;
+		background-color: ${({ theme }) => theme.bgCircle};
+		border: 0.3rem solid ${({ theme }) => theme.primaryColor};
+		transition: 0.2s;
+		opacity: 0;
+		pointer-events: none;
+		.fa-angle-left {
+			font-size: 3rem;
+			transition: 0.2s;
 		}
-	}
+		.fa-bars {
+			font-size: 2.2rem;
+			transition: 0.2s;
+		}
+		#menu {
+			position: relative;
+			display: hidden;
+			#media-burger {
+				z-index: 50;
+				pointer-events: none;
+				display: none;
+			}
+		} */
+	/* &:hover {
+			transition: 0.2s;
+			.fa-angle-left {
+				color: ${({ theme }) => theme.primaryColor};
+			}
+			.fa-bars {
+				color: ${({ theme }) => theme.primaryColor};
+			}
+		} */
+	/* } */
 `;
 
-export default Header;
+export default LibraryHeader;

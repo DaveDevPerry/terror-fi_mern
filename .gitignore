@@ -28,6 +28,7 @@ yarn-error.log*
 
 /src/pages/Login copy.js
 /src/pages/Landing.js
+/src/components/Navbar test.js
 
 /src/context/playerContext.js
 /src/context/playerReducer.js

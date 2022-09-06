@@ -238,7 +238,7 @@ const StyledControls = styled.div`
 	/* background: #3a3a3a; */
 	color: ${({ theme }) => theme.white};
 	align-items: center;
-	width: 100vw;
+	width: 100%;
 	padding: 1rem 0.5rem;
 	background-color: ${({ theme }) => theme.bgGrey};
 	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};

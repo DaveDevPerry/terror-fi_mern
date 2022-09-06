@@ -7,12 +7,13 @@ import { motion } from 'framer-motion';
 // import { song_list } from '../context/songs';
 
 import { album_list } from '../context/albums';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import AlbumCard from '../components/AlbumCard';
 import { useStateContext } from '../lib/context';
-import { log } from '../helper';
+// import { log } from '../helper';
 // import playerContext from '../context/playerContext';
 import { usePlayerContext } from '../hooks/usePlayerContext';
+import LibraryHeader from '../components/LibraryHeader';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
@@ -42,6 +43,7 @@ const Library = ({ theme }) => {
 
 	const handleBackClick = () => {
 		// navigate('/landing');
+		logout();
 	};
 
 	const handleClick = (trackId, albumTitle) => {
@@ -75,10 +77,10 @@ const Library = ({ theme }) => {
 		navigate('/player');
 	};
 
-	const handleSignOut = () => {
-		log('signing out');
-		logout();
-	};
+	// const handleSignOut = () => {
+	// 	log('signing out');
+	// 	logout();
+	// };
 
 	// log(songslist, 'songslist library');
 	return (
@@ -87,7 +89,8 @@ const Library = ({ theme }) => {
 			animate={{ width: '100%' }}
 			exit={{ x: window.innerWidth }}
 		>
-			<Header handleBackClick={handleBackClick} />
+			<LibraryHeader handleBackClick={handleBackClick} />
+			{/* <Header handleBackClick={handleBackClick} /> */}
 			<ul className='album-list'>
 				{album_list.map((album, index) => (
 					<AlbumCard
@@ -99,9 +102,9 @@ const Library = ({ theme }) => {
 				))}
 			</ul>
 
-			<button id='sign-out-btn' onClick={handleSignOut}>
+			{/* <button id='sign-out-btn' onClick={handleSignOut}>
 				Log out
-			</button>
+			</button> */}
 		</StyledLibrary>
 	);
 };
@@ -117,6 +120,8 @@ const StyledLibrary = styled(motion.section)`
 	/* align-items: center; */
 	z-index: 5;
 	row-gap: 2rem;
+	margin: 0 auto;
+	max-width: 42rem;
 	.album-list {
 		margin: 0 1rem;
 		display: flex;
@@ -163,9 +168,10 @@ const StyledLibrary = styled(motion.section)`
 			} */
 		/* } */
 	}
-	#sign-out-btn {
+	/* #sign-out-btn {
 		color: ${({ theme }) => theme.white};
-	}
+		background-color: ${({ theme }) => theme.primaryColor};
+	} */
 `;
 
 export default Library;

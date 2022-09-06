@@ -60,9 +60,11 @@ const StyledAlbumCard = styled.li`
 	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 	/* border-radius: 0.5rem; */
 	border-radius: 1rem;
+	cursor: pointer;
 	.album-card-artwork-wrapper {
 		/* border: 1px solid yellow; */
 		height: 10rem;
+		pointer-events: none;
 		/* width: */
 		img.album-cover-artwork {
 			/* width: 20%; */
@@ -75,6 +77,8 @@ const StyledAlbumCard = styled.li`
 		flex: 1;
 		display: flex;
 		flex-direction: column;
+		pointer-events: none;
+
 		p {
 			/* font-weight: bold; */
 			color: ${({ theme }) => theme.white};

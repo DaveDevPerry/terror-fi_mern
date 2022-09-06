@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 // import Landing from './pages/Landing';
 import Library from './pages/Library';
 import Loader from './pages/Loader';
+import Settings from './pages/Settings';
 // import PlayerState from './context/PlayerState';
 // import Playing from './pages/Playing';
 
@@ -44,6 +45,16 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 						element={
 							user ? (
 								<Library themeToggler={themeToggler} theme={theme} />
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/>
+					<Route
+						path='/settings'
+						element={
+							user ? (
+								<Settings themeToggler={themeToggler} theme={theme} />
 							) : (
 								<Navigate to='/login' />
 							)

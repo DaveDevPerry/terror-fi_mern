@@ -1,197 +1,143 @@
-import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+// import { format } from 'date-fns';
 
-const Navbar = ({ setUserLoggedIn, userLoggedIn }) => {
-	// let navigate = useNavigate();
-	// const logout = () => {
-	// 	localStorage.setItem('loopycurrentuser', JSON.stringify('false'));
+const Navbar = ({ targets }) => {
+	const { logout } = useLogout();
+	const { user } = useAuthContext();
 
-	// 	setUserLoggedIn(false);
-	// 	navigate('/login');
-	// };
+	const handleClick = () => {
+		logout();
+	};
 	return (
 		<StyledNavbar>
-			{/* {userLoggedIn && <button onClick={logout}>LOGOUT</button>} */}
-			{/* <button onClick={logout}>LOGOUT</button> */}
-			{/* <Link to='/login'>
-				<li>LOGIN</li>
-			</Link> */}
+			{/* <div className='container'> */}
 			{/* <Link to='/'>
-				<li>HOME</li>
-			</Link> */}
-			{/* <NavLink
-				to='/'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					GAME
-					<br />
-					SELECT
-				</li>
-			</NavLink> */}
-			{/* <NavLink
-				to='/leagues'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>LEAGUES</li>
-			</NavLink> */}
-			<NavLink
-				to='/'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>LANDING</li>
-			</NavLink>
-			<NavLink
-				to='/playing'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>PLAYING</li>
-			</NavLink>
-			{/* <NavLink
-				to='/race'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					RACE TO
-					<br />
-					THE FINISH
-				</li>
-			</NavLink>
-			<NavLink
-				to='/dashboard'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					PLAYER
-					<br />
-					DASHBOARD
-				</li>
-			</NavLink>
-			<NavLink
-				to='/numbers'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					PLAYER
-					<br />
-					NUMBERS
-				</li>
-			</NavLink>
-			<NavLink
-				to='/gamehistory'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					GAME
-					<br />
-					HISTORY
-				</li>
-			</NavLink> */}
-			{/* <NavLink
-				to='/drawhistory'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					DRAW
-					<br />
-					HISTORY
-				</li>
-			</NavLink>
-			<NavLink
-				to='/ballhistory'
-				className={({ isActive }) => (isActive ? 'selected' : '')}
-			>
-				<li>
-					BALL
-					<br />
-					HISTORY
-				</li>
-			</NavLink> */}
+					<h1>
+						Wedding
+						<br />
+						Weight
+					</h1>
+				</Link> */}
+			{/* <nav> */}
+			{user && (
+				<div>
+					<ul className='user-details-list'>
+						{/* <li>
+							<p>username:</p>
+							<span>{user.username}</span>
+						</li> */}
+						{/* <li>
+							<p>D.O.B:</p>
+							<span>12/02/1978</span>
+						</li> */}
+						<li>
+							<p>email:</p>
+							<span>{user.email}</span>
+						</li>
+						<li>
+							<p>&nbsp;</p>
+							<span>&nbsp;</span>
+						</li>
+						{/* {targets.length === 1 && (
+							<>
+								<li>
+									<p>target:</p>
+									<span>{targets[0].target_weight.toFixed(2)} Kgs</span>
+								</li>
+								<li>
+									<p>date:</p>
+									<span>
+										{format(new Date(targets[0].deadline_date), 'dd/MM/yyyy')}
+									</span>
+								</li>
+								<li>
+									<p>event:</p>
+									<span>{targets[0].deadline_reason}</span>
+								</li>
+							</>
+						)} */}
+					</ul>
 
-			{/* <Link to='/'>
-				<li>
-					CURRENT
-					<br />
-					GAME
-				</li>
-			</Link>
-			<Link to='/dashboard'>
-				<li>
-					PLAYER
-					<br />
-					DASHBOARD
-				</li>
-			</Link>
-			<Link to='/numbers'>
-				<li>
-					PLAYER
-					<br />
-					NUMBERS
-				</li>
-			</Link>
-			<Link to='/gamehistory'>
-				<li>
-					GAME
-					<br />
-					HISTORY
-				</li>
-			</Link>
-			<Link to='/drawhistory'>
-				<li>
-					DRAW
-					<br />
-					HISTORY
-				</li>
-			</Link> */}
-
-			{/* <Link to='/ballhistory'>
-				<li>
-					BALL
-					<br />
-					HISTORY
-				</li>
-			</Link> */}
-			{/* <Link to='/leagues'>
-						<li>LEAGUES</li>
-					</Link> */}
-			{/* <Link to='/tools'>
-				<li>
-					USER
-					<br />
-					TOOLS
-				</li>
-			</Link> */}
+					<button onClick={handleClick}>Log out</button>
+				</div>
+			)}
+			{!user && (
+				<div>
+					<Link to='/login'>Login</Link>
+					<Link to='/signup'>Signup</Link>
+				</div>
+			)}
+			{/* </nav> */}
+			{/* </div> */}
 		</StyledNavbar>
 	);
 };
-const StyledNavbar = styled.ul`
-	/* border: 1px solid red; */
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	column-gap: 2rem;
-	list-style: none;
-	li {
-		font-size: 1.4rem;
-		text-align: center;
-		color: ${({ theme }) => theme.titleText};
-		transition: all 200ms linear;
-		&:hover {
-			color: ${({ theme }) => theme.primaryColor};
-			/* font-weight: bold; */
+const StyledNavbar = styled.nav`
+	background: ${({ theme }) => theme.bgCircle};
+	transition: all 200ms linear;
+	/* .container { */
+	/* max-width: 1400px; */
+	/* margin: 0 auto; */
+	/* padding: 0.5rem 1rem; */
+	color: ${({ theme }) => theme.txtGrey};
+	div {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		row-gap: 3rem;
+		.user-details-list {
+			list-style: none;
+			li {
+				display: flex;
+				align-items: center;
+				column-gap: 1rem;
+				p {
+					/* width: 5rem; */
+					/* text-align: right; */
+				}
+			}
 		}
-	}
-	.selected {
-		li {
-			color: ${({ theme }) => theme.primaryColor};
-		}
-	}
-	/* @media screen and (max-width: 420px) {
-		display: none;
+		/* h1 {
+		font-size: 2rem;
 	} */
+		/* nav {
+		display: flex;
+		align-items: center;
+		text-align: right;
+	} */
+		/* a,
+	button {
+		margin-left: 1rem;
+	} */
+		p {
+			span {
+				font-weight: bold;
+				text-transform: capitalize;
+			}
+		}
+		a {
+			text-decoration: none;
+		}
+		button {
+			align-self: flex-end;
+			/* background: ${({ theme }) => theme.white}; */
+			background: ${({ theme }) => theme.bgCircle};
+			color: ${({ theme }) => theme.white};
+			border: 2px solid ${({ theme }) => theme.white};
+			/* color: ${({ theme }) => theme.primaryColor};
+			border: 2px solid ${({ theme }) => theme.primaryColor}; */
+			padding: 0.3rem 0.6rem;
+			border-radius: 0.4rem;
+			/* font-family: 'Poppins'; */
+			cursor: pointer;
+			font-size: 1em;
+		}
+	}
+	/* } */
 `;
+
 export default Navbar;

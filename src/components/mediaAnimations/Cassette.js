@@ -101,10 +101,12 @@ const StyledCassette = styled(motion.div)`
 					font-family: 'Rock Salt', cursive;
 					text-align: center;
 					color: ${({ theme }) => theme.primaryColor};
-					font-size: 1.4rem;
+					font-size: 0.7em;
+					/* font-size: 1.4rem; */
 					font-style: italic;
 					line-height: 2.2rem;
 					z-index: 5;
+					font-weight: bolder;
 				}
 			}
 		}

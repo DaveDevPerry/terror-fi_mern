@@ -127,6 +127,7 @@ const StyledPlaylist = styled.div`
 			align-items: center;
 			padding: 0 1rem 0 0;
 			background: ${({ theme }) => theme.bgGrey};
+			pointer-events: none;
 			&:hover {
 				background-color: #dfdfdf;
 			}
@@ -167,13 +168,13 @@ const StyledPlaylist = styled.div`
 				flex-direction: column;
 				flex-wrap: wrap;
 				.songname {
-					padding: 0 1rem;
+					padding: 0 0.5rem;
 					/* font-weight: 600; */
 					font-size: 1.6rem;
 					color: ${({ theme }) => theme.white};
 				}
 				.songauthors {
-					padding: 0 1rem;
+					padding: 0 0.5rem;
 					font-weight: normal;
 					color: ${({ theme }) => theme.primaryColor};
 					/* color: ${({ theme }) => theme.tapeGrey}; */
@@ -188,6 +189,7 @@ const StyledPlaylist = styled.div`
 	.fav_song {
 		color: ${({ theme }) => theme.primaryColor};
 		margin-right: 5px;
+		cursor: pointer;
 	}
 `;
 
