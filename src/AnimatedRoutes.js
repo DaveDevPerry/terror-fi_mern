@@ -4,7 +4,7 @@ import AudioPlayer from './pages/AudioPlayer';
 import { AnimatePresence } from 'framer-motion';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Landing from './pages/Landing';
+// import Landing from './pages/Landing';
 import Library from './pages/Library';
 import Loader from './pages/Loader';
 // import PlayerState from './context/PlayerState';
@@ -28,7 +28,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 						path='/signup'
 						element={!user ? <Signup theme={theme} /> : <Navigate to='/' />}
 					/>
-					<Route
+					{/* <Route
 						path='/landing'
 						element={
 							user ? (
@@ -37,7 +37,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 								<Navigate to='/login' />
 							)
 						}
-					/>
+					/> */}
 					{/* <Route path='/landing' element={<Landing />} /> */}
 					<Route
 						path='/library'
