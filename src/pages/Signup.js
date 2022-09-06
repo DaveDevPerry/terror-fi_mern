@@ -81,6 +81,7 @@ const StyledSignup = styled(motion.div)`
 	flex: 1;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 600;
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
 		border: 2px solid ${({ theme }) => theme.bgGrey};

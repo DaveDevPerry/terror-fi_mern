@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import styled from 'styled-components';
 // import { useStateContext } from '../../lib/context';
-import playerContext from '../../context/playerContext';
+// import playerContext from '../../context/playerContext';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 const CdPlayer = () => {
 	// const { currentSongCover, isPlaying } = useStateContext();
-	const { currentSong, songslist } = useContext(playerContext);
+	const { currentSong, songslist } = usePlayerContext();
 	return (
 		<StyledCdPlayer
 			className='media-container media-cd display-cd'

@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import styled from 'styled-components';
-import playerContext from '../../context/playerContext';
+// import playerContext from '../../context/playerContext';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 function Playlist() {
-	const { SetCurrent, currentSong, songslist } = useContext(playerContext);
+	const { SetCurrent, currentSong, songslist } = usePlayerContext();
 
 	return (
 		<StyledPlaylist className='playlist no_drag'>
@@ -73,21 +74,23 @@ function Playlist() {
 	);
 }
 const StyledPlaylist = styled.div`
-	flex: 1;
+	/* flex: 1; */
 	overflow-y: scroll;
 	z-index: 1;
 	/* border: 2px solid green; */
 	/* padding: 0 1rem; */
 	margin: 0 1rem;
+
 	&.no_drag {
 		-webkit-app-region: no-drag;
 	}
 	&.playlist {
 		background: ${({ theme }) => theme.bgLightGrey};
 		/* background: #e3e3e3; */
-		flex: 1 1;
+		/* flex: 1 1; */
 		display: flex;
 		flex-direction: column;
+		/* height: 20rem; */
 		/* margin-bottom: 2rem; */
 	}
 	.pltext {
@@ -99,6 +102,7 @@ const StyledPlaylist = styled.div`
 		flex-direction: column;
 		flex: 1 1;
 		padding: 0;
+		/* height: 20rem; */
 		li {
 			margin: 2px;
 			font-weight: 450;

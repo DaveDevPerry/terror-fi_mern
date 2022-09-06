@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import styled from 'styled-components';
-import playerContext from '../../context/playerContext';
+// import playerContext from '../../context/playerContext';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { useStateContext } from '../../lib/context';
 
 const Cassette = () => {
 	// const { currentSongTitle } = useStateContext();
-	const { currentSong, songslist } = useContext(playerContext);
+	const { currentSong, songslist } = usePlayerContext();
 	return (
 		<StyledCassette
 			className='media-container media-cassette display-cassette'

@@ -11,7 +11,7 @@ import Playlist from '../components/playlist/Playlist';
 // import Actions from './components/playlist/Actions';
 import Controls from '../components/Controls';
 
-import PlayerState from '../context/PlayerState';
+// import PlayerState from '../context/PlayerState';
 
 // import '../main.css';
 // import '../input.css';
@@ -22,6 +22,7 @@ import Header from '../components/Header';
 // import Turntable from '../components/mediaAnimations/Turntable';
 import AnimationsContainer from '../components/AnimationsContainer';
 import SongProgressWidget from '../components/SongProgressWidget';
+import { usePlayerContext } from '../hooks/usePlayerContext';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -35,9 +36,71 @@ function AudioPlayer() {
 	// const {
 	// 	mediaToDisplay,
 	// } = useStateContext();
+	const {
+		currentSong,
+		// songs,
+		// nextSong,
+		// prevSong,
+		repeat,
+		random,
+		// playing,
+		// toggleRandom,
+		// toggleRepeat,
+		// togglePlaying,
+		// handleEnd,
+		songslist,
+	} = usePlayerContext();
+	const { playing, dispatch } = usePlayerContext();
 	const navigate = useNavigate();
 
 	const audio = useRef('audio_tag');
+
+	const togglePlaying = () =>
+		dispatch({ type: 'TOGGLE_PLAYING', data: playing ? false : true });
+	// Set current song
+	const SetCurrent = (id) => dispatch({ type: 'SET_CURRENT_SONG', data: id });
+
+	// Prev song
+	const prevSong = () => {
+		if (currentSong === 0) {
+			SetCurrent(songslist.length - 1);
+		} else {
+			SetCurrent(currentSong - 1);
+		}
+	};
+	// Next song
+	const nextSong = () => {
+		if (currentSong === songslist.length - 1) {
+			SetCurrent(0);
+		} else {
+			SetCurrent(currentSong + 1);
+		}
+	};
+
+	// Repeat and Random
+	const toggleRepeat = (id) =>
+		dispatch({ type: 'TOGGLE_REPEAT', data: repeat ? false : true });
+	const toggleRandom = (id) =>
+		dispatch({ type: 'TOGGLE_RANDOM', data: random ? false : true });
+
+	// End of Song
+	const handleEnd = () => {
+		// Check for random and repeat options
+		if (random) {
+			return dispatch({
+				type: 'SET_CURRENT_SONG',
+				data: ~~(Math.random() * songslist.length),
+			});
+		} else {
+			if (repeat) {
+				nextSong();
+			} else if (currentSong === songslist.length - 1) {
+				return;
+			} else {
+				nextSong();
+			}
+		}
+	};
 
 	const [stateVolume, setStateVolume] = useState(0.3);
 	const [dur, setDur] = useState(0);
@@ -59,6 +122,7 @@ function AudioPlayer() {
 	};
 
 	const handleBackClick = () => {
+		dispatch({ type: 'SET_ALL_SONGS_ARRAY', data: 'reset' });
 		navigate('/library');
 	};
 	return (
@@ -67,59 +131,70 @@ function AudioPlayer() {
 			animate={{ width: '100%' }}
 			exit={{ x: window.innerWidth }}
 		>
-			<PlayerState>
-				{/* <div className='main'>
+			{/* <PlayerState> */}
+			{/* <div className='main'>
 					<div className='top'> */}
-				{/* <div className="left">
+			{/* <div className="left">
           </div> */}
 
-				<Header handleBackClick={handleBackClick} />
-				{/* <div className='content-wrapper'> */}
-				{/* <Cassette /> */}
-				{/* <DefaultAnimation /> */}
-				<AnimationsContainer />
-				{/* <div className='all-media-container'>
+			<Header handleBackClick={handleBackClick} />
+			{/* <div className='content-wrapper'> */}
+			{/* <Cassette /> */}
+			{/* <DefaultAnimation /> */}
+			<AnimationsContainer />
+			{/* <div className='all-media-container'>
 						{mediaToDisplay === 'display-default' && <DefaultAnimation />}
 						{mediaToDisplay === 'display-record' && <Turntable />}
 						{mediaToDisplay === 'display-cd' && <CdPlayer />}
 						{mediaToDisplay === 'display-cassette' && <Cassette />}
 					</div> */}
 
-				{/* <ProgressWidget /> */}
-				<SongProgressWidget
-					dur={dur}
-					// setDur={setDur}
-					currentTime={currentTime}
-					// setCurrentTime={setCurrentTime}
-					fmtMSS={fmtMSS}
-					handleProgress={handleProgress}
-					// audio={audio}
-					// stateVolume={stateVolume}
-					// setStateVolume={setStateVolume}
-					// toggleAudio={toggleAudio}
-					// handleVolume={handleVolume}
-				/>
-				<Playlist />
-				{/* <VisualyzerWidget /> */}
-				{/* </div> */}
-				{/* <Actions /> */}
-				{/* </div> */}
-				<Controls
-					dur={dur}
-					setDur={setDur}
-					currentTime={currentTime}
-					setCurrentTime={setCurrentTime}
-					fmtMSS={fmtMSS}
-					handleProgress={handleProgress}
-					audio={audio}
-					stateVolume={stateVolume}
-					setStateVolume={setStateVolume}
-					toggleAudio={toggleAudio}
-					handleVolume={handleVolume}
-				/>
-				{/* <Footer /> */}
-				{/* </div> */}
-			</PlayerState>
+			{/* <ProgressWidget /> */}
+			<SongProgressWidget
+				dur={dur}
+				// setDur={setDur}
+				currentTime={currentTime}
+				// setCurrentTime={setCurrentTime}
+				fmtMSS={fmtMSS}
+				handleProgress={handleProgress}
+				// audio={audio}
+				// stateVolume={stateVolume}
+				// setStateVolume={setStateVolume}
+				// toggleAudio={toggleAudio}
+				// handleVolume={handleVolume}
+			/>
+			<Playlist />
+			{/* <VisualyzerWidget /> */}
+			{/* </div> */}
+			{/* <Actions /> */}
+			{/* </div> */}
+			<Controls
+				dur={dur}
+				setDur={setDur}
+				currentTime={currentTime}
+				setCurrentTime={setCurrentTime}
+				fmtMSS={fmtMSS}
+				handleProgress={handleProgress}
+				audio={audio}
+				stateVolume={stateVolume}
+				setStateVolume={setStateVolume}
+				toggleAudio={toggleAudio}
+				handleVolume={handleVolume}
+				handleEnd={handleEnd}
+				// playing,
+				toggleRandom={toggleRandom}
+				toggleRepeat={toggleRepeat}
+				togglePlaying={togglePlaying}
+				prevSong={prevSong}
+				nextSong={nextSong}
+				currentSong={currentSong}
+				repeat={repeat}
+				random={random}
+				songslist={songslist}
+			/>
+			{/* <Footer /> */}
+			{/* </div> */}
+			{/* </PlayerState> */}
 		</StyledAudioPlayer>
 	);
 }

@@ -1,32 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
+// import React, { useContext } from 'react';
 import styled from 'styled-components';
-import playerContext from '../context/playerContext';
+// import playerContext from '../context/playerContext';
 import { log } from '../helper';
 
 const AlbumCard = ({ handleClick, album }) => {
-	const {
-		// currentSong,
-		// songs,
-		// nextSong,
-		// prevSong,
-		// repeat,
-		// random,
-		// playing,
-		// toggleRandom,
-		// toggleRepeat,
-		// togglePlaying,
-		// handleEnd,
-		setAlbumSongs,
-		songslist,
-	} = useContext(playerContext);
+	// const {
+	// 	// currentSong,
+	// 	// songs,
+	// 	// nextSong,
+	// 	// prevSong,
+	// 	// repeat,
+	// 	// random,
+	// 	// playing,
+	// 	// toggleRandom,
+	// 	// toggleRepeat,
+	// 	// togglePlaying,
+	// 	// handleEnd,
+	// 	// setAlbumSongs,
+	// 	// songslist,
+	// } = useContext(playerContext);
 	return (
 		<StyledAlbumCard
 			className='album-card'
 			onClick={() => {
 				handleClick(album.id);
 				log(album.id, 'album id');
-				log(songslist, 'songslist card');
-				setAlbumSongs(album.id);
+				// log(songslist, 'songslist card');
+				// setAlbumSongs(album.id);
 			}}
 		>
 			<img

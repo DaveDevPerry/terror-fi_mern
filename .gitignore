@@ -29,4 +29,9 @@ yarn-error.log*
 /src/pages/Login copy.js
 /src/pages/Landing.js
 
+/src/context/playerContext.js
+/src/context/playerReducer.js
+
+
+
 

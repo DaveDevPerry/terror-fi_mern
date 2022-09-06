@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import styled from 'styled-components';
-import playerContext from '../../context/playerContext';
+// import playerContext from '../../context/playerContext';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { useStateContext } from '../../lib/context';
 
 const Turntable = () => {
 	// const { currentSongCover, isPlaying } = useStateContext();
-	const { currentSong, songslist } = useContext(playerContext);
+	const { currentSong, songslist } = usePlayerContext();
+	// const { currentSong, songslist } = useContext(playerContext);
 	return (
 		<StyledTurntable
 			className='media-container media-turntable display-record'

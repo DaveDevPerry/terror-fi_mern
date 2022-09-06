@@ -1,15 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
+// import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+// import { song_list } from '../context/songs';
 
 import { album_list } from '../context/albums';
 import Header from '../components/Header';
 import AlbumCard from '../components/AlbumCard';
 import { useStateContext } from '../lib/context';
 import { log } from '../helper';
-import playerContext from '../context/playerContext';
+// import playerContext from '../context/playerContext';
+import { usePlayerContext } from '../hooks/usePlayerContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
@@ -21,21 +24,14 @@ const Library = ({ theme }) => {
 	const { dataLoaded } = useStateContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
-	const {
-		// currentSong,
-		// songs,
-		// nextSong,
-		// prevSong,
-		// repeat,
-		// random,
-		// playing,
-		// toggleRandom,
-		// toggleRepeat,
-		// togglePlaying,
-		// handleEnd,
-		setAlbumSongs,
-		songslist,
-	} = useContext(playerContext);
+	// const {
+
+	// 	setAlbumSongs,
+	// 	songslist,
+	// } = useContext(playerContext);
+
+	const { dispatch } = usePlayerContext();
+	// const {songslist, dispatch} = usePlayerContext()
 
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -53,12 +49,23 @@ const Library = ({ theme }) => {
 		// set songs array 	SET_SONGS_ARRAY - songsSet
 		// log(e.target, 'album chosen');
 		// log(albumId 'album chosen');
-		log(trackId, 'albumn id library');
-		log(songslist, 'songslist library');
-		const clonedList = [...songslist];
-		clonedList.filter((obj) => obj.albumId === trackId);
-		log(clonedList, 'clonedList library');
-		setAlbumSongs(clonedList);
+		// log(trackId, 'album id library');
+		// log(song_list, 'songslist library');
+		// const clonedList = [...song_list];
+		// const clonedList = [...songslist];
+		// clonedList.filter((obj) => {
+		// 	return obj.albumId === 1;
+		// });
+		// clonedList.filter((obj) => {
+		// 	return obj.albumId === trackId;
+		// });
+		// clonedList.map((obj) => obj.albumId === 1);
+		// log(clonedList[0], 'clonedList library');
+		// setAlbumSongs(clonedList);
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: trackId });
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: clonedList });
+		// dispatch({ type: 'SET_ALBUM_SONGS_ARRAY', data: clonedList });
 		// set
 		navigate('/player');
 	};
@@ -68,7 +75,7 @@ const Library = ({ theme }) => {
 		logout();
 	};
 
-	log(songslist, 'songslist library');
+	// log(songslist, 'songslist library');
 	return (
 		<StyledLibrary
 			initial={{ width: 0 }}

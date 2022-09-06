@@ -1,7 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
+// import React, { useEffect, useContext } from 'react';
 // import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
-import playerContext from '../context/playerContext';
+// import playerContext from '../context/playerContext';
+// import { usePlayerContext } from '../hooks/usePlayerContext';
 // import ProgressBar from './ProgressBar';
 
 function Controls({
@@ -16,22 +18,34 @@ function Controls({
 	setStateVolume,
 	toggleAudio,
 	handleVolume,
+	playing,
+	toggleRandom,
+	toggleRepeat,
+	togglePlaying,
+	handleEnd,
+	prevSong,
+	nextSong,
+
+	currentSong,
+	repeat,
+	random,
+	songslist,
 }) {
 	// Global State
-	const {
-		currentSong,
-		// songs,
-		nextSong,
-		prevSong,
-		repeat,
-		random,
-		playing,
-		toggleRandom,
-		toggleRepeat,
-		togglePlaying,
-		handleEnd,
-		songslist,
-	} = useContext(playerContext);
+	// const {
+	// 	currentSong,
+	// 	// songs,
+	// 	// nextSong,
+	// 	// prevSong,
+	// 	repeat,
+	// 	random,
+	// 	// playing,
+	// 	// toggleRandom,
+	// 	// toggleRepeat,
+	// 	// togglePlaying,
+	// 	// handleEnd,
+	// 	songslist,
+	// } = usePlayerContext();
 
 	// const audio = useRef('audio_tag');
 
@@ -56,6 +70,54 @@ function Controls({
 	// 	let compute = (e.target.value * dur) / 100;
 	// 	setCurrentTime(compute);
 	// 	audio.current.currentTime = compute;
+	// };
+	// const { playing, dispatch } = usePlayerContext();
+	// Set playing state
+	// const togglePlaying = () =>
+	// 	dispatch({ type: 'TOGGLE_PLAYING', data: playing ? false : true });
+	// // Set current song
+	// const SetCurrent = (id) => dispatch({ type: 'SET_CURRENT_SONG', data: id });
+
+	// // Prev song
+	// const prevSong = () => {
+	// 	if (currentSong === 0) {
+	// 		SetCurrent(songslist.length - 1);
+	// 	} else {
+	// 		SetCurrent(currentSong - 1);
+	// 	}
+	// };
+	// // Next song
+	// const nextSong = () => {
+	// 	if (currentSong === songslist.length - 1) {
+	// 		SetCurrent(0);
+	// 	} else {
+	// 		SetCurrent(currentSong + 1);
+	// 	}
+	// };
+
+	// // Repeat and Random
+	// const toggleRepeat = (id) =>
+	// 	dispatch({ type: 'TOGGLE_REPEAT', data: repeat ? false : true });
+	// const toggleRandom = (id) =>
+	// 	dispatch({ type: 'TOGGLE_RANDOM', data: random ? false : true });
+
+	// // End of Song
+	// const handleEnd = () => {
+	// 	// Check for random and repeat options
+	// 	if (random) {
+	// 		return dispatch({
+	// 			type: 'SET_CURRENT_SONG',
+	// 			data: ~~(Math.random() * songslist.length),
+	// 		});
+	// 	} else {
+	// 		if (repeat) {
+	// 			nextSong();
+	// 		} else if (currentSong === songslist.length - 1) {
+	// 			return;
+	// 		} else {
+	// 			nextSong();
+	// 		}
+	// 	}
 	// };
 
 	useEffect(() => {

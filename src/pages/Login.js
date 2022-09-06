@@ -81,6 +81,7 @@ const StyledLogin = styled(motion.div)`
 	flex: 1;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 600;
 	/* position: relative; */
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};

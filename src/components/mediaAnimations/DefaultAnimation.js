@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion';
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
+// import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import playerContext from '../../context/playerContext';
+// import playerContext from '../../context/playerContext';
 import { log } from '../../helper';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { useStateContext } from '../../lib/context';
 
 const DefaultAnimation = () => {
 	// const { currentSongCover } = useStateContext();
-	const { currentSong, songslist } = useContext(playerContext);
+	const { currentSong, songslist } = usePlayerContext();
+	// const { currentSong, songslist } = useContext(playerContext);
 
 	useEffect(() => {
 		log(currentSong, 'currentSong');
@@ -43,8 +46,8 @@ const StyledDefaultAnimation = styled(motion.div)`
 	transition: 0.5s ease linear;
 	.default-cover {
 		// width: 100%;
-		height: 15rem;
-		/* height: 20rem; */
+		/* height: 15rem; */
+		height: 20rem;
 		// object-fit: cover;
 		border-radius: 2rem;
 		margin: 0;
