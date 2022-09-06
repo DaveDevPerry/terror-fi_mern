@@ -24,6 +24,11 @@ const AnimationsContainer = () => {
 		</StyledAnimationsContainer>
 	);
 };
-const StyledAnimationsContainer = styled.div``;
+const StyledAnimationsContainer = styled.div`
+	/* font-size: 50%; */
+	/* border: 2px solid green; */
+	/* flex: 1; */
+	height: 24rem;
+`;
 
 export default AnimationsContainer;

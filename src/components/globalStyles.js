@@ -8,9 +8,11 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  :root{
+  ${
+		'' /* :root{
     --letter-count: 9;
-  }
+  } */
+	}
   @font-face {
 	font-family: 'BadSignal';
 	src: url('/fonts/BadSignal.otf');

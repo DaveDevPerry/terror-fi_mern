@@ -46,6 +46,7 @@ const CdPlayer = () => {
 };
 const StyledCdPlayer = styled(motion.div)`
 	/* .media-container.media-cd.media-active { */
+	height: 100%;
 	display: grid;
 	place-content: center;
 	.circle-wrapper.record {

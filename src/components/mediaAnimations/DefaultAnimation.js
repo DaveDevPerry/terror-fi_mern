@@ -39,12 +39,15 @@ const DefaultAnimation = () => {
 	);
 };
 const StyledDefaultAnimation = styled(motion.div)`
+	height: 100%;
 	display: grid;
 	place-content: center;
 	// height: 25rem;
 	// overflow: hidden;
 	transition: 0.5s ease linear;
+
 	.default-cover {
+		/* font-size: 50% !important; */
 		// width: 100%;
 		/* height: 15rem; */
 		height: 20rem;

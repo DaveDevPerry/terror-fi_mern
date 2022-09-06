@@ -24,7 +24,7 @@ const AlbumCard = ({ handleClick, album }) => {
 		<StyledAlbumCard
 			className='album-card'
 			onClick={() => {
-				handleClick(album.id);
+				handleClick(album.id, album.title);
 				log(album.id, 'album id');
 				// log(songslist, 'songslist card');
 				// setAlbumSongs(album.id);

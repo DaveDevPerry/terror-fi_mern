@@ -44,7 +44,7 @@ const Library = ({ theme }) => {
 		// navigate('/landing');
 	};
 
-	const handleClick = (trackId) => {
+	const handleClick = (trackId, albumTitle) => {
 		// temp navigate - will navigate and play selected album clicked by user
 		// set songs array 	SET_SONGS_ARRAY - songsSet
 		// log(e.target, 'album chosen');
@@ -62,8 +62,13 @@ const Library = ({ theme }) => {
 		// clonedList.map((obj) => obj.albumId === 1);
 		// log(clonedList[0], 'clonedList library');
 		// setAlbumSongs(clonedList);
+		const playListData = {
+			playListId: trackId,
+			playListName: albumTitle,
+		};
 
-		dispatch({ type: 'SET_SONGS_ARRAY', data: trackId });
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: trackId });
 		// dispatch({ type: 'SET_SONGS_ARRAY', data: clonedList });
 		// dispatch({ type: 'SET_ALBUM_SONGS_ARRAY', data: clonedList });
 		// set

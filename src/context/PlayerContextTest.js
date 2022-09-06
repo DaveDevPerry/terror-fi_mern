@@ -8,14 +8,17 @@ export const playerReducer = (state, action) => {
 	switch (action.type) {
 		case 'SET_SONGS_ARRAY':
 			log(action.data, 'action data in player reducer !!!!!!');
+			log(action.data.playListId, 'playlist id in player reducer !!!!!!');
+			log(action.data.playListName, 'playlist name in player reducer !!!!!!');
 			log({ ...state }, 'state in player reducer !!!!!!!');
 			const clonedA = { ...state };
 			const filteredA = clonedA.songslist.filter(
-				(obj) => obj.albumId === action.data
+				(obj) => obj.albumId === action.data.playListId
 			);
 			return {
 				...state,
 				songslist: filteredA,
+				playListTitle: action.data.playListName,
 			};
 		// const clonedA = [...action.data];
 		// const filteredA = clonedA.filter((obj) => obj.albumId === 2);
@@ -82,6 +85,7 @@ export const PlayerContextTestProvider = ({ children }) => {
 		// currentCover: 0,
 		// songslist: null,
 		songslist: song_list,
+		playListTitle: null,
 		repeat: false,
 		random: false,
 		playing: false,

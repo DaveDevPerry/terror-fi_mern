@@ -209,23 +209,10 @@ function AudioPlayer() {
 const StyledAudioPlayer = styled(motion.section)`
 	height: 100%;
 	width: 100%;
-
-	/* @include flex(space-between, center, column); */
 	display: flex;
 	justify-content: space-between;
-	/* align-items: center; */
 	flex-direction: column;
-	row-gap: 1rem;
-	/* .content-wrapper {
-		width: 100%;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex-direction: column;
-		row-gap: 2rem;
-		overflow-y: auto;
-		margin-bottom: 1rem;
-	} */
+	/* row-gap: 1rem; */
 	z-index: 2;
 `;
 

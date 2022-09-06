@@ -68,6 +68,7 @@ const Turntable = () => {
 const StyledTurntable = styled(motion.div)`
 	display: grid;
 	place-content: center;
+	height: 100%;
 	#turntable {
 		background-color: ${({ theme }) => theme.bgGrey};
 		width: 28rem;

@@ -48,6 +48,7 @@ const Cassette = () => {
 };
 const StyledCassette = styled(motion.div)`
 	// background-color: yellow;
+	height: 100%;
 	display: grid;
 	place-content: center;
 	#cassette {

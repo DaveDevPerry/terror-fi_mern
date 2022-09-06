@@ -8,13 +8,14 @@ import { FiHeart } from 'react-icons/fi';
 import { FaEllipsisV } from 'react-icons/fa';
 
 function Playlist() {
-	const { SetCurrent, currentSong, songslist } = usePlayerContext();
+	const { SetCurrent, currentSong, songslist, playListTitle } =
+		usePlayerContext();
 
 	return (
 		<StyledPlaylist className='playlist no_drag'>
-			{/* <div className="header">
-        <h4 className="pltext">Songs by artist</h4>
-      </div> */}
+			<div className='header'>
+				<h4 className='pltext'>{playListTitle}</h4>
+			</div>
 			<ul className='loi'>
 				{songslist.map((song, i) => (
 					<li
@@ -82,7 +83,8 @@ function Playlist() {
 }
 const StyledPlaylist = styled.div`
 	/* flex: 1; */
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
+	overflow-y: hidden;
 	z-index: 1;
 	/* border: 2px solid green; */
 	/* padding: 0 1rem; */
@@ -102,14 +104,20 @@ const StyledPlaylist = styled.div`
 		/* margin-bottom: 2rem; */
 	}
 	.pltext {
-		padding: 5px;
+		display: inline-block;
+		padding: 2px 10px;
+		background-color: ${({ theme }) => theme.primaryColor};
+		border-radius: 0.5rem 0.5rem 0 0;
+		color: ${({ theme }) => theme.white};
+		font-weight: lighter;
 	}
 	.loi {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		flex: 1 1;
+		/* flex: 1 1; */
 		padding: 0;
+		overflow-y: scroll;
 		/* height: 20rem; */
 		li {
 			/* margin: 2px; */
@@ -171,6 +179,8 @@ const StyledPlaylist = styled.div`
 					/* color: ${({ theme }) => theme.tapeGrey}; */
 					/* color: #555; */
 					font-size: 1.2rem;
+					text-transform: uppercase;
+					font-weight: bolder;
 				}
 			}
 		}
