@@ -1,20 +1,13 @@
 // import { useStateContext } from '../lib/context';
 import { useAuthContext } from './useAuthContext';
-// import { useBandsContext } from './useBandsContext';
-// import { useCitiesContext } from './useCitiesContext';
-// import { useGroupsContext } from './useGroupsContext';
-// import { useTargetsContext } from './useTargetsContext';
+// import { usePlayerContext } from './usePlayerContext';
 import { useSongsContext } from './useSongsContext';
-// import { useVenuesContext } from './useVenuesContext';
 
 export const useLogout = () => {
 	const { dispatch } = useAuthContext();
 	const { dispatch: songsDispatch } = useSongsContext();
-	// const { dispatch: bandsDispatch } = useBandsContext();
-	// const { dispatch: citiesDispatch } = useCitiesContext();
-	// const { dispatch: venuesDispatch } = useVenuesContext();
-	// const { dispatch: targetsDispatch } = useTargetsContext();
-	// // const { dispatch: groupsDispatch } = useGroupsContext();
+	// const {dispatch: playerDispatch} = usePlayerContext()
+
 	// const {
 	// 	setTotalGigsPerBand,
 	// 	setTotalSupportGigsPerBand,
@@ -41,6 +34,7 @@ export const useLogout = () => {
 			{ type: 'SET_SONGS', payload: null },
 			{ type: 'SET_SONG', payload: null }
 		);
+		// playerDispatch({})
 	};
 
 	return { logout };

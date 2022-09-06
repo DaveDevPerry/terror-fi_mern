@@ -15,6 +15,14 @@ export const song_list = [
 		fileUrl: '/music/02 You Talk Too Much.mp3',
 		artworkUrl: '/assets/02 You Talk Too Much.webp',
 	},
+	// {
+	// 	"title": "You Talk Too Much",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 0,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/02 You Talk Too Much.mp3",
+	// 	"artworkUrl": "/assets/02 You Talk Too Much.webp",
+	// },
 	{
 		title: 'I Could Die',
 		artistName: 'Spoilt Bratz',
@@ -23,6 +31,14 @@ export const song_list = [
 		fileUrl: '/music/03 I Could Die.mp3',
 		artworkUrl: '/assets/03 I Could Die.webp',
 	},
+	// {
+	// 	"title": "I Could Die",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 0,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/03 I Could Die.mp3",
+	// 	"artworkUrl": "/assets/03 I Could Die.webp",
+	// },
 	{
 		title: "She's A Drag",
 		artistName: 'Spoilt Bratz',
@@ -31,6 +47,14 @@ export const song_list = [
 		fileUrl: "/music/04 She's A Drag.mp3",
 		artworkUrl: "/assets/04 She's A Drag.webp",
 	},
+	// {
+	// 	"title": "She's A Drag",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 0,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/04 She's A Drag.mp3",
+	// 	"artworkUrl": "/assets/04 She's A Drag.webp",
+	// },
 	{
 		title: 'Pain Reliever',
 		artistName: 'Spoilt Bratz',
@@ -39,6 +63,14 @@ export const song_list = [
 		fileUrl: '/music/01 Pain Reliever.mp3',
 		artworkUrl: '/assets/01 Pain Reliever.webp',
 	},
+	// {
+	// 	"title": "Pain Reliever",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 2,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/01 Pain Reliever.mp3",
+	// 	"artworkUrl": "/assets/01 Pain Reliever.webp",
+	// },
 	{
 		title: 'Past Times',
 		artistName: 'Spoilt Bratz',
@@ -47,6 +79,14 @@ export const song_list = [
 		fileUrl: '/music/02 Past Times.mp3',
 		artworkUrl: '/assets/02 Past Times.webp',
 	},
+	// {
+	// 	"title": "Past Times",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 2,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/02 Past Times.mp3",
+	// 	"artworkUrl": "/assets/02 Past Times.webp",
+	// },
 	{
 		title: 'Ignorance',
 		artistName: 'Spoilt Bratz',
@@ -55,6 +95,14 @@ export const song_list = [
 		fileUrl: '/music/03 Ignorance.mp3',
 		artworkUrl: '/assets/03 Ignorance.webp',
 	},
+	// {
+	// 	"title": "Ignorance",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 2,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/03 Ignorance.mp3",
+	// 	"artworkUrl": "/assets/03 Ignorance.webp",
+	// },
 	{
 		title: 'Sex Doll Love Cramp',
 		artistName: 'Spoilt Bratz',
@@ -63,6 +111,14 @@ export const song_list = [
 		fileUrl: '/music/01 Sex Doll Love Cramp.mp3',
 		artworkUrl: '/assets/01 Sex Doll Love Cramp.webp',
 	},
+	// {
+	// 	"title": "Sex Doll Love Cramp",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 1,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/01 Sex Doll Love Cramp.mp3",
+	// 	"artworkUrl": "/assets/01 Sex Doll Love Cramp.webp",
+	// },
 	{
 		title: 'Going Down Again',
 		artistName: 'Spoilt Bratz',
@@ -71,6 +127,14 @@ export const song_list = [
 		fileUrl: '/music/02 Going Down Again.mp3',
 		artworkUrl: '/assets/02 Going Down Again.webp',
 	},
+	// {
+	// 	"title": "Going Down Again",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 1,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/02 Going Down Again.mp3",
+	// 	"artworkUrl": "/assets/02 Going Down Again.webp",
+	// },
 	{
 		title: 'Stuck In A Rut',
 		artistName: 'Spoilt Bratz',
@@ -79,6 +143,14 @@ export const song_list = [
 		fileUrl: '/music/03 Stuck In A Rut.mp3',
 		artworkUrl: '/assets/03 Stuck In A Rut.webp',
 	},
+	// {
+	// 	"title": "Stuck In A Rut",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 1,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/03 Stuck In A Rut.mp3",
+	// 	"artworkUrl": "/assets/03 Stuck In A Rut.webp",
+	// },
 	{
 		title: "Crawlin' On Broken Glass",
 		artistName: 'Spoilt Bratz',
@@ -87,6 +159,14 @@ export const song_list = [
 		fileUrl: "/music/04 Crawlin' On Broken Glass.mp3",
 		artworkUrl: "/assets/04 Crawlin' On Broken Glass.webp",
 	},
+	// {
+	// 	"title": "Crawlin' On Broken Glass",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"albumId": 1,
+	// 	"albumTitle": "Spoilt Bratz Demo Tape",
+	// 	"fileUrl": "/music/04 Crawlin' On Broken Glass.mp3",
+	// 	"artworkUrl": "/assets/04 Crawlin' On Broken Glass.webp",
+	// },
 	{
 		title: 'Bring Your Daughter To The Slaughter',
 		artistName: 'Terrorvision',
@@ -95,6 +175,14 @@ export const song_list = [
 		fileUrl: '/music/14 Bring Your Daughter To The Slaughter.mp3',
 		artworkUrl: '/assets/14 Bring Your Daughter To The Slaughter.webp',
 	},
+	// {
+	// 	"title": "Bring Your Daughter To The Slaughter",
+	// 	"artistName": "Terrorvision",
+	// 	"albumId": 3,
+	// 	"albumTitle": "Terrorvision Live",
+	// 	"fileUrl": "/music/14 Bring Your Daughter To The Slaughter.mp3",
+	// 	"artworkUrl": "/assets/14 Bring Your Daughter To The Slaughter.webp",
+	// },
 	{
 		title: "Keep On Movin'",
 		artistName: 'Terrorvision',
@@ -103,6 +191,14 @@ export const song_list = [
 		fileUrl: "/music/09 Keep On Movin'.mp3",
 		artworkUrl: "/assets/09 Keep On Movin'.webp",
 	},
+	// {
+	// 	"title": "Keep On Movin'",
+	// 	"artistName": "Terrorvision",
+	// 	"albumId": 3,
+	// 	"albumTitle": "Terrorvision Live",
+	// 	"fileUrl": "/music/09 Keep On Movin'.mp3",
+	// 	"artworkUrl": "/assets/09 Keep On Movin'.webp",
+	// },
 	{
 		title: 'Under the Moon of Love',
 		artistName: 'Terrorvision',
@@ -111,6 +207,14 @@ export const song_list = [
 		fileUrl: '/music/01 Under the Moon of Love.mp3',
 		artworkUrl: '/assets/01 Under the Moon of Love.webp',
 	},
+	// {
+	// 	"title": "Under the Moon of Love",
+	// 	"artistName": "Terrorvision",
+	// 	"albumId": 3,
+	// 	"albumTitle": "Terrorvision Live",
+	// 	"fileUrl": "/music/01 Under the Moon of Love.mp3",
+	// 	"artworkUrl": "/assets/01 Under the Moon of Love.webp",
+	// },
 	// {
 	// 	title: 'Brand New Toy',
 	// 	artistName: 'Terrorvision',

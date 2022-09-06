@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 // import { song_list } from '../context/songs';
 
-import { album_list } from '../context/albums';
+// import { album_list } from '../context/albums';
 // import Header from '../components/Header';
 import AlbumCard from '../components/AlbumCard';
 import { useStateContext } from '../lib/context';
@@ -14,6 +14,9 @@ import { useStateContext } from '../lib/context';
 // import playerContext from '../context/playerContext';
 import { usePlayerContext } from '../hooks/usePlayerContext';
 import LibraryHeader from '../components/LibraryHeader';
+import { useAlbumsContext } from '../hooks/useAlbumsContext';
+import { useSongsContext } from '../hooks/useSongsContext';
+import { log } from '../helper';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
@@ -23,6 +26,8 @@ const Library = ({ theme }) => {
 	const { logout } = useLogout();
 	// const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
+	const { albums } = useAlbumsContext();
+	const { songs } = useSongsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
 	// const {
@@ -47,42 +52,37 @@ const Library = ({ theme }) => {
 	};
 
 	const handleClick = (trackId, albumTitle) => {
-		// temp navigate - will navigate and play selected album clicked by user
-		// set songs array 	SET_SONGS_ARRAY - songsSet
-		// log(e.target, 'album chosen');
-		// log(albumId 'album chosen');
-		// log(trackId, 'album id library');
-		// log(song_list, 'songslist library');
-		// const clonedList = [...song_list];
-		// const clonedList = [...songslist];
-		// clonedList.filter((obj) => {
-		// 	return obj.albumId === 1;
-		// });
-		// clonedList.filter((obj) => {
-		// 	return obj.albumId === trackId;
-		// });
-		// clonedList.map((obj) => obj.albumId === 1);
-		// log(clonedList[0], 'clonedList library');
-		// setAlbumSongs(clonedList);
+		// const playListData = {
+		// 	playListId: trackId,
+		// 	playListName: albumTitle,
+		// };
+
+		// set songs array with all songs on album
+		const clonedSongs = [...songs];
+		const filteredSongs = clonedSongs.filter((obj) => obj.albumId === trackId);
+
+		log(filteredSongs, 'filtered Songs');
+
 		const playListData = {
-			playListId: trackId,
+			albumTracks: filteredSongs,
 			playListName: albumTitle,
 		};
 
 		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
-		// dispatch({ type: 'SET_SONGS_ARRAY', data: trackId });
-		// dispatch({ type: 'SET_SONGS_ARRAY', data: clonedList });
-		// dispatch({ type: 'SET_ALBUM_SONGS_ARRAY', data: clonedList });
-		// set
 		navigate('/player');
 	};
 
-	// const handleSignOut = () => {
-	// 	log('signing out');
-	// 	logout();
+	// working using songs_list
+	// const handleClick = (trackId, albumTitle) => {
+	// 	const playListData = {
+	// 		playListId: trackId,
+	// 		playListName: albumTitle,
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
 	// };
 
-	// log(songslist, 'songslist library');
 	return (
 		<StyledLibrary
 			initial={{ width: 0 }}
@@ -90,21 +90,21 @@ const Library = ({ theme }) => {
 			exit={{ x: window.innerWidth }}
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
-			{/* <Header handleBackClick={handleBackClick} /> */}
 			<ul className='album-list'>
+				{albums &&
+					albums.map((album, index) => (
+						<AlbumCard key={index} handleClick={handleClick} album={album} />
+					))}
+			</ul>
+			{/* <ul className='album-list'>
 				{album_list.map((album, index) => (
 					<AlbumCard
 						key={index}
 						handleClick={handleClick}
 						album={album}
-						// onClick={(e) => setAlbumSongs}
 					/>
 				))}
-			</ul>
-
-			{/* <button id='sign-out-btn' onClick={handleSignOut}>
-				Log out
-			</button> */}
+			</ul> */}
 		</StyledLibrary>
 	);
 };

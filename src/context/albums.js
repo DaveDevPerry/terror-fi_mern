@@ -35,6 +35,24 @@ export const album_list = [
 		],
 		coverUrl: '/assets/gasoline and suicide.webp',
 	},
+	// {
+	// 	"id": 1,
+	// 	"title": "Gasoline & Suicide",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"fileUrls": [
+	// 		"/music/01 Sex Doll Love Cramp.mp3",
+	// 		"/music/02 Going Down Again.mp3",
+	// 		"/music/03 Stuck In A Rut.mp3",
+	// 		"/music/04 Crawlin' On Broken Glass.mp3",
+	// 	],
+	// 	"artworkUrls": [
+	// 		"/assets/01 Sex Doll Love Cramp.webp",
+	// 		"/assets/02 Going Down Again.webp",
+	// 		"/assets/03 Stuck In A Rut.webp",
+	// 		"/assets/04 Crawlin' On Broken Glass.webp",
+	// 	],
+	// 	"coverUrl": "/assets/gasoline and suicide.webp",
+	// },
 	{
 		id: 2,
 		title: 'Be My Guest',
@@ -51,6 +69,22 @@ export const album_list = [
 		],
 		coverUrl: '/assets/be my guest.webp',
 	},
+	// {
+	// 	"id": 2,
+	// 	"title": "Be My Guest",
+	// 	"artistName": "Spoilt Bratz",
+	// 	"fileUrls": [
+	// 		"/music/01 Pain Reliever.mp3",
+	// 		"/music/02 Past Times.mp3",
+	// 		"/music/03 Ignorance.mp3",
+	// 	],
+	// 	"artworkUrls": [
+	// 		"/assets/01 Pain Reliever.webp",
+	// 		"/assets/02 Past Times.webp",
+	// 		"/assets/03 Ignorance.webp",
+	// 	],
+	// 	"coverUrl": "/assets/be my guest.webp",
+	// },
 	// {
 	// 	id: 3,
 	// 	title: 'Demo Tape',
@@ -85,6 +119,22 @@ export const album_list = [
 		],
 		coverUrl: '/assets/tv demo.webp',
 	},
+	// {
+	// 	"id": 3,
+	// 	"title": "Rareties",
+	// 	"artistName": "Terrorvision",
+	// 	"fileUrls": [
+	// 		"/music/01 Under the Moon of Love.mp3",
+	// 		"/music/09 Keep On Movin'.mp3",
+	// 		"/music/14 Bring Your Daughter To The Slaughter.mp3",
+	// 	],
+	// 	"artworkUrls": [
+	// 		"/assets/01 Under the Moon of Love.webp",
+	// 		"/assets/09 Keep On Movin'.webp",
+	// 		"/assets/14 Bring Your Daughter To The Slaughter.webp",
+	// 	],
+	// 	"coverUrl": "/assets/tv demo.webp",
+	// },
 	// {
 	// 	title: 'Bring Your Daughter To The Slaughter',
 	// 	artistName: 'Terrorvision',

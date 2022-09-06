@@ -3,18 +3,95 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../lib/context';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useSongsContext } from '../hooks/useSongsContext';
+import { log } from '../helper';
+import { useAlbumsContext } from '../hooks/useAlbumsContext';
 // import { motion } from 'framer-motion';
 
 const Loader = () => {
+	const { user } = useAuthContext();
+	const { songs, dispatch } = useSongsContext();
+	const { albums, dispatch: albumDispatch } = useAlbumsContext();
+	// const {  dispatch } = useSongsContext();
 	const { setDataLoaded } = useStateContext();
 
 	const navigate = useNavigate();
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		setDataLoaded(true);
+	// 		navigate('/library');
+	// 	}, 2000);
+	// });
+
 	useEffect(() => {
+		const fetchSongs = async () => {
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/api/songs`,
+				{
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				}
+			);
+			const json = await response.json();
+
+			log(json, 'json');
+
+			if (response.ok) {
+				// setWorkouts(json);
+				dispatch({
+					type: 'SET_SONGS',
+					payload: json,
+				});
+			}
+		};
+		if (user) {
+			fetchSongs();
+		}
 		setTimeout(() => {
 			setDataLoaded(true);
-			navigate('/library');
-		}, 2000);
-	});
+			// setFadeOutLoader(true);
+			// setCrowdOutLoader(true);
+			// navigate('/home');
+
+			setTimeout(() => {
+				log(songs, 'songs');
+				log(albums, 'albums');
+				navigate('/library');
+			}, 2000);
+		}, 3000);
+	}, [dispatch, user]);
+
+	useEffect(() => {
+		const fetchAlbums = async () => {
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/api/albums`,
+				{
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				}
+			);
+			const json = await response.json();
+
+			log(json, 'albums json');
+			json.reverse();
+
+			if (response.ok) {
+				// setWorkouts(json);
+				albumDispatch({
+					type: 'SET_ALBUMS',
+					payload: json,
+				});
+			}
+		};
+		// if we have a value for the user then fetch the workouts
+		if (user) {
+			fetchAlbums();
+		}
+	}, [albumDispatch, user]);
+
 	return (
 		<StyledLoader
 			className='tv-loader'

@@ -7,38 +7,39 @@ export const PlayerContextTest = createContext();
 export const playerReducer = (state, action) => {
 	switch (action.type) {
 		case 'SET_SONGS_ARRAY':
-			log(action.data, 'action data in player reducer !!!!!!');
-			log(action.data.playListId, 'playlist id in player reducer !!!!!!');
-			log(action.data.playListName, 'playlist name in player reducer !!!!!!');
-			log({ ...state }, 'state in player reducer !!!!!!!');
-			const clonedA = { ...state };
-			const filteredA = clonedA.songslist.filter(
-				(obj) => obj.albumId === action.data.playListId
-			);
+			// log(action.data, 'action data in player reducer !!!!!!');
+			// log(action.data.playListId, 'playlist id in player reducer !!!!!!');
+			// log(action.data.playListName, 'playlist name in player reducer !!!!!!');
+			// log({ ...state }, 'state in player reducer !!!!!!!');
+			// const clonedA = { ...state };
+			// const filteredA = clonedA.songslist.filter(
+			// 	(obj) => obj.albumId === action.data.playListId
+			// );
 			return {
 				...state,
-				songslist: filteredA,
+				songslist: action.data.albumTracks,
 				playListTitle: action.data.playListName,
 			};
-		// const clonedA = [...action.data];
-		// const filteredA = clonedA.filter((obj) => obj.albumId === 2);
-		// return {
-		// 	...state,
-		// 	songslist: filteredA,
-		// };
+
+		// works with songs_list
 		// case 'SET_SONGS_ARRAY':
+		// 	log(action.data, 'action data in player reducer !!!!!!');
+		// 	log(action.data.playListId, 'playlist id in player reducer !!!!!!');
+		// 	log(action.data.playListName, 'playlist name in player reducer !!!!!!');
+		// 	log({ ...state }, 'state in player reducer !!!!!!!');
+		// 	const clonedA = { ...state };
+		// 	const filteredA = clonedA.songslist.filter(
+		// 		(obj) => obj.albumId === action.data.playListId
+		// 	);
 		// 	return {
 		// 		...state,
-		// 		songs: action.data,
+		// 		songslist: filteredA,
+		// 		playListTitle: action.data.playListName,
 		// 	};
+
 		case 'SET_ALL_SONGS_ARRAY':
 			log(action.data, 'reset?');
-			// log(action.data, 'action data in player reducer !!!!!!');
-			// log({ ...state }, 'state in player reducer !!!!!!!');
-			// const clonedB = { ...state };
-			// const filteredA = clonedB.songslist.filter(
-			// 	(obj) => obj.albumId === action.data
-			// );
+
 			return {
 				...state,
 				songslist: song_list,
