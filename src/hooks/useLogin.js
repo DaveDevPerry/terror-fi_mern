@@ -14,25 +14,10 @@ export const useLogin = () => {
 		const response = await fetch(
 			`${process.env.REACT_APP_BACKEND_URL}/api/user/login`,
 			{
-				// const response = await fetch('/api/user/login', {
 				method: 'POST',
-				// mode: 'no-cors',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				// headers: {
-				// 	'Content-Type': 'application/json',
-				// 	'Access-Control-Allow-Origin': '*',
-				// },
-				// headers: {
-				// 	'Content-Type': 'application/json',
-				// 	'Access-Control-Allow-Headers': 'Content-Type',
-				// 	'Access-Control-Allow-Origin': process.env.REACT_APP_BACKEND_URL,
-				// 	'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
-				// },
-				// headers: {
-				// 	'Content-Type': 'application/json',
-				// },
 				body: JSON.stringify({ email, password }),
 			}
 		);
