@@ -1,7 +1,7 @@
 import React from 'react';
 // import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useStateContext } from '../lib/context';
 import { TbVinyl, TbDeviceAudioTape, TbDisc } from 'react-icons/tb';
 import { FiImage } from 'react-icons/fi';
@@ -24,30 +24,33 @@ const MediaMenu = () => {
 
 	return (
 		<>
-			{menuStatus === true && (
-				<StyledMediaMenu
-					className='media-menu'
-					initial={{ height: 0 }}
-					animate={{ height: '90%' }}
-					// exit={{ height: '0%' }}
-					// exit={{ y: '-7rem' }}
-				>
-					<ul id='media-menu'>
-						<li id='display-default' onClick={handleClick}>
-							<FiImage className='media-menu-icons' />
-						</li>
-						<li id='display-record' onClick={handleClick}>
-							<TbVinyl className='media-menu-icons' />
-						</li>
-						<li id='display-cd' onClick={handleClick}>
-							<TbDisc className='media-menu-icons' />
-						</li>
-						<li id='display-cassette' onClick={handleClick}>
-							<TbDeviceAudioTape className='media-menu-icons' />
-						</li>
-					</ul>
-				</StyledMediaMenu>
-			)}
+			<AnimatePresence mode='wait'>
+				{menuStatus === true && (
+					<StyledMediaMenu
+						className='media-menu'
+						initial={{ height: 0 }}
+						animate={{ height: '100%' }}
+						// animate={{ height: '90%' }}
+						exit={{ height: 0 }}
+						// exit={{ y: '-7rem' }}
+					>
+						<ul id='media-menu'>
+							<li id='display-default' onClick={handleClick}>
+								<FiImage className='media-menu-icons' />
+							</li>
+							<li id='display-record' onClick={handleClick}>
+								<TbVinyl className='media-menu-icons' />
+							</li>
+							<li id='display-cd' onClick={handleClick}>
+								<TbDisc className='media-menu-icons' />
+							</li>
+							<li id='display-cassette' onClick={handleClick}>
+								<TbDeviceAudioTape className='media-menu-icons' />
+							</li>
+						</ul>
+					</StyledMediaMenu>
+				)}
+			</AnimatePresence>
 		</>
 	);
 };

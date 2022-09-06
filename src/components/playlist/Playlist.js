@@ -2,6 +2,10 @@
 import styled from 'styled-components';
 // import playerContext from '../../context/playerContext';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
+// import { HiEllipsisVertical } from 'react-icons/hi';
+// import { HiOutlineEllipsisVertical } from 'react-icons/hi';
+import { FiHeart } from 'react-icons/fi';
+import { FaEllipsisV } from 'react-icons/fa';
 
 function Playlist() {
 	const { SetCurrent, currentSong, songslist } = usePlayerContext();
@@ -26,7 +30,7 @@ function Playlist() {
 								alt='song artwork'
 								className='song-artwork'
 							/>
-							<i className='fas fa-play test-play-btn'></i>
+							{/* <i className='fas fa-play test-play-btn'></i> */}
 						</div>
 						<div className='songmeta_playlist'>
 							<span className='songname'>{song.title}</span>
@@ -34,10 +38,13 @@ function Playlist() {
 						</div>
 						<div className='playlist_btns_group'>
 							<button className='fav_song playlist_btn'>
-								<i className='far fa-heart fa-lg'></i>
+								<FiHeart className='far fa-heart fa-lg' />
 							</button>
 							<button className='options_song playlist_btn'>
-								<i className='fas fa-ellipsis-v fa-lg'></i>
+								{/* <HiOutlineEllipsisVertical className='fas' /> */}
+								{/* <HiEllipsisVertical className='fas fa-ellipsis-v fa-lg' /> */}
+								<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
+								{/* <i className='fas fa-ellipsis-v fa-lg'></i> */}
 							</button>
 						</div>
 					</li>
@@ -79,13 +86,14 @@ const StyledPlaylist = styled.div`
 	z-index: 1;
 	/* border: 2px solid green; */
 	/* padding: 0 1rem; */
-	margin: 0 1rem;
+	margin: 0 2rem;
 
 	&.no_drag {
 		-webkit-app-region: no-drag;
 	}
 	&.playlist {
-		background: ${({ theme }) => theme.bgLightGrey};
+		/* background: ${({ theme }) => theme.bgGrey}; */
+		/* background: ${({ theme }) => theme.bgLightGrey}; */
 		/* background: #e3e3e3; */
 		/* flex: 1 1; */
 		display: flex;
@@ -104,16 +112,19 @@ const StyledPlaylist = styled.div`
 		padding: 0;
 		/* height: 20rem; */
 		li {
-			margin: 2px;
+			/* margin: 2px; */
 			font-weight: 450;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
+			padding: 0 1rem 0 0;
+			background: ${({ theme }) => theme.bgGrey};
 			&:hover {
 				background-color: #dfdfdf;
 			}
 			&.selected {
-				background: white;
+				/* background: white; */
+				background: ${({ theme }) => theme.bgCircle};
 			}
 			&.songContainer {
 				cursor: pointer;
@@ -123,14 +134,15 @@ const StyledPlaylist = styled.div`
 				height: 4.5rem;
 				width: 4.5rem;
 				position: relative;
+				padding: 0.5rem 0;
 				.song-artwork {
-					height: 4.5rem;
-					width: 4.5rem;
+					height: 3.5rem;
+					width: 3.5rem;
 					position: absolute;
 					top: 50%;
 					left: 50%;
 					transform: translate(-50%, -50%);
-					.test-play-btn {
+					/* .test-play-btn {
 						height: 4.5rem;
 						width: 4.5rem;
 						position: absolute;
@@ -138,7 +150,7 @@ const StyledPlaylist = styled.div`
 						left: 50%;
 						transform: translate(-50%, -50%);
 						z-index: 5;
-					}
+					} */
 				}
 			}
 			.songmeta_playlist {
@@ -148,13 +160,15 @@ const StyledPlaylist = styled.div`
 				flex-wrap: wrap;
 				.songname {
 					padding: 0 1rem;
-					font-weight: 600;
+					/* font-weight: 600; */
 					font-size: 1.6rem;
+					color: ${({ theme }) => theme.white};
 				}
 				.songauthors {
 					padding: 0 1rem;
 					font-weight: normal;
-					color: ${({ theme }) => theme.tapeGrey};
+					color: ${({ theme }) => theme.primaryColor};
+					/* color: ${({ theme }) => theme.tapeGrey}; */
 					/* color: #555; */
 					font-size: 1.2rem;
 				}

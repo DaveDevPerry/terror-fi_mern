@@ -5,6 +5,16 @@ import styled from 'styled-components';
 // import playerContext from '../context/playerContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 // import ProgressBar from './ProgressBar';
+// import {
+// 	FaRegPlayCircle,
+// 	FaPauseCircle,
+// 	FaRegPauseCircle,
+// } from 'react-icons/fa';
+import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
+import { FiSkipForward, FiSkipBack } from 'react-icons/fi';
+// import { VscUnmute } from 'react-icons/vsc';
+import { GoUnmute } from 'react-icons/go';
+import { BiShuffle, BiRepeat } from 'react-icons/bi';
 
 function Controls({
 	dur,
@@ -162,7 +172,7 @@ function Controls({
 				/>
 				<div className='vlme'>
 					<span className='volum'>
-						<i className='fas fa-volume-down'></i>
+						<GoUnmute className='fas fa-volume-down' />
 					</span>
 					<input
 						value={Math.round(stateVolume * 100)}
@@ -174,7 +184,7 @@ function Controls({
 				</div>
 				<div className='musicControls'>
 					<span className='prev' onClick={prevSong}>
-						<i className='fas fa-step-backward'></i>
+						<FiSkipBack className='fas fa-step-backward' />
 					</span>
 
 					<span
@@ -185,55 +195,30 @@ function Controls({
 						}}
 					>
 						<span className={!playing ? '' : 'hide'}>
-							<i className='fas fa-play'></i>
+							<BsPlayCircle className='fas fa-play' />
 						</span>
 						<span className={!playing ? 'hide' : ''}>
-							<i className='fas fa-pause'></i>
+							<BsPauseCircle className='fas fa-pause' />
 						</span>
 					</span>
 
 					<span className='next' onClick={nextSong}>
-						<i className='fas fa-step-forward'></i>
+						<FiSkipForward className='fas fa-step-forward' />
 					</span>
 				</div>
-				{/* <ProgressBar
-				dur={dur}
-				currentTime={currentTime}
-				handleProgress={handleProgress}
-				songslist={songslist}
-				currentSong={currentSong}
-				fmtMSS={fmtMSS}
-			/> */}
 
-				{/* <div className='progressb'>
-				<div className='songMeta'>
-					<span className='songtitle'>{songslist[currentSong].title}</span>
-					<span className='songartistName'>
-						{songslist[currentSong].artistName}
-					</span>
-				</div>
-				<input
-					onChange={handleProgress}
-					value={dur ? (currentTime * 100) / dur : 0}
-					type='range'
-					name='progressBar'
-					id='prgbar'
-				/>
-				<span className='currentT'>{fmtMSS(currentTime)}</span>/
-				<span className='totalT'>{fmtMSS(dur)}</span>
-			</div> */}
 				<div className='plsoptions'>
 					<span
 						onClick={toggleRandom}
 						className={'random ' + (random ? 'active' : '')}
 					>
-						<i className='fas fa-random'></i>
+						<BiShuffle className='fas fa-random' />
 					</span>
 					<span
 						onClick={toggleRepeat}
 						className={'repeat ' + (repeat ? 'active' : '')}
 					>
-						<i className='fas fa-redo-alt'></i>
+						<BiRepeat className='fas fa-redo-alt' />
 					</span>
 				</div>
 			</div>
@@ -245,12 +230,14 @@ const StyledControls = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1rem;
+	/* row-gap: 0.5rem; */
 	background: #3a3a3a;
 	color: ${({ theme }) => theme.white};
 	align-items: center;
 	width: 100vw;
 	padding: 1rem 0.5rem;
-	background-color: ${({ theme }) => theme.bgCircle};
+	background-color: ${({ theme }) => theme.bgGrey};
+	/* background-color: ${({ theme }) => theme.bgCircle}; */
 	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};
 	z-index: 5;
 	.upper-container {
@@ -305,42 +292,42 @@ const StyledControls = styled.div`
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
+		/* border: 2px solid yellow; */
 		.vlme {
 			display: flex;
 			align-content: center;
 			overflow: hidden;
 			/* width: 40%; */
 			/* width: 40%; */
-			width: 8rem;
+			width: 10rem;
 			transition: all 500ms;
+			/* border: 2px solid green; */
 			&:hover {
 				/* width: 40%; */
-				width: 8rem;
+				width: 10rem;
+			}
+			.volum {
+				padding: 1rem;
+				font-size: 2.2rem;
+				display: grid;
+				place-content: center;
+			}
+			#volBar {
+				padding: 0;
+				margin: 0;
+				width: 50px;
+				background: transparent;
+			}
+
+			#volBar::-moz-range-thumb {
+				height: 1rem;
+				width: 3px;
+				background-color: ${({ theme }) => theme.white};
+				border-radius: 5px;
+				cursor: pointer;
 			}
 		}
-		.volum {
-			padding: 1rem;
-			font-size: 2rem;
-		}
 
-		#volBar {
-			padding: 0;
-			margin: 0;
-			width: 50px;
-			background: transparent;
-		}
-
-		#volBar::-moz-range-thumb {
-			height: 1rem;
-			width: 3px;
-			background-color: ${({ theme }) => theme.white};
-			/* background: #2a6586; */
-			border-radius: 5px;
-			cursor: pointer;
-		}
-		.hide {
-			display: none;
-		}
 		.musicControls {
 			/* width: 60%; */
 			display: flex;
@@ -349,55 +336,74 @@ const StyledControls = styled.div`
 			text-align: center;
 			flex: 1;
 			column-gap: 1.4rem;
+			/* border: 2px solid green; */
 			span {
 				cursor: pointer;
 				&:hover {
 					color: ${({ theme }) => theme.white};
 					/* color: #2a6586; */
 				}
-			}
-			.play {
-				/* background: #4aa9de; */
-				background-color: ${({ theme }) => theme.primaryColor};
-				padding: 15px 18px;
-				border-radius: 100%;
-				box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-				position: relative;
-				z-index: 3;
-				&:active {
-					box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+				&.prev {
+					/* background: #4aa9de; */
+					/* background-color: ${({ theme }) => theme.primaryColor}; */
+					/* border-radius: 1rem 0 0px 1rem;
+					padding-left: 15px;
+					padding-right: 1rem;
+					margin-right: -5px;
+					z-index: 1; */
+					font-size: 2.4rem;
+					display: grid;
+					place-content: center;
 				}
-				&:hover {
-					box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+				&.play {
+					/* background: #4aa9de; */
+					/* background-color: ${({ theme }) => theme.primaryColor}; */
+					/* padding: 15px 18px; */
+					/* border-radius: 100%; */
+					/* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25); */
+					/* position: relative; */
+					z-index: 3;
+					&:active {
+						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+					}
+					&:hover {
+						box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+					}
+					display: grid;
+					place-content: center;
+					.fas {
+						font-size: 4rem;
+					}
+					.hide {
+						display: none;
+					}
 				}
-			}
-			.prev {
-				/* background: #4aa9de; */
-				/* background-color: ${({ theme }) => theme.primaryColor}; */
-				border-radius: 1rem 0 0px 1rem;
-				padding-left: 15px;
-				padding-right: 1rem;
-				margin-right: -5px;
-				z-index: 1;
-			}
-			.next {
-				/* background: #4aa9de; */
-				/* background-color: ${({ theme }) => theme.primaryColor}; */
-				border-radius: 0px 1rem 1rem 0px;
-				padding-right: 15px;
-				padding-left: 1rem;
-				margin-left: -5px;
-				z-index: 1;
+				&.next {
+					/* background: #4aa9de; */
+					/* background-color: ${({ theme }) => theme.primaryColor}; */
+					/* border-radius: 0px 1rem 1rem 0px;
+					padding-right: 15px;
+					padding-left: 1rem;
+					margin-left: -5px;
+					z-index: 1; */
+					font-size: 2.4rem;
+					display: grid;
+					place-content: center;
+				}
 			}
 		}
+
 		.plsoptions {
 			display: flex;
 			justify-content: space-evenly;
 			/* width: 40%; */
-			width: 8rem;
+			width: 10rem;
 			span {
+				font-size: 2.4rem;
 				cursor: pointer;
 				z-index: 29;
+				display: grid;
+				place-content: center;
 				&:hover {
 					color: ${({ theme }) => theme.white};
 					/* color: #2a6586; */

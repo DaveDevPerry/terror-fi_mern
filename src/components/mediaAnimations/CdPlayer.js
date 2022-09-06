@@ -7,7 +7,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 const CdPlayer = () => {
 	// const { currentSongCover, isPlaying } = useStateContext();
-	const { currentSong, songslist } = usePlayerContext();
+	const { currentSong, songslist, playing } = usePlayerContext();
 	return (
 		<StyledCdPlayer
 			className='media-container media-cd display-cd'
@@ -15,7 +15,13 @@ const CdPlayer = () => {
 			animate={{ width: '100%' }}
 			exit={{ x: window.innerWidth }}
 		>
-			<div className='circle-wrapper record play'>
+			<div
+				className={
+					playing === true
+						? 'circle-wrapper record play'
+						: 'circle-wrapper record'
+				}
+			>
 				{/* <div
 				className={
 					isPlaying === true

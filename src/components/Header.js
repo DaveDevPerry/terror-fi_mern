@@ -5,6 +5,7 @@ import MediaMenu from './MediaMenu';
 import { IoMenu, IoChevronBack } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
 import { log } from '../helper';
+// import { AnimatePresence } from 'framer-motion';
 
 const Header = ({ handleBackClick }) => {
 	const location = useLocation();
@@ -19,6 +20,7 @@ const Header = ({ handleBackClick }) => {
 		<StyledHeader>
 			<div className='circle-wrapper' id='t-back-btn' onClick={handleBackClick}>
 				<IoChevronBack className='fas fa-angle-left' />
+				{/* <IoChevronBack className='fas fa-angle-left' /> */}
 			</div>
 			{location.pathname === '/library' && (
 				<h5 className='page-heading'>Library</h5>
@@ -32,18 +34,20 @@ const Header = ({ handleBackClick }) => {
 				<IoMenu className='fas fa-bars' id='media-burger' />
 			</div>
 
+			{/* <AnimatePresence> */}
 			<MediaMenu />
+			{/* </AnimatePresence> */}
 		</StyledHeader>
 	);
 };
 const StyledHeader = styled.header`
-	height: 8rem;
+	/* height: 8rem; */
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
-	padding: 1rem;
+	padding: 1rem 1rem 0 1rem;
 	position: relative;
 	/* margin-bottom: 1rem; */
 	.page-heading {

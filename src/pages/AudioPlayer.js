@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 // import { useStateContext } from '../lib/context';
 
 import Playlist from '../components/playlist/Playlist';
-// import Actions from './components/playlist/Actions';
+// import Actions from '../components/playlist/Actions';
 import Controls from '../components/Controls';
 
 // import PlayerState from '../context/PlayerState';
@@ -23,6 +23,7 @@ import Header from '../components/Header';
 import AnimationsContainer from '../components/AnimationsContainer';
 import SongProgressWidget from '../components/SongProgressWidget';
 import { usePlayerContext } from '../hooks/usePlayerContext';
+import { useStateContext } from '../lib/context';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -32,6 +33,14 @@ import { usePlayerContext } from '../hooks/usePlayerContext';
 // };
 
 function AudioPlayer() {
+	const { dataLoaded } = useStateContext();
+	const navigate = useNavigate();
+	// const navigate = useNavigate();
+	useEffect(() => {
+		if (dataLoaded === false) {
+			navigate('/');
+		}
+	}, [navigate, dataLoaded]);
 	// const { SetCurrent, currentSong, songslist } = useContext(playerContext);
 	// const {
 	// 	mediaToDisplay,
@@ -51,7 +60,6 @@ function AudioPlayer() {
 		songslist,
 	} = usePlayerContext();
 	const { playing, dispatch } = usePlayerContext();
-	const navigate = useNavigate();
 
 	const audio = useRef('audio_tag');
 

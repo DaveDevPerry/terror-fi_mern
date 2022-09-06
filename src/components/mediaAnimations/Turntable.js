@@ -7,7 +7,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 const Turntable = () => {
 	// const { currentSongCover, isPlaying } = useStateContext();
-	const { currentSong, songslist } = usePlayerContext();
+	const { currentSong, songslist, playing } = usePlayerContext();
 	// const { currentSong, songslist } = useContext(playerContext);
 	return (
 		<StyledTurntable
@@ -17,7 +17,13 @@ const Turntable = () => {
 			exit={{ x: window.innerWidth }}
 		>
 			<div id='turntable'>
-				<div className='circle-wrapper lp-table play'>
+				<div
+					className={
+						playing === true
+							? 'circle-wrapper lp-table play'
+							: 'circle-wrapper lp-table'
+					}
+				>
 					{/* <div
 					className={
 						isPlaying === true
@@ -43,7 +49,11 @@ const Turntable = () => {
 				</div>
 
 				<div className='record-player-arm'>
-					<div className='arm-wrapper'>
+					<div
+						className={
+							playing === true ? 'arm-wrapper play-animation' : 'arm-wrapper'
+						}
+					>
 						<img
 							src='./assets/record-player-arm-1.webp'
 							alt='turntable arm'
@@ -102,12 +112,16 @@ const StyledTurntable = styled(motion.div)`
 			.arm-wrapper {
 				position: relative;
 				animation: playRecord 60s ease infinite;
+				animation-play-state: paused;
 				#player-arm {
 					position: absolute;
 					height: 16rem;
 					top: -1.4rem;
 					left: 0;
 					transform: translate(-25%, 0);
+				}
+				&.play-animation {
+					animation-play-state: running;
 				}
 			}
 		}

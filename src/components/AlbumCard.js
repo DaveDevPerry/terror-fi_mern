@@ -52,7 +52,8 @@ const StyledAlbumCard = styled.li`
 	justify-content: space-between;
 	column-gap: 2rem;
 	padding: 1rem;
-	background-color: ${({ theme }) => theme.bgCircle};
+	background-color: ${({ theme }) => theme.bgGrey};
+	/* background-color: ${({ theme }) => theme.bgCircle}; */
 	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 	border-radius: 0.5rem;
 	img.album-cover-artwork {
@@ -65,12 +66,13 @@ const StyledAlbumCard = styled.li`
 		display: flex;
 		flex-direction: column;
 		p {
-			font-weight: bold;
+			/* font-weight: bold; */
 			color: ${({ theme }) => theme.white};
 			&:last-of-type {
 				font-size: 1.2rem;
 				text-transform: uppercase;
-				font-weight: normal;
+				font-weight: bold;
+				color: ${({ theme }) => theme.primaryColor};
 			}
 		}
 		ul {

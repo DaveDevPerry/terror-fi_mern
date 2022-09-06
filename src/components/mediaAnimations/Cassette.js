@@ -7,7 +7,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext';
 
 const Cassette = () => {
 	// const { currentSongTitle } = useStateContext();
-	const { currentSong, songslist } = usePlayerContext();
+	const { currentSong, playing, songslist } = usePlayerContext();
 	return (
 		<StyledCassette
 			className='media-container media-cassette display-cassette'
@@ -26,12 +26,13 @@ const Cassette = () => {
 
 				<div className='tc-reels'>
 					<div className='reel' id='left-reel'>
-						<div className='tape'>
+						<div className={playing === true ? 'tape play-animation' : 'tape'}>
+							{/* <div className='tape'> */}
 							<div className='spindle' id='left-spindle'></div>
 						</div>
 					</div>
 					<div className='reel' id='right-reel'>
-						<div className='tape'>
+						<div className={playing === true ? 'tape play-animation' : 'tape'}>
 							<div className='spindle' id='right-spindle'></div>
 						</div>
 					</div>
@@ -124,7 +125,10 @@ const StyledCassette = styled(motion.div)`
 					display: grid;
 					place-content: center;
 					animation: playTape 5s linear infinite;
-
+					animation-play-state: paused;
+					&.play-animation {
+						animation-play-state: running;
+					}
 					.spindle {
 						height: 6rem;
 						width: 6rem;

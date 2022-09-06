@@ -111,6 +111,7 @@ const StyledLibrary = styled(motion.section)`
 	display: flex;
 	align-items: center;
 	z-index: 5;
+	row-gap: 2rem;
 	.album-list {
 		margin: 0 1rem;
 		display: flex;
