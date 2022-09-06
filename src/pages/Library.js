@@ -64,7 +64,7 @@ const Library = ({ theme }) => {
 		log(filteredSongs, 'filtered Songs');
 
 		const playListData = {
-			albumTracks: filteredSongs,
+			albumTracks: filteredSongs.reverse(),
 			playListName: albumTitle,
 		};
 

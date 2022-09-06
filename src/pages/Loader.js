@@ -59,8 +59,8 @@ const Loader = () => {
 				log(songs, 'songs');
 				log(albums, 'albums');
 				navigate('/library');
-			}, 2000);
-		}, 3000);
+			}, 1000);
+		}, 2000);
 	}, [dispatch, user]);
 
 	useEffect(() => {

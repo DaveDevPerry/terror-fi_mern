@@ -6,7 +6,7 @@ const AppDetails = ({ theme }) => {
 	return (
 		<StyledAppDetails>
 			<div
-				className={theme && theme === 'light' ? 'label-img' : 'label-img dark'}
+				className={theme && theme === 'light' ? 'label-img dark' : 'label-img'}
 			></div>
 			<div className='dev-link-container'>
 				<p>developed by&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
