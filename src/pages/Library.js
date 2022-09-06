@@ -106,17 +106,17 @@ const StyledLibrary = styled(motion.section)`
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
-	align-items: center;
+	/* align-items: center; */
 	flex-direction: column;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 	z-index: 5;
 	row-gap: 2rem;
 	.album-list {
 		margin: 0 1rem;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		/* align-items: center; */
 		row-gap: 1rem;
 		z-index: 5;
 		/* li.album-card {

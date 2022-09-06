@@ -15,6 +15,7 @@ import { FiSkipForward, FiSkipBack } from 'react-icons/fi';
 // import { VscUnmute } from 'react-icons/vsc';
 import { GoUnmute } from 'react-icons/go';
 import { BiShuffle, BiRepeat } from 'react-icons/bi';
+import { usePlayerContext } from '../hooks/usePlayerContext';
 
 function Controls({
 	dur,
@@ -28,7 +29,7 @@ function Controls({
 	setStateVolume,
 	toggleAudio,
 	handleVolume,
-	playing,
+	// playing,
 	toggleRandom,
 	toggleRepeat,
 	togglePlaying,
@@ -42,20 +43,20 @@ function Controls({
 	songslist,
 }) {
 	// Global State
-	// const {
-	// 	currentSong,
-	// 	// songs,
-	// 	// nextSong,
-	// 	// prevSong,
-	// 	repeat,
-	// 	random,
-	// 	// playing,
-	// 	// toggleRandom,
-	// 	// toggleRepeat,
-	// 	// togglePlaying,
-	// 	// handleEnd,
-	// 	songslist,
-	// } = usePlayerContext();
+	const {
+		// currentSong,
+		// songs,
+		// nextSong,
+		// prevSong,
+		// repeat,
+		// random,
+		playing,
+		// toggleRandom,
+		// toggleRepeat,
+		// togglePlaying,
+		// handleEnd,
+		// songslist,
+	} = usePlayerContext();
 
 	// const audio = useRef('audio_tag');
 
@@ -186,7 +187,7 @@ function Controls({
 					<span className='prev' onClick={prevSong}>
 						<FiSkipBack className='fas fa-step-backward' />
 					</span>
-
+					{/* {playing && ( */}
 					<span
 						className='play'
 						onClick={() => {
@@ -194,13 +195,18 @@ function Controls({
 							toggleAudio();
 						}}
 					>
+						{/* {!playing && ( */}
 						<span className={!playing ? '' : 'hide'}>
 							<BsPlayCircle className='fas fa-play' />
 						</span>
+						{/* )} */}
+						{/* {playing && ( */}
 						<span className={!playing ? 'hide' : ''}>
 							<BsPauseCircle className='fas fa-pause' />
 						</span>
+						{/* )} */}
 					</span>
+					{/* )} */}
 
 					<span className='next' onClick={nextSong}>
 						<FiSkipForward className='fas fa-step-forward' />
@@ -226,18 +232,15 @@ function Controls({
 	);
 }
 const StyledControls = styled.div`
-	/* .controls { */
 	display: flex;
 	flex-direction: column;
 	row-gap: 1rem;
-	/* row-gap: 0.5rem; */
-	background: #3a3a3a;
+	/* background: #3a3a3a; */
 	color: ${({ theme }) => theme.white};
 	align-items: center;
 	width: 100vw;
 	padding: 1rem 0.5rem;
 	background-color: ${({ theme }) => theme.bgGrey};
-	/* background-color: ${({ theme }) => theme.bgCircle}; */
 	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};
 	z-index: 5;
 	.upper-container {
@@ -246,21 +249,6 @@ const StyledControls = styled.div`
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		/* .progressb {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex: 1;
-			#prgbar {
-				background: transparent;
-				width: 100%;
-			}
-			.currentT,
-			.totalT {
-				width: 35px;
-				margin: 0 1rem;
-			}
-		} */
 		.songMeta {
 			width: 100%;
 			display: flex;
@@ -270,14 +258,11 @@ const StyledControls = styled.div`
 			flex: 1 1;
 			.songtitle {
 				font-size: 1.8rem;
-				/* font-size: 1.125em; */
-				/* font-weight: 600; */
 				width: 100%;
 				text-align: center;
 			}
 			.songartistName {
 				font-size: 1.4rem;
-				/* font-size: 0.8em; */
 				width: 100%;
 				text-align: center;
 				color: ${({ theme }) => theme.primaryColor};
@@ -296,40 +281,156 @@ const StyledControls = styled.div`
 		.vlme {
 			display: flex;
 			align-content: center;
+			justify-content: flex-start;
+			column-gap: 1rem;
 			overflow: hidden;
 			/* width: 40%; */
 			/* width: 40%; */
-			width: 10rem;
+			width: 8rem;
 			transition: all 500ms;
 			/* border: 2px solid green; */
-			&:hover {
-				/* width: 40%; */
-				width: 10rem;
-			}
+			/* &:hover {
+				width: 11rem;
+			} */
 			.volum {
-				padding: 1rem;
-				font-size: 2.2rem;
+				font-size: 2.4rem;
 				display: grid;
 				place-content: center;
 			}
+			input[type='range'] {
+				-webkit-appearance: none;
+				margin: 1rem 0;
+				width: 100%;
+			}
+
+			input[type='range']:focus {
+				outline: none;
+			}
+
+			input[type='range']::-webkit-slider-runnable-track {
+				width: 100%;
+				height: 0.5rem;
+				cursor: pointer;
+				animation: 0.2s;
+				box-shadow: 0px 0px 0px ${({ theme }) => theme.black};
+				/* background-color: ${({ theme }) => theme.txtGrey}; */
+				background-color: ${({ theme }) => theme.white};
+				border-radius: 0.5rem;
+				border: 0px solid ${({ theme }) => theme.black};
+			}
+
+			input[type='range']::-webkit-slider-thumb {
+				box-shadow: 0px 0px 1px ${({ theme }) => theme.black};
+				border: 0px solid ${({ theme }) => theme.black};
+				height: 1.3rem;
+
+				width: 0.4rem;
+				/* height: 1.3rem;
+				width: 1.3rem; */
+				border-radius: 5rem;
+				${'' /* background: #2a6586; */}
+				background: ${({ theme }) => theme.primaryColor};
+				cursor: pointer;
+				-webkit-appearance: none;
+				margin-top: -0.4rem;
+			}
+
+			input[type='range']:focus::-webkit-slider-runnable-track {
+				background-color: ${({ theme }) => theme.white};
+			}
+
+			input[type='range']::-moz-range-track {
+				width: 100%;
+				height: 0.5rem;
+				cursor: pointer;
+				animation: 0.2s;
+				box-shadow: 0px 0px 0px ${({ theme }) => theme.black};
+				background-color: ${({ theme }) => theme.white};
+				border-radius: 0.5rem;
+				border: 0px solid ${({ theme }) => theme.black};
+			}
+
+			input[type='range']::-moz-range-thumb {
+				box-shadow: 0px 0px 1px ${({ theme }) => theme.black};
+				border: 0px solid ${({ theme }) => theme.black};
+				height: 1.3rem;
+
+				width: 0.4rem;
+				/* height: 1.3rem;
+				width: 1.3rem; */
+				border-radius: 5rem;
+				${'' /* background: #2a6586; */}
+				background: ${({ theme }) => theme.primaryColor};
+				cursor: pointer;
+			}
+
+			input[type='range']::-ms-track {
+				width: 100%;
+				height: 0.5rem;
+				cursor: pointer;
+				animation: 0.2s;
+				background: transparent;
+				/* background: ${({ theme }) => theme.green}; */
+				border-color: transparent;
+				/* color: ${({ theme }) => theme.green}; */
+				color: transparent;
+			}
+
+			input[type='range']::-ms-fill-lower {
+				background: ${({ theme }) => theme.primaryColor};
+				border: 0px solid ${({ theme }) => theme.black};
+				border-radius: 1rem;
+				box-shadow: 0px 0px 0px ${({ theme }) => theme.black};
+			}
+
+			input[type='range']::-ms-fill-upper {
+				background: ${({ theme }) => theme.primaryColor};
+				border: 0px solid ${({ theme }) => theme.black};
+				border-radius: 1rem;
+				box-shadow: 0px 0px 0px ${({ theme }) => theme.black};
+			}
+
+			input[type='range']::-ms-thumb {
+				box-shadow: 0px 0px 1px ${({ theme }) => theme.black};
+				border: 0px solid ${({ theme }) => theme.black};
+				/* height: 1.3rem;
+				width: 1.3rem; */
+				height: 1.3rem;
+				width: 0.4rem;
+				border-radius: 5rem;
+				${'' /* background: #2a6586; */}
+				background: ${({ theme }) => theme.primaryColor};
+				cursor: pointer;
+			}
+
+			/* input[type='range']:focus::-ms-fill-lower {
+				background-color: ${({ theme }) => theme.bgGrey};
+			} */
+
+			/* input[type='range']:focus::-ms-fill-upper {
+				background-color: ${({ theme }) => theme.bgGrey};
+			} */
 			#volBar {
-				padding: 0;
+				/* padding: 0;
 				margin: 0;
-				width: 50px;
+				width: 50px; */
+				/* width: 5rem; */
+				width: 100%;
 				background: transparent;
 			}
 
-			#volBar::-moz-range-thumb {
+			/* #volBar::-moz-range-thumb {
 				height: 1rem;
 				width: 3px;
 				background-color: ${({ theme }) => theme.white};
 				border-radius: 5px;
 				cursor: pointer;
-			}
+			} */
 		}
-
+		.hide {
+			display: none;
+		}
 		.musicControls {
-			/* width: 60%; */
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -337,67 +438,51 @@ const StyledControls = styled.div`
 			flex: 1;
 			column-gap: 1.4rem;
 			/* border: 2px solid green; */
+
 			span {
 				cursor: pointer;
 				&:hover {
 					color: ${({ theme }) => theme.white};
-					/* color: #2a6586; */
 				}
 				&.prev {
-					/* background: #4aa9de; */
-					/* background-color: ${({ theme }) => theme.primaryColor}; */
-					/* border-radius: 1rem 0 0px 1rem;
-					padding-left: 15px;
-					padding-right: 1rem;
-					margin-right: -5px;
-					z-index: 1; */
 					font-size: 2.4rem;
-					display: grid;
-					place-content: center;
+					/* display: grid;
+					place-content: center; */
 				}
 				&.play {
-					/* background: #4aa9de; */
-					/* background-color: ${({ theme }) => theme.primaryColor}; */
-					/* padding: 15px 18px; */
-					/* border-radius: 100%; */
-					/* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25); */
-					/* position: relative; */
 					z-index: 3;
+					span.hide {
+						display: none;
+					}
+					span {
+						display: block;
+						.fas {
+							font-size: 4rem;
+						}
+					}
 					&:active {
 						box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 					}
 					&:hover {
 						box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
 					}
-					display: grid;
-					place-content: center;
-					.fas {
-						font-size: 4rem;
-					}
-					.hide {
-						display: none;
-					}
+					/* display: grid;
+					place-content: center; */
 				}
 				&.next {
-					/* background: #4aa9de; */
-					/* background-color: ${({ theme }) => theme.primaryColor}; */
-					/* border-radius: 0px 1rem 1rem 0px;
-					padding-right: 15px;
-					padding-left: 1rem;
-					margin-left: -5px;
-					z-index: 1; */
 					font-size: 2.4rem;
-					display: grid;
-					place-content: center;
+					/* display: grid;
+					place-content: center; */
 				}
 			}
 		}
 
 		.plsoptions {
 			display: flex;
-			justify-content: space-evenly;
-			/* width: 40%; */
-			width: 10rem;
+			justify-content: space-between;
+			column-gap: 1rem;
+			width: 8rem;
+			/* border: 2px solid green; */
 			span {
 				font-size: 2.4rem;
 				cursor: pointer;
@@ -406,10 +491,8 @@ const StyledControls = styled.div`
 				place-content: center;
 				&:hover {
 					color: ${({ theme }) => theme.white};
-					/* color: #2a6586; */
 				}
 				&.active {
-					/* color: rgb(32, 77, 104); */
 					color: ${({ theme }) => theme.primaryColor};
 					.fas.fa-random {
 						color: ${({ theme }) => theme.primaryColor};
@@ -420,11 +503,10 @@ const StyledControls = styled.div`
 				}
 			}
 		}
-		.plsoptions {
+		/* .plsoptions {
 			justify-self: flex-end;
-		}
+		} */
 	}
-	/* } */
 `;
 
 export default Controls;

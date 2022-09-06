@@ -85,7 +85,7 @@ const StyledLogin = styled(motion.div)`
 	/* position: relative; */
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
-		border: 2px solid ${({ theme }) => theme.bgGrey};
+		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		margin-right: 5rem;
 		width: 100%;
 		height: 1.5rem;
@@ -111,7 +111,7 @@ const StyledLogin = styled(motion.div)`
 		}
 	}
 	.launch-wrapper {
-		border: 2px solid ${({ theme }) => theme.bgGrey};
+		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		background-color: ${({ theme }) => theme.primaryColor};
 		margin-left: 5rem;
 		width: 100%;
@@ -146,7 +146,8 @@ const StyledLogin = styled(motion.div)`
 		background: ${({ theme }) => theme.bgCircle};
 		border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 		/* background: ${({ theme }) => theme.white}; */
-		border-radius: 4px;
+		border-radius: 1rem;
+		/* border-radius: 4px; */
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		h3 {
 			text-align: center;

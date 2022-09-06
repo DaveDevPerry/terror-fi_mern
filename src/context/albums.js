@@ -69,22 +69,22 @@ export const album_list = [
 	// 	],
 	// 	coverUrl: '/assets/tv demo.webp',
 	// },
-	// {
-	// 	id: 4,
-	// 	title: 'Rareties',
-	// 	artistName: 'Terrorvision',
-	// 	fileUrls: [
-	// 		'/music/01 Under the Moon of Love.mp3',
-	// 		"/music/09 Keep On Movin'.mp3",
-	// 		'/music/14 Bring Your Daughter To The Slaughter.mp3',
-	// 	],
-	// 	artworkUrls: [
-	// 		'/assets/01 Under the Moon of Love.webp',
-	// 		"/assets/09 Keep On Movin'.webp",
-	// 		'/assets/14 Bring Your Daughter To The Slaughter.webp',
-	// 	],
-	// 	coverUrl: '/assets/tv demo.webp',
-	// },
+	{
+		id: 3,
+		title: 'Rareties',
+		artistName: 'Terrorvision',
+		fileUrls: [
+			'/music/01 Under the Moon of Love.mp3',
+			"/music/09 Keep On Movin'.mp3",
+			'/music/14 Bring Your Daughter To The Slaughter.mp3',
+		],
+		artworkUrls: [
+			'/assets/01 Under the Moon of Love.webp',
+			"/assets/09 Keep On Movin'.webp",
+			'/assets/14 Bring Your Daughter To The Slaughter.webp',
+		],
+		coverUrl: '/assets/tv demo.webp',
+	},
 	// {
 	// 	title: 'Bring Your Daughter To The Slaughter',
 	// 	artistName: 'Terrorvision',

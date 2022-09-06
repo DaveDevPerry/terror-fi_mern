@@ -46,7 +46,7 @@ const StyledAppDetails = styled.div`
 	/* background: ${({ theme }) => theme.white}; */
 	background: ${({ theme }) => theme.bgCircle};
 	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-	border-radius: 4px;
+	border-radius: 1rem; /* border-radius: 4px; */
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 	transition: all 200ms linear;
 	.dev-link-container {
