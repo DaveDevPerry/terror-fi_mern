@@ -11,11 +11,12 @@ import styled from 'styled-components';
 // 	FaRegPauseCircle,
 // } from 'react-icons/fa';
 import { BsPlayCircle, BsPauseCircle } from 'react-icons/bs';
-import { FiSkipForward, FiSkipBack } from 'react-icons/fi';
+import { FiSkipForward, FiSkipBack, FiHeart } from 'react-icons/fi';
 // import { VscUnmute } from 'react-icons/vsc';
 import { GoUnmute } from 'react-icons/go';
 import { BiShuffle, BiRepeat } from 'react-icons/bi';
 import { usePlayerContext } from '../hooks/usePlayerContext';
+// import { log } from '../helper';
 
 function Controls({
 	dur,
@@ -41,6 +42,7 @@ function Controls({
 	repeat,
 	random,
 	songslist,
+	toggleFav,
 }) {
 	// Global State
 	const {
@@ -214,6 +216,12 @@ function Controls({
 				</div>
 
 				<div className='plsoptions'>
+					<span
+						onClick={toggleFav}
+						className={'random ' + (random ? 'active' : '')}
+					>
+						<FiHeart className='fas fa-random' />
+					</span>
 					<span
 						onClick={toggleRandom}
 						className={'random ' + (random ? 'active' : '')}

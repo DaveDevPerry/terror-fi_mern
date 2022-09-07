@@ -6,10 +6,19 @@ import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { HiOutlineEllipsisVertical } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
 import { FaEllipsisV } from 'react-icons/fa';
+// import { log } from '../../helper';
 
 function Playlist() {
-	const { SetCurrent, currentSong, songslist, playListTitle } =
-		usePlayerContext();
+	const { currentSong, songslist, playListTitle } = usePlayerContext();
+	// const { SetCurrent, currentSong, songslist, playListTitle } =
+	// 	usePlayerContext();
+
+	// const handleFavourite = (e) => {
+	// 	e.preventDefault();
+	// 	log(e.target, 'e target');
+	// 	log(this.song.title, 'song this title');
+	// 	log(this.song._id, 'song id?');
+	// };
 
 	return (
 		<StyledPlaylist className='playlist no_drag'>
@@ -21,9 +30,9 @@ function Playlist() {
 					<li
 						className={'songContainer ' + (currentSong === i ? 'selected' : '')}
 						key={i}
-						onClick={() => {
-							SetCurrent(i);
-						}}
+						// onClick={() => {
+						// 	SetCurrent(i);
+						// }}
 					>
 						<div className='tmbn_song'>
 							<img
@@ -38,8 +47,14 @@ function Playlist() {
 							<span className='songauthors'>{song.artistName}</span>
 						</div>
 						<div className='playlist_btns_group'>
-							<button className='fav_song playlist_btn'>
-								<FiHeart className='far fa-heart fa-lg' />
+							<button
+								className='fav_song playlist_btn'
+								// onClick={(e) => handleFavourite}
+							>
+								<FiHeart
+									className='far fa-heart fa-lg'
+									// onClick={(e) => handleFavourite}
+								/>
 							</button>
 							<button className='options_song playlist_btn'>
 								{/* <HiOutlineEllipsisVertical className='fas' /> */}
@@ -100,7 +115,7 @@ const StyledPlaylist = styled.div`
 			align-items: center;
 			padding: 0 1rem 0 0;
 			background: ${({ theme }) => theme.bgGrey};
-			pointer-events: none;
+
 			&:hover {
 				background-color: #dfdfdf;
 			}
@@ -109,7 +124,7 @@ const StyledPlaylist = styled.div`
 				background: ${({ theme }) => theme.bgCircle};
 			}
 			&.songContainer {
-				cursor: pointer;
+				/* cursor: pointer; */
 				user-select: none;
 			}
 			.tmbn_song {
@@ -117,6 +132,7 @@ const StyledPlaylist = styled.div`
 				width: 4.5rem;
 				position: relative;
 				padding: 0.5rem 0;
+				pointer-events: none;
 				.song-artwork {
 					height: 3.5rem;
 					width: 3.5rem;
@@ -140,6 +156,7 @@ const StyledPlaylist = styled.div`
 				display: flex;
 				flex-direction: column;
 				flex-wrap: wrap;
+				pointer-events: none;
 				.songname {
 					padding: 0 0.5rem;
 					/* font-weight: 600; */
@@ -157,13 +174,18 @@ const StyledPlaylist = styled.div`
 					font-weight: bolder;
 				}
 			}
+			.fav_song.playlist_btn {
+				color: ${({ theme }) => theme.primaryColor};
+				margin-right: 5px;
+				cursor: pointer;
+			}
 		}
 	}
-	.fav_song {
+	/* .fav_song.playlist_btn {
 		color: ${({ theme }) => theme.primaryColor};
 		margin-right: 5px;
 		cursor: pointer;
-	}
+	} */
 `;
 
 export default Playlist;

@@ -23,8 +23,10 @@ import Header from '../components/Header';
 import AnimationsContainer from '../components/AnimationsContainer';
 import SongProgressWidget from '../components/SongProgressWidget';
 import { usePlayerContext } from '../hooks/usePlayerContext';
+// import { useUsersContext } from '../hooks/useUserContext';
 import { useStateContext } from '../lib/context';
 import { log } from '../helper';
+import { useAuthContext } from '../hooks/useAuthContext';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -34,6 +36,8 @@ import { log } from '../helper';
 // };
 
 function AudioPlayer() {
+	// const { user, dispatch: userDispatch } = useUsersContext();
+	const { user, dispatch: authDispatch } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	const navigate = useNavigate();
 	// const navigate = useNavigate();
@@ -130,6 +134,75 @@ function AudioPlayer() {
 		audio.current.currentTime = compute;
 	};
 
+	const toggleFav = async (e) => {
+		log(e.target, 'e target');
+		log(currentSong, 'song this title');
+		// log(this.song._id, 'song id?');
+		const songId = songslist[currentSong]._id;
+		log(songId, 'song id in mongo');
+
+		// user details
+		log(user, 'user in audio player toggle fav');
+
+		// check if already a fav
+
+		// add songId to users favourites
+		// userDispatch({ type: 'UPDATE_USER', payload: songId });
+		// authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+
+		const response = await fetch(
+			`${process.env.REACT_APP_BACKEND_URL}/api/user`,
+			{
+				// const response = await fetch('/api/weights', {
+				method: 'PATCH',
+				body: songId,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.token}`,
+				},
+			}
+		);
+		const json = await response.json();
+		log(json, 'json updating user in form post submit');
+		if (!response.ok) {
+			// setError(json.error);
+			log('error in patch');
+		}
+		if (response.ok) {
+			// setError(null);
+			log('user updated?', json);
+			authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+		}
+		log('new band added', json);
+
+		// const response = await fetch(
+		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`,
+		// 	{
+		// 		// const response = await fetch('/api/user/signup', {
+		// 		method: 'PATCH',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify({ email, password, username }),
+		// 	}
+		// );
+		// // this will return the data as json or the error
+		// const json = await response.json();
+
+		// if (!response.ok) {
+		// 	setIsLoading(false);
+		// 	setError(json.error);
+		// }
+		// if (response.ok) {
+		// 	// save the user to local storage
+		// 	localStorage.setItem('user-terror-fi', JSON.stringify(json));
+		// 	// update auth context with email
+		// 	dispatch({ type: 'LOGIN', payload: json });
+		// 	// update loading state to false as finished
+		// 	setIsLoading(false);
+		// }
+	};
+
 	const { menuStatus, setMenuStatus } = useStateContext();
 
 	const handleMenu = () => {
@@ -209,6 +282,7 @@ function AudioPlayer() {
 				repeat={repeat}
 				random={random}
 				songslist={songslist}
+				toggleFav={toggleFav}
 			/>
 			{/* <Footer /> */}
 			{/* </div> */}

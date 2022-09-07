@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { log } from '../helper';
 import { useAuthContext } from './useAuthContext';
 
 export const useLogin = () => {
@@ -23,6 +24,8 @@ export const useLogin = () => {
 		);
 		// this will return the data as json or the error
 		const json = await response.json();
+
+		log(json, 'use login hook json');
 
 		if (!response.ok) {
 			setIsLoading(false);
