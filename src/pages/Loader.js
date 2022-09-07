@@ -9,7 +9,7 @@ import { log } from '../helper';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
 // import { motion } from 'framer-motion';
 
-const Loader = () => {
+const Loader = ({ theme }) => {
 	const { user } = useAuthContext();
 	const { songs, dispatch } = useSongsContext();
 	const { albums, dispatch: albumDispatch } = useAlbumsContext();
@@ -101,7 +101,15 @@ const Loader = () => {
 		>
 			<div className='tv-wrapper'>
 				<div id='tv-signal'></div>
-				<img src='/assets/tv-telly_screen.webp' alt='telly' id='terror-tv' />
+				<img
+					src={
+						theme === 'light'
+							? '/assets/tv-telly_white.webp'
+							: '/assets/tv-telly_screen.webp'
+					}
+					alt='telly'
+					id='terror-tv'
+				/>
 			</div>
 		</StyledLoader>
 	);

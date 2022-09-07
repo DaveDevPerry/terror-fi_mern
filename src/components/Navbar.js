@@ -76,7 +76,8 @@ const Navbar = ({ targets }) => {
 	);
 };
 const StyledNavbar = styled.nav`
-	background: ${({ theme }) => theme.bgCircle};
+	/* background: ${({ theme }) => theme.bgCircle}; */
+	background-color: ${({ theme }) => theme.bgGrey};
 	transition: all 200ms linear;
 	/* .container { */
 	/* max-width: 1400px; */
@@ -125,7 +126,8 @@ const StyledNavbar = styled.nav`
 		button {
 			align-self: flex-end;
 			/* background: ${({ theme }) => theme.white}; */
-			background: ${({ theme }) => theme.bgCircle};
+			/* background: ${({ theme }) => theme.bgCircle}; */
+			background-color: ${({ theme }) => theme.bgGrey};
 			color: ${({ theme }) => theme.white};
 			border: 2px solid ${({ theme }) => theme.white};
 			/* color: ${({ theme }) => theme.primaryColor};

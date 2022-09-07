@@ -43,6 +43,7 @@ export const playerReducer = (state, action) => {
 			return {
 				...state,
 				songslist: song_list,
+				playing: false,
 			};
 		case 'SET_ALBUM_SONGS_ARRAY':
 			log(action.data, 'action data in player reducer !!!!!!');

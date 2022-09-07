@@ -50,7 +50,7 @@ ${
   row-gap: 1rem;
 
 
-	background-color: rgb(83, 83, 83);
+	background-color: ${({ theme }) => theme.bgApp};
 	margin: auto;
 	overflow: hidden;
   position: relative;

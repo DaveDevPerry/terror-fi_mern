@@ -75,7 +75,8 @@ const StyledLibraryHeader = styled.header`
 		width: 5rem;
 		display: grid;
 		place-content: center;
-		background-color: ${({ theme }) => theme.bgCircle};
+		/* background-color: ${({ theme }) => theme.bgCircle}; */
+		background-color: ${({ theme }) => theme.bgGrey};
 		border: 0.3rem solid ${({ theme }) => theme.primaryColor};
 		transition: 0.2s;
 

@@ -143,12 +143,14 @@ const StyledLogin = styled(motion.div)`
 		flex-direction: column;
 		row-gap: 1rem;
 		padding: 2rem;
-		background: ${({ theme }) => theme.bgCircle};
+		background-color: ${({ theme }) => theme.bgGrey};
+		/* background: ${({ theme }) => theme.bgCircle}; */
 		border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 		/* background: ${({ theme }) => theme.white}; */
 		border-radius: 1rem;
 		/* border-radius: 4px; */
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+		z-index: 601;
 		h3 {
 			text-align: center;
 			margin: 0;

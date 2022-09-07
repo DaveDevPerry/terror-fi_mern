@@ -150,7 +150,7 @@ const StyledPlaylist = styled.div`
 					padding: 0 0.5rem;
 					font-weight: normal;
 					color: ${({ theme }) => theme.primaryColor};
-					/* color: ${({ theme }) => theme.tapeGrey}; */
+
 					/* color: #555; */
 					font-size: 1.2rem;
 					text-transform: uppercase;

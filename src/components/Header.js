@@ -1,20 +1,20 @@
 // import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useStateContext } from '../lib/context';
+// import { useStateContext } from '../lib/context';
 import MediaMenu from './MediaMenu';
 import { IoMenu, IoChevronBack } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
-import { log } from '../helper';
+// import { log } from '../helper';
 // import { AnimatePresence } from 'framer-motion';
 
-const Header = ({ handleBackClick }) => {
+const Header = ({ handleBackClick, handleMenu }) => {
 	const location = useLocation();
-	const { menuStatus, setMenuStatus } = useStateContext();
+	// const { menuStatus, setMenuStatus } = useStateContext();
 
-	const handleMenu = () => {
-		log(menuStatus, 'menu status');
-		setMenuStatus(!menuStatus);
-	};
+	// const handleMenu = () => {
+	// 	log(menuStatus, 'menu status');
+	// 	setMenuStatus(!menuStatus);
+	// };
 
 	return (
 		<StyledHeader>
@@ -70,7 +70,8 @@ const StyledHeader = styled.header`
 		width: 5rem;
 		display: grid;
 		place-content: center;
-		background-color: ${({ theme }) => theme.bgCircle};
+		background-color: ${({ theme }) => theme.bgGrey};
+		/* background-color: ${({ theme }) => theme.bgCircle}; */
 		border: 0.3rem solid ${({ theme }) => theme.primaryColor};
 		transition: 0.2s;
 		.fa-angle-left {

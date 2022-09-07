@@ -161,6 +161,7 @@ const StyledSettings = styled(motion.div)`
 		flex-direction: row;
 		padding: 1rem 1rem 0 1rem;
 		position: relative;
+		transition: all 200ms linear;
 		/* margin-bottom: 1rem; */
 		.page-heading {
 			font-family: 'BadSignal';
@@ -172,6 +173,7 @@ const StyledSettings = styled(motion.div)`
 				0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
 			animation: glitch1 2500ms infinite;
 			line-height: 3rem;
+			transition: all 200ms linear;
 			span#hyphen {
 				font-family: 'Roboto';
 				color: ${({ theme }) => theme.white};
@@ -182,7 +184,8 @@ const StyledSettings = styled(motion.div)`
 			width: 5rem;
 			display: grid;
 			place-content: center;
-			background-color: ${({ theme }) => theme.bgCircle};
+			/* background-color: ${({ theme }) => theme.bgCircle}; */
+			background-color: ${({ theme }) => theme.bgGrey};
 			border: 0.3rem solid ${({ theme }) => theme.primaryColor};
 			transition: 0.2s;
 
@@ -217,7 +220,8 @@ const StyledSettings = styled(motion.div)`
 		padding: 2rem;
 		/* background: ${({ theme }) => theme.white};
 		border-radius: 4px; */
-		background: ${({ theme }) => theme.bgCircle};
+		/* background: ${({ theme }) => theme.bgCircle}; */
+		background-color: ${({ theme }) => theme.bgGrey};
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		transition: all 200ms linear;
 		border: 0.2rem solid ${({ theme }) => theme.primaryColor};

@@ -6,7 +6,7 @@ const AppDetails = ({ theme }) => {
 	return (
 		<StyledAppDetails>
 			<div
-				className={theme && theme === 'light' ? 'label-img dark' : 'label-img'}
+				className={theme && theme === 'light' ? 'label-img' : 'label-img dark'}
 			></div>
 			<div className='dev-link-container'>
 				<p>developed by&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -44,7 +44,8 @@ const StyledAppDetails = styled.div`
 	padding: 2rem 1rem;
 	padding-bottom: 3rem;
 	/* background: ${({ theme }) => theme.white}; */
-	background: ${({ theme }) => theme.bgCircle};
+	/* background: ${({ theme }) => theme.bgCircle}; */
+	background-color: ${({ theme }) => theme.bgGrey};
 	border: 0.2rem solid ${({ theme }) => theme.primaryColor};
 	border-radius: 1rem; /* border-radius: 4px; */
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);

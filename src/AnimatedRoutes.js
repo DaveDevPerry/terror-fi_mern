@@ -20,7 +20,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 				{/* <StateContext> */}
 				{/* <PlayerState> */}
 				<Routes location={location} key={location.pathname}>
-					<Route path='/' element={<Loader />} />
+					<Route path='/' element={<Loader theme={theme} />} />
 					<Route
 						path='/login'
 						element={!user ? <Login theme={theme} /> : <Navigate to='/' />}

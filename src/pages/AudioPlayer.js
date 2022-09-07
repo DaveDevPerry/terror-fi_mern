@@ -24,6 +24,7 @@ import AnimationsContainer from '../components/AnimationsContainer';
 import SongProgressWidget from '../components/SongProgressWidget';
 import { usePlayerContext } from '../hooks/usePlayerContext';
 import { useStateContext } from '../lib/context';
+import { log } from '../helper';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -129,10 +130,19 @@ function AudioPlayer() {
 		audio.current.currentTime = compute;
 	};
 
+	const { menuStatus, setMenuStatus } = useStateContext();
+
+	const handleMenu = () => {
+		log(menuStatus, 'menu status');
+		setMenuStatus(!menuStatus);
+	};
+
 	const handleBackClick = () => {
+		setMenuStatus(false);
 		dispatch({ type: 'SET_ALL_SONGS_ARRAY', data: 'reset' });
 		navigate('/library');
 	};
+
 	return (
 		<StyledAudioPlayer
 			initial={{ width: 0 }}
@@ -145,7 +155,7 @@ function AudioPlayer() {
 			{/* <div className="left">
           </div> */}
 
-			<Header handleBackClick={handleBackClick} />
+			<Header handleBackClick={handleBackClick} handleMenu={handleMenu} />
 			{/* <div className='content-wrapper'> */}
 			{/* <Cassette /> */}
 			{/* <DefaultAnimation /> */}

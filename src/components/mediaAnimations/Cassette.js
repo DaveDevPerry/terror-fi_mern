@@ -221,7 +221,8 @@ const StyledCassette = styled(motion.div)`
 					height: 1.4rem;
 					width: 1.4rem;
 					border-radius: 50%;
-					background-color: rgb(34, 33, 33);
+					/* background-color: rgb(34, 33, 33); */
+					background-color: ${({ theme }) => theme.tapeBase};
 				}
 				&::after {
 					content: '';
@@ -231,7 +232,8 @@ const StyledCassette = styled(motion.div)`
 					height: 1.4rem;
 					width: 1.4rem;
 					border-radius: 50%;
-					background-color: rgb(34, 33, 33);
+					/* background-color: rgb(34, 33, 33); */
+					background-color: ${({ theme }) => theme.tapeBase};
 				}
 			}
 		}
