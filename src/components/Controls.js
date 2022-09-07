@@ -510,6 +510,9 @@ const StyledControls = styled.div`
 					}
 				}
 			}
+			.repeat {
+				display: none;
+			}
 		}
 		/* .plsoptions {
 			justify-self: flex-end;

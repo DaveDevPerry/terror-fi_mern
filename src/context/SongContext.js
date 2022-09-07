@@ -10,6 +10,14 @@ export const songsReducer = (state, action) => {
 				songs: action.payload,
 			};
 
+		// case 'SET_FAVOURITE_SONGS':
+		// 	return {
+		// 		songs: {
+		// 			songs: state,
+		// 			favourite_songs: action.payload,
+		// 		},
+		// 	};
+
 		case 'SET_SONG':
 			log(action.payload, 'action payload song');
 
@@ -34,6 +42,7 @@ export const SongsContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(songsReducer, {
 		songs: null,
 		song: null,
+		favourite_songs: null,
 	});
 
 	return (

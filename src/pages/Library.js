@@ -17,6 +17,8 @@ import LibraryHeader from '../components/LibraryHeader';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
 import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
+import { FiHeart } from 'react-icons/fi';
+import { SiBandsintown } from 'react-icons/si';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
@@ -72,6 +74,31 @@ const Library = ({ theme }) => {
 		navigate('/player');
 	};
 
+	const playFavourites = () => {
+		const clonedFavs = [...songs.favourite_songs];
+		log(clonedFavs, 'cloned favs');
+		const playListData = {
+			albumTracks: clonedFavs,
+			playListName: 'favourites',
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		navigate('/player');
+	};
+
+	const playAllRandom = () => {
+		log('play random');
+		// const clonedFavs = [...songs.favourite_songs];
+		// log(clonedFavs, 'cloned favs');
+		// const playListData = {
+		// 	albumTracks: clonedFavs,
+		// 	playListName: 'favourites',
+		// };
+
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		// navigate('/player');
+	};
+
 	// working using songs_list
 	// const handleClick = (trackId, albumTitle) => {
 	// 	const playListData = {
@@ -90,7 +117,42 @@ const Library = ({ theme }) => {
 			exit={{ x: window.innerWidth }}
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
+
 			<ul className='album-list'>
+				<li id='fav-list'>
+					<div className='li-wrapper' onClick={playFavourites}>
+						<div className='album-card-artwork-wrapper'>
+							<FiHeart className='far fa-heart fa-lg' />
+						</div>
+						<div className='album-info-container'>
+							<p>My Favourites</p>
+							<p>various artists</p>
+						</div>
+					</div>
+					<div className='li-wrapper' onClick={playAllRandom}>
+						<div className='album-card-artwork-wrapper'>
+							<SiBandsintown className='arrow-icon hand gold' />
+							{/* <FiHeart className='far fa-heart fa-lg' /> */}
+						</div>
+						<div className='album-info-container'>
+							<p>Randomize</p>
+							<p>various artists</p>
+						</div>
+					</div>
+				</li>
+				{/* 
+				<li id='fav-list' onClick={playFavourites}>
+					<div className='album-card-artwork-wrapper'>
+						<FiHeart
+							className='far fa-heart fa-lg'
+						/>
+					</div>
+					<div className='album-info-container'>
+						<p>My Favourites</p>
+						<p>various artists</p>
+					</div>
+				</li> */}
+
 				{albums &&
 					albums.map((album, index) => (
 						<AlbumCard key={index} handleClick={handleClick} album={album} />
@@ -122,6 +184,7 @@ const StyledLibrary = styled(motion.section)`
 	row-gap: 2rem;
 	margin: 0 auto;
 	max-width: 42rem;
+
 	.album-list {
 		margin: 0 1rem;
 		display: flex;
@@ -129,6 +192,7 @@ const StyledLibrary = styled(motion.section)`
 		/* align-items: center; */
 		row-gap: 1rem;
 		z-index: 5;
+		/* text-decoration: none; */
 		/* li.album-card {
 			display: flex;
 			justify-content: space-between;
@@ -167,6 +231,63 @@ const StyledLibrary = styled(motion.section)`
 				border: 1px solid green;
 			} */
 		/* } */
+		li#fav-list {
+			display: flex;
+			justify-content: space-between;
+			/* align-items: center; */
+			column-gap: 1rem;
+			.li-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				/* align-items: center; */
+				column-gap: 1rem;
+				padding: 1rem;
+				background-color: ${({ theme }) => theme.bgGrey};
+				/* background-color: ${({ theme }) => theme.bgCircle}; */
+				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+				/* border-radius: 0.5rem; */
+				border-radius: 1rem;
+				cursor: pointer;
+				flex: 1;
+				.album-card-artwork-wrapper {
+					/* border: 1px solid yellow; */
+					/* height: 10rem; */
+					pointer-events: none;
+					display: grid;
+					place-content: center;
+					/* width: 6.4rem; */
+					/* width: */
+					.fa-lg {
+						/* width: 20%; */
+						font-size: 3rem;
+						color: ${({ theme }) => theme.primaryColor};
+						/* width: 15%; */
+						/* aspect-ratio: 1501 / 2376; */
+					}
+					.arrow-icon.hand {
+						font-size: 2.5rem;
+						color: ${({ theme }) => theme.gold};
+					}
+				}
+				.album-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					pointer-events: none;
+
+					p {
+						/* font-weight: bold; */
+						color: ${({ theme }) => theme.white};
+						&:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						}
+					}
+				}
+			}
+		}
 	}
 	/* #sign-out-btn {
 		color: ${({ theme }) => theme.white};

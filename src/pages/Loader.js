@@ -92,6 +92,39 @@ const Loader = ({ theme }) => {
 		}
 	}, [albumDispatch, user]);
 
+	// useEffect(() => {
+	// 	const fetchFavourites = async () => {
+	// 		log(user.favourites, 'favs');
+	// 		const response = await fetch(
+	// 			`${process.env.REACT_APP_BACKEND_URL}/api/songs`,
+	// 			{
+	// 				headers: {
+	// 					Authorization: `Bearer ${user.token}`,
+	// 				},
+	// 			}
+	// 		);
+	// 		const json = await response.json();
+
+	// 		log(json, 'songs json');
+	// 		const cloned = [...json];
+	// 		const filter = cloned.filter((obj) => user.favourites.includes(obj._id));
+	// 		log(filter, 'filtered list');
+	// 		// json.reverse();
+
+	// 		if (response.ok) {
+	// 			// setWorkouts(json);
+	// 			dispatch({
+	// 				type: 'SET_FAVOURITE_SONGS',
+	// 				payload: filter,
+	// 			});
+	// 		}
+	// 	};
+	// 	// if we have a value for the user then fetch the workouts
+	// 	if ((dispatch, user)) {
+	// 		fetchFavourites();
+	// 	}
+	// }, [dispatch, user]);
+
 	return (
 		<StyledLoader
 			className='tv-loader'

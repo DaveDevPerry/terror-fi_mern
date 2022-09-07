@@ -98,6 +98,7 @@ const StyledPlaylist = styled.div`
 		border-radius: 0.5rem 0.5rem 0 0;
 		color: ${({ theme }) => theme.white};
 		font-weight: lighter;
+		text-transform: capitalize;
 	}
 	.loi {
 		list-style: none;

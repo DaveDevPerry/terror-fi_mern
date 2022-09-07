@@ -19,7 +19,7 @@ export const lightTheme = {
 	tapeBase: '#686868',
 	syntax: '#ffffff',
 	black: '#ffffff',
-
+	gold: '#eab209',
 	red: '#980303',
 	green: '#156d01',
 	isComplete: 'rgb(228, 207, 23)',
@@ -44,7 +44,7 @@ export const darkTheme = {
 	tapeBase: 'rgb(34,33,33)',
 	syntax: '#ffffff',
 	black: '#000000',
-
+	gold: '#eab209',
 	red: '#980303',
 	green: '#156d01',
 	isComplete: 'rgb(228, 207, 23)',
