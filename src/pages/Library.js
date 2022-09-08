@@ -88,6 +88,17 @@ const Library = ({ theme }) => {
 
 	const playAllRandom = () => {
 		log('play random');
+		const clonedSongs = [...songs];
+		log(clonedSongs, 'cloned songs random');
+		const playListData = {
+			albumTracks: clonedSongs.sort(function () {
+				return Math.random() - 0.5;
+			}),
+			playListName: 'random',
+		};
+		log(playListData, 'playlist data - random');
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		navigate('/player');
 		// const clonedFavs = [...songs.favourite_songs];
 		// log(clonedFavs, 'cloned favs');
 		// const playListData = {

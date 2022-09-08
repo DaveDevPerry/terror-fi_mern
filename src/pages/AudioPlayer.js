@@ -296,7 +296,7 @@ const StyledAudioPlayer = styled(motion.section)`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	/* row-gap: 1rem; */
+	row-gap: 1rem;
 	z-index: 2;
 	max-width: 42rem;
 	margin: 0 auto;
