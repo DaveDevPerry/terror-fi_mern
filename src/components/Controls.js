@@ -516,6 +516,7 @@ const StyledControls = styled.div`
 		}
 		/* .plsoptions {
 			justify-self: flex-end;
+			add
 		} */
 	}
 `;
