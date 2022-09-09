@@ -48,6 +48,8 @@ function Controls({
 	toggleFav,
 	setPlaylistDisplay,
 	playlistDisplay,
+	handlePlaylist,
+	addSongToPlaylist,
 }) {
 	// Global State
 	const {
@@ -268,6 +270,8 @@ function Controls({
 				setPlaylistDisplay={setPlaylistDisplay}
 				playlistDisplay={playlistDisplay}
 				handlePlaylistDisplay={handlePlaylistDisplay}
+				handlePlaylist={handlePlaylist}
+				addSongToPlaylist={addSongToPlaylist}
 			/>
 			{/* )} */}
 			{/* </AnimatePresence> */}

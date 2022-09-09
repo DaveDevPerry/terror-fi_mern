@@ -10,6 +10,8 @@ const PlaylistOptions = ({
 	setPlaylistDisplay,
 	playlistDisplay,
 	handlePlaylistDisplay,
+	handlePlaylist,
+	addSongToPlaylist,
 }) => {
 	const { playlists } = usePlaylistsContext();
 	// const navigate = useNavigate();
@@ -56,11 +58,22 @@ const PlaylistOptions = ({
 						</li> */}
 						{playlists &&
 							playlists.map((playlist, index) => (
-								<li key={index} className='create-playlist-wrapper'>
+								<li
+									key={index}
+									className='create-playlist-wrapper'
+									onClick={() => {
+										addSongToPlaylist(playlist._id);
+										// handlePlaylist(playlist._id);
+									}}
+								>
 									<MdListAlt className='playlist-icon' />
 									<div className='playlist-info-wrapper'>
 										<p>{playlist.name}</p>
-										<p>{playlist.songs.length} songs</p>
+										<p>
+											{playlist.songs.length === 1
+												? `${playlist.songs.length} song`
+												: `${playlist.songs.length} songs`}
+										</p>
 									</div>
 								</li>
 							))}
@@ -119,6 +132,7 @@ const StyledPlaylistOptions = styled(motion.div)`
 				p {
 					color: ${({ theme }) => theme.white};
 					font-size: 1.4rem;
+					text-transform: capitalize;
 					/* &:first-of-type {
 					} */
 					&:last-of-type {

@@ -35,7 +35,12 @@ import { useAuthContext } from '../hooks/useAuthContext';
 // 	log('Closing the app');
 // };
 
-function AudioPlayer({ setPlaylistDisplay, playlistDisplay }) {
+function AudioPlayer({
+	setPlaylistDisplay,
+	playlistDisplay,
+	handlePlaylist,
+	addSongToPlaylist,
+}) {
 	// const { user, dispatch: userDispatch } = useUsersContext();
 	const { user, dispatch: authDispatch } = useAuthContext();
 	const { dataLoaded } = useStateContext();
@@ -285,6 +290,8 @@ function AudioPlayer({ setPlaylistDisplay, playlistDisplay }) {
 				toggleFav={toggleFav}
 				setPlaylistDisplay={setPlaylistDisplay}
 				playlistDisplay={playlistDisplay}
+				handlePlaylist={handlePlaylist}
+				addSongToPlaylist={addSongToPlaylist}
 			/>
 			{/* <Footer /> */}
 			{/* </div> */}

@@ -21,15 +21,16 @@ import { FiHeart } from 'react-icons/fi';
 import { SiBandsintown } from 'react-icons/si';
 import { MdListAlt } from 'react-icons/md';
 import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
 // import { log } from '../helper';
 
-const Library = ({ theme }) => {
+const Library = ({ handlePlaylist }) => {
 	const { logout } = useLogout();
-	// const { user } = useAuthContext();
+	const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	const { albums } = useAlbumsContext();
 	const { songs } = useSongsContext();
@@ -79,16 +80,32 @@ const Library = ({ theme }) => {
 	};
 
 	const playFavourites = () => {
-		const clonedFavs = [...songs.favourite_songs];
+		const clonedFavs = [...user.favourites];
 		log(clonedFavs, 'cloned favs');
+		const clonedSongsInFav = [...songs];
+		const filteredFavs = clonedSongsInFav.filter((obj) =>
+			clonedFavs.includes(obj._id)
+		);
+		log(filteredFavs, 'filtered favs');
 		const playListData = {
-			albumTracks: clonedFavs,
+			albumTracks: filteredFavs,
 			playListName: 'favourites',
 		};
 
 		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
 		navigate('/player');
 	};
+	// const playFavourites = () => {
+	// 	const clonedFavs = [...songs.favourite_songs];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const playListData = {
+	// 		albumTracks: clonedFavs,
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
 
 	const playAllRandom = () => {
 		log('play random');
@@ -114,32 +131,32 @@ const Library = ({ theme }) => {
 		// navigate('/player');
 	};
 
-	const handlePlaylist = (playlistId) => {
-		log(playlistId, 'id');
-		const clonedPlaylists = [...playlists];
-		log(clonedPlaylists, 'clonedPlaylists');
-		const activePlaylist = clonedPlaylists.filter(
-			(playlist) => playlist._id === playlistId
-		);
-		log(activePlaylist, 'active playlist');
-		const clonedSongs = [...songs];
-		// log(clonedSongs, 'cloned favs');
-		// const userPlaylists = [...user.playlists];
-		// log(userPlaylists, 'cloned user playlists');
-		// // get all playlists
-		// // const
-		const playlistSongs = clonedSongs.filter((obj) =>
-			obj._id.includes(activePlaylist[0].songs)
-		);
-		log(playlistSongs, 'playlistSongs');
-		const playListData = {
-			albumTracks: playlistSongs,
-			playListName: activePlaylist[0].name,
-		};
+	// const handlePlaylist = (playlistId) => {
+	// 	log(playlistId, 'id');
+	// 	const clonedPlaylists = [...playlists];
+	// 	log(clonedPlaylists, 'clonedPlaylists');
+	// 	const activePlaylist = clonedPlaylists.filter(
+	// 		(playlist) => playlist._id === playlistId
+	// 	);
+	// 	log(activePlaylist, 'active playlist');
+	// 	const clonedSongs = [...songs];
+	// 	// log(clonedSongs, 'cloned favs');
+	// 	// const userPlaylists = [...user.playlists];
+	// 	// log(userPlaylists, 'cloned user playlists');
+	// 	// // get all playlists
+	// 	// // const
+	// 	const playlistSongs = clonedSongs.filter((obj) =>
+	// 		obj._id.includes(activePlaylist[0].songs)
+	// 	);
+	// 	log(playlistSongs, 'playlistSongs');
+	// 	const playListData = {
+	// 		albumTracks: playlistSongs,
+	// 		playListName: activePlaylist[0].name,
+	// 	};
 
-		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
-		navigate('/player');
-	};
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
 
 	// working using songs_list
 	// const handleClick = (trackId, albumTitle) => {
