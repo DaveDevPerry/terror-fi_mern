@@ -15,6 +15,7 @@ export const playerReducer = (state, action) => {
 			// const filteredA = clonedA.songslist.filter(
 			// 	(obj) => obj.albumId === action.data.playListId
 			// );
+			log(state, 'state atm');
 			return {
 				...state,
 				songslist: action.data.albumTracks,

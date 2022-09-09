@@ -23,7 +23,7 @@ const AppDetails = ({ theme }) => {
 				</a>
 			</div>
 			<div className='studio-img'></div>
-			<StyledLogoAnimation>
+			{/* <StyledLogoAnimation>
 				<svg id='dp-logo-svg' viewBox='0 0 520 520' fill='#c40303'>
 					<path
 						id='dp-logo-svg-path'
@@ -32,7 +32,7 @@ const AppDetails = ({ theme }) => {
 						strokeWidth='80'
 					/>
 				</svg>
-			</StyledLogoAnimation>
+			</StyledLogoAnimation> */}
 		</StyledAppDetails>
 	);
 };
@@ -74,7 +74,7 @@ const StyledAppDetails = styled.div`
 		transition: all 200ms linear;
 	}
 	.label-img.dark {
-		background-image: url('KTMA_logo1.webp');
+		background-image: url('KTMA_Logo1.webp');
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
@@ -109,12 +109,12 @@ const Brand = styled.div`
 		font-weight: bolder;
 	}
 `;
-const StyledLogoAnimation = styled.div`
-	display: none;
-	#dp-logo-svg-path {
-		stroke-dasharray: 1569;
-		stroke-dashoffset: 1569;
-	}
-`;
+// const StyledLogoAnimation = styled.div`
+// 	display: none;
+// 	#dp-logo-svg-path {
+// 		stroke-dasharray: 1569;
+// 		stroke-dashoffset: 1569;
+// 	}
+// `;
 
 export default AppDetails;

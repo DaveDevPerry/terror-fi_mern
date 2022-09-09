@@ -25,10 +25,10 @@ const Navbar = ({ targets }) => {
 			{user && (
 				<div>
 					<ul className='user-details-list'>
-						{/* <li>
+						<li>
 							<p>username:</p>
 							<span>{user.username}</span>
-						</li> */}
+						</li>
 						{/* <li>
 							<p>D.O.B:</p>
 							<span>12/02/1978</span>
@@ -97,8 +97,8 @@ const StyledNavbar = styled.nav`
 				align-items: center;
 				column-gap: 1rem;
 				p {
-					/* width: 5rem; */
-					/* text-align: right; */
+					width: 7.5rem;
+					text-align: right;
 				}
 			}
 		}

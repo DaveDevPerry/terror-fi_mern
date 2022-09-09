@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 // import React, { useEffect, useContext } from 'react';
 // import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
+// import { AnimatePresence } from 'framer-motion';
 // import playerContext from '../context/playerContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 // import ProgressBar from './ProgressBar';
@@ -15,7 +16,9 @@ import { FiSkipForward, FiSkipBack, FiHeart } from 'react-icons/fi';
 // import { VscUnmute } from 'react-icons/vsc';
 import { GoUnmute } from 'react-icons/go';
 import { BiShuffle, BiRepeat } from 'react-icons/bi';
+import { MdPlaylistAdd } from 'react-icons/md';
 import { usePlayerContext } from '../hooks/usePlayerContext';
+import PlaylistOptions from './PlaylistOptions';
 // import { log } from '../helper';
 
 function Controls({
@@ -43,6 +46,8 @@ function Controls({
 	random,
 	songslist,
 	toggleFav,
+	setPlaylistDisplay,
+	playlistDisplay,
 }) {
 	// Global State
 	const {
@@ -141,6 +146,11 @@ function Controls({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentSong]);
 
+	const handlePlaylistDisplay = () => {
+		// navigate('/library');
+		setPlaylistDisplay(!playlistDisplay);
+	};
+
 	return (
 		<StyledControls className='controls'>
 			<div className='upper-container'>
@@ -156,12 +166,28 @@ function Controls({
 
 					<span className='totalT'>{fmtMSS(dur)}</span>
 				</div> */}
+				<span
+					// onClick={setPlaylistDisplay(!playlistDisplay)}
+					className='playlist'
+					// className={'playlist ' + (random ? 'active' : '')}
+				>
+					<MdPlaylistAdd
+						className='fas fa-playlist'
+						onClick={handlePlaylistDisplay}
+					/>
+				</span>
 				<div className='songMeta'>
 					<span className='songtitle'>{songslist[currentSong].title}</span>
 					<span className='songartistName'>
 						{songslist[currentSong].artistName}
 					</span>
 				</div>
+				<span
+					onClick={toggleFav}
+					// className={'favourite ' + (random ? 'active' : '')}
+				>
+					<FiHeart className='fas fa-favourite' />
+				</span>
 			</div>
 			<div className='lower-container'>
 				<audio
@@ -216,12 +242,12 @@ function Controls({
 				</div>
 
 				<div className='plsoptions'>
-					<span
+					{/* <span
 						onClick={toggleFav}
 						className={'random ' + (random ? 'active' : '')}
 					>
 						<FiHeart className='fas fa-random' />
-					</span>
+					</span> */}
 					<span
 						onClick={toggleRandom}
 						className={'random ' + (random ? 'active' : '')}
@@ -236,6 +262,15 @@ function Controls({
 					</span>
 				</div>
 			</div>
+			{/* <AnimatePresence mode='wait'> */}
+			{/* {playlistDisplay === true && ( */}
+			<PlaylistOptions
+				setPlaylistDisplay={setPlaylistDisplay}
+				playlistDisplay={playlistDisplay}
+				handlePlaylistDisplay={handlePlaylistDisplay}
+			/>
+			{/* )} */}
+			{/* </AnimatePresence> */}
 		</StyledControls>
 	);
 }
@@ -251,12 +286,24 @@ const StyledControls = styled.div`
 	background-color: ${({ theme }) => theme.bgGrey};
 	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};
 	z-index: 5;
+	position: relative;
 	.upper-container {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		flex-direction: row;
+		justify-content: space-between;
 		align-items: center;
 		width: 100%;
+		span {
+			font-size: 2.4rem;
+			color: ${({ theme }) => theme.white};
+			.fas.fa-playlist {
+				/* color: ${({ theme }) => theme.primaryColor}; */
+				font-size: 3rem;
+			}
+			.fas.fa-favourite {
+				/* color: ${({ theme }) => theme.primaryColor}; */
+			}
+		}
 		.songMeta {
 			width: 100%;
 			display: flex;
@@ -510,14 +557,18 @@ const StyledControls = styled.div`
 					}
 				}
 			}
-			.repeat {
+			/* .repeat {
 				display: none;
-			}
+			} */
 		}
 		/* .plsoptions {
 			justify-self: flex-end;
 			add
 		} */
+	}
+	.playlist-model {
+		position: absolute;
+		z-index: 6000;
 	}
 `;
 

@@ -7,12 +7,14 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
+import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 // import { motion } from 'framer-motion';
 
 const Loader = ({ theme }) => {
 	const { user } = useAuthContext();
 	const { songs, dispatch } = useSongsContext();
 	const { albums, dispatch: albumDispatch } = useAlbumsContext();
+	const { dispatch: playlistDispatch } = usePlaylistsContext();
 	// const {  dispatch } = useSongsContext();
 	const { setDataLoaded } = useStateContext();
 
@@ -91,6 +93,64 @@ const Loader = ({ theme }) => {
 			fetchAlbums();
 		}
 	}, [albumDispatch, user]);
+
+	useEffect(() => {
+		const fetchPlaylists = async () => {
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/api/playlists`,
+				{
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				}
+			);
+			const json = await response.json();
+
+			log(json, 'playlists json');
+			// json.reverse();
+
+			if (response.ok) {
+				// setWorkouts(json);
+				playlistDispatch({
+					type: 'SET_PLAYLISTS',
+					payload: json,
+				});
+			}
+		};
+		// if we have a value for the user then fetch the workouts
+		if (user) {
+			fetchPlaylists();
+		}
+	}, [playlistDispatch, user]);
+
+	// useEffect(() => {
+	// 	const fetchPlaylists = async () => {
+	// 		const response = await fetch(
+	// 			`${process.env.REACT_APP_BACKEND_URL}/api/playlists`,
+	// 			{
+	// 				headers: {
+	// 					Authorization: `Bearer ${user.token}`,
+	// 				},
+	// 			}
+	// 		);
+	// 		const json = await response.json();
+
+	// 		log(json, 'albums json');
+	// 		json.reverse();
+
+	// 		if (response.ok) {
+	// 			// setWorkouts(json);
+	// 			albumDispatch({
+	// 				type: 'SET_ALBUMS',
+	// 				payload: json,
+	// 			});
+	// 		}
+	// 	};
+	// 	// if we have a value for the user then fetch the workouts
+	// 	if (user) {
+	// 		fetchPlaylists();
+	// 	}
+	// }, [albumDispatch, user]);
 
 	// useEffect(() => {
 	// 	const fetchFavourites = async () => {

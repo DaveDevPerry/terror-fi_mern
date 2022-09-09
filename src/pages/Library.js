@@ -19,6 +19,9 @@ import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
 import { FiHeart } from 'react-icons/fi';
 import { SiBandsintown } from 'react-icons/si';
+import { MdListAlt } from 'react-icons/md';
+import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+// import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
@@ -30,6 +33,7 @@ const Library = ({ theme }) => {
 	const { dataLoaded } = useStateContext();
 	const { albums } = useAlbumsContext();
 	const { songs } = useSongsContext();
+	const { playlists } = usePlaylistsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
 	// const {
@@ -110,6 +114,33 @@ const Library = ({ theme }) => {
 		// navigate('/player');
 	};
 
+	const handlePlaylist = (playlistId) => {
+		log(playlistId, 'id');
+		const clonedPlaylists = [...playlists];
+		log(clonedPlaylists, 'clonedPlaylists');
+		const activePlaylist = clonedPlaylists.filter(
+			(playlist) => playlist._id === playlistId
+		);
+		log(activePlaylist, 'active playlist');
+		const clonedSongs = [...songs];
+		// log(clonedSongs, 'cloned favs');
+		// const userPlaylists = [...user.playlists];
+		// log(userPlaylists, 'cloned user playlists');
+		// // get all playlists
+		// // const
+		const playlistSongs = clonedSongs.filter((obj) =>
+			obj._id.includes(activePlaylist[0].songs)
+		);
+		log(playlistSongs, 'playlistSongs');
+		const playListData = {
+			albumTracks: playlistSongs,
+			playListName: activePlaylist[0].name,
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		navigate('/player');
+	};
+
 	// working using songs_list
 	// const handleClick = (trackId, albumTitle) => {
 	// 	const playListData = {
@@ -151,6 +182,30 @@ const Library = ({ theme }) => {
 						</div>
 					</div>
 				</li>
+				{playlists &&
+					playlists.map((playlist, index) => (
+						<li key={index} id='playlist-list'>
+							<div
+								className='li-wrapper'
+								onClick={() => {
+									handlePlaylist(playlist._id);
+								}}
+							>
+								<div className='album-card-artwork-wrapper'>
+									<MdListAlt className='far fa-playlist fa-lg' />
+								</div>
+								<div className='album-info-container'>
+									<p>{playlist.name}</p>
+									<p>
+										{playlist.songs.length === 1
+											? `${playlist.songs.length} song`
+											: `${playlist.songs.length} songs`}
+									</p>
+								</div>
+							</div>
+						</li>
+					))}
+
 				{/* 
 				<li id='fav-list' onClick={playFavourites}>
 					<div className='album-card-artwork-wrapper'>
@@ -242,7 +297,8 @@ const StyledLibrary = styled(motion.section)`
 				border: 1px solid green;
 			} */
 		/* } */
-		li#fav-list {
+		li#fav-list,
+		li#playlist-list {
 			display: flex;
 			justify-content: space-between;
 			/* align-items: center; */
@@ -289,6 +345,7 @@ const StyledLibrary = styled(motion.section)`
 					p {
 						/* font-weight: bold; */
 						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
 						&:last-of-type {
 							font-size: 1.2rem;
 							text-transform: uppercase;

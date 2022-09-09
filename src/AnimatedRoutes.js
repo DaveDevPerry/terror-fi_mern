@@ -8,11 +8,14 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Loader from './pages/Loader';
 import Settings from './pages/Settings';
+import { useState } from 'react';
 // import PlayerState from './context/PlayerState';
 // import Playing from './pages/Playing';
 
 const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	const location = useLocation();
+
+	const [playlistDisplay, setPlaylistDisplay] = useState(false);
 
 	return (
 		<>
@@ -66,7 +69,12 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 						path='/player'
 						element={
 							user ? (
-								<AudioPlayer themeToggler={themeToggler} theme={theme} />
+								<AudioPlayer
+									themeToggler={themeToggler}
+									theme={theme}
+									setPlaylistDisplay={setPlaylistDisplay}
+									playlistDisplay={playlistDisplay}
+								/>
 							) : (
 								<Navigate to='/login' />
 							)
