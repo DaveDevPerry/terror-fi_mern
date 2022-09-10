@@ -18,11 +18,11 @@ export const playlistsReducer = (state, action) => {
 			};
 
 		case 'CREATE_PLAYLIST':
+			log(state, 'current playlist state');
+			log(action.payload, 'new playist');
+			log([action.payload, ...state.playlists], 'new playist array');
 			return {
-				// playlists: {
-				// 	...state.playlists,
-				// 	gigs: [action.payload, ...state.gigCounterData.gigs],
-				// },
+				playlists: [action.payload, ...state.playlists],
 			};
 		case 'UPDATE_PLAYLIST':
 			log(action.payload, 'playlist context');

@@ -46,6 +46,6 @@ export const darkTheme = {
 	black: '#000000',
 	gold: '#eab209',
 	red: '#980303',
-	green: '#156d01',
+	green: '#26c303',
 	isComplete: 'rgb(228, 207, 23)',
 };

@@ -27,6 +27,9 @@ import { usePlayerContext } from '../hooks/usePlayerContext';
 import { useStateContext } from '../lib/context';
 import { log } from '../helper';
 import { useAuthContext } from '../hooks/useAuthContext';
+import AddPlaylistForm from '../components/AddPlaylistForm';
+
+import { Toaster } from 'react-hot-toast';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -40,6 +43,9 @@ function AudioPlayer({
 	playlistDisplay,
 	handlePlaylist,
 	addSongToPlaylist,
+	handlePlaylistFormDisplay,
+	playlistFormDisplay,
+	setPlaylistFormDisplay,
 }) {
 	// const { user, dispatch: userDispatch } = useUsersContext();
 	const { user, dispatch: authDispatch } = useAuthContext();
@@ -233,6 +239,8 @@ function AudioPlayer({
 			{/* <div className="left">
           </div> */}
 
+			<Toaster />
+
 			<Header handleBackClick={handleBackClick} handleMenu={handleMenu} />
 			{/* <div className='content-wrapper'> */}
 			{/* <Cassette /> */}
@@ -292,10 +300,19 @@ function AudioPlayer({
 				playlistDisplay={playlistDisplay}
 				handlePlaylist={handlePlaylist}
 				addSongToPlaylist={addSongToPlaylist}
+				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
 			/>
 			{/* <Footer /> */}
 			{/* </div> */}
 			{/* </PlayerState> */}
+
+			{/* // add playlist form */}
+			<AddPlaylistForm
+				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				playlistFormDisplay={playlistFormDisplay}
+				setPlaylistFormDisplay={setPlaylistFormDisplay}
+				// handleCreatePlaylist={handleCreatePlaylist}
+			/>
 		</StyledAudioPlayer>
 	);
 }

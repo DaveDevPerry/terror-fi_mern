@@ -15,17 +15,17 @@ root.render(
 	<React.StrictMode>
 		<AuthContextProvider>
 			<UsersContextProvider>
-				<PlaylistsContextProvider>
-					<AlbumsContextProvider>
-						<SongsContextProvider>
-							<PlayerContextTestProvider>
+				<AlbumsContextProvider>
+					<SongsContextProvider>
+						<PlayerContextTestProvider>
+							<PlaylistsContextProvider>
 								{/* <BrowserRouter> */}
 								<App />
 								{/* </BrowserRouter> */}
-							</PlayerContextTestProvider>
-						</SongsContextProvider>
-					</AlbumsContextProvider>
-				</PlaylistsContextProvider>
+							</PlaylistsContextProvider>
+						</PlayerContextTestProvider>
+					</SongsContextProvider>
+				</AlbumsContextProvider>
 			</UsersContextProvider>
 		</AuthContextProvider>
 	</React.StrictMode>

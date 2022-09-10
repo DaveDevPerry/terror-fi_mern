@@ -50,6 +50,8 @@ function Controls({
 	playlistDisplay,
 	handlePlaylist,
 	addSongToPlaylist,
+	handlePlaylistFormDisplay,
+	playlistFormDisplay,
 }) {
 	// Global State
 	const {
@@ -272,6 +274,8 @@ function Controls({
 				handlePlaylistDisplay={handlePlaylistDisplay}
 				handlePlaylist={handlePlaylist}
 				addSongToPlaylist={addSongToPlaylist}
+				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				playlistFormDisplay={playlistFormDisplay}
 			/>
 			{/* )} */}
 			{/* </AnimatePresence> */}

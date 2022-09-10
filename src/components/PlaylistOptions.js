@@ -12,6 +12,8 @@ const PlaylistOptions = ({
 	handlePlaylistDisplay,
 	handlePlaylist,
 	addSongToPlaylist,
+	handlePlaylistFormDisplay,
+	playlistFormDisplay,
 }) => {
 	const { playlists } = usePlaylistsContext();
 	// const navigate = useNavigate();
@@ -35,7 +37,10 @@ const PlaylistOptions = ({
 						<CgCloseR className='close-icon' onClick={handlePlaylistDisplay} />
 					</p>
 					<ul className='playlist-options-list'>
-						<li className='create-playlist-wrapper'>
+						<li
+							className='create-playlist-wrapper'
+							onClick={handlePlaylistFormDisplay}
+						>
 							<MdOutlineAddBox className='add-playlist-btn' />
 							<div className='playlist-info-wrapper'>
 								<p>Create Playlist</p>

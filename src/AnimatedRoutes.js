@@ -33,6 +33,12 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	const { currentSong, songslist } = usePlayerContext();
 
 	const [playlistDisplay, setPlaylistDisplay] = useState(false);
+	const [playlistFormDisplay, setPlaylistFormDisplay] = useState(false);
+
+	const handlePlaylistFormDisplay = () => {
+		setPlaylistFormDisplay(!playlistFormDisplay);
+		// setPlaylistFormDisplay(false);
+	};
 
 	const handlePlaylist = (playlistId) => {
 		log(playlistId, 'id');
@@ -76,16 +82,18 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		log(user, 'user in animated routes add song to playlist');
 
 		// check if already a fav
-
+		// const testSongId = '6313f4ed02cefa8f1dc9535b';
 		// add songId to users favourites
 		// userDispatch({ type: 'UPDATE_USER', payload: songId });
 		// authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
 
 		const response = await fetch(
+			// `${process.env.REACT_APP_BACKEND_URL}/api/playlists/631a5feb0d4492d2be61cd2a`,
 			`${process.env.REACT_APP_BACKEND_URL}/api/playlists/${playlistId}`,
 			{
 				// const response = await fetch('/api/weights', {
 				method: 'PATCH',
+				// body: testSongId,
 				body: songId,
 				headers: {
 					'Content-Type': 'application/json',
@@ -190,6 +198,9 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 									playlistDisplay={playlistDisplay}
 									handlePlaylist={handlePlaylist}
 									addSongToPlaylist={addSongToPlaylist}
+									handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+									playlistFormDisplay={playlistFormDisplay}
+									setPlaylistFormDisplay={setPlaylistFormDisplay}
 								/>
 							) : (
 								<Navigate to='/login' />
