@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -198,6 +198,18 @@ const Library = ({ handlePlaylist }) => {
 							<p>various artists</p>
 						</div>
 					</div>
+				</li>
+
+				<li id='fav-list'>
+					<NavLink to='/playlists' className='li-wrapper'>
+						<div className='album-card-artwork-wrapper'>
+							<FiHeart className='far fa-heart fa-lg' />
+						</div>
+						<div className='album-info-container'>
+							<p>My Playlists</p>
+							{/* <p>various artists</p> */}
+						</div>
+					</NavLink>
 				</li>
 				{playlists &&
 					playlists.map((playlist, index) => (

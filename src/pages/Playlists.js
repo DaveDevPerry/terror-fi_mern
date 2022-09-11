@@ -1,0 +1,284 @@
+import React, { useEffect } from 'react';
+// import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { useLogout } from '../hooks/useLogout';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+// import { song_list } from '../context/songs';
+
+// import { album_list } from '../context/albums';
+// import Header from '../components/Header';
+// import AlbumCard from '../components/AlbumCard';
+import { useStateContext } from '../lib/context';
+// import { log } from '../helper';
+// import playerContext from '../context/playerContext';
+// import { usePlayerContext } from '../hooks/usePlayerContext';
+import PlaylistsHeader from '../components/PlaylistsHeader';
+// import { useAlbumsContext } from '../hooks/useAlbumsContext';
+// import { useSongsContext } from '../hooks/useSongsContext';
+// import { log } from '../helper';
+// import { FiHeart } from 'react-icons/fi';
+// import { SiBandsintown } from 'react-icons/si';
+import { MdListAlt } from 'react-icons/md';
+import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+
+import { FaPlay } from 'react-icons/fa';
+import { log } from '../helper';
+// import { useAuthContext } from '../hooks/useAuthContext';
+// import { useAuthContext } from '../hooks/useAuthContext';
+// import PlayerState from '../context/PlayerState';
+// import playerContext from '../context/playerContext';
+// import playerReducer from '../context/playerReducer';
+// import { log } from '../helper';
+
+const Playlists = ({ handleViewPlaylist }) => {
+	// const { logout } = useLogout();
+	// const { user } = useAuthContext();
+	const { dataLoaded } = useStateContext();
+	// const { albums } = useAlbumsContext();
+	// const { songs } = useSongsContext();
+	const { playlists } = usePlaylistsContext();
+	// const { songslist } = playerContext();
+	// const { songslist } = playerReducer()
+	// const {
+
+	// 	setAlbumSongs,
+	// 	songslist,
+	// } = useContext(playerContext);
+
+	// const { dispatch } = usePlayerContext();
+	// const {songslist, dispatch} = usePlayerContext()
+
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (dataLoaded === false) {
+			navigate('/');
+		}
+	}, [navigate, dataLoaded]);
+
+	const handleBackClick = () => {
+		navigate('/library');
+		// logout();
+	};
+
+	// const handleClick = (trackId, albumTitle) => {
+	// 	// const playListData = {
+	// 	// 	playListId: trackId,
+	// 	// 	playListName: albumTitle,
+	// 	// };
+
+	// 	// set songs array with all songs on album
+	// 	const clonedSongs = [...songs];
+	// 	const filteredSongs = clonedSongs.filter((obj) => obj.albumId === trackId);
+
+	// 	log(filteredSongs, 'filtered Songs');
+
+	// 	const playListData = {
+	// 		albumTracks: filteredSongs.reverse(),
+	// 		playListName: albumTitle,
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
+
+	// const playFavourites = () => {
+	// 	const clonedFavs = [...user.favourites];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const clonedSongsInFav = [...songs];
+	// 	const filteredFavs = clonedSongsInFav.filter((obj) =>
+	// 		clonedFavs.includes(obj._id)
+	// 	);
+	// 	log(filteredFavs, 'filtered favs');
+	// 	const playListData = {
+	// 		albumTracks: filteredFavs,
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
+	// const playFavourites = () => {
+	// 	const clonedFavs = [...songs.favourite_songs];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const playListData = {
+	// 		albumTracks: clonedFavs,
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
+
+	return (
+		<StyledPlaylists
+			initial={{ width: 0 }}
+			animate={{ width: '100%' }}
+			exit={{ x: window.innerWidth }}
+		>
+			<PlaylistsHeader handleBackClick={handleBackClick} />
+
+			<ul className='album-list'>
+				{playlists &&
+					playlists.map((playlist, index) => (
+						<li key={index} id='playlist-list'>
+							<div
+								className='li-wrapper'
+								onClick={() => {
+									handleViewPlaylist(playlist._id);
+								}}
+							>
+								<div className='album-card-artwork-wrapper'>
+									<MdListAlt className='far fa-playlist fa-lg' />
+								</div>
+								<div className='album-info-container'>
+									<p>{playlist.name}</p>
+									<p>
+										{playlist.songs.length === 1
+											? `${playlist.songs.length} song`
+											: `${playlist.songs.length} songs`}
+									</p>
+								</div>
+								<div className='playlist-control-btns'>
+									<FaPlay
+										className='play-playlist-btn'
+										onClick={() => {
+											log('clicked');
+										}}
+									/>
+								</div>
+							</div>
+						</li>
+					))}
+			</ul>
+		</StyledPlaylists>
+	);
+};
+const StyledPlaylists = styled(motion.section)`
+	flex: 1;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	/* align-items: center; */
+	flex-direction: column;
+	display: flex;
+	/* align-items: center; */
+	z-index: 5;
+	row-gap: 2rem;
+	margin: 0 auto;
+	max-width: 42rem;
+
+	.album-list {
+		margin: 0 1rem;
+		display: flex;
+		flex-direction: column;
+		/* align-items: center; */
+		row-gap: 1rem;
+		z-index: 5;
+		/* text-decoration: none; */
+		/* li.album-card {
+			display: flex;
+			justify-content: space-between;
+			column-gap: 2rem;
+			padding: 1rem;
+			background-color: ${({ theme }) => theme.bgCircle};
+			border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+			border-radius: 0.5rem;
+			img.album-cover-artwork {
+				width: 15%;
+				aspect-ratio: 1501 / 2376;
+			}
+			.album-info-container {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				p {
+					font-weight: bold;
+					color: ${({ theme }) => theme.white};
+					&:last-of-type {
+						font-size: 1.2rem;
+						text-transform: uppercase;
+						font-weight: normal;
+					}
+				}
+				ul {
+					margin-top: 0.5rem;
+					list-style: none;
+					li {
+						font-size: 1.2rem;
+						color: ${({ theme }) => theme.txtGrey};
+					}
+				}
+			} */
+		/* .album-card-btns {
+				border: 1px solid green;
+			} */
+		/* } */
+		li#fav-list,
+		li#playlist-list {
+			display: flex;
+			justify-content: space-between;
+			/* align-items: center; */
+			column-gap: 1rem;
+			.li-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				/* align-items: center; */
+				column-gap: 1rem;
+				padding: 1rem;
+				background-color: ${({ theme }) => theme.bgGrey};
+				/* background-color: ${({ theme }) => theme.bgCircle}; */
+				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+				/* border-radius: 0.5rem; */
+				border-radius: 1rem;
+				cursor: pointer;
+				flex: 1;
+				.album-card-artwork-wrapper {
+					/* border: 1px solid yellow; */
+					/* height: 10rem; */
+					pointer-events: none;
+					display: grid;
+					place-content: center;
+					/* width: 6.4rem; */
+					/* width: */
+					.fa-lg {
+						/* width: 20%; */
+						font-size: 3rem;
+						color: ${({ theme }) => theme.primaryColor};
+						/* width: 15%; */
+						/* aspect-ratio: 1501 / 2376; */
+					}
+					.arrow-icon.hand {
+						font-size: 2.5rem;
+						color: ${({ theme }) => theme.gold};
+					}
+				}
+				.album-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					pointer-events: none;
+
+					p {
+						/* font-weight: bold; */
+						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
+						&:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						}
+					}
+				}
+			}
+		}
+	}
+	/* #sign-out-btn {
+		color: ${({ theme }) => theme.white};
+		background-color: ${({ theme }) => theme.primaryColor};
+	} */
+`;
+
+export default Playlists;

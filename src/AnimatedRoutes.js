@@ -19,6 +19,9 @@ import { log } from './helper';
 import { useSongsContext } from './hooks/useSongsContext';
 import { usePlaylistsContext } from './hooks/usePlaylistsContext';
 import { usePlayerContext } from './hooks/usePlayerContext';
+import Playlists from './pages/Playlists';
+import Playlist from './pages/Playlist';
+import { useStateContext } from './lib/context';
 // import PlayerState from './context/PlayerState';
 // import Playing from './pages/Playing';
 
@@ -32,14 +35,57 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 
 	const { currentSong, songslist } = usePlayerContext();
 
+	const { setPlaylistToView, setViewPlaylist } = useStateContext();
+
 	const [playlistDisplay, setPlaylistDisplay] = useState(false);
 	const [playlistFormDisplay, setPlaylistFormDisplay] = useState(false);
+	const [deletePlaylistFormDisplay, setDeletePlaylistFormDisplay] =
+		useState(false);
 
 	const handlePlaylistFormDisplay = () => {
 		setPlaylistFormDisplay(!playlistFormDisplay);
 		// setPlaylistFormDisplay(false);
 	};
+	const handleDeletePlaylistFormDisplay = () => {
+		setDeletePlaylistFormDisplay(!deletePlaylistFormDisplay);
+		// setPlaylistFormDisplay(false);
+	};
 
+	const handleViewPlaylist = (playlistId) => {
+		setPlaylistToView(playlistId);
+		// log(playlistToView, ' playlist id to view  in playlist');
+
+		const clonedPL = [...playlists];
+		const findPlaylist = clonedPL.filter((obj) => obj._id === playlistId);
+		log(findPlaylist, 'find playlist');
+		setViewPlaylist(findPlaylist);
+		// log(playlistId, 'id');
+		// const clonedPlaylists = [...playlists];
+		// log(clonedPlaylists, 'clonedPlaylists');
+		// const activePlaylist = clonedPlaylists.filter(
+		// 	(playlist) => playlist._id === playlistId
+		// );
+		// log(activePlaylist, 'active playlist');
+		// const clonedSongs = [...songs];
+		// log(clonedSongs, 'cloned songs');
+		// // const userPlaylists = [...user.playlists];
+		// // log(userPlaylists, 'cloned user playlists');
+		// // // get all playlists
+		// // // const
+		// const playlistSongs = clonedSongs.filter((obj) =>
+		// 	activePlaylist[0].songs.includes(obj._id)
+		// );
+		// log(playlistSongs, 'playlistSongs');
+		// const playListData = {
+		// 	albumTracks: playlistSongs,
+		// 	playListName: activePlaylist[0].name,
+		// };
+
+		// dispatch({ type: 'SET_PLAYLIST', payload: playListData });
+		// setPlaylistDisplay(false);
+		navigate(`/playlists/${playlistId}`);
+		// navigate('/playlist');
+	};
 	const handlePlaylist = (playlistId) => {
 		log(playlistId, 'id');
 		const clonedPlaylists = [...playlists];
@@ -175,6 +221,53 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 							)
 						}
 					/>
+					<Route
+						path='/playlists'
+						element={
+							user ? (
+								<Playlists
+									themeToggler={themeToggler}
+									theme={theme}
+									handleViewPlaylist={handleViewPlaylist}
+								/>
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/>
+					<Route
+						path='/playlists/:id'
+						element={
+							user ? (
+								<Playlist
+									themeToggler={themeToggler}
+									theme={theme}
+									handleDeletePlaylistFormDisplay={
+										handleDeletePlaylistFormDisplay
+									}
+									deletePlaylistFormDisplay={deletePlaylistFormDisplay}
+									setDeletePlaylistFormDisplay={setDeletePlaylistFormDisplay}
+									// handlePlaylist={handlePlaylist}
+								/>
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/>
+					{/* <Route
+						path='/playlist'
+						element={
+							user ? (
+								<Playlist
+									themeToggler={themeToggler}
+									theme={theme}
+									// handlePlaylist={handlePlaylist}
+								/>
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/> */}
 					<Route
 						path='/settings'
 						element={

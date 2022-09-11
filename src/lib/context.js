@@ -8,6 +8,8 @@ export const StateContext = ({ children }) => {
 	const [dataLoaded, setDataLoaded] = useState(false);
 	const [menuStatus, setMenuStatus] = useState(false);
 	const [mediaToDisplay, setMediaToDisplay] = useState('display-default');
+	const [playlistToView, setPlaylistToView] = useState(null);
+	const [viewPlaylist, setViewPlaylist] = useState(null);
 	// const [currentSong, setCurrentSong] = useState(null);
 	const audio = document.getElementById('audio');
 	// SONGS
@@ -246,6 +248,12 @@ export const StateContext = ({ children }) => {
 				dataLoaded,
 				setDataLoaded,
 				setCurrentSongTime,
+
+				playlistToView,
+				setPlaylistToView,
+
+				viewPlaylist,
+				setViewPlaylist,
 			}}
 		>
 			{children}

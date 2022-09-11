@@ -11,9 +11,10 @@ export const playlistsReducer = (state, action) => {
 			};
 
 		case 'SET_PLAYLIST':
-			log(action.payload, 'action payload album');
+			log(action.payload, 'action payload playlist');
 
 			return {
+				playlists: state,
 				playlist: action.payload,
 			};
 
@@ -29,6 +30,21 @@ export const playlistsReducer = (state, action) => {
 			log(state, 'state, update playlist');
 			return {
 				// users: state.users.filter((user) => user._id === action.payload._id),
+			};
+		case 'DELETE_PLAYLIST':
+			log(action.payload, 'delete playlist context');
+			log(state, 'state, delete playlist');
+			log(
+				state.playlists.filter(
+					(playlist) => playlist._id !== action.payload._id
+				),
+				'test'
+			);
+			return {
+				// users: state.users.filter((user) => user._id === action.payload._id),
+				playlists: state.playlists.filter(
+					(playlist) => playlist._id !== action.payload._id
+				),
 			};
 
 		default:
