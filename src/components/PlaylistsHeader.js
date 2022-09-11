@@ -10,7 +10,7 @@ import { IoChevronBack } from 'react-icons/io5';
 // import { log } from '../helper';
 // import { AnimatePresence } from 'framer-motion';
 
-const PlaylistsHeader = ({ handleBackClick }) => {
+const PlaylistsHeader = ({ handleBackClick, pageTitle }) => {
 	const location = useLocation();
 	// const { menuStatus, setMenuStatus } = useStateContext();
 
@@ -25,9 +25,9 @@ const PlaylistsHeader = ({ handleBackClick }) => {
 				{/* <BiLogOutCircle className='fas fa-angle-left' /> */}
 				<IoChevronBack className='fas fa-angle-left' />
 			</div>
-			{location.pathname === '/playlists' && (
+			{/* {location.pathname === '/playlists' && (
 				<h5 className='page-heading'>Playlists</h5>
-			)}
+			)} */}
 			{location.pathname === '/library' && (
 				<h5 className='page-heading'>Library</h5>
 			)}
@@ -36,6 +36,7 @@ const PlaylistsHeader = ({ handleBackClick }) => {
 					terror<span id='hyphen'>-</span>fi
 				</h5>
 			)}
+			<h5 className='page-heading'>{pageTitle}</h5>
 			<NavLink to='/settings' className='circle-wrapper'>
 				<IoSettingsOutline className='settings-icon' />
 			</NavLink>

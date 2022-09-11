@@ -16,6 +16,7 @@ import { Toaster } from 'react-hot-toast';
 import PlaylistsHeader from '../components/PlaylistsHeader';
 import PlaylistSongs from '../components/PlaylistSongs';
 import DeletePlaylistConfirmation from '../components/DeletePlaylistConfirmation';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 // import { format } from 'date-fns';
 // import BandSupportGigsList from '../components/BandSupportGigsList';
 // import BandHeadlineGigsList from '../components/BandHeadlineGigsList';
@@ -105,23 +106,37 @@ const Playlist = ({
 			exit={{ x: window.innerWidth }}
 		>
 			<Toaster />
-			<PlaylistsHeader handleBackClick={handleBackClick} />
+			<PlaylistsHeader
+				handleBackClick={handleBackClick}
+				pageTitle={viewPlaylist[0].name}
+			/>
 
 			{viewPlaylist[0] && viewPlaylist[0] && (
 				<PlaylistSongs playlist={viewPlaylist[0]} />
 			)}
 			{/* {playlist && playlist && <PlaylistSongs playlist={playlist} />} */}
 
-			<div className='playlist-btns'>
+			{/* <div className='playlist-btns'>
 				<button
 					className='delete-playlist-btn'
 					onClick={handleDeletePlaylistFormDisplay}
 				>
-					{/* <button className='delete-playlist-btn' onClick={handleDelete}> */}
-					{/* <button className='delete-playlist-btn' onClick={handleDelete}> */}
 					delete
 				</button>
-			</div>
+			</div> */}
+
+			<ul className='playlist-options-list'>
+				<li
+					className='delete-playlist-wrapper'
+					onClick={handleDeletePlaylistFormDisplay}
+				>
+					<RiDeleteBin6Line className='delete-playlist-btn' />
+					<div className='playlist-info-wrapper'>
+						<p>delete Playlist</p>
+						<p></p>
+					</div>
+				</li>
+			</ul>
 
 			<DeletePlaylistConfirmation
 				deletePlaylistFormDisplay={deletePlaylistFormDisplay}
@@ -228,6 +243,45 @@ const StyledPlaylist = styled(motion.div)`
 	}
 	::-webkit-scrollbar-corner {
 		background: rgb(75, 74, 74);
+	}
+	.playlist-options-list {
+		list-style: none;
+		background-color: ${({ theme }) => theme.bgGrey};
+		margin: 0 1rem;
+		padding: 0.5rem;
+		.delete-playlist-wrapper {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			column-gap: 1rem;
+			margin-top: 0rem;
+			/* padding: 0.5rem; */
+			.delete-playlist-btn {
+				font-size: 3rem;
+				color: ${({ theme }) => theme.primaryColor};
+			}
+			/* .playlist-icon {
+				font-size: 3rem;
+				color: ${({ theme }) => theme.white};
+			} */
+			.playlist-info-wrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				/* row-gap: 0.5rem; */
+				p {
+					color: ${({ theme }) => theme.white};
+					font-size: 1.4rem;
+					text-transform: capitalize;
+					/* &:first-of-type {
+					} */
+					&:last-of-type {
+						font-size: 1rem;
+					}
+				}
+			}
+		}
 	}
 	.band-gigs-list-header {
 		display: flex;

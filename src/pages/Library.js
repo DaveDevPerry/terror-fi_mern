@@ -20,7 +20,7 @@ import { log } from '../helper';
 import { FiHeart } from 'react-icons/fi';
 import { SiBandsintown } from 'react-icons/si';
 import { MdListAlt } from 'react-icons/md';
-import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+// import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
@@ -34,7 +34,7 @@ const Library = ({ handlePlaylist }) => {
 	const { dataLoaded } = useStateContext();
 	const { albums } = useAlbumsContext();
 	const { songs } = useSongsContext();
-	const { playlists } = usePlaylistsContext();
+	// const { playlists } = usePlaylistsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
 	// const {
@@ -177,7 +177,7 @@ const Library = ({ handlePlaylist }) => {
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
 
-			<ul className='album-list'>
+			<ul className='select-list'>
 				<li id='fav-list'>
 					<div className='li-wrapper' onClick={playFavourites}>
 						<div className='album-card-artwork-wrapper'>
@@ -191,7 +191,6 @@ const Library = ({ handlePlaylist }) => {
 					<div className='li-wrapper' onClick={playAllRandom}>
 						<div className='album-card-artwork-wrapper'>
 							<SiBandsintown className='arrow-icon hand gold' />
-							{/* <FiHeart className='far fa-heart fa-lg' /> */}
 						</div>
 						<div className='album-info-container'>
 							<p>Randomize</p>
@@ -200,18 +199,19 @@ const Library = ({ handlePlaylist }) => {
 					</div>
 				</li>
 
-				<li id='fav-list'>
+				<li id='play-list'>
 					<NavLink to='/playlists' className='li-wrapper'>
 						<div className='album-card-artwork-wrapper'>
-							<FiHeart className='far fa-heart fa-lg' />
+							{/* <FiHeart className='far fa-heart fa-lg' /> */}
+							<MdListAlt className='far fa-playlist fa-lg' />
 						</div>
-						<div className='album-info-container'>
+						<div className='playlist-info-container'>
 							<p>My Playlists</p>
-							{/* <p>various artists</p> */}
+							{/* <p></p> */}
 						</div>
 					</NavLink>
 				</li>
-				{playlists &&
+				{/* {playlists &&
 					playlists.map((playlist, index) => (
 						<li key={index} id='playlist-list'>
 							<div
@@ -233,9 +233,10 @@ const Library = ({ handlePlaylist }) => {
 								</div>
 							</div>
 						</li>
-					))}
+					))} */}
+			</ul>
 
-				{/* 
+			{/* 
 				<li id='fav-list' onClick={playFavourites}>
 					<div className='album-card-artwork-wrapper'>
 						<FiHeart
@@ -247,7 +248,7 @@ const Library = ({ handlePlaylist }) => {
 						<p>various artists</p>
 					</div>
 				</li> */}
-
+			<ul className='album-list'>
 				{albums &&
 					albums.map((album, index) => (
 						<AlbumCard key={index} handleClick={handleClick} album={album} />
@@ -279,7 +280,149 @@ const StyledLibrary = styled(motion.section)`
 	row-gap: 2rem;
 	margin: 0 auto;
 	max-width: 42rem;
+	overflow-y: hidden;
 
+	.select-list {
+		margin: 0 1rem;
+		display: flex;
+		flex-direction: column;
+		/* align-items: center; */
+		row-gap: 1rem;
+		z-index: 5;
+		/* overflow-y: scroll; */
+		li#fav-list,
+		li#playlist-list {
+			display: flex;
+			justify-content: space-between;
+			/* align-items: center; */
+			column-gap: 1rem;
+			.li-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				/* align-items: center; */
+				column-gap: 1rem;
+				padding: 1rem;
+				background-color: ${({ theme }) => theme.bgGrey};
+				/* background-color: ${({ theme }) => theme.bgCircle}; */
+				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+				/* border-radius: 0.5rem; */
+				border-radius: 1rem;
+				cursor: pointer;
+				flex: 1;
+				.album-card-artwork-wrapper {
+					/* border: 1px solid yellow; */
+					/* height: 10rem; */
+					pointer-events: none;
+					display: grid;
+					place-content: center;
+					/* width: 6.4rem; */
+					/* width: */
+					.fa-lg {
+						/* width: 20%; */
+						font-size: 3rem;
+						color: ${({ theme }) => theme.primaryColor};
+						/* width: 15%; */
+						/* aspect-ratio: 1501 / 2376; */
+					}
+					.arrow-icon.hand {
+						font-size: 2.5rem;
+						color: ${({ theme }) => theme.gold};
+					}
+				}
+				.album-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					pointer-events: none;
+
+					p {
+						/* font-weight: bold; */
+						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
+						&:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						}
+					}
+				}
+				.playlist-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: row;
+					pointer-events: none;
+
+					p {
+						/* font-weight: bold; */
+						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
+						/* &:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						} */
+					}
+				}
+			}
+		}
+		li#play-list {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			column-gap: 1rem;
+			.li-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				column-gap: 1rem;
+				padding: 1rem;
+				background-color: ${({ theme }) => theme.bgGrey};
+				/* background-color: ${({ theme }) => theme.bgCircle}; */
+				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+				/* border-radius: 0.5rem; */
+				border-radius: 1rem;
+				cursor: pointer;
+				flex: 1;
+				.album-card-artwork-wrapper {
+					/* border: 1px solid yellow; */
+					/* height: 10rem; */
+					pointer-events: none;
+					display: grid;
+					place-content: center;
+					/* width: 6.4rem; */
+					/* width: */
+					.fa-lg {
+						/* width: 20%; */
+						font-size: 3rem;
+						color: ${({ theme }) => theme.primaryColor};
+						/* width: 15%; */
+						/* aspect-ratio: 1501 / 2376; */
+					}
+				}
+
+				.playlist-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: row;
+					pointer-events: none;
+
+					p {
+						/* font-weight: bold; */
+						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
+						/* &:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						} */
+					}
+				}
+			}
+		}
+	}
 	.album-list {
 		margin: 0 1rem;
 		display: flex;
@@ -287,45 +430,7 @@ const StyledLibrary = styled(motion.section)`
 		/* align-items: center; */
 		row-gap: 1rem;
 		z-index: 5;
-		/* text-decoration: none; */
-		/* li.album-card {
-			display: flex;
-			justify-content: space-between;
-			column-gap: 2rem;
-			padding: 1rem;
-			background-color: ${({ theme }) => theme.bgCircle};
-			border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-			border-radius: 0.5rem;
-			img.album-cover-artwork {
-				width: 15%;
-				aspect-ratio: 1501 / 2376;
-			}
-			.album-info-container {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				p {
-					font-weight: bold;
-					color: ${({ theme }) => theme.white};
-					&:last-of-type {
-						font-size: 1.2rem;
-						text-transform: uppercase;
-						font-weight: normal;
-					}
-				}
-				ul {
-					margin-top: 0.5rem;
-					list-style: none;
-					li {
-						font-size: 1.2rem;
-						color: ${({ theme }) => theme.txtGrey};
-					}
-				}
-			} */
-		/* .album-card-btns {
-				border: 1px solid green;
-			} */
-		/* } */
+		overflow-y: scroll;
 		li#fav-list,
 		li#playlist-list {
 			display: flex;

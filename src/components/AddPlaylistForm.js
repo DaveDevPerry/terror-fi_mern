@@ -81,7 +81,7 @@ const AddPlaylistForm = ({
 	// create a toast
 	const notify = () => {
 		toast.success(`${playlistName} playlist successfully created.`, {
-			duration: 5000,
+			duration: 2000,
 			style: {
 				border: '2px solid #1da000',
 			},
