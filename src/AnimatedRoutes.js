@@ -215,6 +215,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 									themeToggler={themeToggler}
 									theme={theme}
 									handlePlaylist={handlePlaylist}
+									handleViewPlaylist={handleViewPlaylist}
 								/>
 							) : (
 								<Navigate to='/login' />

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // import { HiOutlineEllipsisVertical } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
 import { FaEllipsisV } from 'react-icons/fa';
+import { log } from '../helper';
 // import { log } from '../../helper';
 
 function PlaylistSongs({ playlist }) {
@@ -19,6 +20,8 @@ function PlaylistSongs({ playlist }) {
 	// 	log(this.song.title, 'song this title');
 	// 	log(this.song._id, 'song id?');
 	// };
+	log(playlist, 'playlist - playlist songs');
+	log(playlist && playlist, 'playlist - playlist songs');
 
 	return (
 		<StyledPlaylistSongs className='playlist no_drag'>

@@ -67,6 +67,7 @@ function Controls({
 		// togglePlaying,
 		// handleEnd,
 		// songslist,
+		// dispatch,
 	} = usePlayerContext();
 
 	// const audio = useRef('audio_tag');
@@ -142,11 +143,16 @@ function Controls({
 	// 	}
 	// };
 
+	// useEffect(() => {
+	// 	dispatch({ type: 'START_PLAYING', data: true });
+	// }, [playing]);
+
 	useEffect(() => {
 		audio.current.volume = stateVolume;
 		if (playing) {
 			toggleAudio();
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentSong]);
 

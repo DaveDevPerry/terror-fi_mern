@@ -77,6 +77,11 @@ export const playerReducer = (state, action) => {
 				...state,
 				playing: action.data,
 			};
+		case 'START_PLAYING':
+			return {
+				...state,
+				playing: action.data,
+			};
 		default:
 			return state;
 	}

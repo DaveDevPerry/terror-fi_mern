@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import React, { useContext, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 // import { album_list } from '../context/albums';
 // import Header from '../components/Header';
-import AlbumCard from '../components/AlbumCard';
+// import AlbumCard from '../components/AlbumCard';
 import { useStateContext } from '../lib/context';
 // import { log } from '../helper';
 // import playerContext from '../context/playerContext';
@@ -19,21 +19,26 @@ import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
 import { FiHeart } from 'react-icons/fi';
 import { SiBandsintown } from 'react-icons/si';
-import { MdListAlt } from 'react-icons/md';
+// import { MdListAlt } from 'react-icons/md';
 // import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
+// import AlbumSliderCard from '../components/AlbumSliderCard';
+import AlbumSlider from '../components/AlbumSlider';
+import LibraryPlaylists from '../components/LibraryPlaylists';
+import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
 // import { log } from '../helper';
 
-const Library = ({ handlePlaylist }) => {
+const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 	const { logout } = useLogout();
 	const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	const { albums } = useAlbumsContext();
 	const { songs } = useSongsContext();
+	const { playlists } = usePlaylistsContext();
 	// const { playlists } = usePlaylistsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
@@ -177,6 +182,13 @@ const Library = ({ handlePlaylist }) => {
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
 
+			{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
+			<LibraryPlaylists
+				handleViewPlaylist={handleViewPlaylist}
+				playlists={playlists}
+				handlePlaylist={handlePlaylist}
+			/>
+
 			<ul className='select-list'>
 				<li id='fav-list'>
 					<div className='li-wrapper' onClick={playFavourites}>
@@ -199,18 +211,16 @@ const Library = ({ handlePlaylist }) => {
 					</div>
 				</li>
 
-				<li id='play-list'>
+				{/* <li id='play-list'>
 					<NavLink to='/playlists' className='li-wrapper'>
 						<div className='album-card-artwork-wrapper'>
-							{/* <FiHeart className='far fa-heart fa-lg' /> */}
 							<MdListAlt className='far fa-playlist fa-lg' />
 						</div>
 						<div className='playlist-info-container'>
 							<p>My Playlists</p>
-							{/* <p></p> */}
 						</div>
 					</NavLink>
-				</li>
+				</li> */}
 				{/* {playlists &&
 					playlists.map((playlist, index) => (
 						<li key={index} id='playlist-list'>
@@ -236,32 +246,20 @@ const Library = ({ handlePlaylist }) => {
 					))} */}
 			</ul>
 
-			{/* 
-				<li id='fav-list' onClick={playFavourites}>
-					<div className='album-card-artwork-wrapper'>
-						<FiHeart
-							className='far fa-heart fa-lg'
-						/>
-					</div>
-					<div className='album-info-container'>
-						<p>My Favourites</p>
-						<p>various artists</p>
-					</div>
-				</li> */}
-			<ul className='album-list'>
+			<AlbumSlider albums={albums} handleClick={handleClick} />
+
+			{/* <LibraryPlaylists
+				handleViewPlaylist={handleViewPlaylist}
+				playlists={playlists}
+				handlePlaylist={handlePlaylist}
+			/> */}
+			{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
+
+			{/* <ul className='album-list'>
 				{albums &&
 					albums.map((album, index) => (
 						<AlbumCard key={index} handleClick={handleClick} album={album} />
 					))}
-			</ul>
-			{/* <ul className='album-list'>
-				{album_list.map((album, index) => (
-					<AlbumCard
-						key={index}
-						handleClick={handleClick}
-						album={album}
-					/>
-				))}
 			</ul> */}
 		</StyledLibrary>
 	);
@@ -490,6 +488,64 @@ const StyledLibrary = styled(motion.section)`
 				}
 			}
 		}
+	}
+	.album-slider {
+		/* margin: 0 1rem;
+		display: flex;
+		flex-direction: row;
+		column-gap: 1rem;
+		z-index: 5;
+		overflow-x: scroll; */
+		/* li#fav-list,
+		li#playlist-list {
+			display: flex;
+			justify-content: space-between;
+			column-gap: 1rem;
+			.li-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				column-gap: 1rem;
+				padding: 1rem;
+				background-color: ${({ theme }) => theme.bgGrey};
+				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
+				border-radius: 1rem;
+				cursor: pointer;
+				flex: 1;
+				.album-card-artwork-wrapper {
+		
+					pointer-events: none;
+					display: grid;
+					place-content: center;
+				
+					.fa-lg {
+						font-size: 3rem;
+						color: ${({ theme }) => theme.primaryColor};
+	
+					}
+					.arrow-icon.hand {
+						font-size: 2.5rem;
+						color: ${({ theme }) => theme.gold};
+					}
+				}
+				.album-info-container {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					pointer-events: none;
+
+					p {
+						color: ${({ theme }) => theme.white};
+						text-transform: capitalize;
+						&:last-of-type {
+							font-size: 1.2rem;
+							text-transform: uppercase;
+							font-weight: bold;
+							color: ${({ theme }) => theme.primaryColor};
+						}
+					}
+				}
+			}
+		} */
 	}
 	/* #sign-out-btn {
 		color: ${({ theme }) => theme.white};
