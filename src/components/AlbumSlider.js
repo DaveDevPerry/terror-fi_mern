@@ -43,6 +43,7 @@ const StyledAlbumSlider = styled.div`
 		column-gap: 1rem;
 		z-index: 5;
 		overflow-x: scroll;
+		// remove appearance of scroll bar
 	}
 `;
 
