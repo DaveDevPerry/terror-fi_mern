@@ -202,26 +202,28 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
 
-			<FavouritesWidget
-				playFavourites={playFavourites}
-				shuffleFavourites={shuffleFavourites}
-			/>
+			<div className='library-container'>
+				<FavouritesWidget
+					playFavourites={playFavourites}
+					shuffleFavourites={shuffleFavourites}
+				/>
 
-			{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
-			<LibraryPlaylists
-				handleViewPlaylist={handleViewPlaylist}
-				playlists={playlists}
-				handlePlaylist={handlePlaylist}
-			/>
+				{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
+				<LibraryPlaylists
+					handleViewPlaylist={handleViewPlaylist}
+					playlists={playlists}
+					handlePlaylist={handlePlaylist}
+				/>
 
-			{/* <FavouritesWidget
+				{/* <FavouritesWidget
 				playFavourites={playFavourites}
 				shuffleFavourites={shuffleFavourites}
 			/> */}
 
-			<AlbumSlider albums={albums} handleClick={handleClick} />
+				<AlbumSlider albums={albums} handleClick={handleClick} />
 
-			<RandomizeWidget playAllRandom={playAllRandom} />
+				<RandomizeWidget playAllRandom={playAllRandom} />
+			</div>
 
 			{/* <ul className='select-list'>
 				<li id='fav-list'>
@@ -282,6 +284,25 @@ const StyledLibrary = styled(motion.section)`
 	max-width: 42rem;
 	overflow-y: hidden;
 	margin-bottom: 2rem;
+
+	.library-container {
+		/* border: 1px solid orange; */
+		flex: 1;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		/* align-items: center; */
+		flex-direction: column;
+		display: flex;
+		/* align-items: center; */
+		z-index: 5;
+		row-gap: 2rem;
+		margin: 0 auto;
+		max-width: 42rem;
+		overflow-y: hidden;
+		/* margin-bottom: 2rem; */
+	}
 
 	.select-list {
 		margin: 0 1rem;
@@ -492,68 +513,6 @@ const StyledLibrary = styled(motion.section)`
 			}
 		}
 	}
-	.album-slider {
-		/* margin: 0 1rem;
-		display: flex;
-		flex-direction: row;
-		column-gap: 1rem;
-		z-index: 5;
-		overflow-x: scroll; */
-		/* li#fav-list,
-		li#playlist-list {
-			display: flex;
-			justify-content: space-between;
-			column-gap: 1rem;
-			.li-wrapper {
-				display: flex;
-				justify-content: flex-start;
-				column-gap: 1rem;
-				padding: 1rem;
-				background-color: ${({ theme }) => theme.bgGrey};
-				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-				border-radius: 1rem;
-				cursor: pointer;
-				flex: 1;
-				.album-card-artwork-wrapper {
-		
-					pointer-events: none;
-					display: grid;
-					place-content: center;
-				
-					.fa-lg {
-						font-size: 3rem;
-						color: ${({ theme }) => theme.primaryColor};
-	
-					}
-					.arrow-icon.hand {
-						font-size: 2.5rem;
-						color: ${({ theme }) => theme.gold};
-					}
-				}
-				.album-info-container {
-					flex: 1;
-					display: flex;
-					flex-direction: column;
-					pointer-events: none;
-
-					p {
-						color: ${({ theme }) => theme.white};
-						text-transform: capitalize;
-						&:last-of-type {
-							font-size: 1.2rem;
-							text-transform: uppercase;
-							font-weight: bold;
-							color: ${({ theme }) => theme.primaryColor};
-						}
-					}
-				}
-			}
-		} */
-	}
-	/* #sign-out-btn {
-		color: ${({ theme }) => theme.white};
-		background-color: ${({ theme }) => theme.primaryColor};
-	} */
 `;
 
 export default Library;

@@ -98,6 +98,7 @@ const StyledNavbar = styled.nav`
 				column-gap: 1rem;
 				p {
 					width: 7.5rem;
+					/* width: 12rem; */
 					text-align: right;
 				}
 			}

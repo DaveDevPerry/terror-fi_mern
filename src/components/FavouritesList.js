@@ -9,6 +9,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 import { useStateContext } from '../lib/context';
 import toast from 'react-hot-toast';
 import { AnimatePresence, motion } from 'framer-motion';
+import { log } from '../helper';
 // import { log } from '../../helper';
 
 function FavouritesList({ handleOptions }) {
@@ -17,11 +18,12 @@ function FavouritesList({ handleOptions }) {
 	// const { currentSong, songslist } = usePlayerContext();
 
 	// create a toast
-	const notify = () => {
-		toast.success(`removed from favourites.`, {
+	const notify = (songTitle) => {
+		toast.success(`${songTitle} removed from favourites.`, {
 			duration: 2000,
 			style: {
 				border: '2px solid #1da000',
+				textAlign: 'center',
 			},
 		});
 	};
@@ -70,7 +72,8 @@ function FavouritesList({ handleOptions }) {
 									>
 										<p
 											onClick={() => {
-												notify();
+												log(song.title, 'for notify');
+												notify(song.title);
 												setTimeout(() => {
 													setShowOptions(false);
 												}, 2000);
@@ -92,7 +95,8 @@ const StyledFavouritesList = styled.div`
 	overflow-y: hidden;
 	z-index: 1;
 
-	margin: 0 1rem 2rem 1rem;
+	margin: 0 2rem 2rem 2rem;
+	/* margin: 0 1rem 2rem 1rem; */
 
 	&.no_drag {
 		-webkit-app-region: no-drag;

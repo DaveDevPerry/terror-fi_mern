@@ -12,6 +12,7 @@ import AppDetails from '../components/AppDetails';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { IoChevronBack } from 'react-icons/io5';
 import UserDefaultAnimation from '../components/UserDefaultAnimation';
+import UserDefaultViewMode from '../components/UserDefaultViewMode';
 // import KeyWidget from '../components/KeyWidget';
 // import { useEffect } from 'react';
 // import UserForm from '../components/UserForm';
@@ -93,6 +94,7 @@ const Settings = ({ themeToggler, theme }) => {
 
 				<Toggle toggleTheme={themeToggler} theme={theme} />
 				<UserDefaultAnimation theme={theme} />
+				<UserDefaultViewMode theme={theme} />
 				<Navbar />
 				{/* <Navbar targets={targets} /> */}
 				{/* {!targets && <TargetForm />} */}
