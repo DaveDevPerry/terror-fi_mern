@@ -30,6 +30,8 @@ yarn-error.log*
 /src/pages/Landing.js
 /src/components/Navbar test.js
 /src/components/FavouritesWidget copy.js
+/src/components/VisualyzerWidget copy.js
+
 
 /src/context/playerContext.js
 /src/context/playerReducer.js

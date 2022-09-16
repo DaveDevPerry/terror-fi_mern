@@ -1,135 +1,193 @@
-// import React, { useEffect } from 'react';
-// import React, { useEffect, useRef } from 'react';
+// Credits to Nick Jones's original vanilla source: https://codepen.io/nfj525/pen/rVBaab
+// import React from 'https://cdn.skypack.dev/react@17.0.1';
+// import ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
+import { useEffect, useRef } from 'react';
+// import React from "https://cdn.skypack.dev/react@17.0.1";
+// import ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
+// import { useEffect, useRef } from "https://cdn.skypack.dev/react";
 import styled from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { usePlayerContext } from '../hooks/usePlayerContext';
 // import { log } from '../helper';
-// import { useStateContext } from '../lib/context';
 
-const VisualyzerWidget = () => {
-	// const { isPlaying } = useStateContext();
+const AudioVisualizer = () => {
+	const {
+		currentSong,
 
-	// // const container = useRef('#container');
-	// // const canvas = useRef('#canvas1');
+		// 		repeat,
+		// 		random,
+		// playing,
+		// dispatch,
+		songslist,
+	} = usePlayerContext();
 
-	// // const container = document.querySelector('#container');
-	// const canvas = document.querySelector('#canvas1');
-	// canvas.width = window.innerWidth;
-	// canvas.height = window.innerHeight;
-	// // const file = document.querySelector('#file-upload');
-	// const ctx = canvas.getContext('2d');
-	// let audioSource;
-	// let analyser;
+	const songUrl = songslist[currentSong].fileUrl;
+	const canvasRef = useRef(null);
+	// buttonRef = useRef(null);
 
-	// // my function that starts vis from playSong func
-	// function startVisualiser(audio) {
-	// 	console.log('in vis func');
-	// 	console.log(audio);
-	// 	const audioContext = new AudioContext();
-	// 	audioSource = audioContext.createMediaElementSource(audio);
-	// 	analyser = audioContext.createAnalyser();
-	// 	audioSource.connect(analyser);
-	// 	analyser.connect(audioContext.destination);
-	// 	analyser.fftSize = 32;
-	// 	const bufferLength = analyser.frequencyBinCount;
-	// 	const dataArray = new Uint8Array(bufferLength);
-	// 	// bar visualiser
-	// 	const barWidth = canvas.width / 2 / bufferLength;
-	// 	// const barWidth = canvas.width / 2 / bufferLength;
-	// 	let barHeight;
-	// 	let x;
+	const audioVisualizerLogic = () => {
+		const context = new (window.AudioContext || window.webkitAudioContext)(),
+			source = context.createBufferSource();
 
-	// 	function animate() {
-	// 		x = 0;
-	// 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-	// 		analyser.getByteFrequencyData(dataArray);
-	// 		drawEq(bufferLength, x, barWidth, barHeight, dataArray);
-	// 		requestAnimationFrame(animate);
-	// 	}
-	// 	animate();
-	// }
-	// function drawEq(bufferLength, x, barWidth, barHeight, dataArray) {
-	// 	// draw visualiser on canvas
-	// 	for (let i = 0; i < bufferLength; i++) {
-	// 		barHeight = dataArray[i] * 2.5;
-	// 		const red = (i * barHeight) / 20;
-	// 		const green = i * 2;
-	// 		const blue = 0;
-	// 		// ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
-	// 		ctx.fillStyle = `rgb(${red},${green},${blue})`;
-	// 		ctx.fillRect(
-	// 			canvas.width / 2 - x,
-	// 			canvas.height - barHeight,
-	// 			barWidth,
-	// 			barHeight
-	// 		);
-	// 		x += barWidth;
-	// 	}
-	// 	for (let i = 0; i < bufferLength; i++) {
-	// 		barHeight = dataArray[i] * 2;
-	// 		const red = (i * barHeight) / 20;
-	// 		const green = i * 2;
-	// 		const blue = 0;
-	// 		ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
-	// 		ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-	// 		x += barWidth;
-	// 	}
-	// }
+		//fetch remote audio source
+		fetch(songUrl)
+			// fetch('https://jplayer.org/audio/mp3/RioMez-01-Sleep_together.mp3')
+			.then((response) => response.arrayBuffer())
+			.then((response) => {
+				context.decodeAudioData(response, (buffer) => {
+					source.buffer = buffer;
+					source.connect(context.destination);
+					// auto play
+					// if (playing === true) {
+					source.start(0);
+					// }
+				});
+			});
 
-	// useEffect(() => {
-	// 	log('starting viz - isplaying true - viz widget');
-	// 	startVisualiser();
-	// }, [isPlaying]);
+		// const audio = new Audio(source);
+		const canvas = canvasRef.current;
+		// muteButton = buttonRef.current;
+
+		//mute or play on click
+		// const mutePlay = () => {
+		// 	context.state === 'running' ? context.suspend() : context.resume();
+		// };
+		// muteButton.onclick = () => mutePlay();
+
+		//config canvas
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		const ctx = canvas.getContext('2d');
+
+		//config audio analyzer
+		const analyser = context.createAnalyser();
+		source.connect(analyser);
+		analyser.connect(context.destination);
+		// analyser.fftSize = 128;
+		analyser.fftSize = 256;
+		// log(barHeight, 'bar height');
+		const bufferLength = analyser.frequencyBinCount,
+			dataArray = new Uint8Array(bufferLength),
+			WIDTH = canvas.width,
+			// HEIGHT = 800,
+			HEIGHT = canvas.height,
+			barWidth = (WIDTH / bufferLength) * 5;
+		// barWidth = (WIDTH / bufferLength) * 2.5;
+		// log(HEIGHT, 'bar height');
+		let barHeight = null,
+			x = null;
+
+		//core logic for the visualizer
+		const timeouts = [];
+		const renderFrame = () => {
+			ctx.fillStyle = 'rgba(0,0,0,0)';
+			requestAnimationFrame(renderFrame);
+			x = 0;
+			analyser.getByteFrequencyData(dataArray);
+			ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+			for (let i = 0; i < bufferLength; i++) {
+				//color based upon frequency
+				barHeight = dataArray[i];
+				// log(barHeight, 'bar height');
+				let r = barHeight + 22 * (i / bufferLength),
+					// let r = barHeight + 22 * (i / bufferLength),
+					g = 333 * (i / bufferLength),
+					b = 47;
+				ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+				// ctx.fillRect(x, 640 - barHeight, barWidth, barHeight);
+				ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+				x += barWidth + 1;
+
+				//Allows visualizer to overlay on a background/video by clearing the rects after painting.
+				let timer = setTimeout(() => {
+					ctx.clearRect(0, 0, WIDTH, HEIGHT);
+				}, 50);
+				timeouts.push(timer);
+			}
+			// log(barHeight, 'bar height');
+		};
+		//Clears the accumulating timeouts.
+		setTimeout(() => {
+			for (let i = 0; i < timeouts.length; i++) {
+				return clearTimeout(timeouts[i]);
+			}
+		}, 51);
+		renderFrame();
+	};
+
+	//connect audio visualizer to DOM and execute logic
+	useEffect(() => {
+		audioVisualizerLogic();
+	}, []);
 
 	return (
-		<AnimatePresence mode='wait'>
-			<StyledVisualyzerWidget
-				className='visualyser-container'
-				initial={{ width: 0 }}
-				animate={{ width: 'auto' }}
-				exit={{ x: window.innerWidth }}
-			>
-				<div id='container'>
-					<canvas id='canvas1'></canvas>
-				</div>
-				{/* <div id='container' ref={container}>
-				<canvas id='canvas1' ref={canvas}></canvas>
-			</div> */}
-			</StyledVisualyzerWidget>
-		</AnimatePresence>
+		<StyledAudioVisualizer>
+			{/* <header className='App-header'>
+				<h1>React Audio Visualizer</h1>
+			</header> */}
+			{/* <span className='hint'>(Click page to start/stop)</span> */}
+			{/* <main className='main-box'> */}
+			{/* <button className='contextButton' ref={buttonRef}> */}
+			<canvas ref={canvasRef} className='canvas'></canvas>
+			{/* </button> */}
+			{/* </main> */}
+		</StyledAudioVisualizer>
 	);
 };
-const StyledVisualyzerWidget = styled(motion.div)`
-	height: 12rem;
-	position: relative;
+
+const StyledAudioVisualizer = styled.div`
+	/* .App-header {
+		position: relative;
+		top: 100px;
+		width: 500px;
+		margin: 0 auto;
+		text-align: center;
+		background-color: #282c34;
+		min-height: 64px;
+		display: flex;
+		flex-direction: column;
+		color: white;
+	}
+
+	.App-header h1 {
+		margin: auto;
+		font-size: 32px;
+	} */
+	/* height: 12rem; */
+	/* position: relative; */
 	width: 100%;
 	height: 12rem;
-	border: 2px solid red;
+	/* border: 2px solid red; */
 	flex: 1;
-	#container {
-		position: absolute;
-		top: 0;
-		left: 0;
+	/* .hint {
+		display: block;
 		width: 100%;
+		text-align: center;
+	} */
+
+	/* .contextButton {
+		background: transparent;
+		border: none;
+		padding: 0;
 		height: 100%;
-		#canvas1 {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 12rem;
-		}
-		#audio1 {
-			width: 50%;
-			margin: 5rem auto;
-			display: block;
-		}
-		#file-upload {
-			position: absolute;
-			top: 0;
-			color: white;
-			z-index: 10;
-		}
+		width: 100%;
+	} */
+
+	/* .main-box {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		height: calc(100vh - 64px);
+		width: 100vw;
+		overflow: hidden hidden;
+	} */
+
+	.canvas {
+		height: 110%;
+		width: 100.4%;
 	}
 `;
 
-export default VisualyzerWidget;
+export default AudioVisualizer;

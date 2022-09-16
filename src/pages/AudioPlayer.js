@@ -31,7 +31,8 @@ import AddPlaylistForm from '../components/AddPlaylistForm';
 
 import { Toaster } from 'react-hot-toast';
 // import playerContext from '../context/playerContext';
-import VisualyzerWidget from '../components/VisualyzerWidget';
+// import VisualyzerWidget from '../components/VisualyzerWidget';
+import AudioVisualizer from '../components/VisualyzerWidget';
 
 // import { AnimatePresence } from 'framer-motion';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -295,7 +296,8 @@ function AudioPlayer({
 			{/* <AnimatePrescence mode='wait'> */}
 
 			{viewMode === 'tracklist' && <Playlist />}
-			{viewMode === 'visualizer' && <VisualyzerWidget />}
+			{viewMode === 'visualizer' && <AudioVisualizer />}
+			{/* {viewMode === 'visualizer' && <VisualyzerWidget />} */}
 			{/* </AnimatePrescence> */}
 			{/* </div> */}
 			{/* <Actions /> */}
