@@ -3,6 +3,7 @@ import styled from 'styled-components';
 // import { FiHeart } from 'react-icons/fi';
 import { FaPlay } from 'react-icons/fa';
 import { ImShuffle } from 'react-icons/im';
+import { NavLink } from 'react-router-dom';
 // import { log } from '../helper';
 
 const FavouritesWidget = ({ playFavourites, shuffleFavourites }) => {
@@ -17,7 +18,9 @@ const FavouritesWidget = ({ playFavourites, shuffleFavourites }) => {
 			<div className='fav-widget-bar'></div>
 			<div className='fav-widget-content-wrapper'>
 				<div className='fav-widget-text-wrapper'>
-					<p>My Favourites</p>
+					<NavLink to='/favourites' className='favourites-link'>
+						<p>My Favourites</p>
+					</NavLink>
 				</div>
 				<div className='fav-widget-icon-wrapper'>
 					<ImShuffle
@@ -67,10 +70,19 @@ const StyledFavouritesWidget = styled.div`
 		padding-right: 2rem;
 		.fav-widget-text-wrapper {
 			z-index: 8000;
-			p {
-				color: ${({ theme }) => theme.white};
-				text-transform: capitalize;
-				margin-right: 1rem;
+			a.favourites-link {
+				text-decoration: none;
+				/* color: ${({ theme }) => theme.white}; */
+				/* font-style: italic; */
+				/* padding: 2px 10px; */
+				/* border: 2px solid ${({ theme }) => theme.primaryColor}; */
+				/* border-radius: 0.5rem; */
+				/* font-size: 1.4rem; */
+				p {
+					color: ${({ theme }) => theme.white};
+					text-transform: capitalize;
+					margin-right: 1rem;
+				}
 			}
 		}
 		.fav-widget-icon-wrapper {

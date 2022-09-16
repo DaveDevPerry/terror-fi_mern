@@ -22,6 +22,7 @@ import { usePlayerContext } from './hooks/usePlayerContext';
 import Playlists from './pages/Playlists';
 import Playlist from './pages/Playlist';
 import { useStateContext } from './lib/context';
+import Favourites from './pages/Favourites';
 // import PlayerState from './context/PlayerState';
 // import Playing from './pages/Playing';
 
@@ -252,6 +253,24 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 									}
 									deletePlaylistFormDisplay={deletePlaylistFormDisplay}
 									setDeletePlaylistFormDisplay={setDeletePlaylistFormDisplay}
+									// handlePlaylist={handlePlaylist}
+								/>
+							) : (
+								<Navigate to='/login' />
+							)
+						}
+					/>
+					<Route
+						path='/favourites'
+						element={
+							user ? (
+								<Favourites
+									themeToggler={themeToggler}
+									theme={theme}
+									// handleViewPlaylist={handleViewPlaylist}
+									// handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+									// playlistFormDisplay={playlistFormDisplay}
+									// setPlaylistFormDisplay={setPlaylistFormDisplay}
 									// handlePlaylist={handlePlaylist}
 								/>
 							) : (

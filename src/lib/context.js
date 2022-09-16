@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
 	const [mediaToDisplay, setMediaToDisplay] = useState('display-default');
 	const [playlistToView, setPlaylistToView] = useState(null);
 	const [viewPlaylist, setViewPlaylist] = useState(null);
+	const [showOptions, setShowOptions] = useState(false);
 	// const [currentSong, setCurrentSong] = useState(null);
 	const audio = document.getElementById('audio');
 	// SONGS
@@ -254,6 +255,8 @@ export const StateContext = ({ children }) => {
 
 				viewPlaylist,
 				setViewPlaylist,
+				setShowOptions,
+				showOptions,
 			}}
 		>
 			{children}
