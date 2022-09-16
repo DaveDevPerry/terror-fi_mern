@@ -12,9 +12,9 @@ const LibraryPlaylists = ({
 	handlePlaylist,
 }) => {
 	return (
-		<StyledLibraryPlaylists className='album-slider'>
+		<StyledLibraryPlaylists className='library-playlists'>
 			<div className='header'>
-				<p>Playlists</p>
+				<p>My Playlists</p>
 				<NavLink to='/playlists' className='playlists-link'>
 					view all
 				</NavLink>
@@ -85,21 +85,28 @@ const StyledLibraryPlaylists = styled.div`
 	/* border: 2px solid green; */
 	display: flex;
 	flex-direction: column;
-	row-gap: 0.5rem;
+	/* row-gap: 0.5rem; */
 	justify-content: space-between;
 	/* margin: 0 1rem; */
-	/* border-top: 0.4rem solid ${({ theme }) => theme.borderLine};
-	border-bottom: 0.4rem solid ${({ theme }) => theme.borderLine}; */
-	border-top: 0.2rem solid ${({ theme }) => theme.bgGrey};
-	border-bottom: 0.2rem solid ${({ theme }) => theme.bgGrey};
+
+	/* border-top: 0.2rem solid ${({ theme }) => theme.bgGrey}; */
+	/* border-bottom: 0.2rem solid ${({ theme }) => theme.bgGrey}; */
 	padding: 0.5rem 0 1rem 0;
+	overflow-y: auto;
 	.header {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-start;
 		padding: 0 2rem;
 		color: ${({ theme }) => theme.white};
 		p {
+			text-transform: capitalize;
+			display: inline-block;
+			padding: 5px 10px;
+			background-color: ${({ theme }) => theme.primaryColor};
+			border-radius: 0.5rem 0.5rem 0 0;
+			color: ${({ theme }) => theme.white};
+			font-weight: lighter;
 			text-transform: capitalize;
 		}
 
@@ -107,6 +114,10 @@ const StyledLibraryPlaylists = styled.div`
 			text-decoration: none;
 			color: ${({ theme }) => theme.white};
 			font-style: italic;
+			padding: 2px 10px;
+			border: 2px solid ${({ theme }) => theme.primaryColor};
+			border-radius: 0.5rem;
+			font-size: 1.4rem;
 		}
 	}
 
@@ -117,8 +128,13 @@ const StyledLibraryPlaylists = styled.div`
 		/* flex: 1 1; */
 		padding: 0;
 		overflow-y: scroll;
-		margin: 0 1rem;
+		margin: 0 2rem;
 		/* row-gap: 0.2rem; */
+		overflow: -moz-scrollbars-none;
+		-ms-overflow-style: none;
+		&::-webkit-scrollbar {
+			width: 0 !important;
+		}
 
 		li {
 			font-weight: 450;
@@ -133,12 +149,14 @@ const StyledLibraryPlaylists = styled.div`
 				display: flex;
 				flex-direction: column;
 				flex-wrap: wrap;
+				cursor: pointer;
 				/* pointer-events: none; */
 				.songname {
 					padding: 0 0.5rem;
 					/* font-weight: 600; */
 					font-size: 1.6rem;
 					color: ${({ theme }) => theme.white};
+					text-transform: capitalize;
 				}
 				.songauthors {
 					padding: 0 0.5rem;
@@ -161,10 +179,12 @@ const StyledLibraryPlaylists = styled.div`
 				.options-playlist-btn {
 					color: ${({ theme }) => theme.white};
 					font-size: 2rem;
+					cursor: pointer;
 				}
 				.play-playlist-btn {
 					/* color: ${({ theme }) => theme.white}; */
 					font-size: 1.6rem;
+					cursor: pointer;
 				}
 			}
 		}

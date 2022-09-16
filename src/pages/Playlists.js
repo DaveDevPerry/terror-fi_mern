@@ -343,6 +343,7 @@ const StyledPlaylists = styled(motion.section)`
 			align-items: center;
 			column-gap: 1rem;
 			margin-top: 0rem;
+
 			.add-playlist-btn {
 				font-size: 3rem;
 				color: ${({ theme }) => theme.green};

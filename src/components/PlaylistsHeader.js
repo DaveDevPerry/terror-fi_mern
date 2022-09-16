@@ -64,6 +64,7 @@ const StyledPlaylistsHeader = styled.header`
 		font-family: 'BadSignal';
 		font-size: 4rem;
 		letter-spacing: 0.3rem;
+		text-align: center;
 		color: ${({ theme }) => theme.white};
 		text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
 			-0.025em -0.05em 0 rgba(0, 255, 0, 0.75),

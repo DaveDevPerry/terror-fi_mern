@@ -20,7 +20,7 @@ export const playlistsReducer = (state, action) => {
 
 		case 'CREATE_PLAYLIST':
 			log(state, 'current playlist state');
-			log(action.payload, 'new playist');
+			log(action.payload, 'new playlist');
 			log([action.payload, ...state.playlists], 'new playist array');
 			return {
 				playlists: [action.payload, ...state.playlists],

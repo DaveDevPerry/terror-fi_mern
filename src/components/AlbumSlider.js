@@ -26,15 +26,15 @@ const StyledAlbumSlider = styled.div`
 	row-gap: 0.5rem;
 	justify-content: space-between;
 	/* margin: 0 1rem; */
-	/* border-top: 0.4rem solid ${({ theme }) => theme.borderLine};
-	border-bottom: 0.4rem solid ${({ theme }) => theme.borderLine}; */
-	border-top: 0.2rem solid ${({ theme }) => theme.bgGrey};
-	border-bottom: 0.2rem solid ${({ theme }) => theme.bgGrey};
-	padding: 0.5rem 0 1rem 0;
+
+	/* border-top: 0.2rem solid ${({ theme }) => theme.bgGrey};
+	border-bottom: 0.2rem solid ${({ theme }) => theme.bgGrey}; */
+	/* padding: 0.5rem 0 1rem 0; */
 	p {
 		color: ${({ theme }) => theme.white};
 		text-transform: capitalize;
 		padding-left: 2rem;
+		pointer-events: none;
 	}
 	.album-slider-list {
 		display: flex;
@@ -44,6 +44,11 @@ const StyledAlbumSlider = styled.div`
 		z-index: 5;
 		overflow-x: scroll;
 		// remove appearance of scroll bar
+		overflow: -moz-scrollbars-none;
+		-ms-overflow-style: none;
+		&::-webkit-scrollbar {
+			width: 0 !important;
+		}
 	}
 `;
 

@@ -17,6 +17,7 @@ import PlaylistsHeader from '../components/PlaylistsHeader';
 import PlaylistSongs from '../components/PlaylistSongs';
 import DeletePlaylistConfirmation from '../components/DeletePlaylistConfirmation';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { log } from '../helper';
 // import { format } from 'date-fns';
 // import BandSupportGigsList from '../components/BandSupportGigsList';
 // import BandHeadlineGigsList from '../components/BandHeadlineGigsList';
@@ -36,8 +37,9 @@ const Playlist = ({
 	// const { playlistToView, dataLoaded, setViewPlaylist, viewPlaylist } =
 	// 	useStateContext();
 
-	let navigate = useNavigate();
+	const navigate = useNavigate();
 	useEffect(() => {
+		log(dataLoaded, 'playlist page');
 		if (dataLoaded === false) {
 			navigate('/');
 		}
@@ -106,10 +108,7 @@ const Playlist = ({
 			exit={{ x: window.innerWidth }}
 		>
 			<Toaster />
-			<PlaylistsHeader
-				handleBackClick={handleBackClick}
-				pageTitle={viewPlaylist[0].name}
-			/>
+			<PlaylistsHeader handleBackClick={handleBackClick} pageTitle='playlist' />
 
 			{viewPlaylist[0] && viewPlaylist[0] && (
 				<PlaylistSongs playlist={viewPlaylist[0]} />
@@ -213,7 +212,7 @@ const StyledPlaylist = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	row-gap: 1rem;
+	row-gap: 2rem;
 	flex: 1;
 	max-width: 42rem;
 	padding: 0 1rem;

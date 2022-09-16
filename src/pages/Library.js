@@ -17,8 +17,8 @@ import LibraryHeader from '../components/LibraryHeader';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
 import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
-import { FiHeart } from 'react-icons/fi';
-import { SiBandsintown } from 'react-icons/si';
+// import { FiHeart } from 'react-icons/fi';
+// import { SiBandsintown } from 'react-icons/si';
 // import { MdListAlt } from 'react-icons/md';
 // import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -26,6 +26,8 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import AlbumSlider from '../components/AlbumSlider';
 import LibraryPlaylists from '../components/LibraryPlaylists';
 import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+import FavouritesWidget from '../components/FavouritesWidget';
+import RandomizeWidget from '../components/RandomiseWidget';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
@@ -94,6 +96,24 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 		log(filteredFavs, 'filtered favs');
 		const playListData = {
 			albumTracks: filteredFavs,
+			playListName: 'favourites',
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		navigate('/player');
+	};
+	const shuffleFavourites = () => {
+		const clonedFavs = [...user.favourites];
+		log(clonedFavs, 'cloned favs');
+		const clonedSongsInFav = [...songs];
+		const filteredFavs = clonedSongsInFav.filter((obj) =>
+			clonedFavs.includes(obj._id)
+		);
+		log(filteredFavs, 'filtered favs');
+		const playListData = {
+			albumTracks: filteredFavs.sort(function () {
+				return Math.random() - 0.5;
+			}),
 			playListName: 'favourites',
 		};
 
@@ -182,6 +202,11 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 		>
 			<LibraryHeader handleBackClick={handleBackClick} />
 
+			<FavouritesWidget
+				playFavourites={playFavourites}
+				shuffleFavourites={shuffleFavourites}
+			/>
+
 			{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
 			<LibraryPlaylists
 				handleViewPlaylist={handleViewPlaylist}
@@ -189,7 +214,16 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 				handlePlaylist={handlePlaylist}
 			/>
 
-			<ul className='select-list'>
+			{/* <FavouritesWidget
+				playFavourites={playFavourites}
+				shuffleFavourites={shuffleFavourites}
+			/> */}
+
+			<AlbumSlider albums={albums} handleClick={handleClick} />
+
+			<RandomizeWidget playAllRandom={playAllRandom} />
+
+			{/* <ul className='select-list'>
 				<li id='fav-list'>
 					<div className='li-wrapper' onClick={playFavourites}>
 						<div className='album-card-artwork-wrapper'>
@@ -211,42 +245,10 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 					</div>
 				</li>
 
-				{/* <li id='play-list'>
-					<NavLink to='/playlists' className='li-wrapper'>
-						<div className='album-card-artwork-wrapper'>
-							<MdListAlt className='far fa-playlist fa-lg' />
-						</div>
-						<div className='playlist-info-container'>
-							<p>My Playlists</p>
-						</div>
-					</NavLink>
-				</li> */}
-				{/* {playlists &&
-					playlists.map((playlist, index) => (
-						<li key={index} id='playlist-list'>
-							<div
-								className='li-wrapper'
-								onClick={() => {
-									handlePlaylist(playlist._id);
-								}}
-							>
-								<div className='album-card-artwork-wrapper'>
-									<MdListAlt className='far fa-playlist fa-lg' />
-								</div>
-								<div className='album-info-container'>
-									<p>{playlist.name}</p>
-									<p>
-										{playlist.songs.length === 1
-											? `${playlist.songs.length} song`
-											: `${playlist.songs.length} songs`}
-									</p>
-								</div>
-							</div>
-						</li>
-					))} */}
-			</ul>
+			
+			</ul> */}
 
-			<AlbumSlider albums={albums} handleClick={handleClick} />
+			{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
 
 			{/* <LibraryPlaylists
 				handleViewPlaylist={handleViewPlaylist}
@@ -279,6 +281,7 @@ const StyledLibrary = styled(motion.section)`
 	margin: 0 auto;
 	max-width: 42rem;
 	overflow-y: hidden;
+	margin-bottom: 2rem;
 
 	.select-list {
 		margin: 0 1rem;

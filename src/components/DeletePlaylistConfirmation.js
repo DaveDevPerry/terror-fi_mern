@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CgCloseR } from 'react-icons/cg';
+// import { CgCloseR } from 'react-icons/cg';
 import { log } from '../helper';
 import { useAuthContext } from '../hooks/useAuthContext';
 import toast from 'react-hot-toast';
@@ -109,11 +109,12 @@ const DeletePlaylistConfirmation = ({
 				>
 					<p className='playlist-header'>
 						Delete playlist?
-						<CgCloseR
+						{/* <CgCloseR
 							className='close-icon'
 							onClick={handleDeletePlaylistFormDisplay}
-						/>
+						/> */}
 					</p>
+					<p className='playlist-warning'>this can not be undone</p>
 					<form onSubmit={handleSubmit}>
 						<div id='form-btns'>
 							<p
@@ -145,6 +146,7 @@ const StyledDeletePlaylistConfirmation = styled(motion.div)`
 	width: calc(100% - 4rem);
 	/* flex: 1; */
 	z-index: 7000;
+	border-radius: 0.5rem;
 	.playlist-header {
 		text-align: center;
 		position: relative;
@@ -158,6 +160,13 @@ const StyledDeletePlaylistConfirmation = styled(motion.div)`
 			color: ${({ theme }) => theme.white};
 			cursor: pointer;
 		}
+	}
+	.playlist-warning {
+		text-align: center;
+		font-size: 1.4rem;
+		text-transform: uppercase;
+		color: ${({ theme }) => theme.txtDarkGrey};
+		font-style: italic;
 	}
 	form {
 		display: flex;
@@ -179,24 +188,34 @@ const StyledDeletePlaylistConfirmation = styled(motion.div)`
 		}
 		#form-btns {
 			display: flex;
-			justify-content: flex-end;
+			justify-content: space-evenly;
 			align-items: center;
 			column-gap: 2rem;
 			.form-action-cancel-btn {
-				color: ${({ theme }) => theme.primaryColor};
-				/* color: ${({ theme }) => theme.green}; */
+				background-color: ${({ theme }) => theme.primaryColor};
+				color: ${({ theme }) => theme.white};
 				text-transform: uppercase;
-				font-style: italic;
-				font-size: 1.4rem;
+				/* font-style: italic; */
+				font-size: 1.8rem;
+				padding: 0.5rem 1rem;
+				border-radius: 0.5rem;
+				width: 9rem;
 				/* &:first-of-type {
 					color: ${({ theme }) => theme.primaryColor};
 				} */
 			}
 			button {
-				color: ${({ theme }) => theme.green};
+				background-color: ${({ theme }) => theme.green};
+				color: ${({ theme }) => theme.white};
 				text-transform: uppercase;
-				font-style: italic;
-				font-size: 1.4rem;
+				/* font-style: italic; */
+				font-size: 1.8rem;
+				outline: none;
+				border: none;
+
+				padding: 0.5rem 1rem;
+				border-radius: 0.5rem;
+				width: 9rem;
 			}
 		}
 	}
