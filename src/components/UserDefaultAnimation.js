@@ -67,7 +67,8 @@ const StyledUserDefaultAnimation = styled.nav`
 				column-gap: 1rem;
 				p {
 					/* width: 7.5rem; */
-					width: 12rem;
+					/* width: 12rem; */
+					width: 8.5rem;
 					text-align: right;
 				}
 				#animation-menu {
@@ -76,7 +77,7 @@ const StyledUserDefaultAnimation = styled.nav`
 					align-items: center;
 					flex-direction: row;
 					list-style: none;
-					width: 100%;
+					/* width: 100%; */
 					column-gap: 1.5rem;
 					li {
 						cursor: pointer;

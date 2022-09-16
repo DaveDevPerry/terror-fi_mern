@@ -81,7 +81,7 @@ const StyledPlaylistSongs = styled.div`
 	z-index: 1;
 	/* border: 2px solid green; */
 	/* padding: 0 1rem; */
-	margin: 0 1rem;
+	margin: 0 2rem;
 
 	&.no_drag {
 		-webkit-app-region: no-drag;
@@ -113,6 +113,11 @@ const StyledPlaylistSongs = styled.div`
 		padding: 0;
 		overflow-y: scroll;
 		/* height: 20rem; */
+		overflow: -moz-scrollbars-none;
+		-ms-overflow-style: none;
+		&::-webkit-scrollbar {
+			width: 0 !important;
+		}
 		li {
 			/* margin: 2px; */
 			font-weight: 450;

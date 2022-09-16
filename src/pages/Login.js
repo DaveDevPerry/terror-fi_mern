@@ -151,6 +151,7 @@ const StyledLogin = styled(motion.div)`
 		/* border-radius: 4px; */
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		z-index: 601;
+		margin: 0 1rem;
 		h3 {
 			text-align: center;
 			margin: 0;

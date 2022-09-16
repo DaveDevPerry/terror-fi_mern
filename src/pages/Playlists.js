@@ -131,7 +131,7 @@ const Playlists = ({
 				pageTitle='playlists'
 			/>
 			{/* 
-			<ul className='album-list'>
+			<ul className='playlists-list'>
 				{playlists &&
 					playlists.map((playlist, index) => (
 						<li key={index} id='playlist-list'>
@@ -180,7 +180,7 @@ const Playlists = ({
 					</div>
 				</li>
 			</ul>
-			<ul className='album-list'>
+			<ul className='playlists-list'>
 				{playlists &&
 					playlists.map((playlist, index) => (
 						<li
@@ -263,7 +263,7 @@ const StyledPlaylists = styled(motion.section)`
 	margin: 0 auto;
 	max-width: 42rem;
 
-	/* .album-list {
+	/* .playlists-list {
 		margin: 0 1rem;
 		display: flex;
 		flex-direction: column;
@@ -371,7 +371,7 @@ const StyledPlaylists = styled(motion.section)`
 			}
 		}
 	}
-	.album-list {
+	.playlists-list {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
@@ -379,7 +379,7 @@ const StyledPlaylists = styled(motion.section)`
 		padding: 0;
 		overflow-y: scroll;
 		margin: 0 2rem;
-		row-gap: 0.2rem;
+		/* row-gap: 0.2rem; */
 
 		li {
 			font-weight: 450;
@@ -399,6 +399,7 @@ const StyledPlaylists = styled(motion.section)`
 					/* font-weight: 600; */
 					font-size: 1.6rem;
 					color: ${({ theme }) => theme.white};
+					text-transform: capitalize;
 				}
 				.songauthors {
 					padding: 0 0.5rem;

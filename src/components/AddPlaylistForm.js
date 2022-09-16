@@ -96,7 +96,7 @@ const AddPlaylistForm = ({
 					exit={{ opacity: 0 }}
 				>
 					<p className='playlist-header'>
-						Add to playlist
+						Playlist name
 						<CgCloseR
 							className='close-icon'
 							onClick={handlePlaylistFormDisplay}

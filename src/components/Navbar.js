@@ -89,7 +89,7 @@ const StyledNavbar = styled.nav`
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: flex-start;
-		row-gap: 3rem;
+		/* row-gap: 3rem; */
 		.user-details-list {
 			list-style: none;
 			li {
@@ -97,50 +97,29 @@ const StyledNavbar = styled.nav`
 				align-items: center;
 				column-gap: 1rem;
 				p {
-					width: 7.5rem;
-					/* width: 12rem; */
+					width: 8.5rem;
 					text-align: right;
+				}
+				span {
+					color: ${({ theme }) => theme.white};
 				}
 			}
 		}
-		/* h1 {
-		font-size: 2rem;
-	} */
-		/* nav {
-		display: flex;
-		align-items: center;
-		text-align: right;
-	} */
-		/* a,
-	button {
-		margin-left: 1rem;
-	} */
-		p {
-			span {
-				font-weight: bold;
-				text-transform: capitalize;
-			}
-		}
+
 		a {
 			text-decoration: none;
 		}
 		button {
 			align-self: flex-end;
-			/* background: ${({ theme }) => theme.white}; */
-			/* background: ${({ theme }) => theme.bgCircle}; */
 			background-color: ${({ theme }) => theme.bgGrey};
 			color: ${({ theme }) => theme.white};
 			border: 2px solid ${({ theme }) => theme.white};
-			/* color: ${({ theme }) => theme.primaryColor};
-			border: 2px solid ${({ theme }) => theme.primaryColor}; */
 			padding: 0.3rem 0.6rem;
 			border-radius: 0.4rem;
-			/* font-family: 'Poppins'; */
 			cursor: pointer;
 			font-size: 1em;
 		}
 	}
-	/* } */
 `;
 
 export default Navbar;

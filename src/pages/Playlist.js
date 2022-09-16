@@ -215,11 +215,13 @@ const StyledPlaylist = styled(motion.div)`
 	row-gap: 2rem;
 	flex: 1;
 	max-width: 42rem;
-	padding: 0 1rem;
+	/* padding: 0 1rem; */
+
 	overflow: hidden;
 	overflow-y: auto;
 	transition: all 200ms linear;
-	margin: 0 auto;
+	/* margin: 0 auto; */
+	/* margin: 0 1rem; */
 	scroll-behavior: smooth;
 	scroll-behavior: smooth;
 	scrollbar-width: normal;
@@ -246,7 +248,7 @@ const StyledPlaylist = styled(motion.div)`
 	.playlist-options-list {
 		list-style: none;
 		background-color: ${({ theme }) => theme.bgGrey};
-		margin: 0 1rem;
+		margin: 0 2rem;
 		padding: 0.5rem;
 		.delete-playlist-wrapper {
 			display: flex;

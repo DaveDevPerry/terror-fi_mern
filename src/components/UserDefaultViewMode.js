@@ -74,7 +74,8 @@ const StyledUserDefaultViewMode = styled.nav`
 				align-items: center;
 				column-gap: 1rem;
 				p {
-					width: 12rem;
+					/* width: 12rem; */
+					width: 8.5rem;
 					text-align: right;
 				}
 				#view-mode-menu {
@@ -83,7 +84,7 @@ const StyledUserDefaultViewMode = styled.nav`
 					align-items: center;
 					flex-direction: row;
 					list-style: none;
-					width: 100%;
+					/* width: 100%; */
 					column-gap: 1.5rem;
 					li {
 						cursor: pointer;
@@ -95,8 +96,8 @@ const StyledUserDefaultViewMode = styled.nav`
 							background-color: ${({ theme }) => theme.bgGrey};
 							color: ${({ theme }) => theme.txtGrey};
 							width: 8rem;
-							pointer-events: none;
-							border: 1px solid ${({ theme }) => theme.txtGrey};
+							/* pointer-events: none; */
+							border: 2px solid ${({ theme }) => theme.txtGrey};
 						}
 						/* span {
 							pointer-events: none !important;
@@ -114,7 +115,7 @@ const StyledUserDefaultViewMode = styled.nav`
 								width: 8rem;
 								color: ${({ theme }) => theme.white};
 								/* font-size: 3rem; */
-								border: 1px solid ${({ theme }) => theme.white};
+								border: 2px solid ${({ theme }) => theme.white};
 								pointer-events: none;
 							}
 							/* span {

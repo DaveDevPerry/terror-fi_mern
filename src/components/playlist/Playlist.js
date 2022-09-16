@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { HiEllipsisVertical } from 'react-icons/hi';
 // import { HiOutlineEllipsisVertical } from 'react-icons/hi';
-import { FiHeart } from 'react-icons/fi';
-import { FaEllipsisV } from 'react-icons/fa';
+// import { FiHeart } from 'react-icons/fi';
+// import { FaEllipsisV } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 // import { log } from '../../helper';
 
@@ -56,23 +56,18 @@ function Playlist() {
 								<span className='songname'>{song.title}</span>
 								<span className='songauthors'>{song.artistName}</span>
 							</div>
-							<div className='playlist_btns_group'>
+							{/* <div className='playlist_btns_group'>
 								<button
 									className='fav_song playlist_btn'
-									// onClick={(e) => handleFavourite}
 								>
 									<FiHeart
 										className='far fa-heart fa-lg'
-										// onClick={(e) => handleFavourite}
 									/>
 								</button>
 								<button className='options_song playlist_btn'>
-									{/* <HiOutlineEllipsisVertical className='fas' /> */}
-									{/* <HiEllipsisVertical className='fas fa-ellipsis-v fa-lg' /> */}
 									<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
-									{/* <i className='fas fa-ellipsis-v fa-lg'></i> */}
 								</button>
-							</div>
+							</div> */}
 						</li>
 					))}
 				</ul>
@@ -119,13 +114,19 @@ const StyledPlaylist = styled(motion.div)`
 		padding: 0;
 		overflow-y: scroll;
 		/* height: 20rem; */
+		overflow: -moz-scrollbars-none;
+		-ms-overflow-style: none;
+		&::-webkit-scrollbar {
+			width: 0 !important;
+		}
 		li {
 			/* margin: 2px; */
 			font-weight: 450;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			padding: 0 1rem 0 0;
+			padding: 0;
+			/* padding: 0 1rem 0 0; */
 			background: ${({ theme }) => theme.bgGrey};
 
 			&:hover {
@@ -172,7 +173,7 @@ const StyledPlaylist = styled(motion.div)`
 				.songname {
 					padding: 0 0.5rem;
 					/* font-weight: 600; */
-					font-size: 1.6rem;
+					font-size: 1.4rem;
 					color: ${({ theme }) => theme.white};
 				}
 				.songauthors {

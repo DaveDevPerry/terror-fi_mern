@@ -149,7 +149,7 @@ const StyledSettings = styled(motion.div)`
 
 	flex: 1;
 	max-width: 42rem;
-	padding: 0 1rem;
+	/* padding: 0 1rem; */
 	/* overflow-y: auto; */
 	/* overflow: hidden; */
 	overflow: hidden;
@@ -232,6 +232,7 @@ const StyledSettings = styled(motion.div)`
 		border-radius: 1rem; /* border-radius: 4px; */
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		transition: all 200ms linear;
+		margin: 0 1rem;
 		/* flex: 1; */
 	}
 	h3 {

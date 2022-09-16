@@ -50,20 +50,21 @@ const StyledAppDetails = styled.div`
 	border-radius: 1rem; /* border-radius: 4px; */
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 	transition: all 200ms linear;
+	margin: 0 1rem;
 	.dev-link-container {
 		display: flex;
 		flex-direction: column;
-	}
-	p {
-		align-self: center;
-		font-size: 1.2rem;
-		color: ${({ theme }) => theme.txtGrey};
+		p {
+			align-self: center;
+			font-size: 1.2rem;
+			color: ${({ theme }) => theme.txtGrey};
+		}
 	}
 	a.developer-link {
 		text-decoration: none;
 		align-self: center;
 		font-size: 1.2rem;
-		color: ${({ theme }) => theme.txtDarkGrey};
+		color: ${({ theme }) => theme.white};
 	}
 	.label-img {
 		background-image: url('KTMA_logo.webp');
@@ -97,7 +98,7 @@ const Brand = styled.div`
 	font-weight: lighter;
 	text-align: center;
 	line-height: 1;
-	color: ${({ theme }) => theme.txtGrey};
+	color: ${({ theme }) => theme.white};
 	span {
 		font-weight: bolder;
 		/* color: ${({ theme }) => theme.txtGrey}; */

@@ -326,7 +326,7 @@ const StyledControls = styled.div`
 			flex-direction: column;
 			flex: 1 1;
 			.songtitle {
-				font-size: 1.8rem;
+				font-size: 1.6rem;
 				width: 100%;
 				text-align: center;
 			}
