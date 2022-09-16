@@ -6,6 +6,7 @@ import { usePlayerContext } from '../../hooks/usePlayerContext';
 // import { HiOutlineEllipsisVertical } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
 import { FaEllipsisV } from 'react-icons/fa';
+import { AnimatePresence, motion } from 'framer-motion';
 // import { log } from '../../helper';
 
 function Playlist() {
@@ -21,55 +22,65 @@ function Playlist() {
 	// };
 
 	return (
-		<StyledPlaylist className='playlist no_drag'>
-			<div className='header'>
-				<h4 className='pltext'>{playListTitle}</h4>
-			</div>
-			<ul className='loi'>
-				{songslist.map((song, i) => (
-					<li
-						className={'songContainer ' + (currentSong === i ? 'selected' : '')}
-						key={i}
-						// onClick={() => {
-						// 	SetCurrent(i);
-						// }}
-					>
-						<div className='tmbn_song'>
-							<img
-								src={song.artworkUrl}
-								alt='song artwork'
-								className='song-artwork'
-							/>
-							{/* <i className='fas fa-play test-play-btn'></i> */}
-						</div>
-						<div className='songmeta_playlist'>
-							<span className='songname'>{song.title}</span>
-							<span className='songauthors'>{song.artistName}</span>
-						</div>
-						<div className='playlist_btns_group'>
-							<button
-								className='fav_song playlist_btn'
-								// onClick={(e) => handleFavourite}
-							>
-								<FiHeart
-									className='far fa-heart fa-lg'
-									// onClick={(e) => handleFavourite}
+		<AnimatePresence mode='wait'>
+			<StyledPlaylist
+				className='playlist no_drag'
+				initial={{ width: 0 }}
+				animate={{ width: 'auto' }}
+				// animate={{ width: '100%' }}
+				exit={{ x: window.innerWidth }}
+			>
+				<div className='header'>
+					<h4 className='pltext'>{playListTitle}</h4>
+				</div>
+				<ul className='loi'>
+					{songslist.map((song, i) => (
+						<li
+							className={
+								'songContainer ' + (currentSong === i ? 'selected' : '')
+							}
+							key={i}
+							// onClick={() => {
+							// 	SetCurrent(i);
+							// }}
+						>
+							<div className='tmbn_song'>
+								<img
+									src={song.artworkUrl}
+									alt='song artwork'
+									className='song-artwork'
 								/>
-							</button>
-							<button className='options_song playlist_btn'>
-								{/* <HiOutlineEllipsisVertical className='fas' /> */}
-								{/* <HiEllipsisVertical className='fas fa-ellipsis-v fa-lg' /> */}
-								<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
-								{/* <i className='fas fa-ellipsis-v fa-lg'></i> */}
-							</button>
-						</div>
-					</li>
-				))}
-			</ul>
-		</StyledPlaylist>
+								{/* <i className='fas fa-play test-play-btn'></i> */}
+							</div>
+							<div className='songmeta_playlist'>
+								<span className='songname'>{song.title}</span>
+								<span className='songauthors'>{song.artistName}</span>
+							</div>
+							<div className='playlist_btns_group'>
+								<button
+									className='fav_song playlist_btn'
+									// onClick={(e) => handleFavourite}
+								>
+									<FiHeart
+										className='far fa-heart fa-lg'
+										// onClick={(e) => handleFavourite}
+									/>
+								</button>
+								<button className='options_song playlist_btn'>
+									{/* <HiOutlineEllipsisVertical className='fas' /> */}
+									{/* <HiEllipsisVertical className='fas fa-ellipsis-v fa-lg' /> */}
+									<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
+									{/* <i className='fas fa-ellipsis-v fa-lg'></i> */}
+								</button>
+							</div>
+						</li>
+					))}
+				</ul>
+			</StyledPlaylist>
+		</AnimatePresence>
 	);
 }
-const StyledPlaylist = styled.div`
+const StyledPlaylist = styled(motion.div)`
 	/* flex: 1; */
 	/* overflow-y: scroll; */
 	overflow-y: hidden;
@@ -77,7 +88,7 @@ const StyledPlaylist = styled.div`
 	/* border: 2px solid green; */
 	/* padding: 0 1rem; */
 	margin: 0 2rem;
-
+	flex: 1;
 	&.no_drag {
 		-webkit-app-region: no-drag;
 	}

@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import AppDetails from '../components/AppDetails';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { IoChevronBack } from 'react-icons/io5';
+import UserDefaultAnimation from '../components/UserDefaultAnimation';
 // import KeyWidget from '../components/KeyWidget';
 // import { useEffect } from 'react';
 // import UserForm from '../components/UserForm';
@@ -91,6 +92,7 @@ const Settings = ({ themeToggler, theme }) => {
 				</h3>
 
 				<Toggle toggleTheme={themeToggler} theme={theme} />
+				<UserDefaultAnimation theme={theme} />
 				<Navbar />
 				{/* <Navbar targets={targets} /> */}
 				{/* {!targets && <TargetForm />} */}
@@ -216,7 +218,7 @@ const StyledSettings = styled(motion.div)`
 	.settings-modal {
 		display: flex;
 		flex-direction: column;
-		row-gap: 1rem;
+		row-gap: 2rem;
 		padding: 2rem;
 		/* background: ${({ theme }) => theme.white};
 		border-radius: 4px; */

@@ -31,7 +31,9 @@ import AddPlaylistForm from '../components/AddPlaylistForm';
 
 import { Toaster } from 'react-hot-toast';
 // import playerContext from '../context/playerContext';
-// import VisualyzerWidget from '../components/VisualyzerWidget';
+import VisualyzerWidget from '../components/VisualyzerWidget';
+
+// import { AnimatePresence } from 'framer-motion';
 // import ProgressWidget from '../components/ProgressWidget';
 
 // const close = () => {
@@ -214,7 +216,8 @@ function AudioPlayer({
 		// }
 	};
 
-	const { menuStatus, setMenuStatus } = useStateContext();
+	const { menuStatus, setMenuStatus, viewMode, setViewMode } =
+		useStateContext();
 
 	const handleMenu = () => {
 		log(menuStatus, 'menu status');
@@ -267,8 +270,33 @@ function AudioPlayer({
 				// toggleAudio={toggleAudio}
 				// handleVolume={handleVolume}
 			/>
-			<Playlist />
-			{/* <VisualyzerWidget /> */}
+			<div className='view-mode-btns'>
+				{viewMode === 'tracklist' && (
+					<button
+						className='view-mode-btn'
+						onClick={() => {
+							setViewMode('visualizer');
+						}}
+					>
+						visualizer
+					</button>
+				)}
+				{viewMode === 'visualizer' && (
+					<button
+						className='view-mode-btn'
+						onClick={() => {
+							setViewMode('tracklist');
+						}}
+					>
+						track list
+					</button>
+				)}
+			</div>
+			{/* <AnimatePrescence mode='wait'> */}
+
+			{viewMode === 'tracklist' && <Playlist />}
+			{viewMode === 'visualizer' && <VisualyzerWidget />}
+			{/* </AnimatePrescence> */}
 			{/* </div> */}
 			{/* <Actions /> */}
 			{/* </div> */}
@@ -326,6 +354,22 @@ const StyledAudioPlayer = styled(motion.section)`
 	z-index: 2;
 	max-width: 42rem;
 	margin: 0 auto;
+	.view-mode-btns {
+		display: flex;
+		justify-content: flex-end;
+		column-gap: 1rem;
+		align-items: center;
+		margin: 0 2rem;
+		.view-mode-btn {
+			padding: 0.3rem 1rem;
+			outline: none;
+			border: none;
+			border-radius: 0.5rem;
+			background-color: ${({ theme }) => theme.bgGrey};
+			color: ${({ theme }) => theme.white};
+			width: 8rem;
+		}
+	}
 `;
 
 export default AudioPlayer;

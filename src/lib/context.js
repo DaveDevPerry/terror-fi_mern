@@ -11,6 +11,7 @@ export const StateContext = ({ children }) => {
 	const [playlistToView, setPlaylistToView] = useState(null);
 	const [viewPlaylist, setViewPlaylist] = useState(null);
 	const [showOptions, setShowOptions] = useState(false);
+	const [viewMode, setViewMode] = useState('tracklist');
 	// const [currentSong, setCurrentSong] = useState(null);
 	const audio = document.getElementById('audio');
 	// SONGS
@@ -257,6 +258,8 @@ export const StateContext = ({ children }) => {
 				setViewPlaylist,
 				setShowOptions,
 				showOptions,
+				viewMode,
+				setViewMode,
 			}}
 		>
 			{children}
