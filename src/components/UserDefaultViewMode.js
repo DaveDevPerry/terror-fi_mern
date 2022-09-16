@@ -5,28 +5,68 @@ import styled from 'styled-components';
 // import { TbVinyl, TbDeviceAudioTape, TbDisc } from 'react-icons/tb';
 // import { FiImage } from 'react-icons/fi';
 import { log } from '../helper';
+import { useUsersContext } from '../hooks/useUserContext';
+import { useStateContext } from '../lib/context';
 // import { format } from 'date-fns';
 
 const UserDefaultViewMode = ({ targets }) => {
 	// const { logout } = useLogout();
 	const { user } = useAuthContext();
+	const { active_user } = useUsersContext();
+	const { setViewMode, setDefaultViewMode, defaultViewMode } =
+		useStateContext();
 
-	const handleClick = () => {
+	const handleClick = (mode) => {
 		// logout();
-		log('clicked');
+		log(mode, ' mode clicked');
+		setViewMode(mode);
+		setDefaultViewMode(mode);
 	};
 	return (
 		<StyledUserDefaultViewMode>
-			{user && (
+			{user && active_user && (
 				<div>
 					<ul className='user-details-list'>
 						<li>
 							<p>View Mode:</p>
 							<ul id='view-mode-menu'>
 								<li
-									id='display-default'
-									className='active-view-mode'
-									onClick={handleClick}
+									id='tracklist'
+									className={
+										defaultViewMode === 'tracklist' ? 'active-view-mode' : ''
+									}
+									// className={
+									// 	active_user.defaultView === 'tracklist'
+									// 		? 'active-view-mode'
+									// 		: ''
+									// }
+									onClick={() => {
+										handleClick('tracklist');
+									}}
+								>
+									<button
+										className='view-mode-btn'
+										onClick={() => {
+											// setViewMode('tracklist');
+										}}
+									>
+										track list
+									</button>
+								</li>
+								<li
+									id='visualizer'
+									className={
+										defaultViewMode === 'visualizer' ? 'active-view-mode' : ''
+									}
+									// className={
+									// 	active_user.defaultView === 'visualizer'
+									// 		? 'active-view-mode'
+									// 		: ''
+									// }
+									// className='active-view-mode'
+									onClick={() => {
+										handleClick('visualizer');
+									}}
 								>
 									<button
 										className='view-mode-btn'
@@ -35,16 +75,6 @@ const UserDefaultViewMode = ({ targets }) => {
 										}}
 									>
 										visualizer
-									</button>
-								</li>
-								<li id='display-record' onClick={handleClick}>
-									<button
-										className='view-mode-btn'
-										onClick={() => {
-											// setViewMode('tracklist');
-										}}
-									>
-										track list
 									</button>
 								</li>
 							</ul>

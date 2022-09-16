@@ -7,11 +7,15 @@ const AppContext = createContext();
 export const StateContext = ({ children }) => {
 	const [dataLoaded, setDataLoaded] = useState(false);
 	const [menuStatus, setMenuStatus] = useState(false);
-	const [mediaToDisplay, setMediaToDisplay] = useState('display-default');
+	const [mediaToDisplay, setMediaToDisplay] = useState(null);
 	const [playlistToView, setPlaylistToView] = useState(null);
 	const [viewPlaylist, setViewPlaylist] = useState(null);
 	const [showOptions, setShowOptions] = useState(false);
-	const [viewMode, setViewMode] = useState('tracklist');
+	const [viewMode, setViewMode] = useState(null);
+	// const [viewMode, setViewMode] = useState('tracklist');
+
+	const [defaultViewMode, setDefaultViewMode] = useState(null);
+	const [defaultAnimation, setDefaultAnimation] = useState(null);
 	// const [currentSong, setCurrentSong] = useState(null);
 	const audio = document.getElementById('audio');
 	// SONGS
@@ -260,6 +264,11 @@ export const StateContext = ({ children }) => {
 				showOptions,
 				viewMode,
 				setViewMode,
+
+				defaultViewMode,
+				setDefaultViewMode,
+				defaultAnimation,
+				setDefaultAnimation,
 			}}
 		>
 			{children}

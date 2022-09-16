@@ -1,23 +1,56 @@
 // import { Link } from 'react-router-dom';
 // import { useLogout } from '../hooks/useLogout';
+import { useUsersContext } from '../hooks/useUserContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import styled from 'styled-components';
 import { TbVinyl, TbDeviceAudioTape, TbDisc } from 'react-icons/tb';
 import { FiImage } from 'react-icons/fi';
 import { log } from '../helper';
+import { useStateContext } from '../lib/context';
 // import { format } from 'date-fns';
 
 const UserDefaultAnimation = ({ targets }) => {
 	// const { logout } = useLogout();
 	const { user } = useAuthContext();
+	const { active_user } = useUsersContext();
+	const { setMediaToDisplay, setDefaultAnimation, defaultAnimation } =
+		useStateContext();
+	// const { dispatch, active_user } = useUsersContext();
 
-	const handleClick = () => {
+	const handleClick = async (display) => {
 		// logout();
 		log('clicked');
+		log(display, 'display chosen');
+		setMediaToDisplay(display);
+		setDefaultAnimation(display);
+
+		// const response = await fetch(
+		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/${active_user.userId}`,
+		// 	{
+		// 		method: 'PATCH',
+		// 		body: display,
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Authorization: `Bearer ${user.token}`,
+		// 		},
+		// 	}
+		// );
+		// const json = await response.json();
+		// log(json, 'json updating user default animation');
+		// if (!response.ok) {
+		// 	// setError(json.error);
+		// 	log('error in patch');
+		// }
+		// if (response.ok) {
+		// 	// setError(null);
+		// 	log('user updated?', json);
+		// 	// playlistDispatch({ type: 'UPDATE_USER_PLAYLIST_WITH_SONG', payload: songId });
+		// 	dispatch({ type: 'UPDATE_USER', payload: display });
+		// }
 	};
 	return (
 		<StyledUserDefaultAnimation>
-			{user && (
+			{user && active_user && (
 				<div>
 					<ul className='user-details-list'>
 						<li>
@@ -25,18 +58,72 @@ const UserDefaultAnimation = ({ targets }) => {
 							<ul id='animation-menu'>
 								<li
 									id='display-default'
-									className='active-animation'
-									onClick={handleClick}
+									className={
+										defaultAnimation === 'display-default'
+											? 'active-animation'
+											: ''
+									}
+									// className={
+									// 	active_user.defaultAnimation === 'display-default'
+									// 		? 'active-animation'
+									// 		: ''
+									// }
+									onClick={() => {
+										handleClick('display-default');
+									}}
 								>
 									<FiImage className='media-menu-icons' />
 								</li>
-								<li id='display-record' onClick={handleClick}>
+								<li
+									id='display-record'
+									className={
+										defaultAnimation === 'display-record'
+											? 'active-animation'
+											: ''
+									}
+									// className={
+									// 	active_user.defaultAnimation === 'display-record'
+									// 		? 'active-animation'
+									// 		: ''
+									// }
+									onClick={() => {
+										handleClick('display-record');
+									}}
+								>
 									<TbVinyl className='media-menu-icons' />
 								</li>
-								<li id='display-cd' onClick={handleClick}>
+								<li
+									id='display-cd'
+									className={
+										defaultAnimation === 'display-cd' ? 'active-animation' : ''
+									}
+									// className={
+									// 	active_user.defaultAnimation === 'display-cd'
+									// 		? 'active-animation'
+									// 		: ''
+									// }
+									onClick={() => {
+										handleClick('display-cd');
+									}}
+								>
 									<TbDisc className='media-menu-icons' />
 								</li>
-								<li id='display-cassette' onClick={handleClick}>
+								<li
+									id='display-cassette'
+									className={
+										defaultAnimation === 'display-cassette'
+											? 'active-animation'
+											: ''
+									}
+									// className={
+									// 	active_user.defaultAnimation === 'display-cassette'
+									// 		? 'active-animation'
+									// 		: ''
+									// }
+									onClick={() => {
+										handleClick('display-cassette');
+									}}
+								>
 									<TbDeviceAudioTape className='media-menu-icons' />
 								</li>
 							</ul>

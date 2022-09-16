@@ -5,9 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useStateContext } from '../lib/context';
 import { TbVinyl, TbDeviceAudioTape, TbDisc } from 'react-icons/tb';
 import { FiImage } from 'react-icons/fi';
+import { log } from '../helper';
 
 const MediaMenu = () => {
-	const { menuStatus, setMediaToDisplay } = useStateContext();
+	const { menuStatus, setMediaToDisplay, mediaToDisplay } = useStateContext();
 	// const { menuStatus, setMenuStatus } = useStateContext();
 
 	// useEffect(() => {
@@ -15,7 +16,7 @@ const MediaMenu = () => {
 	// }, [menuStatus]);
 
 	const handleClick = (e) => {
-		// log(e.target.id, 'media to display');
+		log(e.target.id, 'media to display');
 		setMediaToDisplay(e.target.id);
 	};
 	// const handleClick = (clicked_id) => {
@@ -36,16 +37,42 @@ const MediaMenu = () => {
 						// exit={{ y: window.innerHeight }}
 					>
 						<ul id='media-menu'>
-							<li id='display-default' onClick={handleClick}>
+							<li
+								id='display-default'
+								className={
+									mediaToDisplay === 'display-default' ? 'active-animation' : ''
+								}
+								onClick={handleClick}
+							>
 								<FiImage className='media-menu-icons' />
 							</li>
-							<li id='display-record' onClick={handleClick}>
+							<li
+								id='display-record'
+								className={
+									mediaToDisplay === 'display-record' ? 'active-animation' : ''
+								}
+								onClick={handleClick}
+							>
 								<TbVinyl className='media-menu-icons' />
 							</li>
-							<li id='display-cd' onClick={handleClick}>
+							<li
+								id='display-cd'
+								className={
+									mediaToDisplay === 'display-cd' ? 'active-animation' : ''
+								}
+								onClick={handleClick}
+							>
 								<TbDisc className='media-menu-icons' />
 							</li>
-							<li id='display-cassette' onClick={handleClick}>
+							<li
+								id='display-cassette'
+								className={
+									mediaToDisplay === 'display-cassette'
+										? 'active-animation'
+										: ''
+								}
+								onClick={handleClick}
+							>
 								<TbDeviceAudioTape className='media-menu-icons' />
 							</li>
 						</ul>
@@ -88,9 +115,16 @@ const StyledMediaMenu = styled(motion.div)`
 		li {
 			cursor: pointer;
 			.media-menu-icons {
-				color: ${({ theme }) => theme.white};
+				color: ${({ theme }) => theme.bgGrey};
 				font-size: 3rem;
 				pointer-events: none;
+			}
+			&.active-animation {
+				.media-menu-icons {
+					color: ${({ theme }) => theme.white};
+					font-size: 3rem;
+					pointer-events: none;
+				}
 			}
 			span {
 				pointer-events: none !important;

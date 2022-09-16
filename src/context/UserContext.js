@@ -1,5 +1,5 @@
-import { createContext, useReducer } from 'react';
-// import { createContext, useEffect, useReducer } from 'react';
+// import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { log } from '../helper';
 
 export const UsersContext = createContext();
@@ -15,7 +15,7 @@ export const usersReducer = (state, action) => {
 			log(action.payload, 'user context');
 			log(state, 'state, update user');
 			return {
-				users: state.users.filter((user) => user._id === action.payload._id),
+				// users: state.users.filter((user) => user._id === action.payload._id),
 			};
 		default:
 			return state;
@@ -28,15 +28,15 @@ export const UsersContextProvider = ({ children }) => {
 		active_user: null,
 	});
 
-	// useEffect(() => {
-	// 	// check is user in ls
-	// 	const user = JSON.parse(localStorage.getItem('user-terror-fi'));
-	// 	log(user, 'user user context');
-	// 	if (user) {
-	// 		dispatch({ type: 'SET_USER', payload: user });
-	// 		log(user, 'user user context');
-	// 	}
-	// }, []);
+	useEffect(() => {
+		// check is user in ls
+		const user = JSON.parse(localStorage.getItem('user-terror-fi'));
+		log(user, 'user user context');
+		if (user) {
+			dispatch({ type: 'SET_USER', payload: user });
+			log(user, 'user user context');
+		}
+	}, []);
 
 	return (
 		<UsersContext.Provider value={{ ...state, dispatch }}>

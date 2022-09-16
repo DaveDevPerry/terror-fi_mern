@@ -37,6 +37,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	const { currentSong, songslist } = usePlayerContext();
 
 	const { setPlaylistToView, setViewPlaylist } = useStateContext();
+	// const { setPlaylistToView, setViewPlaylist, defaultViewMode, setDefaultViewMode,
+	// 	defaultAnimation, setDefaultAnimation } = useStateContext();
 
 	const [playlistDisplay, setPlaylistDisplay] = useState(false);
 	const [playlistFormDisplay, setPlaylistFormDisplay] = useState(false);

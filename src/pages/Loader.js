@@ -8,15 +8,24 @@ import { useSongsContext } from '../hooks/useSongsContext';
 import { log } from '../helper';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
 import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+import { useUsersContext } from '../hooks/useUserContext';
 // import { motion } from 'framer-motion';
 
 const Loader = ({ theme }) => {
 	const { user } = useAuthContext();
+	const { active_user } = useUsersContext();
 	const { songs, dispatch } = useSongsContext();
 	const { albums, dispatch: albumDispatch } = useAlbumsContext();
 	const { dispatch: playlistDispatch } = usePlaylistsContext();
 	// const {  dispatch } = useSongsContext();
 	const { setDataLoaded } = useStateContext();
+
+	const {
+		setDefaultAnimation,
+		setDefaultViewMode,
+		setViewMode,
+		setMediaToDisplay,
+	} = useStateContext();
 
 	const navigate = useNavigate();
 	// useEffect(() => {
@@ -122,6 +131,13 @@ const Loader = ({ theme }) => {
 			fetchPlaylists();
 		}
 	}, [playlistDispatch, user]);
+
+	useEffect(() => {
+		setDefaultAnimation(active_user.defaultAnimation);
+		setMediaToDisplay(active_user.defaultAnimation);
+		setDefaultViewMode(active_user.defaultView);
+		setViewMode(active_user.defaultView);
+	}, [user]);
 
 	// useEffect(() => {
 	// 	const fetchPlaylists = async () => {
