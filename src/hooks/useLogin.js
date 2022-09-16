@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { log } from '../helper';
 import { useAuthContext } from './useAuthContext';
+import { useUsersContext } from './useUserContext';
 
 export const useLogin = () => {
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(null);
 	const { dispatch } = useAuthContext();
+	const { dispatch: userDispatch } = useUsersContext();
 
 	const login = async (email, password) => {
 		setIsLoading(true);
@@ -27,15 +29,28 @@ export const useLogin = () => {
 
 		log(json, 'use login hook json');
 
+		const clonedJson = { ...json };
+		const userForLocalStorage = {
+			email: clonedJson.email,
+			token: clonedJson.token,
+		};
+
+		log(userForLocalStorage, 'user for local storage');
+		log(json, 'use login hook json');
 		if (!response.ok) {
 			setIsLoading(false);
 			setError(json.error);
 		}
 		if (response.ok) {
 			// save the user to local storage
-			localStorage.setItem('user-terror-fi', JSON.stringify(json));
+			localStorage.setItem(
+				'user-terror-fi',
+				JSON.stringify(userForLocalStorage)
+			);
+			// localStorage.setItem('user-terror-fi', JSON.stringify(json));
 			// update auth context with email
 			dispatch({ type: 'LOGIN', payload: json });
+			userDispatch({ type: 'SET_USER', payload: json });
 			// update loading state to false as finished
 			setIsLoading(false);
 		}
