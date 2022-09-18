@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLogin } from '../hooks/useLogin';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import AppDetails from '../components/AppDetails';
 
 const Login = ({ theme }) => {
@@ -12,7 +12,6 @@ const Login = ({ theme }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		await login(email, password);
 	};
 
@@ -57,7 +56,7 @@ const Login = ({ theme }) => {
 				</form>
 
 				<p>
-					Need an account? Sign up<Link to='/signup'> here</Link>
+					Need an account? Sign up<NavLink to='/signup'> here</NavLink>
 				</p>
 				<AppDetails theme={theme} />
 			</div>
@@ -82,16 +81,13 @@ const StyledLogin = styled(motion.div)`
 	justify-content: space-between;
 	align-items: center;
 	z-index: 600;
-	/* position: relative; */
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
-		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		margin-right: 5rem;
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
 		margin-top: 5rem;
-		/* margin-top: 10rem; */
 		border-radius: 0.5rem;
 		position: relative;
 		h1#brand {
@@ -111,14 +107,12 @@ const StyledLogin = styled(motion.div)`
 		}
 	}
 	.launch-wrapper {
-		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		background-color: ${({ theme }) => theme.primaryColor};
 		margin-left: 5rem;
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
 		margin-bottom: 5rem;
-		/* margin-bottom: 10rem; */
 		border-radius: 0.5rem;
 		position: relative;
 		.launch-btn {
@@ -144,25 +138,20 @@ const StyledLogin = styled(motion.div)`
 		row-gap: 1rem;
 		padding: 2rem;
 		background-color: ${({ theme }) => theme.bgGrey};
-		/* background: ${({ theme }) => theme.bgCircle}; */
 		border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-		/* background: ${({ theme }) => theme.white}; */
 		border-radius: 1rem;
-		/* border-radius: 4px; */
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 		z-index: 601;
 		margin: 0 1rem;
 		h3 {
 			text-align: center;
 			margin: 0;
-			/* color: ${({ theme }) => theme.txtDarkGrey}; */
 			color: ${({ theme }) => theme.white};
 		}
 		input {
 			padding: 0.8rem 1rem;
 			margin: 0;
 			font-size: 1.8rem;
-			/* color: ${({ theme }) => theme.txtGrey}; */
 			color: ${({ theme }) => theme.white};
 			flex: 1;
 			&:focus {
@@ -182,7 +171,6 @@ const StyledLogin = styled(motion.div)`
 	}
 	p {
 		text-align: center;
-		/* color: ${({ theme }) => theme.txtDarkGrey}; */
 		color: ${({ theme }) => theme.white};
 		a {
 			color: ${({ theme }) => theme.secondaryColor};
@@ -192,7 +180,6 @@ const StyledLogin = styled(motion.div)`
 	label,
 	input {
 		display: block;
-		/* color: ${({ theme }) => theme.txtGrey}; */
 		color: ${({ theme }) => theme.white};
 	}
 	input {

@@ -10,12 +10,25 @@ import { useStateContext } from '../lib/context';
 import toast from 'react-hot-toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import { log } from '../helper';
+// import { useAuthContext } from '../hooks/useAuthContext';
+// import { useSongsContext } from '../hooks/useSongsContext';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import { log } from '../../helper';
 
-function FavouritesList({ handleOptions }) {
+function FavouritesList({ handleOptions, removeFavourite }) {
 	const { songslist } = usePlayerContext();
-	const { showOptions, setShowOptions } = useStateContext();
+	const { dataLoaded, showOptions, setShowOptions } = useStateContext();
 	// const { currentSong, songslist } = usePlayerContext();
+	// const { user } = useAuthContext();
+	// const { songs } = useSongsContext();
+
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (dataLoaded === false) {
+			navigate('/');
+		}
+	}, [navigate, dataLoaded]);
 
 	// create a toast
 	const notify = (songTitle) => {
@@ -73,6 +86,7 @@ function FavouritesList({ handleOptions }) {
 										<p
 											onClick={() => {
 												log(song.title, 'for notify');
+												removeFavourite(song._id);
 												notify(song.title);
 												setTimeout(() => {
 													setShowOptions(false);

@@ -6,7 +6,11 @@ import { ImShuffle } from 'react-icons/im';
 import { NavLink } from 'react-router-dom';
 // import { log } from '../helper';
 
-const FavouritesWidget = ({ playFavourites, shuffleFavourites }) => {
+const FavouritesWidget = ({
+	playFavourites,
+	shuffleFavourites,
+	viewFavourites,
+}) => {
 	return (
 		<StyledFavouritesWidget
 			className='fav-widget-wrapper'
@@ -18,7 +22,11 @@ const FavouritesWidget = ({ playFavourites, shuffleFavourites }) => {
 			<div className='fav-widget-bar'></div>
 			<div className='fav-widget-content-wrapper'>
 				<div className='fav-widget-text-wrapper'>
-					<NavLink to='/favourites' className='favourites-link'>
+					<NavLink
+						to='/favourites'
+						className='favourites-link'
+						onClick={viewFavourites}
+					>
 						<p>My Favourites</p>
 					</NavLink>
 				</div>

@@ -34,7 +34,6 @@ export const useLogin = () => {
 		);
 		// this will return the data as json or the error
 		const json = await response.json();
-
 		log(json, 'use login hook json');
 
 		// const clonedJson = { ...json };

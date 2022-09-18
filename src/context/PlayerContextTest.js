@@ -16,10 +16,12 @@ export const playerReducer = (state, action) => {
 			// 	(obj) => obj.albumId === action.data.playListId
 			// );
 			log(state, 'state atm');
+			log(action.data, 'action.data atm');
 			return {
 				...state,
 				songslist: action.data.albumTracks,
 				playListTitle: action.data.playListName,
+				// playing: true,
 			};
 
 		// works with songs_list

@@ -15,6 +15,9 @@ import { log } from '../helper';
 // import { log } from '../helper';
 // import AddPlaylistForm from '../components/AddPlaylistForm';
 import { Toaster } from 'react-hot-toast';
+import { useAuthContext } from '../hooks/useAuthContext';
+// import { useSongsContext } from '../hooks/useSongsContext';
+// import { usePlayerContext } from '../hooks/usePlayerContext';
 
 const Favourites = ({
 	handleViewPlaylist,
@@ -24,6 +27,9 @@ const Favourites = ({
 	handlePlaylist,
 }) => {
 	const { dataLoaded, setShowOptions, showOptions } = useStateContext();
+	const { user } = useAuthContext();
+	// const { songs } = useSongsContext();
+	// const { dispatch } = usePlayerContext();
 
 	// const { playlists } = usePlaylistsContext();
 
@@ -37,6 +43,64 @@ const Favourites = ({
 	const handleBackClick = () => {
 		navigate('/library');
 		// logout();
+	};
+
+	const removeFavourite = async (songId) => {
+		// from front end
+		log(songId, 'song id to remove');
+		let songIndex = user.favourites.indexOf(songId);
+		user.favourites.splice(songIndex, 1);
+		const clonedFavs = [...user.favourites];
+		log(clonedFavs, 'cloned favs');
+		// const clonedSongsInFav = [...songs];
+		// const filteredFavs = clonedSongsInFav.filter((obj) =>
+		// 	clonedFavs.includes(obj._id)
+		// );
+		// log(filteredFavs, 'filtered favs');
+		// const playListData = {
+		// 	albumTracks: filteredFavs,
+		// 	playListName: 'favourites',
+		// };
+		// log(user, 'user id');
+		// from back end
+		const response = await fetch(
+			`${process.env.REACT_APP_BACKEND_URL}/api/user/${user.userId}`,
+			{
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.token}`,
+				},
+				body: clonedFavs,
+			}
+		);
+		const json = await response.json();
+		log(json, 'user json');
+		// json.reverse();
+		if (response.ok) {
+			log('ok');
+			// playlistDispatch({
+			// 	type: 'SET_PLAYLISTS',
+			// 	payload: json,
+			// });
+		}
+		// from front end
+		// log(songId, 'song id to remove');
+		// let songIndex = user.favourites.indexOf(songId);
+		// user.favourites.splice(songIndex, 1);
+		// const clonedFavs = [...user.favourites];
+		// log(clonedFavs, 'cloned favs');
+		// const clonedSongsInFav = [...songs];
+		// const filteredFavs = clonedSongsInFav.filter((obj) =>
+		// 	clonedFavs.includes(obj._id)
+		// );
+		// log(filteredFavs, 'filtered favs');
+		// const playListData = {
+		// 	albumTracks: filteredFavs,
+		// 	playListName: 'favourites',
+		// };
+
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
 	};
 
 	const handleOptions = (e, songTitle, i) => {
@@ -61,7 +125,10 @@ const Favourites = ({
 				pageTitle='favourites'
 			/>
 
-			<FavouritesList handleOptions={handleOptions} />
+			<FavouritesList
+				handleOptions={handleOptions}
+				removeFavourite={removeFavourite}
+			/>
 		</StyledFavourites>
 	);
 };

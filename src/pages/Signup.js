@@ -2,18 +2,18 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useSignup } from '../hooks/useSignup';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import AppDetails from '../components/AppDetails';
 
 const Signup = ({ theme }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [username, setUsername] = useState('');
 	const { signup, isLoading, error } = useSignup();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		await signup(email, password);
+		await signup(email, password, username);
 	};
 
 	return (
@@ -28,7 +28,6 @@ const Signup = ({ theme }) => {
 					Terror<span id='hyphen'>-</span>Fi
 				</h1>
 			</div>
-
 			<div className='form-page-container'>
 				<form onSubmit={handleSubmit} className='signup'>
 					<h3>Sign up</h3>
@@ -48,6 +47,14 @@ const Signup = ({ theme }) => {
 							value={password}
 						/>
 					</div>
+					<div>
+						<label>username:</label>
+						<input
+							type='text'
+							onChange={(e) => setUsername(e.target.value)}
+							value={username}
+						/>
+					</div>
 
 					<button className='action-btn' disabled={isLoading}>
 						Sign up
@@ -56,7 +63,7 @@ const Signup = ({ theme }) => {
 				</form>
 
 				<p>
-					Got an account? Log in<Link to='/login'> here</Link>
+					Got an account? Log in<NavLink to='/login'> here</NavLink>
 				</p>
 				<AppDetails theme={theme} />
 			</div>
@@ -75,7 +82,6 @@ const StyledSignup = styled(motion.div)`
 	row-gap: 2rem;
 	margin: 0 auto;
 	max-width: 42rem;
-	/* padding: 0 1rem; */
 	overflow: hidden;
 	transition: all 200ms linear;
 	flex: 1;
@@ -84,12 +90,12 @@ const StyledSignup = styled(motion.div)`
 	z-index: 600;
 	.brand-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
-		border: 2px solid ${({ theme }) => theme.bgGrey};
+		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		margin-right: 5rem;
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
-		margin-top: 10rem;
+		margin-top: 5rem;
 		border-radius: 0.5rem;
 		position: relative;
 		h1#brand {
@@ -109,13 +115,13 @@ const StyledSignup = styled(motion.div)`
 		}
 	}
 	.launch-wrapper {
-		border: 2px solid ${({ theme }) => theme.bgGrey};
+		/* border: 2px solid ${({ theme }) => theme.bgGrey}; */
 		background-color: ${({ theme }) => theme.primaryColor};
 		margin-left: 5rem;
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
-		margin-bottom: 10rem;
+		margin-bottom: 5rem;
 		border-radius: 0.5rem;
 		position: relative;
 		.launch-btn {
@@ -140,22 +146,21 @@ const StyledSignup = styled(motion.div)`
 		flex-direction: column;
 		row-gap: 1rem;
 		padding: 2rem;
-		/* background: ${({ theme }) => theme.white}; */
-		background: ${({ theme }) => theme.bgCircle};
+		background-color: ${({ theme }) => theme.bgGrey};
 		border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-		border-radius: 4px;
+		border-radius: 1rem;
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+		z-index: 601;
+		margin: 0 1rem;
 		h3 {
 			text-align: center;
 			margin: 0;
-			/* color: ${({ theme }) => theme.txtDarkGrey}; */
 			color: ${({ theme }) => theme.white};
 		}
 		input {
 			padding: 0.8rem 1rem;
 			margin: 0;
 			font-size: 1.8rem;
-			/* color: ${({ theme }) => theme.txtGrey}; */
 			color: ${({ theme }) => theme.white};
 			flex: 1;
 			&:focus {
@@ -175,7 +180,6 @@ const StyledSignup = styled(motion.div)`
 	}
 	p {
 		text-align: center;
-		/* color: ${({ theme }) => theme.txtDarkGrey}; */
 		color: ${({ theme }) => theme.white};
 		a {
 			color: ${({ theme }) => theme.secondaryColor};
@@ -185,7 +189,6 @@ const StyledSignup = styled(motion.div)`
 	label,
 	input {
 		display: block;
-		/* color: ${({ theme }) => theme.txtGrey}; */
 		color: ${({ theme }) => theme.white};
 	}
 	input {
@@ -208,9 +211,7 @@ const StyledSignup = styled(motion.div)`
 		background: ${({ theme }) => theme.primaryColor};
 		border: 0;
 		color: #fff;
-		${'' /* color: ${({ theme }) => theme.white}; */}
 		padding: 1rem;
-		/* font-family: 'Poppins'; */
 		border-radius: 4px;
 		cursor: pointer;
 	}
@@ -220,19 +221,10 @@ const StyledSignup = styled(motion.div)`
 		border: 1px solid ${({ theme }) => theme.error};
 		color: ${({ theme }) => theme.error};
 		border-radius: 4px;
-		${'' /* margin: 20px 0; */}
 	}
 	input.error {
 		border: 1px solid ${({ theme }) => theme.error};
 	}
-
-	/* .mono-font {
-		font-family: 'Roboto Mono', monospace;
-	}
-	label .field-required {
-		color: ${({ theme }) => theme.error};
-		font-size: 1.8rem;
-	} */
 `;
 
 export default Signup;

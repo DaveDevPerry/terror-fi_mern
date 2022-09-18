@@ -120,6 +120,22 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
 		navigate('/player');
 	};
+	const viewFavourites = () => {
+		const clonedFavs = [...user.favourites];
+		log(clonedFavs, 'cloned favs');
+		const clonedSongsInFav = [...songs];
+		const filteredFavs = clonedSongsInFav.filter((obj) =>
+			clonedFavs.includes(obj._id)
+		);
+		log(filteredFavs, 'filtered favs');
+		const playListData = {
+			albumTracks: filteredFavs,
+			playListName: 'favourites',
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		// navigate('/player');
+	};
 	// const playFavourites = () => {
 	// 	const clonedFavs = [...songs.favourite_songs];
 	// 	log(clonedFavs, 'cloned favs');
@@ -206,6 +222,7 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 				<FavouritesWidget
 					playFavourites={playFavourites}
 					shuffleFavourites={shuffleFavourites}
+					viewFavourites={viewFavourites}
 				/>
 
 				{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}

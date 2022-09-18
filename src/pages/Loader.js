@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../lib/context';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -17,10 +17,8 @@ const Loader = ({ theme }) => {
 	const { songs, dispatch } = useSongsContext();
 	const { albums, dispatch: albumDispatch } = useAlbumsContext();
 	const { dispatch: playlistDispatch } = usePlaylistsContext();
-	// const {  dispatch } = useSongsContext();
-	const { setDataLoaded } = useStateContext();
-
 	const {
+		setDataLoaded,
 		setDefaultAnimation,
 		setDefaultViewMode,
 		setViewMode,
@@ -46,11 +44,8 @@ const Loader = ({ theme }) => {
 				}
 			);
 			const json = await response.json();
-
 			log(json, 'json');
-
 			if (response.ok) {
-				// setWorkouts(json);
 				dispatch({
 					type: 'SET_SONGS',
 					payload: json,
@@ -62,10 +57,6 @@ const Loader = ({ theme }) => {
 		}
 		setTimeout(() => {
 			setDataLoaded(true);
-			// setFadeOutLoader(true);
-			// setCrowdOutLoader(true);
-			// navigate('/home');
-
 			setTimeout(() => {
 				log(songs, 'songs');
 				log(albums, 'albums');
@@ -85,10 +76,8 @@ const Loader = ({ theme }) => {
 				}
 			);
 			const json = await response.json();
-
 			log(json, 'albums json');
 			json.reverse();
-
 			if (response.ok) {
 				// setWorkouts(json);
 				albumDispatch({
@@ -114,12 +103,9 @@ const Loader = ({ theme }) => {
 				}
 			);
 			const json = await response.json();
-
 			log(json, 'playlists json');
 			// json.reverse();
-
 			if (response.ok) {
-				// setWorkouts(json);
 				playlistDispatch({
 					type: 'SET_PLAYLISTS',
 					payload: json,
@@ -232,7 +218,6 @@ const StyledLoader = styled(motion.section)`
 	width: 100%;
 	height: 100%;
 	background-color: ${({ theme }) => theme.black};
-	/* @include flex(center, center, column); */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -254,7 +239,6 @@ const StyledLoader = styled(motion.section)`
 		}
 	}
 	.tv-wrapper {
-		// border: 1px solid green;
 		position: relative;
 		width: 200px;
 		height: 239px;
@@ -274,7 +258,7 @@ const StyledLoader = styled(motion.section)`
 		}
 	}
 
-	@keyframes glitch {
+	/* @keyframes glitch {
 		0% {
 			text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
 				-0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
@@ -333,10 +317,9 @@ const StyledLoader = styled(motion.section)`
 			text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
 				0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
 		}
-	}
+	} */
 
 	.tv-wrapper {
-		// border: 1px solid green;
 		position: relative;
 		width: 200px;
 		height: 239px;
@@ -362,14 +345,14 @@ const StyledLoader = styled(motion.section)`
 		}
 	}
 
-	@keyframes tvSignal {
+	/* @keyframes tvSignal {
 		from {
 			background-position: 0 0;
 		}
 		to {
 			background-position: -10000px 0;
 		}
-	}
+	} */
 `;
 
 export default Loader;

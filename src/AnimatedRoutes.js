@@ -32,10 +32,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	const { songs } = useSongsContext();
 	// const { playlists } = usePlaylistsContext();
 	const { playlists, dispatch: playlistDispatch } = usePlaylistsContext();
-	const { dispatch } = usePlayerContext();
-
-	const { currentSong, songslist } = usePlayerContext();
-
+	// const { dispatch } = usePlayerContext();
+	const { currentSong, songslist, dispatch } = usePlayerContext();
 	const { setPlaylistToView, setViewPlaylist } = useStateContext();
 	// const { setPlaylistToView, setViewPlaylist, defaultViewMode, setDefaultViewMode,
 	// 	defaultAnimation, setDefaultAnimation } = useStateContext();
@@ -53,11 +51,9 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		setDeletePlaylistFormDisplay(!deletePlaylistFormDisplay);
 		// setPlaylistFormDisplay(false);
 	};
-
 	const handleViewPlaylist = (playlistId) => {
 		setPlaylistToView(playlistId);
 		// log(playlistToView, ' playlist id to view  in playlist');
-
 		const clonedPL = [...playlists];
 		const findPlaylist = clonedPL.filter((obj) => obj._id === playlistId);
 		log(findPlaylist, 'find playlist');
@@ -185,102 +181,88 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	};
 
 	return (
-		<>
-			<AnimatePresence mode='wait'>
-				{/* <StateContext> */}
-				{/* <PlayerState> */}
-				<Routes location={location} key={location.pathname}>
-					<Route path='/' element={<Loader theme={theme} />} />
-					<Route
-						path='/login'
-						element={!user ? <Login theme={theme} /> : <Navigate to='/' />}
-					/>
-					<Route
-						path='/signup'
-						element={!user ? <Signup theme={theme} /> : <Navigate to='/' />}
-					/>
-					{/* <Route
-						path='/landing'
-						element={
-							user ? (
-								<Landing themeToggler={themeToggler} theme={theme} />
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/> */}
-					{/* <Route path='/landing' element={<Landing />} /> */}
-					<Route
-						path='/library'
-						element={
-							user ? (
-								<Library
-									themeToggler={themeToggler}
-									theme={theme}
-									handlePlaylist={handlePlaylist}
-									handleViewPlaylist={handleViewPlaylist}
-								/>
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					<Route
-						path='/playlists'
-						element={
-							user ? (
-								<Playlists
-									themeToggler={themeToggler}
-									theme={theme}
-									handleViewPlaylist={handleViewPlaylist}
-									handlePlaylistFormDisplay={handlePlaylistFormDisplay}
-									playlistFormDisplay={playlistFormDisplay}
-									setPlaylistFormDisplay={setPlaylistFormDisplay}
-									handlePlaylist={handlePlaylist}
-								/>
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					<Route
-						path='/playlists/:id'
-						element={
-							user ? (
-								<Playlist
-									themeToggler={themeToggler}
-									theme={theme}
-									handleDeletePlaylistFormDisplay={
-										handleDeletePlaylistFormDisplay
-									}
-									deletePlaylistFormDisplay={deletePlaylistFormDisplay}
-									setDeletePlaylistFormDisplay={setDeletePlaylistFormDisplay}
-									// handlePlaylist={handlePlaylist}
-								/>
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					<Route
-						path='/favourites'
-						element={
-							user ? (
-								<Favourites
-									themeToggler={themeToggler}
-									theme={theme}
-									// handleViewPlaylist={handleViewPlaylist}
-									// handlePlaylistFormDisplay={handlePlaylistFormDisplay}
-									// playlistFormDisplay={playlistFormDisplay}
-									// setPlaylistFormDisplay={setPlaylistFormDisplay}
-									// handlePlaylist={handlePlaylist}
-								/>
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					{/* <Route
+		<AnimatePresence mode='wait'>
+			<Routes location={location} key={location.pathname}>
+				<Route path='/' element={<Loader theme={theme} />} />
+				<Route
+					path='/login'
+					element={!user ? <Login theme={theme} /> : <Navigate to='/' />}
+				/>
+				<Route
+					path='/signup'
+					element={!user ? <Signup theme={theme} /> : <Navigate to='/' />}
+				/>
+				<Route
+					path='/library'
+					element={
+						user ? (
+							<Library
+								themeToggler={themeToggler}
+								theme={theme}
+								handlePlaylist={handlePlaylist}
+								handleViewPlaylist={handleViewPlaylist}
+							/>
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+				<Route
+					path='/playlists'
+					element={
+						user ? (
+							<Playlists
+								themeToggler={themeToggler}
+								theme={theme}
+								handleViewPlaylist={handleViewPlaylist}
+								handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+								playlistFormDisplay={playlistFormDisplay}
+								setPlaylistFormDisplay={setPlaylistFormDisplay}
+								handlePlaylist={handlePlaylist}
+							/>
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+				<Route
+					path='/playlists/:id'
+					element={
+						user ? (
+							<Playlist
+								themeToggler={themeToggler}
+								theme={theme}
+								handleDeletePlaylistFormDisplay={
+									handleDeletePlaylistFormDisplay
+								}
+								deletePlaylistFormDisplay={deletePlaylistFormDisplay}
+								setDeletePlaylistFormDisplay={setDeletePlaylistFormDisplay}
+								// handlePlaylist={handlePlaylist}
+							/>
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+				<Route
+					path='/favourites'
+					element={
+						user ? (
+							<Favourites
+								themeToggler={themeToggler}
+								theme={theme}
+								// handleViewPlaylist={handleViewPlaylist}
+								// handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+								// playlistFormDisplay={playlistFormDisplay}
+								// setPlaylistFormDisplay={setPlaylistFormDisplay}
+								// handlePlaylist={handlePlaylist}
+							/>
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+				{/* <Route
 						path='/playlist'
 						element={
 							user ? (
@@ -294,45 +276,38 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 							)
 						}
 					/> */}
-					<Route
-						path='/settings'
-						element={
-							user ? (
-								<Settings themeToggler={themeToggler} theme={theme} />
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					{/* <Route path='/library' element={<Library />} /> */}
-					{/* <Route exact path='/' element={<Landing />} /> */}
-					<Route
-						path='/player'
-						element={
-							user ? (
-								<AudioPlayer
-									themeToggler={themeToggler}
-									theme={theme}
-									setPlaylistDisplay={setPlaylistDisplay}
-									playlistDisplay={playlistDisplay}
-									handlePlaylist={handlePlaylist}
-									addSongToPlaylist={addSongToPlaylist}
-									handlePlaylistFormDisplay={handlePlaylistFormDisplay}
-									playlistFormDisplay={playlistFormDisplay}
-									setPlaylistFormDisplay={setPlaylistFormDisplay}
-								/>
-							) : (
-								<Navigate to='/login' />
-							)
-						}
-					/>
-					{/* <Route path='/player' element={<AudioPlayer />} /> */}
-					{/* <Route exact path='/playing' element={<Playing />} /> */}
-				</Routes>
-				{/* </PlayerState> */}
-			</AnimatePresence>
-			{/* // </StateContext> */}
-		</>
+				<Route
+					path='/settings'
+					element={
+						user ? (
+							<Settings themeToggler={themeToggler} theme={theme} />
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+				<Route
+					path='/player'
+					element={
+						user ? (
+							<AudioPlayer
+								themeToggler={themeToggler}
+								theme={theme}
+								setPlaylistDisplay={setPlaylistDisplay}
+								playlistDisplay={playlistDisplay}
+								handlePlaylist={handlePlaylist}
+								addSongToPlaylist={addSongToPlaylist}
+								handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+								playlistFormDisplay={playlistFormDisplay}
+								setPlaylistFormDisplay={setPlaylistFormDisplay}
+							/>
+						) : (
+							<Navigate to='/login' />
+						)
+					}
+				/>
+			</Routes>
+		</AnimatePresence>
 	);
 };
 
