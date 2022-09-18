@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
 import { SongsContextProvider } from './context/SongContext';
-import { PlayerContextProvider } from './context/PlayerContext';
+import { PlayerContextTestProvider } from './context/PlayerContextTest';
 import { AlbumsContextProvider } from './context/AlbumContext';
 import { UsersContextProvider } from './context/UserContext';
 import { PlaylistsContextProvider } from './context/PlaylistContext';
@@ -17,9 +17,9 @@ root.render(
 				<PlaylistsContextProvider>
 					<AlbumsContextProvider>
 						<SongsContextProvider>
-							<PlayerContextProvider>
+							<PlayerContextTestProvider>
 								<App />
-							</PlayerContextProvider>
+							</PlayerContextTestProvider>
 						</SongsContextProvider>
 					</AlbumsContextProvider>
 				</PlaylistsContextProvider>

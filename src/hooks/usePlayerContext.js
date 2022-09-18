@@ -1,12 +1,12 @@
-import { PlayerContext } from '../context/PlayerContext';
+import { PlayerContextTest } from '../context/PlayerContextTest';
 import { useContext } from 'react';
 
 export const usePlayerContext = () => {
-	const context = useContext(PlayerContext);
+	const context = useContext(PlayerContextTest);
 
 	if (!context) {
 		throw Error(
-			'usePlayerContext must be used inside a player Context Provider'
+			'usePlayerContextTest must be used inside a player Context Provider'
 		);
 	}
 
