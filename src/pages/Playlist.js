@@ -16,9 +16,10 @@ import { Toaster } from 'react-hot-toast';
 import PlaylistsHeader from '../components/PlaylistsHeader';
 import PlaylistSongs from '../components/PlaylistSongs';
 import DeletePlaylistConfirmation from '../components/DeletePlaylistConfirmation';
-import { RiDeleteBin6Line } from 'react-icons/ri';
+// import { RiDeleteBin6Line } from 'react-icons/ri';
 import { log } from '../helper';
 import PlaylistWidget from '../components/PlaylistWidget';
+import PlaylistDeleteWidget from '../components/PlaylistDeleteWidget';
 // import { format } from 'date-fns';
 // import BandSupportGigsList from '../components/BandSupportGigsList';
 // import BandHeadlineGigsList from '../components/BandHeadlineGigsList';
@@ -36,7 +37,9 @@ const Playlist = ({
 	// const { playlist, dispatch } = usePlaylistsContext();
 	// const { gigCounterData, dispatch } = useGigsContext();
 	// const { gig,gigCounterData, dispatch } = useGigsContext();
-	const { dataLoaded, viewPlaylist } = useStateContext();
+	// const { dataLoaded, } = useStateContext();
+	const { dataLoaded, setShowOptions, showOptions, viewPlaylist } =
+		useStateContext();
 	// const { playlistToView, dataLoaded, setViewPlaylist, viewPlaylist } =
 	// 	useStateContext();
 
@@ -102,6 +105,74 @@ const Playlist = ({
 	// const handleDelete = () => {
 	// 	log(playlist._id, 'playlist id to delete');
 	// };
+	const handleOptions = (e, songTitle, i) => {
+		e.preventDefault();
+		log('handle options');
+		log(e.target, 'handle options song target');
+		log(songTitle, 'handle options song title');
+		log(i, 'handle options song i');
+		// setShowOptions(!showOptions);
+		showOptions === false ? setShowOptions(i) : setShowOptions(false);
+	};
+
+	const removeSongFromPlaylist = async (songId, playlistId) => {
+		// from front end
+		log(songId, 'song id to remove');
+		log(playlistId, 'playlist id to remove song from');
+		// let songIndex = user.favourites.indexOf(songId);
+		// user.favourites.splice(songIndex, 1);
+		// const clonedFavs = [...user.favourites];
+		// log(clonedFavs, 'cloned favs');
+		// const clonedSongsInFav = [...songs];
+		// const filteredFavs = clonedSongsInFav.filter((obj) =>
+		// 	clonedFavs.includes(obj._id)
+		// );
+		// log(filteredFavs, 'filtered favs');
+		// const playListData = {
+		// 	albumTracks: filteredFavs,
+		// 	playListName: 'favourites',
+		// };
+		// log(user, 'user id');
+		// from back end
+		// const response = await fetch(
+		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/${user.userId}`,
+		// 	{
+		// 		method: 'PATCH',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Authorization: `Bearer ${user.token}`,
+		// 		},
+		// 		body: clonedFavs,
+		// 	}
+		// );
+		// const json = await response.json();
+		// log(json, 'user json');
+		// json.reverse();
+		// if (response.ok) {
+		// 	log('ok');
+		// 	// playlistDispatch({
+		// 	// 	type: 'SET_PLAYLISTS',
+		// 	// 	payload: json,
+		// 	// });
+		// }
+		// from front end
+		// log(songId, 'song id to remove');
+		// let songIndex = user.favourites.indexOf(songId);
+		// user.favourites.splice(songIndex, 1);
+		// const clonedFavs = [...user.favourites];
+		// log(clonedFavs, 'cloned favs');
+		// const clonedSongsInFav = [...songs];
+		// const filteredFavs = clonedSongsInFav.filter((obj) =>
+		// 	clonedFavs.includes(obj._id)
+		// );
+		// log(filteredFavs, 'filtered favs');
+		// const playListData = {
+		// 	albumTracks: filteredFavs,
+		// 	playListName: 'favourites',
+		// };
+
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	};
 
 	return (
 		<StyledPlaylist
@@ -119,7 +190,11 @@ const Playlist = ({
 			/>
 
 			{viewPlaylist[0] && viewPlaylist[0] && (
-				<PlaylistSongs playlist={viewPlaylist[0]} />
+				<PlaylistSongs
+					playlist={viewPlaylist[0]}
+					handleOptions={handleOptions}
+					removeSongFromPlaylist={removeSongFromPlaylist}
+				/>
 			)}
 			{/* {playlist && playlist && <PlaylistSongs playlist={playlist} />} */}
 
@@ -132,7 +207,7 @@ const Playlist = ({
 				</button>
 			</div> */}
 
-			<ul className='playlist-options-list'>
+			{/* <ul className='playlist-options-list'>
 				<li
 					className='delete-playlist-wrapper'
 					onClick={handleDeletePlaylistFormDisplay}
@@ -143,7 +218,11 @@ const Playlist = ({
 						<p></p>
 					</div>
 				</li>
-			</ul>
+			</ul> */}
+
+			<PlaylistDeleteWidget
+				handleDeletePlaylistFormDisplay={handleDeletePlaylistFormDisplay}
+			/>
 
 			<DeletePlaylistConfirmation
 				deletePlaylistFormDisplay={deletePlaylistFormDisplay}
@@ -253,45 +332,7 @@ const StyledPlaylist = styled(motion.div)`
 	::-webkit-scrollbar-corner {
 		background: rgb(75, 74, 74);
 	}
-	.playlist-options-list {
-		list-style: none;
-		background-color: ${({ theme }) => theme.bgGrey};
-		margin: 0 2rem;
-		padding: 0.5rem;
-		.delete-playlist-wrapper {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			column-gap: 1rem;
-			margin-top: 0rem;
-			/* padding: 0.5rem; */
-			.delete-playlist-btn {
-				font-size: 3rem;
-				color: ${({ theme }) => theme.primaryColor};
-			}
-			/* .playlist-icon {
-				font-size: 3rem;
-				color: ${({ theme }) => theme.white};
-			} */
-			.playlist-info-wrapper {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: flex-start;
-				/* row-gap: 0.5rem; */
-				p {
-					color: ${({ theme }) => theme.white};
-					font-size: 1.4rem;
-					text-transform: capitalize;
-					/* &:first-of-type {
-					} */
-					&:last-of-type {
-						font-size: 1rem;
-					}
-				}
-			}
-		}
-	}
+
 	.band-gigs-list-header {
 		display: flex;
 		justify-content: space-between;

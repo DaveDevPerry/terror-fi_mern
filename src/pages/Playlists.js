@@ -14,16 +14,18 @@ import { useStateContext } from '../lib/context';
 // import playerContext from '../context/playerContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 import PlaylistsHeader from '../components/PlaylistsHeader';
+import PlaylistCreateWidget from '../components/PlaylistCreateWidget';
+import PlaylistsList from '../components/PlaylistsList';
 // import { useAlbumsContext } from '../hooks/useAlbumsContext';
 // import { useSongsContext } from '../hooks/useSongsContext';
 // import { log } from '../helper';
 // import { FiHeart } from 'react-icons/fi';
 // import { SiBandsintown } from 'react-icons/si';
 // import { MdListAlt } from 'react-icons/md';
-import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
-import { MdOutlineAddBox } from 'react-icons/md';
-import { FaPlay } from 'react-icons/fa';
-import { ImShuffle } from 'react-icons/im';
+// import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
+// import { MdOutlineAddBox } from 'react-icons/md';
+// import { FaPlay } from 'react-icons/fa';
+// import { ImShuffle } from 'react-icons/im';
 // import { log } from '../helper';
 import AddPlaylistForm from '../components/AddPlaylistForm';
 import { Toaster } from 'react-hot-toast';
@@ -47,7 +49,7 @@ const Playlists = ({
 	const { dataLoaded } = useStateContext();
 	// const { albums } = useAlbumsContext();
 	// const { songs } = useSongsContext();
-	const { playlists } = usePlaylistsContext();
+	// const { playlists } = usePlaylistsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
 	// const {
@@ -169,7 +171,7 @@ const Playlists = ({
 						</li>
 					))}
 			</ul> */}
-			<ul className='playlist-options-list'>
+			{/* <ul className='playlist-options-list'>
 				<li
 					className='create-playlist-wrapper'
 					onClick={handlePlaylistFormDisplay}
@@ -180,16 +182,18 @@ const Playlists = ({
 						<p></p>
 					</div>
 				</li>
-			</ul>
-			<ul className='playlists-list'>
+			</ul> */}
+
+			<PlaylistCreateWidget
+				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+			/>
+
+			<PlaylistsList handleViewPlaylist={handleViewPlaylist} />
+			{/* <ul className='playlists-list'>
 				{playlists &&
 					playlists.map((playlist, index) => (
 						<li
-							// className={'songContainer ' + (currentSong === i ? 'selected' : '')}
 							key={index}
-							// onClick={() => {
-							// 	SetCurrent(i);
-							// }}
 						>
 							<div
 								className='songmeta_playlist'
@@ -209,7 +213,6 @@ const Playlists = ({
 									className='shuffle-playlist-btn'
 									onClick={() => {
 										handleShufflePlaylist(playlist._id);
-										// log('clicked');
 									}}
 								/>
 								<FaPlay
@@ -218,29 +221,10 @@ const Playlists = ({
 										handlePlaylist(playlist._id);
 									}}
 								/>
-								{/* <FaEllipsisV
-									className='options-playlist-btn'
-									onClick={() => {
-										log('clicked');
-									}}
-								/> */}
 							</div>
-							{/* <div className='playlist_btns_group'>
-							<button
-								className='fav_song playlist_btn'
-							>
-								<FiHeart
-									className='far fa-heart fa-lg'
-								/>
-							</button>
-							<button className='options_song playlist_btn'>
-	
-								<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
-							</button>
-						</div> */}
 						</li>
 					))}
-			</ul>
+			</ul> */}
 			<AddPlaylistForm
 				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
 				playlistFormDisplay={playlistFormDisplay}
@@ -334,104 +318,7 @@ const StyledPlaylists = styled(motion.section)`
 			}
 		}
 	} */
-	.playlist-options-list {
-		list-style: none;
-		background-color: ${({ theme }) => theme.bgGrey};
-		margin: 0 2rem;
-		padding: 0.5rem;
-		.create-playlist-wrapper {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-			column-gap: 1rem;
-			margin-top: 0rem;
-
-			.add-playlist-btn {
-				font-size: 3rem;
-				color: ${({ theme }) => theme.green};
-			}
-			/* .playlist-icon {
-				font-size: 3rem;
-				color: ${({ theme }) => theme.white};
-			} */
-			.playlist-info-wrapper {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: flex-start;
-				/* row-gap: 0.5rem; */
-				p {
-					color: ${({ theme }) => theme.white};
-					font-size: 1.4rem;
-					text-transform: capitalize;
-					/* &:first-of-type {
-					} */
-					&:last-of-type {
-						font-size: 1rem;
-					}
-				}
-			}
-		}
-	}
-	.playlists-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		/* flex: 1 1; */
-		padding: 0;
-		overflow-y: scroll;
-		margin: 0 2rem;
-		/* row-gap: 0.2rem; */
-
-		li {
-			font-weight: 450;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			padding: 0.5rem 1rem 0.5rem 0.5rem;
-			background: ${({ theme }) => theme.bgGrey};
-			.songmeta_playlist {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				flex-wrap: wrap;
-				/* pointer-events: none; */
-				.songname {
-					padding: 0 0.5rem;
-					/* font-weight: 600; */
-					font-size: 1.6rem;
-					color: ${({ theme }) => theme.white};
-					text-transform: capitalize;
-				}
-				.songauthors {
-					padding: 0 0.5rem;
-					font-weight: normal;
-					color: ${({ theme }) => theme.primaryColor};
-
-					/* color: #555; */
-					font-size: 1.2rem;
-					text-transform: uppercase;
-					font-weight: bolder;
-				}
-			}
-
-			.playlist-control-btns {
-				display: flex;
-				align-items: center;
-				column-gap: 2rem;
-				.shuffle-playlist-btn,
-				.play-playlist-btn,
-				.options-playlist-btn {
-					color: ${({ theme }) => theme.white};
-					font-size: 2rem;
-				}
-				.play-playlist-btn {
-					/* color: ${({ theme }) => theme.white}; */
-					font-size: 1.6rem;
-				}
-			}
-		}
-	}
+	/*  */
 
 	/* #sign-out-btn {
 		color: ${({ theme }) => theme.white};

@@ -1,4 +1,6 @@
-// import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useStateContext } from '../lib/context';
 import styled from 'styled-components';
 // import playerContext from '../../context/playerContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
@@ -7,13 +9,21 @@ import styled from 'styled-components';
 import { FiHeart } from 'react-icons/fi';
 import { FaEllipsisV } from 'react-icons/fa';
 import { log } from '../helper';
+import toast from 'react-hot-toast';
 // import { log } from '../../helper';
+import { AnimatePresence, motion } from 'framer-motion';
 
-function PlaylistSongs({ playlist }) {
+function PlaylistSongs({ playlist, removeSongFromPlaylist, handleOptions }) {
 	// const { currentSong, songslist, playListTitle } = usePlayerContext();
 	// const { SetCurrent, currentSong, songslist, playListTitle } =
 	// 	usePlayerContext();
-
+	const { dataLoaded, showOptions, setShowOptions } = useStateContext();
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (dataLoaded === false) {
+			navigate('/');
+		}
+	}, [navigate, dataLoaded]);
 	// const handleFavourite = (e) => {
 	// 	e.preventDefault();
 	// 	log(e.target, 'e target');
@@ -22,6 +32,17 @@ function PlaylistSongs({ playlist }) {
 	// };
 	log(playlist, 'playlist - playlist songs');
 	log(playlist && playlist, 'playlist - playlist songs');
+
+	// create a toast
+	const notify = (songTitle) => {
+		toast.success(`${songTitle} removed from playlist.`, {
+			duration: 2000,
+			style: {
+				border: '2px solid #1da000',
+				textAlign: 'center',
+			},
+		});
+	};
 
 	return (
 		<StyledPlaylistSongs className='playlist no_drag'>
@@ -52,22 +73,59 @@ function PlaylistSongs({ playlist }) {
 								<span className='songauthors'>{song.artistName}</span>
 							</div>
 							<div className='playlist_btns_group'>
+								<button className='fav_song playlist_btn'>
+									<FiHeart className='far fa-heart fa-lg' />
+								</button>
+								<button
+									className='options_song playlist_btn'
+									onClick={(e) => {
+										// handleOptions(e);
+										handleOptions(e, song.title, i);
+									}}
+								>
+									<FaEllipsisV
+										className='fas fa-ellipsis-v fa-lg'
+										// onClick={(e) => {
+										// 	handleOptions(song._id);
+										// }}
+									/>
+								</button>
+								<AnimatePresence mode='wait'>
+									{showOptions === i && (
+										<motion.div
+											className='list-options-modal'
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											exit={{ opacity: 0 }}
+										>
+											<p
+												onClick={() => {
+													log(song.title, 'for notify');
+													removeSongFromPlaylist(song._id, playlist._id);
+													notify(song.title);
+													setTimeout(() => {
+														setShowOptions(false);
+													}, 2000);
+												}}
+											>
+												remove
+											</p>
+										</motion.div>
+									)}
+								</AnimatePresence>
+							</div>
+							{/* <div className='playlist_btns_group'>
 								<button
 									className='fav_song playlist_btn'
-									// onClick={(e) => handleFavourite}
 								>
 									<FiHeart
 										className='far fa-heart fa-lg'
-										// onClick={(e) => handleFavourite}
 									/>
 								</button>
 								<button className='options_song playlist_btn'>
-									{/* <HiOutlineEllipsisVertical className='fas' /> */}
-									{/* <HiEllipsisVertical className='fas fa-ellipsis-v fa-lg' /> */}
 									<FaEllipsisV className='fas fa-ellipsis-v fa-lg' />
-									{/* <i className='fas fa-ellipsis-v fa-lg'></i> */}
 								</button>
-							</div>
+							</div> */}
 						</li>
 					))}
 			</ul>
@@ -127,11 +185,10 @@ const StyledPlaylistSongs = styled.div`
 			padding: 0 1rem 0 0;
 			background: ${({ theme }) => theme.bgGrey};
 
-			&:hover {
+			/* &:hover {
 				background-color: #dfdfdf;
-			}
+			} */
 			&.selected {
-				/* background: white; */
 				background: ${({ theme }) => theme.bgCircle};
 			}
 			&.songContainer {
@@ -185,10 +242,53 @@ const StyledPlaylistSongs = styled.div`
 					font-weight: bolder;
 				}
 			}
-			.fav_song.playlist_btn {
+			/* .fav_song.playlist_btn {
 				color: ${({ theme }) => theme.primaryColor};
 				margin-right: 5px;
 				cursor: pointer;
+			} */
+			.playlist_btns_group {
+				display: flex;
+				flex-direction: row;
+				column-gap: 1rem;
+				justify-content: space-between;
+				position: relative;
+				height: 100%;
+				.playlist_btn {
+					color: ${({ theme }) => theme.primaryColor};
+					/* margin-right: 5px; */
+					cursor: pointer;
+					font-size: 1.8rem;
+					z-index: 10000;
+					.fas.fa-ellipsis-v.fa-lg {
+						pointer-events: none;
+					}
+					&.fav_song {
+						color: ${({ theme }) => theme.primaryColor};
+						margin-right: 5px;
+						cursor: pointer;
+					}
+				}
+				.list-options-modal {
+					position: absolute;
+					right: 50%;
+					top: 50%;
+					transform: translateY(-50%);
+					height: calc(100% - 1rem);
+					background-color: ${({ theme }) => theme.primaryColor};
+					color: ${({ theme }) => theme.white};
+					width: max-content;
+					border-radius: 0.5rem;
+					padding: 0.5rem;
+					display: grid;
+					place-content: center;
+					z-index: 60000;
+					p {
+						text-transform: uppercase;
+						font-weight: bold;
+						padding: 0 1rem;
+					}
+				}
 			}
 		}
 	}
