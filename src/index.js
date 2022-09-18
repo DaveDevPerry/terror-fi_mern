@@ -4,11 +4,10 @@ import './index.css';
 import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
 import { SongsContextProvider } from './context/SongContext';
-import { PlayerContextTestProvider } from './context/PlayerContextTest';
+import { PlayerContextProvider } from './context/PlayerContext';
 import { AlbumsContextProvider } from './context/AlbumContext';
 import { UsersContextProvider } from './context/UserContext';
 import { PlaylistsContextProvider } from './context/PlaylistContext';
-// import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,11 +17,9 @@ root.render(
 				<PlaylistsContextProvider>
 					<AlbumsContextProvider>
 						<SongsContextProvider>
-							<PlayerContextTestProvider>
-								{/* <BrowserRouter> */}
+							<PlayerContextProvider>
 								<App />
-								{/* </BrowserRouter> */}
-							</PlayerContextTestProvider>
+							</PlayerContextProvider>
 						</SongsContextProvider>
 					</AlbumsContextProvider>
 				</PlaylistsContextProvider>

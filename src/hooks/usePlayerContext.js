@@ -1,8 +1,8 @@
-import { PlayerContextTest } from '../context/PlayerContextTest';
+import { PlayerContext } from '../context/PlayerContext';
 import { useContext } from 'react';
 
 export const usePlayerContext = () => {
-	const context = useContext(PlayerContextTest);
+	const context = useContext(PlayerContext);
 
 	if (!context) {
 		throw Error(

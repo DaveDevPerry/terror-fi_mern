@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+import { StateContext } from './lib/context';
 import { ThemeProvider } from 'styled-components';
 import { useDarkMode } from './components/useDarkMode';
 import { GlobalStyles } from './components/globalStyles';
 import { lightTheme, darkTheme } from './components/Themes';
 import AnimatedRoutes from './AnimatedRoutes';
-import { useAuthContext } from './hooks/useAuthContext';
-import { StateContext } from './lib/context';
 // import PlayerState from './context/PlayerState';
 
 function App() {
