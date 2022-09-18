@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { log } from '../helper';
 import { useAuthContext } from './useAuthContext';
 
 export const useSignup = () => {
@@ -25,6 +26,7 @@ export const useSignup = () => {
 		);
 		// this will return the data as json or the error
 		const json = await response.json();
+		log(json, 'json in signup');
 
 		if (!response.ok) {
 			setIsLoading(false);

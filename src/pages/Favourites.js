@@ -16,6 +16,7 @@ import { log } from '../helper';
 // import AddPlaylistForm from '../components/AddPlaylistForm';
 import { Toaster } from 'react-hot-toast';
 import { useAuthContext } from '../hooks/useAuthContext';
+import FavouritesViewWidget from '../components/FavouritesViewWidget';
 // import { useSongsContext } from '../hooks/useSongsContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 
@@ -25,6 +26,10 @@ const Favourites = ({
 	playlistFormDisplay,
 	setPlaylistFormDisplay,
 	handlePlaylist,
+	playFavourites,
+	shuffleFavourites,
+	setPlaylistDisplay,
+	handleShuffleFavourites,
 }) => {
 	const { dataLoaded, setShowOptions, showOptions } = useStateContext();
 	const { user } = useAuthContext();
@@ -113,6 +118,11 @@ const Favourites = ({
 		showOptions === false ? setShowOptions(i) : setShowOptions(false);
 	};
 
+	const handlePlayFavourites = () => {
+		setPlaylistDisplay(false);
+		navigate('/player');
+	};
+
 	return (
 		<StyledFavourites
 			initial={{ width: 0 }}
@@ -123,6 +133,12 @@ const Favourites = ({
 			<PlaylistsHeader
 				handleBackClick={handleBackClick}
 				pageTitle='favourites'
+			/>
+
+			<FavouritesViewWidget
+				playFavourites={handlePlayFavourites}
+				shuffleFavourites={shuffleFavourites}
+				handleShuffleFavourites={handleShuffleFavourites}
 			/>
 
 			<FavouritesList

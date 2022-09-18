@@ -1,7 +1,7 @@
 // import React, { useContext } from 'react';
 import styled from 'styled-components';
 // import playerContext from '../../context/playerContext';
-import { usePlayerContext } from '../hooks/usePlayerContext';
+// import { usePlayerContext } from '../hooks/usePlayerContext';
 // import { HiEllipsisVertical } from 'react-icons/hi';
 // import { HiOutlineEllipsisVertical } from 'react-icons/hi';
 // import { FiHeart } from 'react-icons/fi';
@@ -14,14 +14,16 @@ import { log } from '../helper';
 // import { useSongsContext } from '../hooks/useSongsContext';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
 // import { log } from '../../helper';
 
 function FavouritesList({ handleOptions, removeFavourite }) {
-	const { songslist } = usePlayerContext();
+	// const { songslist } = usePlayerContext();
 	const { dataLoaded, showOptions, setShowOptions } = useStateContext();
 	// const { currentSong, songslist } = usePlayerContext();
 	// const { user } = useAuthContext();
 	// const { songs } = useSongsContext();
+	const { favourites } = useFavouritesContext();
 
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -47,7 +49,7 @@ function FavouritesList({ handleOptions, removeFavourite }) {
 				<h4 className='title-text'>All tracks</h4>
 			</div>
 			<ul className='all-favourite-tracks-list'>
-				{songslist.map((song, i) => (
+				{favourites.map((song, i) => (
 					<li key={i}>
 						<div className='tmbn_song'>
 							<img
@@ -102,6 +104,62 @@ function FavouritesList({ handleOptions, removeFavourite }) {
 					</li>
 				))}
 			</ul>
+			{/* <ul className='all-favourite-tracks-list'>
+				{songslist.map((song, i) => (
+					<li key={i}>
+						<div className='tmbn_song'>
+							<img
+								src={song.artworkUrl}
+								alt='song artwork'
+								className='song-artwork'
+							/>
+						</div>
+						<div className='songmeta_favourites-list'>
+							<span className='songname'>{song.title}</span>
+							<span className='songauthors'>{song.artistName}</span>
+						</div>
+						<div className='favourites-list_btns_group'>
+							<button
+								className='options_song favourites-list_btn'
+								onClick={(e) => {
+									// handleOptions(e);
+									handleOptions(e, song.title, i);
+								}}
+							>
+								<FaEllipsisV
+									className='fas fa-ellipsis-v fa-lg'
+									// onClick={(e) => {
+									// 	handleOptions(song._id);
+									// }}
+								/>
+							</button>
+							<AnimatePresence mode='wait'>
+								{showOptions === i && (
+									<motion.div
+										className='list-options-modal'
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<p
+											onClick={() => {
+												log(song.title, 'for notify');
+												removeFavourite(song._id);
+												notify(song.title);
+												setTimeout(() => {
+													setShowOptions(false);
+												}, 2000);
+											}}
+										>
+											remove
+										</p>
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</div>
+					</li>
+				))}
+			</ul> */}
 		</StyledFavouritesList>
 	);
 }

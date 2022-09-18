@@ -9,6 +9,7 @@ import { log } from '../helper';
 import { useAlbumsContext } from '../hooks/useAlbumsContext';
 import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import { useUsersContext } from '../hooks/useUserContext';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
 // import { motion } from 'framer-motion';
 
 const Loader = ({ theme }) => {
@@ -17,6 +18,7 @@ const Loader = ({ theme }) => {
 	const { songs, dispatch } = useSongsContext();
 	const { albums, dispatch: albumDispatch } = useAlbumsContext();
 	const { dispatch: playlistDispatch } = usePlaylistsContext();
+	const { dispatch: favouritesDispatch } = useFavouritesContext();
 	const {
 		setDataLoaded,
 		setDefaultAnimation,
@@ -117,6 +119,32 @@ const Loader = ({ theme }) => {
 			fetchPlaylists();
 		}
 	}, [playlistDispatch, user]);
+	useEffect(() => {
+		const fetchFavourites = async () => {
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/api/favourites`,
+				{
+					method: 'GET',
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				}
+			);
+			const json = await response.json();
+			log(json, 'favourites json');
+			// json.reverse();
+			if (response.ok) {
+				favouritesDispatch({
+					type: 'SET_FAVOURITES',
+					payload: json,
+				});
+			}
+		};
+		// if we have a value for the user then fetch the workouts
+		if (user) {
+			fetchFavourites();
+		}
+	}, [favouritesDispatch, user]);
 
 	useEffect(() => {
 		setDefaultAnimation(active_user.defaultAnimation);

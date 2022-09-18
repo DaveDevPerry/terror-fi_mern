@@ -21,26 +21,32 @@ import { log } from '../helper';
 // import { SiBandsintown } from 'react-icons/si';
 // import { MdListAlt } from 'react-icons/md';
 // import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
-import { useAuthContext } from '../hooks/useAuthContext';
+// import { useAuthContext } from '../hooks/useAuthContext';
 // import AlbumSliderCard from '../components/AlbumSliderCard';
 import AlbumSlider from '../components/AlbumSlider';
 import LibraryPlaylists from '../components/LibraryPlaylists';
 import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import FavouritesWidget from '../components/FavouritesWidget';
 import RandomizeWidget from '../components/RandomiseWidget';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
 // import playerReducer from '../context/playerReducer';
 // import { log } from '../helper';
 
-const Library = ({ handlePlaylist, handleViewPlaylist }) => {
+const Library = ({
+	handlePlaylist,
+	handleViewPlaylist,
+	handleShufflePlaylist,
+}) => {
 	const { logout } = useLogout();
-	const { user } = useAuthContext();
+	// const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	const { albums } = useAlbumsContext();
 	const { songs } = useSongsContext();
 	const { playlists } = usePlaylistsContext();
+	const { favourites } = useFavouritesContext();
 	// const { playlists } = usePlaylistsContext();
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
@@ -87,49 +93,72 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 	};
 
 	const playFavourites = () => {
-		const clonedFavs = [...user.favourites];
+		const clonedFavs = [...favourites];
 		log(clonedFavs, 'cloned favs');
-		const clonedSongsInFav = [...songs];
-		const filteredFavs = clonedSongsInFav.filter((obj) =>
-			clonedFavs.includes(obj._id)
-		);
-		log(filteredFavs, 'filtered favs');
 		const playListData = {
-			albumTracks: filteredFavs,
+			albumTracks: clonedFavs,
 			playListName: 'favourites',
 		};
 
 		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
 		navigate('/player');
 	};
+	// const playFavourites = () => {
+	// 	const clonedFavs = [...user.favourites];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const clonedSongsInFav = [...songs];
+	// 	const filteredFavs = clonedSongsInFav.filter((obj) =>
+	// 		clonedFavs.includes(obj._id)
+	// 	);
+	// 	log(filteredFavs, 'filtered favs');
+	// 	const playListData = {
+	// 		albumTracks: filteredFavs,
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
 	const shuffleFavourites = () => {
-		const clonedFavs = [...user.favourites];
+		const clonedFavs = [...favourites];
 		log(clonedFavs, 'cloned favs');
-		const clonedSongsInFav = [...songs];
-		const filteredFavs = clonedSongsInFav.filter((obj) =>
-			clonedFavs.includes(obj._id)
-		);
-		log(filteredFavs, 'filtered favs');
 		const playListData = {
-			albumTracks: filteredFavs.sort(function () {
+			albumTracks: clonedFavs.sort(function () {
 				return Math.random() - 0.5;
 			}),
 			playListName: 'favourites',
 		};
-
 		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
 		navigate('/player');
 	};
+	// const shuffleFavourites = () => {
+	// 	const clonedFavs = [...user.favourites];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const clonedSongsInFav = [...songs];
+	// 	const filteredFavs = clonedSongsInFav.filter((obj) =>
+	// 		clonedFavs.includes(obj._id)
+	// 	);
+	// 	log(filteredFavs, 'filtered favs');
+	// 	const playListData = {
+	// 		albumTracks: filteredFavs.sort(function () {
+	// 			return Math.random() - 0.5;
+	// 		}),
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
 	const viewFavourites = () => {
-		const clonedFavs = [...user.favourites];
+		const clonedFavs = [...favourites];
 		log(clonedFavs, 'cloned favs');
-		const clonedSongsInFav = [...songs];
-		const filteredFavs = clonedSongsInFav.filter((obj) =>
-			clonedFavs.includes(obj._id)
-		);
-		log(filteredFavs, 'filtered favs');
+		// const clonedSongsInFav = [...songs];
+		// const filteredFavs = clonedSongsInFav.filter((obj) =>
+		// 	clonedFavs.includes(obj._id)
+		// );
+		// log(filteredFavs, 'filtered favs');
 		const playListData = {
-			albumTracks: filteredFavs,
+			albumTracks: clonedFavs,
 			playListName: 'favourites',
 		};
 
@@ -230,6 +259,7 @@ const Library = ({ handlePlaylist, handleViewPlaylist }) => {
 					handleViewPlaylist={handleViewPlaylist}
 					playlists={playlists}
 					handlePlaylist={handlePlaylist}
+					handleShufflePlaylist={handleShufflePlaylist}
 				/>
 
 				{/* <FavouritesWidget

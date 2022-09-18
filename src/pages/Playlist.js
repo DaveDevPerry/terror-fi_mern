@@ -18,6 +18,7 @@ import PlaylistSongs from '../components/PlaylistSongs';
 import DeletePlaylistConfirmation from '../components/DeletePlaylistConfirmation';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { log } from '../helper';
+import PlaylistWidget from '../components/PlaylistWidget';
 // import { format } from 'date-fns';
 // import BandSupportGigsList from '../components/BandSupportGigsList';
 // import BandHeadlineGigsList from '../components/BandHeadlineGigsList';
@@ -27,6 +28,8 @@ const Playlist = ({
 	handleDeletePlaylistFormDisplay,
 	deletePlaylistFormDisplay,
 	setDeletePlaylistFormDisplay,
+	handlePlayPlaylist,
+	handleShufflePlayPlaylist,
 }) => {
 	// const { user } = useAuthContext();
 	// const { playlists } = usePlaylistsContext();
@@ -109,6 +112,11 @@ const Playlist = ({
 		>
 			<Toaster />
 			<PlaylistsHeader handleBackClick={handleBackClick} pageTitle='playlist' />
+
+			<PlaylistWidget
+				handlePlayPlaylist={handlePlayPlaylist}
+				handleShufflePlayPlaylist={handleShufflePlayPlaylist}
+			/>
 
 			{viewPlaylist[0] && viewPlaylist[0] && (
 				<PlaylistSongs playlist={viewPlaylist[0]} />

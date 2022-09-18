@@ -16,25 +16,29 @@ import Loader from './pages/Loader';
 import Settings from './pages/Settings';
 import { useState } from 'react';
 import { log } from './helper';
-import { useSongsContext } from './hooks/useSongsContext';
+// import { useSongsContext } from './hooks/useSongsContext';
 import { usePlaylistsContext } from './hooks/usePlaylistsContext';
 import { usePlayerContext } from './hooks/usePlayerContext';
 import Playlists from './pages/Playlists';
 import Playlist from './pages/Playlist';
 import { useStateContext } from './lib/context';
 import Favourites from './pages/Favourites';
+import { useFavouritesContext } from './hooks/useFavouritesContext';
 // import PlayerState from './context/PlayerState';
 // import Playing from './pages/Playing';
 
 const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { songs } = useSongsContext();
+	// const { songs } = useSongsContext();
 	// const { playlists } = usePlaylistsContext();
 	const { playlists, dispatch: playlistDispatch } = usePlaylistsContext();
 	// const { dispatch } = usePlayerContext();
-	const { currentSong, songslist, dispatch } = usePlayerContext();
+	const { currentSong, playListTitle, songslist, dispatch } =
+		usePlayerContext();
 	const { setPlaylistToView, setViewPlaylist } = useStateContext();
+	const { favourites } = useFavouritesContext();
+
 	// const { setPlaylistToView, setViewPlaylist, defaultViewMode, setDefaultViewMode,
 	// 	defaultAnimation, setDefaultAnimation } = useStateContext();
 
@@ -58,33 +62,32 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		const findPlaylist = clonedPL.filter((obj) => obj._id === playlistId);
 		log(findPlaylist, 'find playlist');
 		setViewPlaylist(findPlaylist);
-		// log(playlistId, 'id');
-		// const clonedPlaylists = [...playlists];
-		// log(clonedPlaylists, 'clonedPlaylists');
-		// const activePlaylist = clonedPlaylists.filter(
-		// 	(playlist) => playlist._id === playlistId
-		// );
-		// log(activePlaylist, 'active playlist');
-		// const clonedSongs = [...songs];
-		// log(clonedSongs, 'cloned songs');
-		// // const userPlaylists = [...user.playlists];
-		// // log(userPlaylists, 'cloned user playlists');
-		// // // get all playlists
-		// // // const
-		// const playlistSongs = clonedSongs.filter((obj) =>
-		// 	activePlaylist[0].songs.includes(obj._id)
-		// );
-		// log(playlistSongs, 'playlistSongs');
-		// const playListData = {
-		// 	albumTracks: playlistSongs,
-		// 	playListName: activePlaylist[0].name,
-		// };
 
+		const playListData = {
+			albumTracks: findPlaylist[0].songs,
+			playListName: findPlaylist[0].name,
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		setPlaylistDisplay(false);
 		// dispatch({ type: 'SET_PLAYLIST', payload: playListData });
 		// setPlaylistDisplay(false);
 		navigate(`/playlists/${playlistId}`);
 		// navigate('/playlist');
 	};
+	// const handleViewPlaylist = (playlistId) => {
+	// 	setPlaylistToView(playlistId);
+	// 	// log(playlistToView, ' playlist id to view  in playlist');
+	// 	const clonedPL = [...playlists];
+	// 	const findPlaylist = clonedPL.filter((obj) => obj._id === playlistId);
+	// 	log(findPlaylist, 'find playlist');
+	// 	setViewPlaylist(findPlaylist);
+
+	// 	// dispatch({ type: 'SET_PLAYLIST', payload: playListData });
+	// 	// setPlaylistDisplay(false);
+	// 	navigate(`/playlists/${playlistId}`);
+	// 	// navigate('/playlist');
+	// };
 	const handlePlaylist = (playlistId) => {
 		log(playlistId, 'id');
 		const clonedPlaylists = [...playlists];
@@ -93,18 +96,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 			(playlist) => playlist._id === playlistId
 		);
 		log(activePlaylist, 'active playlist');
-		const clonedSongs = [...songs];
-		log(clonedSongs, 'cloned songs');
-		// const userPlaylists = [...user.playlists];
-		// log(userPlaylists, 'cloned user playlists');
-		// // get all playlists
-		// // const
-		const playlistSongs = clonedSongs.filter((obj) =>
-			activePlaylist[0].songs.includes(obj._id)
-		);
-		log(playlistSongs, 'playlistSongs');
 		const playListData = {
-			albumTracks: playlistSongs,
+			albumTracks: activePlaylist[0].songs,
 			playListName: activePlaylist[0].name,
 		};
 
@@ -112,6 +105,112 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		setPlaylistDisplay(false);
 		navigate('/player');
 	};
+	const handlePlayPlaylist = () => {
+		// log(playlistId, 'id');
+		// const clonedPlaylists = [...playlists];
+		// log(clonedPlaylists, 'clonedPlaylists');
+		// const activePlaylist = clonedPlaylists.filter(
+		// 	(playlist) => playlist._id === playlistId
+		// );
+		// log(activePlaylist, 'active playlist');
+		// const playListData = {
+		// 	albumTracks: activePlaylist[0].songs,
+		// 	playListName: activePlaylist[0].name,
+		// };
+
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		setPlaylistDisplay(false);
+		navigate('/player');
+	};
+	const handleShufflePlaylist = (playlistId) => {
+		log(playlistId, 'id');
+		const clonedPlaylists = [...playlists];
+		log(clonedPlaylists, 'clonedPlaylists');
+		const activePlaylist = clonedPlaylists.filter(
+			(playlist) => playlist._id === playlistId
+		);
+		log(activePlaylist, 'active playlist');
+		const playListData = {
+			albumTracks: activePlaylist[0].songs.sort(() => Math.random() - 0.5),
+			playListName: activePlaylist[0].name,
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		setPlaylistDisplay(false);
+		navigate('/player');
+	};
+	const handleShufflePlayPlaylist = () => {
+		// log(playlistId, 'id');
+		const clonedPlaylists = [...songslist];
+		log(clonedPlaylists, 'clonedPlaylists');
+		// const activePlaylist = clonedPlaylists.filter(
+		// 	(playlist) => playlist._id === playlistId
+		// );
+		// log(activePlaylist, 'active playlist');
+		const playListData = {
+			albumTracks: clonedPlaylists.sort(() => Math.random() - 0.5),
+			playListName: playListTitle,
+		};
+
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		setPlaylistDisplay(false);
+		navigate('/player');
+	};
+
+	const handleShuffleFavourites = () => {
+		const clonedFavs = [...favourites];
+		log(clonedFavs, 'cloned favs');
+		const playListData = {
+			albumTracks: clonedFavs.sort(function () {
+				return Math.random() - 0.5;
+			}),
+			playListName: 'favourites',
+		};
+		dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		navigate('/player');
+		// log(playlistId, 'id');
+		// const clonedPlaylists = [...playlists];
+		// log(clonedPlaylists, 'clonedPlaylists');
+		// const activePlaylist = clonedPlaylists.filter(
+		// 	(playlist) => playlist._id === playlistId
+		// );
+		// log(activePlaylist, 'active playlist');
+		// const playListData = {
+		// 	albumTracks: activePlaylist[0].songs.sort(() => Math.random() - 0.5),
+		// 	playListName: activePlaylist[0].name,
+		// };
+
+		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		// setPlaylistDisplay(false);
+		// navigate('/player');
+	};
+	// const handlePlaylist = (playlistId) => {
+	// 	log(playlistId, 'id');
+	// 	const clonedPlaylists = [...playlists];
+	// 	log(clonedPlaylists, 'clonedPlaylists');
+	// 	const activePlaylist = clonedPlaylists.filter(
+	// 		(playlist) => playlist._id === playlistId
+	// 	);
+	// 	log(activePlaylist, 'active playlist');
+	// 	const clonedSongs = [...songs];
+	// 	log(clonedSongs, 'cloned songs');
+	// 	// const userPlaylists = [...user.playlists];
+	// 	// log(userPlaylists, 'cloned user playlists');
+	// 	// // get all playlists
+	// 	// // const
+	// 	const playlistSongs = clonedSongs.filter((obj) =>
+	// 		activePlaylist[0].songs.includes(obj._id)
+	// 	);
+	// 	log(playlistSongs, 'playlistSongs');
+	// 	const playListData = {
+	// 		albumTracks: playlistSongs,
+	// 		playListName: activePlaylist[0].name,
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	setPlaylistDisplay(false);
+	// 	navigate('/player');
+	// };
 
 	const addSongToPlaylist = async (playlistId) => {
 		log(playlistId, 'id');
@@ -180,6 +279,18 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		navigate('/player');
 	};
 
+	// const playFavourites = () => {
+	// 	const clonedFavs = [...favourites];
+	// 	log(clonedFavs, 'cloned favs');
+	// 	const playListData = {
+	// 		albumTracks: clonedFavs,
+	// 		playListName: 'favourites',
+	// 	};
+
+	// 	dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+	// 	navigate('/player');
+	// };
+
 	return (
 		<AnimatePresence mode='wait'>
 			<Routes location={location} key={location.pathname}>
@@ -201,6 +312,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 								theme={theme}
 								handlePlaylist={handlePlaylist}
 								handleViewPlaylist={handleViewPlaylist}
+								handleShufflePlaylist={handleShufflePlaylist}
 							/>
 						) : (
 							<Navigate to='/login' />
@@ -219,6 +331,7 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 								playlistFormDisplay={playlistFormDisplay}
 								setPlaylistFormDisplay={setPlaylistFormDisplay}
 								handlePlaylist={handlePlaylist}
+								handleShufflePlaylist={handleShufflePlaylist}
 							/>
 						) : (
 							<Navigate to='/login' />
@@ -238,6 +351,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 								deletePlaylistFormDisplay={deletePlaylistFormDisplay}
 								setDeletePlaylistFormDisplay={setDeletePlaylistFormDisplay}
 								// handlePlaylist={handlePlaylist}
+								handlePlayPlaylist={handlePlayPlaylist}
+								handleShufflePlayPlaylist={handleShufflePlayPlaylist}
 							/>
 						) : (
 							<Navigate to='/login' />
@@ -251,6 +366,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 							<Favourites
 								themeToggler={themeToggler}
 								theme={theme}
+								setPlaylistDisplay={setPlaylistDisplay}
+								handleShuffleFavourites={handleShuffleFavourites}
 								// handleViewPlaylist={handleViewPlaylist}
 								// handlePlaylistFormDisplay={handlePlaylistFormDisplay}
 								// playlistFormDisplay={playlistFormDisplay}

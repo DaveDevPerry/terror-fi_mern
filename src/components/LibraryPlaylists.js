@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { log } from '../helper';
+// import { log } from '../helper';
 // import LibraryPlaylistsCard from './LibraryPlaylistsCard';
 import { FaPlay } from 'react-icons/fa';
 import { ImShuffle } from 'react-icons/im';
@@ -10,6 +10,7 @@ const LibraryPlaylists = ({
 	handleViewPlaylist,
 	playlists,
 	handlePlaylist,
+	handleShufflePlaylist,
 }) => {
 	return (
 		<StyledLibraryPlaylists className='library-playlists'>
@@ -46,7 +47,8 @@ const LibraryPlaylists = ({
 								<ImShuffle
 									className='shuffle-playlist-btn'
 									onClick={() => {
-										log('clicked');
+										handleShufflePlaylist(playlist._id);
+										// log('clicked');
 									}}
 								/>
 								<FaPlay

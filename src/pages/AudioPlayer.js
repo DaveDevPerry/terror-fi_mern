@@ -33,6 +33,7 @@ import { Toaster } from 'react-hot-toast';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 import AudioVisualizer from '../components/VisualyzerWidget';
+// import { useFavouritesContext } from '../hooks/useFavouritesContext';
 
 // import { AnimatePresence } from 'framer-motion';
 // import ProgressWidget from '../components/ProgressWidget';
@@ -53,6 +54,7 @@ function AudioPlayer({
 	// const { user, dispatch: userDispatch } = useUsersContext();
 	const { user, dispatch: authDispatch } = useAuthContext();
 	const { dataLoaded } = useStateContext();
+	// const { favourites } = useFavouritesContext();
 	const navigate = useNavigate();
 	// const navigate = useNavigate();
 	useEffect(() => {
@@ -147,6 +149,99 @@ function AudioPlayer({
 		setCurrentTime(compute);
 		audio.current.currentTime = compute;
 	};
+
+	// const toggleFav = async (e) => {
+	// 	log(e.target, 'e target');
+	// 	log(currentSong, 'song this title');
+	// 	// log(this.song._id, 'song id?');
+	// 	const songId = songslist[currentSong]._id;
+	// 	log(songId, 'song id in mongo');
+
+	// 	// user details
+	// 	log(user, 'user in audio player toggle fav');
+
+	// 	// check if already a fav
+	// 	log(user.favourites, 'user favs');
+
+	// 	// log(favourites, 'favourites');
+	// 	// const clonedFavs = [...favourites];
+	// 	// const isFav = clonedFavs.filter((obj) => obj._id === songId);
+	// 	// log(isFav, 'is Fav value', songId);
+	// 	// // if (favourites.filter((obj) => obj._id === songId) {
+	// 	// // 	log(songId, 'songId is a fav');
+	// 	// // }){
+	// 	// if (isFav.length === 1) {
+	// 	// 	log('remove from favs', songId);
+	// 	// 	let songIndex = favourites.indexOf(songId);
+	// 	// 	favourites.splice(songIndex, 1);
+	// 	// 	log(favourites, 'favourites after remove');
+	// 	// } else {
+	// 	// 	log('add to favs', songId);
+
+	// 	// 	favourites.push(songId);
+	// 	// 	log(favourites, 'favourites after add');
+	// 	// }
+	// 	// // }
+	// 	// // if (favourites.filter((obj) => obj._id !== songId)) {
+	// 	// // 	log(songId, 'songId is not a fav');
+	// 	// // }
+	// 	// // add songId to users favourites
+	// 	// // userDispatch({ type: 'UPDATE_USER', payload: songId });
+	// 	// // authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+	// 	// // http://localhost:4000/api/favourites/632741e355a6587b5e1db96a
+	// 	// const response = await fetch(
+	// 	// 	`${process.env.REACT_APP_BACKEND_URL}/api/favourites/632741e355a6587b5e1db96a`,
+	// 	// 	// `${process.env.REACT_APP_BACKEND_URL}/api/favourites/${user.favourites}`,
+	// 	// 	{
+	// 	// 		// const response = await fetch('/api/weights', {
+	// 	// 		method: 'PATCH',
+	// 	// 		headers: {
+	// 	// 			'Content-Type': 'application/json',
+	// 	// 			Authorization: `Bearer ${user.token}`,
+	// 	// 		},
+	// 	// 		body: favourites,
+	// 	// 	}
+	// 	// );
+	// 	// const json = await response.json();
+	// 	// log(json, 'json updating fav in toggle fav');
+	// 	// if (!response.ok) {
+	// 	// 	// setError(json.error);
+	// 	// 	log('error in patch');
+	// 	// }
+	// 	// if (response.ok) {
+	// 	// 	// setError(null);
+	// 	// 	log('fav updated?', json);
+	// 	// 	// authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+	// 	// }
+	// 	// log('new band added', json);
+
+	// 	// const response = await fetch(
+	// 	// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`,
+	// 	// 	{
+	// 	// 		// const response = await fetch('/api/user/signup', {
+	// 	// 		method: 'PATCH',
+	// 	// 		headers: {
+	// 	// 			'Content-Type': 'application/json',
+	// 	// 		},
+	// 	// 		body: JSON.stringify({ email, password, username }),
+	// 	// 	}
+	// 	// );
+	// 	// // this will return the data as json or the error
+	// 	// const json = await response.json();
+
+	// 	// if (!response.ok) {
+	// 	// 	setIsLoading(false);
+	// 	// 	setError(json.error);
+	// 	// }
+	// 	// if (response.ok) {
+	// 	// 	// save the user to local storage
+	// 	// 	localStorage.setItem('user-terror-fi', JSON.stringify(json));
+	// 	// 	// update auth context with email
+	// 	// 	dispatch({ type: 'LOGIN', payload: json });
+	// 	// 	// update loading state to false as finished
+	// 	// 	setIsLoading(false);
+	// 	// }
+	// };
 
 	const toggleFav = async (e) => {
 		log(e.target, 'e target');

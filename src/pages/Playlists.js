@@ -24,7 +24,7 @@ import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import { MdOutlineAddBox } from 'react-icons/md';
 import { FaPlay } from 'react-icons/fa';
 import { ImShuffle } from 'react-icons/im';
-import { log } from '../helper';
+// import { log } from '../helper';
 import AddPlaylistForm from '../components/AddPlaylistForm';
 import { Toaster } from 'react-hot-toast';
 // import { useAuthContext } from '../hooks/useAuthContext';
@@ -40,6 +40,7 @@ const Playlists = ({
 	playlistFormDisplay,
 	setPlaylistFormDisplay,
 	handlePlaylist,
+	handleShufflePlaylist,
 }) => {
 	// const { logout } = useLogout();
 	// const { user } = useAuthContext();
@@ -207,7 +208,8 @@ const Playlists = ({
 								<ImShuffle
 									className='shuffle-playlist-btn'
 									onClick={() => {
-										log('clicked');
+										handleShufflePlaylist(playlist._id);
+										// log('clicked');
 									}}
 								/>
 								<FaPlay
