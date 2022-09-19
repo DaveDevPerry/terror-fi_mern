@@ -12,8 +12,11 @@ export const favouritesReducer = (state, action) => {
 			log(action.payload, 'set fav payload');
 			// log(action.payload[0].songs, 'set fav payload');
 			return {
-				favourites: action.payload[0].songs,
+				favourites: action.payload.length === 0 ? [] : action.payload[0].songs,
 			};
+		// return {
+		// 	favourites: action.payload[0].songs,
+		// };
 		case 'ADD_FAVOURITE':
 			log(state, 'fav state - add fav');
 			log(action.payload, ' payload add fav');

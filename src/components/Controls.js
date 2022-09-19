@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 // import React, { useEffect, useContext } from 'react';
 // import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
@@ -19,6 +19,10 @@ import { BiShuffle, BiRepeat } from 'react-icons/bi';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { usePlayerContext } from '../hooks/usePlayerContext';
 import PlaylistOptions from './PlaylistOptions';
+import { useEffect } from 'react';
+import { log } from '../helper';
+// import { useRef } from 'react';
+// import { log } from '../helper';
 // import { log } from '../helper';
 
 function Controls({
@@ -149,6 +153,13 @@ function Controls({
 
 	useEffect(() => {
 		audio.current.volume = stateVolume;
+		log(playing, 'is playing in controls');
+		// setTimeout(() => {
+		// 	if (playing === false) {
+		// 		togglePlaying();
+		// 		toggleAudio();
+		// 	}
+		// }, 3000);
 		if (playing) {
 			toggleAudio();
 		}

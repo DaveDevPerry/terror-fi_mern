@@ -218,12 +218,20 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 		// log(e.target, 'e target');
 		log(currentSong, 'song this title');
 		// log(this.song._id, 'song id?');
+		// const songId = [songslist[currentSong]._id];
 		const songId = songslist[currentSong]._id;
 		log(songId, 'song id in mongo');
 
 		// const playlistData = [playlistId, songId]
 		// user details
 		log(user, 'user in animated routes add song to playlist');
+
+		const pLID = await playlistId;
+
+		const plData = {
+			plID: pLID,
+			sID: songId,
+		};
 
 		// check if already a fav
 		// const testSongId = '6313f4ed02cefa8f1dc9535b';
@@ -233,14 +241,15 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 
 		const response = await fetch(
 			// `${process.env.REACT_APP_BACKEND_URL}/api/playlists/631a5feb0d4492d2be61cd2a`,
-			`${process.env.REACT_APP_BACKEND_URL}/api/playlists/${playlistId}`,
+			`${process.env.REACT_APP_BACKEND_URL}/api/playlists/${pLID}`,
+			// `${process.env.REACT_APP_BACKEND_URL}/api/playlists/${playlistId}`,
 			{
 				// const response = await fetch('/api/weights', {
 				method: 'PATCH',
 				// body: testSongId,
-				body: songId,
+				body: plData,
 				headers: {
-					'Content-Type': 'application/json',
+					// 'Content-Type': 'application/json',
 					Authorization: `Bearer ${user.token}`,
 				},
 			}
@@ -255,7 +264,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 			// setError(null);
 			log('user updated?', json);
 			// playlistDispatch({ type: 'UPDATE_USER_PLAYLIST_WITH_SONG', payload: songId });
-			playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: songId });
+			playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: plData });
+			// playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: songId });
 		}
 		log('new band added', json);
 		// const clonedPlaylists = [...playlists];

@@ -21,6 +21,7 @@ export const playerReducer = (state, action) => {
 				...state,
 				songslist: action.data.albumTracks,
 				playListTitle: action.data.playListName,
+				// currentSong: 0,
 				// playing: true,
 			};
 
@@ -91,6 +92,7 @@ export const playerReducer = (state, action) => {
 // children represents everything the PlayerContextTestProvider wraps
 export const PlayerContextTestProvider = ({ children }) => {
 	const initialState = {
+		// currentSong: null,
 		currentSong: 0,
 		// currentCover: 0,
 		// songslist: null,

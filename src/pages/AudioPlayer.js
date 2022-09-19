@@ -326,6 +326,42 @@ function AudioPlayer({
 		navigate('/library');
 	};
 
+	// useEffect(() => {
+	// 	audio.current.volume = stateVolume;
+	// 	log(playing, 'is playing in controls');
+	// 	setTimeout(() => {
+	// 		if (playing === false) {
+	// 			togglePlaying();
+	// 			toggleAudio();
+	// 		}
+	// 	}, 3000);
+	// 	// if (playing) {
+	// 	// 	toggleAudio();
+	// 	// }
+
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [currentSong]);
+
+	// useEffect(() => {
+	// 	dispatch({ type: 'START_PLAYING', data: true });
+	// }, [playing]);
+
+	// useEffect(() => {
+	// 	audio.current.volume = stateVolume;
+	// 	log(playing, 'is playing in controls');
+	// 	// setTimeout(() => {
+	// 	// 	if (playing === false) {
+	// 	// 		togglePlaying();
+	// 	// 		toggleAudio();
+	// 	// 	}
+	// 	// }, 3000);
+	// 	if (playing) {
+	// 		toggleAudio();
+	// 	}
+
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [currentSong]);
+
 	return (
 		<StyledAudioPlayer
 			initial={{ width: 0 }}

@@ -29,8 +29,11 @@ export const playlistsReducer = (state, action) => {
 			log(action.payload, 'playlist context');
 			log(state, 'state, update playlist');
 			return {
-				// users: state.users.filter((user) => user._id === action.payload._id),
+				// playlists: [...state]
 			};
+		// return {
+		// 	users: state.users.filter((user) => user._id === action.payload._id),
+		// };
 		case 'DELETE_PLAYLIST':
 			log(action.payload, 'delete playlist context');
 			log(state, 'state, delete playlist');
