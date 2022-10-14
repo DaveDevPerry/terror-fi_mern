@@ -1,13 +1,19 @@
 // import { useStateContext } from '../lib/context';
+import { useAlbumsContext } from './useAlbumsContext';
 import { useAuthContext } from './useAuthContext';
+// import { useFavouritesContext } from './useFavouritesContext';
 import { usePlaylistsContext } from './usePlaylistsContext';
 // import { usePlayerContext } from './usePlayerContext';
 import { useSongsContext } from './useSongsContext';
+import { useUsersContext } from './useUserContext';
 
 export const useLogout = () => {
 	const { dispatch } = useAuthContext();
 	const { dispatch: songsDispatch } = useSongsContext();
 	const { dispatch: playlistsDispatch } = usePlaylistsContext();
+	const { dispatch: userDispatch } = useUsersContext();
+	// const { dispatch: favouritesDispatch } = useFavouritesContext();
+	const { dispatch: albumDispatch } = useAlbumsContext();
 	// const {dispatch: playerDispatch} = usePlayerContext()
 
 	// const {
@@ -40,6 +46,9 @@ export const useLogout = () => {
 			{ type: 'SET_PLAYLISTS', payload: null },
 			{ type: 'SET_PLAYLIST', payload: null }
 		);
+		userDispatch({ type: 'SET_USER', payload: null });
+		// favouritesDispatch({ type: 'SET_FAVOURITES', payload: null });
+		albumDispatch({ type: 'SET_ALBUMS', payload: null });
 		// playerDispatch({})
 	};
 

@@ -247,9 +247,9 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 				// const response = await fetch('/api/weights', {
 				method: 'PATCH',
 				// body: testSongId,
-				body: plData,
+				body: JSON.stringify({ plData }),
 				headers: {
-					// 'Content-Type': 'application/json',
+					'Content-Type': 'application/json',
 					Authorization: `Bearer ${user.token}`,
 				},
 			}

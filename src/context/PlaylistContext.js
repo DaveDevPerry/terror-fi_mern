@@ -7,6 +7,7 @@ export const playlistsReducer = (state, action) => {
 	switch (action.type) {
 		case 'SET_PLAYLISTS':
 			return {
+				...state,
 				playlists: action.payload,
 			};
 
@@ -14,20 +15,35 @@ export const playlistsReducer = (state, action) => {
 			log(action.payload, 'action payload playlist');
 
 			return {
-				playlists: state,
+				...state,
 				playlist: action.payload,
 			};
+		// return {
+		// 	playlists: state,
+		// 	playlist: action.payload,
+		// };
 
 		case 'CREATE_PLAYLIST':
 			log(state, 'current playlist state');
 			log(action.payload, 'new playlist');
-			log([action.payload, ...state.playlists], 'new playist array');
+			log([action.payload, ...state.playlists], 'new playlist array');
 			return {
+				...state,
 				playlists: [action.payload, ...state.playlists],
 			};
 		case 'UPDATE_PLAYLIST':
 			log(action.payload, 'playlist context');
 			log(state, 'state, update playlist');
+			const statePl = state;
+			log(statePl, 'state pl');
+			const clonedPL = [...state];
+			const playlistToUpdate = clonedPL.filter((playlist) => {
+				return playlist._id === action.payload.plID;
+			});
+			log(playlistToUpdate, 'playlist to update');
+			playlistToUpdate[0].songs.push(action.payload.sID);
+			log(playlistToUpdate, 'playlist to update with extra song');
+
 			return {
 				// playlists: [...state]
 			};
