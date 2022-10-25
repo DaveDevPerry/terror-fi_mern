@@ -34,18 +34,21 @@ export const playlistsReducer = (state, action) => {
 		case 'UPDATE_PLAYLIST':
 			log(action.payload, 'playlist context');
 			log(state, 'state, update playlist');
-			const statePl = state;
-			log(statePl, 'state pl');
-			const clonedPL = [...state];
-			const playlistToUpdate = clonedPL.filter((playlist) => {
-				return playlist._id === action.payload.plID;
-			});
-			log(playlistToUpdate, 'playlist to update');
-			playlistToUpdate[0].songs.push(action.payload.sID);
-			log(playlistToUpdate, 'playlist to update with extra song');
+			// const statePl = state;
+			// log(statePl, 'state pl');
+			// const clonedPL = [...state];
+			// const playlistToUpdate = clonedPL.filter((playlist) => {
+			// 	return playlist._id === action.payload.plID;
+			// });
+			// log(playlistToUpdate, 'playlist to update');
+			// playlistToUpdate[0].songs.push(action.payload.sID);
+			// log(playlistToUpdate, 'playlist to update with extra song');
 
 			return {
 				// playlists: [...state]
+				// ...state,
+				...state,
+				// playlists: [action.payload, ...state.playlists],
 			};
 		// return {
 		// 	users: state.users.filter((user) => user._id === action.payload._id),

@@ -4,11 +4,11 @@ import { log } from '../helper';
 
 export const useDarkMode = () => {
 	// let navigate = useNavigate();
-	const [theme, setTheme] = useState('light');
+	const [theme, setTheme] = useState('dark');
 	const [mountedComponent, setMountedComponent] = useState(false);
 
 	const setMode = (mode) => {
-		window.localStorage.setItem('theme', mode);
+		window.localStorage.setItem('terror-fi-theme', mode);
 		setTheme(mode);
 	};
 
@@ -19,8 +19,8 @@ export const useDarkMode = () => {
 	};
 
 	useEffect(() => {
-		const localTheme = window.localStorage.getItem('theme');
-		localTheme ? setTheme(localTheme) : setMode('light');
+		const localTheme = window.localStorage.getItem('terror-fi-theme');
+		localTheme ? setTheme(localTheme) : setMode('dark');
 		setMountedComponent(true);
 	}, []);
 	return [theme, themeToggler, mountedComponent];

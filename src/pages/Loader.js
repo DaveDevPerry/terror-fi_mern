@@ -147,11 +147,17 @@ const Loader = ({ theme }) => {
 	}, [favouritesDispatch, user]);
 
 	useEffect(() => {
-		setDefaultAnimation(active_user.defaultAnimation);
-		setMediaToDisplay(active_user.defaultAnimation);
-		setDefaultViewMode(active_user.defaultView);
-		setViewMode(active_user.defaultView);
+		setDefaultAnimation(active_user && active_user.defaultAnimation);
+		setMediaToDisplay(active_user && active_user.defaultAnimation);
+		setDefaultViewMode(active_user && active_user.defaultView);
+		setViewMode(active_user && active_user.defaultView);
 	}, [user]);
+	// useEffect(() => {
+	// 	setDefaultAnimation(active_user.defaultAnimation);
+	// 	setMediaToDisplay(active_user.defaultAnimation);
+	// 	setDefaultViewMode(active_user.defaultView);
+	// 	setViewMode(active_user.defaultView);
+	// }, [user]);
 
 	// useEffect(() => {
 	// 	const fetchPlaylists = async () => {

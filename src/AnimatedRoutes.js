@@ -264,7 +264,8 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 			// setError(null);
 			log('user updated?', json);
 			// playlistDispatch({ type: 'UPDATE_USER_PLAYLIST_WITH_SONG', payload: songId });
-			playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: plData });
+			playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: json });
+			// playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: plData });
 			// playlistDispatch({ type: 'UPDATE_PLAYLIST', payload: songId });
 		}
 		log('new band added', json);
