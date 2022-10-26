@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+![Screenshot](./src/assets/screen_terrorfi.webp)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project Link: [TERROR_Fi](https://terror-fi-mern.vercel.app)
+
+# TERROR-Fi
+
+<!-- A little info about your project and/ or overview that explains **what** the project is about. -->
+
+A single page app built for Terrorvision fans to easily stream rare demo songs from the bands early days. Containing custom animations and an audio visualizer to provide a great user experience.
+
+<!-- ## Game Details
+
+Each player choses ten numbers (from available lotto numbers range). Mark off each of your numbers if the ball was drawn in the official lotto draw. The winner is the first person to match all ten numbers. -->
+
+## Motivation
+
+Terrorvision are my favourite band and I really wanted to stream un-released songs in addition to all their other songs. I also had permission from the band to share the link for other Terrorvision fans to enjoy.
+
+## Code
+
+I used the MERN stack for this. In addition it includes custom hooks and functions.
+
+## Future Features
+
+- Access to device media
+- Progressive Web App
+- Improved desktop layout design
 
 ## Available Scripts
 
@@ -14,10 +38,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+<!--
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information. -->
 
 ### `npm run build`
 
@@ -27,44 +52,34 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ## Code Example
 
-### `npm run eject`
+Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise. -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- ## Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Provide step by step series of examples and explanations about how to get a development env running. -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<!-- ## API Reference
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
 
-## Learn More
+## Tests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Describe and show how to run the tests with code examples. -->
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- ## How to use? -->
 
-### Code Splitting
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+If you want to contact me you can reach me at [daveperry.tech](https://daveperry.tech)
 
-### Analyzing the Bundle Size
+<!-- [loopy lotto repo](https://github.com/your_username/repo_name) -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
+<!-- A short snippet describing the license (MIT, Apache etc) -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more information.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- MIT © [Dave Perry]() -->
