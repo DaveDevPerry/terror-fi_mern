@@ -148,7 +148,11 @@ const Playlists = ({
 				/>
 			)}
 
-			<PlaylistsList handleViewPlaylist={handleViewPlaylist} />
+			<PlaylistsList
+				handleViewPlaylist={handleViewPlaylist}
+				handlePlaylist={handlePlaylist}
+				handleShufflePlaylist={handleShufflePlaylist}
+			/>
 
 			<AddPlaylistForm
 				handlePlaylistFormDisplay={handlePlaylistFormDisplay}

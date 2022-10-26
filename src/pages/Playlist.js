@@ -294,7 +294,8 @@ const Playlist = ({
 const StyledPlaylist = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
+	/* justify-content: flex-start; */
 	row-gap: 2rem;
 	flex: 1;
 	max-width: 80rem;

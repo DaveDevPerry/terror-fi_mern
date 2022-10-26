@@ -317,8 +317,9 @@ function AudioPlayer({
 		// }
 	};
 
-	const { menuStatus, setMenuStatus, viewMode, setViewMode } =
-		useStateContext();
+	const { menuStatus, setMenuStatus, viewMode } = useStateContext();
+	// const { menuStatus, setMenuStatus, viewMode, setViewMode } =
+	// 	useStateContext();
 
 	const handleMenu = () => {
 		log(menuStatus, 'menu status');
@@ -410,7 +411,7 @@ function AudioPlayer({
 				/>
 			)}
 
-			<div className='view-mode-btns'>
+			{/* <div className='view-mode-btns'>
 				{viewMode === 'tracklist' && (
 					<button
 						className='view-mode-btn'
@@ -431,8 +432,7 @@ function AudioPlayer({
 						track list
 					</button>
 				)}
-			</div>
-			{/* <AnimatePrescence mode='wait'> */}
+			</div> */}
 
 			{viewMode === 'tracklist' && <Playlist />}
 			{viewMode === 'visualizer' && <AudioVisualizer />}

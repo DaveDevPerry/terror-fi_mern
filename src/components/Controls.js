@@ -21,6 +21,8 @@ import { usePlayerContext } from '../hooks/usePlayerContext';
 import PlaylistOptions from './PlaylistOptions';
 import { useEffect } from 'react';
 import { log } from '../helper';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
+import { FaHeart } from 'react-icons/fa';
 // import PlaylistOptionsDesktop from './desktop/PlaylistOptionsDesktop';
 // import { useViewport } from '../hooks/useViewport';
 // import { useRef } from 'react';
@@ -75,6 +77,8 @@ function Controls({
 		// songslist,
 		// dispatch,
 	} = usePlayerContext();
+
+	const { favourites } = useFavouritesContext();
 
 	// const { width } = useViewport();
 	// const breakpoint = 620;
@@ -212,7 +216,15 @@ function Controls({
 					onClick={toggleFav}
 					// className={'favourite ' + (random ? 'active' : '')}
 				>
-					<FiHeart className='fas fa-favourite' />
+					{favourites.some(
+						(favourite) => favourite._id === songslist[currentSong]._id
+					) ? (
+						<FaHeart className='fas fa-favourite' />
+					) : (
+						<FiHeart className='fas fa-favourite off' />
+					)}
+					{/* {songslist[currentSong]._id} */}
+					{/* <FiHeart className='fas fa-favourite' /> */}
 				</span>
 			</div>
 			<div className='lower-container'>
@@ -334,6 +346,10 @@ const StyledControls = styled.div`
 			}
 			.fas.fa-favourite {
 				/* color: ${({ theme }) => theme.primaryColor}; */
+				color: ${({ theme }) => theme.red};
+				&.off {
+					color: ${({ theme }) => theme.white};
+				}
 			}
 		}
 		.songMeta {

@@ -84,7 +84,38 @@ function PlaylistsList({
 								</span>
 							</div>
 							<div className='playlist-control-btns'>
-								<ImShuffle
+								{playlist.songs.length >= 1 ? (
+									<>
+										<ImShuffle
+											className='shuffle-playlist-btn'
+											onClick={() => {
+												handleShufflePlaylist(playlist._id);
+											}}
+										/>
+										<FaPlay
+											className='play-playlist-btn'
+											onClick={() => {
+												handlePlaylist(playlist._id);
+											}}
+										/>
+									</>
+								) : (
+									<>
+										<ImShuffle
+											className='shuffle-playlist-btn not-active'
+											// onClick={() => {
+											// 	handleShufflePlaylist(playlist._id);
+											// }}
+										/>
+										<FaPlay
+											className='play-playlist-btn not-active'
+											// onClick={() => {
+											// 	handlePlaylist(playlist._id);
+											// }}
+										/>
+									</>
+								)}
+								{/* <ImShuffle
 									className='shuffle-playlist-btn'
 									onClick={() => {
 										handleShufflePlaylist(playlist._id);
@@ -95,7 +126,7 @@ function PlaylistsList({
 									onClick={() => {
 										handlePlaylist(playlist._id);
 									}}
-								/>
+								/> */}
 							</div>
 						</li>
 					))}
@@ -186,10 +217,26 @@ const StyledPlaylistsList = styled.div`
 				.options-playlist-btn {
 					color: ${({ theme }) => theme.white};
 					font-size: 2rem;
+					/* &.not-active {
+						color: ${({ theme }) => theme.borderLine};
+					
+					} */
 				}
 				.play-playlist-btn {
 					/* color: ${({ theme }) => theme.white}; */
 					font-size: 1.6rem;
+					&.not-active {
+						color: ${({ theme }) => theme.borderLine};
+						/* font-size: 1.8rem; */
+					}
+				}
+				.shuffle-playlist-btn {
+					/* color: ${({ theme }) => theme.white}; */
+					/* font-size: 1.6rem; */
+					&.not-active {
+						color: ${({ theme }) => theme.borderLine};
+						/* font-size: 1.8rem; */
+					}
 				}
 			}
 		}
