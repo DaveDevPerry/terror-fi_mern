@@ -20,6 +20,9 @@ import DeletePlaylistConfirmation from '../components/DeletePlaylistConfirmation
 import { log } from '../helper';
 import PlaylistWidget from '../components/PlaylistWidget';
 import PlaylistDeleteWidget from '../components/PlaylistDeleteWidget';
+import { useViewport } from '../hooks/useViewport';
+import PlaylistWidgetDesktop from '../components/PlaylistWidgetDesktop';
+import PlaylistDeleteWidgetDesktop from '../components/PlaylistDeleteWidgetDesktop';
 // import { format } from 'date-fns';
 // import BandSupportGigsList from '../components/BandSupportGigsList';
 // import BandHeadlineGigsList from '../components/BandHeadlineGigsList';
@@ -50,6 +53,9 @@ const Playlist = ({
 			navigate('/');
 		}
 	}, [navigate, dataLoaded]);
+
+	const { width } = useViewport();
+	const breakpoint = 620;
 
 	// useEffect(() => {
 	// 	log(playlistToView, ' playlist id to view  in playlist');
@@ -184,10 +190,17 @@ const Playlist = ({
 			<Toaster />
 			<PlaylistsHeader handleBackClick={handleBackClick} pageTitle='playlist' />
 
-			<PlaylistWidget
-				handlePlayPlaylist={handlePlayPlaylist}
-				handleShufflePlayPlaylist={handleShufflePlayPlaylist}
-			/>
+			{width < breakpoint ? (
+				<PlaylistWidget
+					handlePlayPlaylist={handlePlayPlaylist}
+					handleShufflePlayPlaylist={handleShufflePlayPlaylist}
+				/>
+			) : (
+				<PlaylistWidgetDesktop
+					handlePlayPlaylist={handlePlayPlaylist}
+					handleShufflePlayPlaylist={handleShufflePlayPlaylist}
+				/>
+			)}
 
 			{viewPlaylist[0] && viewPlaylist[0] && (
 				<PlaylistSongs
@@ -196,33 +209,16 @@ const Playlist = ({
 					removeSongFromPlaylist={removeSongFromPlaylist}
 				/>
 			)}
-			{/* {playlist && playlist && <PlaylistSongs playlist={playlist} />} */}
 
-			{/* <div className='playlist-btns'>
-				<button
-					className='delete-playlist-btn'
-					onClick={handleDeletePlaylistFormDisplay}
-				>
-					delete
-				</button>
-			</div> */}
-
-			{/* <ul className='playlist-options-list'>
-				<li
-					className='delete-playlist-wrapper'
-					onClick={handleDeletePlaylistFormDisplay}
-				>
-					<RiDeleteBin6Line className='delete-playlist-btn' />
-					<div className='playlist-info-wrapper'>
-						<p>delete Playlist</p>
-						<p></p>
-					</div>
-				</li>
-			</ul> */}
-
-			<PlaylistDeleteWidget
-				handleDeletePlaylistFormDisplay={handleDeletePlaylistFormDisplay}
-			/>
+			{width < breakpoint ? (
+				<PlaylistDeleteWidget
+					handleDeletePlaylistFormDisplay={handleDeletePlaylistFormDisplay}
+				/>
+			) : (
+				<PlaylistDeleteWidgetDesktop
+					handleDeletePlaylistFormDisplay={handleDeletePlaylistFormDisplay}
+				/>
+			)}
 
 			<DeletePlaylistConfirmation
 				deletePlaylistFormDisplay={deletePlaylistFormDisplay}
@@ -301,13 +297,13 @@ const StyledPlaylist = styled(motion.div)`
 	justify-content: flex-start;
 	row-gap: 2rem;
 	flex: 1;
-	max-width: 42rem;
+	max-width: 80rem;
 	/* padding: 0 1rem; */
 
 	overflow: hidden;
 	overflow-y: auto;
 	transition: all 200ms linear;
-	/* margin: 0 auto; */
+	margin: 0 auto;
 	/* margin: 0 1rem; */
 	scroll-behavior: smooth;
 	scroll-behavior: smooth;

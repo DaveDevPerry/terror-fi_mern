@@ -17,17 +17,16 @@ import { FiSkipForward, FiSkipBack, FiHeart } from 'react-icons/fi';
 import { GoUnmute } from 'react-icons/go';
 import { BiShuffle, BiRepeat } from 'react-icons/bi';
 import { MdPlaylistAdd } from 'react-icons/md';
-import { usePlayerContext } from '../hooks/usePlayerContext';
-import PlaylistOptions from './PlaylistOptions';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
+// import PlaylistOptions from '../PlaylistOptions';
 import { useEffect } from 'react';
-import { log } from '../helper';
-// import PlaylistOptionsDesktop from './desktop/PlaylistOptionsDesktop';
-// import { useViewport } from '../hooks/useViewport';
+import { log } from '../../helper';
+import PlaylistOptionsDesktop from './PlaylistOptionsDesktop';
 // import { useRef } from 'react';
 // import { log } from '../helper';
 // import { log } from '../helper';
 
-function Controls({
+function ControlsDesktop({
 	dur,
 	setDur,
 	currentTime,
@@ -75,9 +74,6 @@ function Controls({
 		// songslist,
 		// dispatch,
 	} = usePlayerContext();
-
-	// const { width } = useViewport();
-	// const breakpoint = 620;
 
 	// const audio = useRef('audio_tag');
 
@@ -158,7 +154,7 @@ function Controls({
 
 	useEffect(() => {
 		audio.current.volume = stateVolume;
-		log(playing, 'is playing in controls');
+		log(playing, 'is playing in controlsDesktop');
 		// setTimeout(() => {
 		// 	if (playing === false) {
 		// 		togglePlaying();
@@ -178,7 +174,7 @@ function Controls({
 	};
 
 	return (
-		<StyledControls className='controls'>
+		<StyledControlsDesktop className='controls'>
 			<div className='upper-container'>
 				{/* <div className='progressb'>
 					<span className='currentT'>{fmtMSS(currentTime)}</span>
@@ -290,8 +286,7 @@ function Controls({
 			</div>
 			{/* <AnimatePresence mode='wait'> */}
 			{/* {playlistDisplay === true && ( */}
-
-			<PlaylistOptions
+			<PlaylistOptionsDesktop
 				setPlaylistDisplay={setPlaylistDisplay}
 				playlistDisplay={playlistDisplay}
 				handlePlaylistDisplay={handlePlaylistDisplay}
@@ -300,13 +295,12 @@ function Controls({
 				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
 				playlistFormDisplay={playlistFormDisplay}
 			/>
-
 			{/* )} */}
 			{/* </AnimatePresence> */}
-		</StyledControls>
+		</StyledControlsDesktop>
 	);
 }
-const StyledControls = styled.div`
+const StyledControlsDesktop = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1rem;
@@ -314,11 +308,13 @@ const StyledControls = styled.div`
 	color: ${({ theme }) => theme.white};
 	align-items: center;
 	width: 100%;
-	padding: 1rem 0.5rem;
+	padding: 1rem;
 	background-color: ${({ theme }) => theme.bgGrey};
-	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};
+	border: 0.4rem solid ${({ theme }) => theme.primaryColor};
+	border-radius: 10px;
 	z-index: 5;
 	position: relative;
+	margin: 0 1rem;
 	.upper-container {
 		display: flex;
 		flex-direction: row;
@@ -604,4 +600,4 @@ const StyledControls = styled.div`
 	}
 `;
 
-export default Controls;
+export default ControlsDesktop;

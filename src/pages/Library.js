@@ -29,6 +29,11 @@ import { usePlaylistsContext } from '../hooks/usePlaylistsContext';
 import FavouritesWidget from '../components/FavouritesWidget';
 import RandomizeWidget from '../components/RandomiseWidget';
 import { useFavouritesContext } from '../hooks/useFavouritesContext';
+import { useViewport } from '../hooks/useViewport';
+import FavouritesWidgetDesktop from '../components/desktop/FavouritesWidgetDesktop';
+import RandomizeWidgetDesktop from '../components/desktop/RandomiseWidgetDesktop';
+import AlbumGrid from '../components/AlbumGrid';
+
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
 // import playerContext from '../context/playerContext';
@@ -51,6 +56,9 @@ const Library = ({
 	// const { songslist } = playerContext();
 	// const { songslist } = playerReducer()
 	// const {
+
+	const { width } = useViewport();
+	const breakpoint = 620;
 
 	// 	setAlbumSongs,
 	// 	songslist,
@@ -248,11 +256,19 @@ const Library = ({
 			<LibraryHeader handleBackClick={handleBackClick} />
 
 			<div className='library-container'>
-				<FavouritesWidget
-					playFavourites={playFavourites}
-					shuffleFavourites={shuffleFavourites}
-					viewFavourites={viewFavourites}
-				/>
+				{width < breakpoint ? (
+					<FavouritesWidget
+						playFavourites={playFavourites}
+						shuffleFavourites={shuffleFavourites}
+						viewFavourites={viewFavourites}
+					/>
+				) : (
+					<FavouritesWidgetDesktop
+						playFavourites={playFavourites}
+						shuffleFavourites={shuffleFavourites}
+						viewFavourites={viewFavourites}
+					/>
+				)}
 
 				{/* <AlbumSlider albums={albums} handleClick={handleClick} /> */}
 				<LibraryPlaylists
@@ -267,9 +283,17 @@ const Library = ({
 				shuffleFavourites={shuffleFavourites}
 			/> */}
 
-				<AlbumSlider albums={albums} handleClick={handleClick} />
+				{width < breakpoint ? (
+					<AlbumSlider albums={albums} handleClick={handleClick} />
+				) : (
+					<AlbumGrid albums={albums} handleClick={handleClick} />
+				)}
 
-				<RandomizeWidget playAllRandom={playAllRandom} />
+				{width < breakpoint ? (
+					<RandomizeWidget playAllRandom={playAllRandom} />
+				) : (
+					<RandomizeWidgetDesktop playAllRandom={playAllRandom} />
+				)}
 			</div>
 
 			{/* <ul className='select-list'>
@@ -328,7 +352,7 @@ const StyledLibrary = styled(motion.section)`
 	z-index: 5;
 	row-gap: 2rem;
 	margin: 0 auto;
-	max-width: 42rem;
+	max-width: 80rem;
 	overflow-y: hidden;
 	margin-bottom: 2rem;
 
@@ -346,7 +370,7 @@ const StyledLibrary = styled(motion.section)`
 		z-index: 5;
 		row-gap: 2rem;
 		margin: 0 auto;
-		max-width: 42rem;
+		max-width: 80rem;
 		overflow-y: hidden;
 		/* margin-bottom: 2rem; */
 	}

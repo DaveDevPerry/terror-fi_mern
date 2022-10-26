@@ -9,24 +9,27 @@ import { AlbumsContextProvider } from './context/AlbumContext';
 import { UsersContextProvider } from './context/UserContext';
 import { PlaylistsContextProvider } from './context/PlaylistContext';
 import { FavouritesContextProvider } from './context/FavouritesContext';
+import { ViewportContextProvider } from './context/ViewportContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<AuthContextProvider>
-			<UsersContextProvider>
-				<FavouritesContextProvider>
-					<PlaylistsContextProvider>
-						<AlbumsContextProvider>
-							<SongsContextProvider>
-								<PlayerContextTestProvider>
-									<App />
-								</PlayerContextTestProvider>
-							</SongsContextProvider>
-						</AlbumsContextProvider>
-					</PlaylistsContextProvider>
-				</FavouritesContextProvider>
-			</UsersContextProvider>
-		</AuthContextProvider>
+		<ViewportContextProvider>
+			<AuthContextProvider>
+				<UsersContextProvider>
+					<FavouritesContextProvider>
+						<PlaylistsContextProvider>
+							<AlbumsContextProvider>
+								<SongsContextProvider>
+									<PlayerContextTestProvider>
+										<App />
+									</PlayerContextTestProvider>
+								</SongsContextProvider>
+							</AlbumsContextProvider>
+						</PlaylistsContextProvider>
+					</FavouritesContextProvider>
+				</UsersContextProvider>
+			</AuthContextProvider>
+		</ViewportContextProvider>
 	</React.StrictMode>
 );

@@ -17,6 +17,9 @@ import { log } from '../helper';
 import { Toaster } from 'react-hot-toast';
 import { useAuthContext } from '../hooks/useAuthContext';
 import FavouritesViewWidget from '../components/FavouritesViewWidget';
+import FavouritesListDesktop from '../components/desktop/FavouritesListDesktop';
+import { useViewport } from '../hooks/useViewport';
+import FavouritesViewWidgetDesktop from '../components/FavouritesViewWidgetDesktop';
 // import { useSongsContext } from '../hooks/useSongsContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 
@@ -33,6 +36,9 @@ const Favourites = ({
 }) => {
 	const { dataLoaded, setShowOptions, showOptions } = useStateContext();
 	const { user } = useAuthContext();
+
+	const { width } = useViewport();
+	const breakpoint = 620;
 	// const { songs } = useSongsContext();
 	// const { dispatch } = usePlayerContext();
 
@@ -134,17 +140,30 @@ const Favourites = ({
 				handleBackClick={handleBackClick}
 				pageTitle='favourites'
 			/>
-
-			<FavouritesViewWidget
-				playFavourites={handlePlayFavourites}
-				shuffleFavourites={shuffleFavourites}
-				handleShuffleFavourites={handleShuffleFavourites}
-			/>
-
-			<FavouritesList
-				handleOptions={handleOptions}
-				removeFavourite={removeFavourite}
-			/>
+			{width < breakpoint ? (
+				<FavouritesViewWidget
+					playFavourites={handlePlayFavourites}
+					shuffleFavourites={shuffleFavourites}
+					handleShuffleFavourites={handleShuffleFavourites}
+				/>
+			) : (
+				<FavouritesViewWidgetDesktop
+					playFavourites={handlePlayFavourites}
+					shuffleFavourites={shuffleFavourites}
+					handleShuffleFavourites={handleShuffleFavourites}
+				/>
+			)}
+			{width < breakpoint ? (
+				<FavouritesList
+					handleOptions={handleOptions}
+					removeFavourite={removeFavourite}
+				/>
+			) : (
+				<FavouritesListDesktop
+					handleOptions={handleOptions}
+					removeFavourite={removeFavourite}
+				/>
+			)}
 		</StyledFavourites>
 	);
 };
@@ -161,7 +180,7 @@ const StyledFavourites = styled(motion.section)`
 	z-index: 5;
 	row-gap: 2rem;
 	margin: 0 auto;
-	max-width: 42rem;
+	max-width: 80rem;
 `;
 
 export default Favourites;

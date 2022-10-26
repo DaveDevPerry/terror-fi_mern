@@ -29,6 +29,8 @@ import PlaylistsList from '../components/PlaylistsList';
 // import { log } from '../helper';
 import AddPlaylistForm from '../components/AddPlaylistForm';
 import { Toaster } from 'react-hot-toast';
+import PlaylistCreateWidgetDesktop from '../components/desktop/PlaylistCreateWidgetDesktop';
+import { useViewport } from '../hooks/useViewport';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import { useAuthContext } from '../hooks/useAuthContext';
 // import PlayerState from '../context/PlayerState';
@@ -47,6 +49,9 @@ const Playlists = ({
 	// const { logout } = useLogout();
 	// const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
+
+	const { width } = useViewport();
+	const breakpoint = 620;
 	// const { albums } = useAlbumsContext();
 	// const { songs } = useSongsContext();
 	// const { playlists } = usePlaylistsContext();
@@ -133,98 +138,18 @@ const Playlists = ({
 				handleBackClick={handleBackClick}
 				pageTitle='playlists'
 			/>
-			{/* 
-			<ul className='playlists-list'>
-				{playlists &&
-					playlists.map((playlist, index) => (
-						<li key={index} id='playlist-list'>
-							<div
-								className='li-wrapper'
-								onClick={() => {
-									handleViewPlaylist(playlist._id);
-								}}
-							>
-				
-								<div className='album-info-container'>
-									<p>{playlist.name}</p>
-									<p>
-										{playlist.songs.length === 1
-											? `${playlist.songs.length} song`
-											: `${playlist.songs.length} songs`}
-									</p>
-								</div>
-							</div>
-							<div className='playlist-control-btns'>
-								<ImShuffle
-									className='shuffle-playlist-btn'
-									onClick={() => {
-										log('clicked');
-									}}
-								/>
-								<FaPlay
-									className='play-playlist-btn'
-									onClick={() => {
-										log('clicked');
-									}}
-								/>
-							</div>
-						</li>
-					))}
-			</ul> */}
-			{/* <ul className='playlist-options-list'>
-				<li
-					className='create-playlist-wrapper'
-					onClick={handlePlaylistFormDisplay}
-				>
-					<MdOutlineAddBox className='add-playlist-btn' />
-					<div className='playlist-info-wrapper'>
-						<p>Create Playlist</p>
-						<p></p>
-					</div>
-				</li>
-			</ul> */}
-
-			<PlaylistCreateWidget
-				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
-			/>
+			{width < breakpoint ? (
+				<PlaylistCreateWidget
+					handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				/>
+			) : (
+				<PlaylistCreateWidgetDesktop
+					handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				/>
+			)}
 
 			<PlaylistsList handleViewPlaylist={handleViewPlaylist} />
-			{/* <ul className='playlists-list'>
-				{playlists &&
-					playlists.map((playlist, index) => (
-						<li
-							key={index}
-						>
-							<div
-								className='songmeta_playlist'
-								onClick={() => {
-									handleViewPlaylist(playlist._id);
-								}}
-							>
-								<span className='songname'>{playlist.name}</span>
-								<span className='songauthors'>
-									{playlist.songs.length === 1
-										? `${playlist.songs.length} song`
-										: `${playlist.songs.length} songs`}
-								</span>
-							</div>
-							<div className='playlist-control-btns'>
-								<ImShuffle
-									className='shuffle-playlist-btn'
-									onClick={() => {
-										handleShufflePlaylist(playlist._id);
-									}}
-								/>
-								<FaPlay
-									className='play-playlist-btn'
-									onClick={() => {
-										handlePlaylist(playlist._id);
-									}}
-								/>
-							</div>
-						</li>
-					))}
-			</ul> */}
+
 			<AddPlaylistForm
 				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
 				playlistFormDisplay={playlistFormDisplay}
@@ -247,7 +172,7 @@ const StyledPlaylists = styled(motion.section)`
 	z-index: 5;
 	row-gap: 2rem;
 	margin: 0 auto;
-	max-width: 42rem;
+	max-width: 80rem;
 
 	/* .playlists-list {
 		margin: 0 1rem;

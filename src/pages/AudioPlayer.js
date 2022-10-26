@@ -33,6 +33,9 @@ import { Toaster } from 'react-hot-toast';
 // import playerContext from '../context/playerContext';
 // import VisualyzerWidget from '../components/VisualyzerWidget';
 import AudioVisualizer from '../components/VisualyzerWidget';
+import ControlsDesktop from '../components/desktop/ControlsDesktop';
+import { useViewport } from '../hooks/useViewport';
+import SongProgressWidgetDesktop from '../components/desktop/SongProgressWidgetDesktop';
 // import { useFavouritesContext } from '../hooks/useFavouritesContext';
 
 // import { AnimatePresence } from 'framer-motion';
@@ -55,6 +58,8 @@ function AudioPlayer({
 	const { user, dispatch: authDispatch } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	// const { favourites } = useFavouritesContext();
+	const { width } = useViewport();
+	const breakpoint = 620;
 	const navigate = useNavigate();
 	// const navigate = useNavigate();
 	useEffect(() => {
@@ -389,19 +394,22 @@ function AudioPlayer({
 					</div> */}
 
 			{/* <ProgressWidget /> */}
-			<SongProgressWidget
-				dur={dur}
-				// setDur={setDur}
-				currentTime={currentTime}
-				// setCurrentTime={setCurrentTime}
-				fmtMSS={fmtMSS}
-				handleProgress={handleProgress}
-				// audio={audio}
-				// stateVolume={stateVolume}
-				// setStateVolume={setStateVolume}
-				// toggleAudio={toggleAudio}
-				// handleVolume={handleVolume}
-			/>
+			{width < breakpoint ? (
+				<SongProgressWidget
+					dur={dur}
+					currentTime={currentTime}
+					fmtMSS={fmtMSS}
+					handleProgress={handleProgress}
+				/>
+			) : (
+				<SongProgressWidgetDesktop
+					dur={dur}
+					currentTime={currentTime}
+					fmtMSS={fmtMSS}
+					handleProgress={handleProgress}
+				/>
+			)}
+
 			<div className='view-mode-btns'>
 				{viewMode === 'tracklist' && (
 					<button
@@ -433,36 +441,70 @@ function AudioPlayer({
 			{/* </div> */}
 			{/* <Actions /> */}
 			{/* </div> */}
-			<Controls
-				dur={dur}
-				setDur={setDur}
-				currentTime={currentTime}
-				setCurrentTime={setCurrentTime}
-				fmtMSS={fmtMSS}
-				handleProgress={handleProgress}
-				audio={audio}
-				stateVolume={stateVolume}
-				setStateVolume={setStateVolume}
-				toggleAudio={toggleAudio}
-				handleVolume={handleVolume}
-				handleEnd={handleEnd}
-				// playing,
-				toggleRandom={toggleRandom}
-				toggleRepeat={toggleRepeat}
-				togglePlaying={togglePlaying}
-				prevSong={prevSong}
-				nextSong={nextSong}
-				currentSong={currentSong}
-				repeat={repeat}
-				random={random}
-				songslist={songslist}
-				toggleFav={toggleFav}
-				setPlaylistDisplay={setPlaylistDisplay}
-				playlistDisplay={playlistDisplay}
-				handlePlaylist={handlePlaylist}
-				addSongToPlaylist={addSongToPlaylist}
-				handlePlaylistFormDisplay={handlePlaylistFormDisplay}
-			/>
+			{width < breakpoint ? (
+				<Controls
+					dur={dur}
+					setDur={setDur}
+					currentTime={currentTime}
+					setCurrentTime={setCurrentTime}
+					fmtMSS={fmtMSS}
+					handleProgress={handleProgress}
+					audio={audio}
+					stateVolume={stateVolume}
+					setStateVolume={setStateVolume}
+					toggleAudio={toggleAudio}
+					handleVolume={handleVolume}
+					handleEnd={handleEnd}
+					// playing,
+					toggleRandom={toggleRandom}
+					toggleRepeat={toggleRepeat}
+					togglePlaying={togglePlaying}
+					prevSong={prevSong}
+					nextSong={nextSong}
+					currentSong={currentSong}
+					repeat={repeat}
+					random={random}
+					songslist={songslist}
+					toggleFav={toggleFav}
+					setPlaylistDisplay={setPlaylistDisplay}
+					playlistDisplay={playlistDisplay}
+					handlePlaylist={handlePlaylist}
+					addSongToPlaylist={addSongToPlaylist}
+					handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				/>
+			) : (
+				<ControlsDesktop
+					dur={dur}
+					setDur={setDur}
+					currentTime={currentTime}
+					setCurrentTime={setCurrentTime}
+					fmtMSS={fmtMSS}
+					handleProgress={handleProgress}
+					audio={audio}
+					stateVolume={stateVolume}
+					setStateVolume={setStateVolume}
+					toggleAudio={toggleAudio}
+					handleVolume={handleVolume}
+					handleEnd={handleEnd}
+					// playing,
+					toggleRandom={toggleRandom}
+					toggleRepeat={toggleRepeat}
+					togglePlaying={togglePlaying}
+					prevSong={prevSong}
+					nextSong={nextSong}
+					currentSong={currentSong}
+					repeat={repeat}
+					random={random}
+					songslist={songslist}
+					toggleFav={toggleFav}
+					setPlaylistDisplay={setPlaylistDisplay}
+					playlistDisplay={playlistDisplay}
+					handlePlaylist={handlePlaylist}
+					addSongToPlaylist={addSongToPlaylist}
+					handlePlaylistFormDisplay={handlePlaylistFormDisplay}
+				/>
+			)}
+
 			{/* <Footer /> */}
 			{/* </div> */}
 			{/* </PlayerState> */}
@@ -485,7 +527,7 @@ const StyledAudioPlayer = styled(motion.section)`
 	flex-direction: column;
 	row-gap: 1rem;
 	z-index: 2;
-	max-width: 42rem;
+	max-width: 80rem;
 	margin: 0 auto;
 	.view-mode-btns {
 		display: flex;

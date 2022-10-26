@@ -148,7 +148,7 @@ const StyledSettings = styled(motion.div)`
 	row-gap: 2rem;
 
 	flex: 1;
-	max-width: 42rem;
+	max-width: 80rem;
 	/* padding: 0 1rem; */
 	/* overflow-y: auto; */
 	/* overflow: hidden; */

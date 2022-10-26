@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 import { useLogin } from '../hooks/useLogin';
 import { NavLink } from 'react-router-dom';
 import AppDetails from '../components/AppDetails';
+import { useViewport } from '../hooks/useViewport';
 
 const Login = ({ theme }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { login, error, isLoading } = useLogin();
+
+	const { width } = useViewport();
+	const breakpoint = 620;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -22,11 +26,19 @@ const Login = ({ theme }) => {
 			animate={{ width: '100%' }}
 			exit={{ x: window.innerWidth }}
 		>
-			<div className='brand-wrapper'>
-				<h1 id='brand'>
-					Terror<span id='hyphen'>-</span>Fi
-				</h1>
-			</div>
+			{width < breakpoint ? (
+				<div className='brand-wrapper'>
+					<h1 id='brand'>
+						Terror<span id='hyphen'>-</span>Fi
+					</h1>
+				</div>
+			) : (
+				<div className='brand-wrapper-pc'>
+					<h1 id='brand'>
+						Terror<span id='hyphen'>-</span>Fi
+					</h1>
+				</div>
+			)}
 
 			<div className='form-page-container'>
 				<form onSubmit={handleSubmit} className='login'>
@@ -61,11 +73,19 @@ const Login = ({ theme }) => {
 				<AppDetails theme={theme} />
 			</div>
 
-			<div className='launch-wrapper'>
-				<h1 className='launch-btn' id='lets-rock'>
-					The Demo Tapes
-				</h1>
-			</div>
+			{width < breakpoint ? (
+				<div className='launch-wrapper'>
+					<h1 className='launch-btn' id='lets-rock'>
+						The Demo Tapes
+					</h1>
+				</div>
+			) : (
+				<div className='launch-wrapper-pc'>
+					<h1 className='launch-btn' id='lets-rock'>
+						The Demo Tapes
+					</h1>
+				</div>
+			)}
 		</StyledLogin>
 	);
 };
@@ -74,7 +94,7 @@ const StyledLogin = styled(motion.div)`
 	flex-direction: column;
 	row-gap: 2rem;
 	margin: 0 auto;
-	max-width: 42rem;
+	max-width: 80rem;
 	overflow: hidden;
 	transition: all 200ms linear;
 	flex: 1;
@@ -106,9 +126,55 @@ const StyledLogin = styled(motion.div)`
 			color: ${({ theme }) => theme.white};
 		}
 	}
+	.brand-wrapper-pc {
+		background-color: ${({ theme }) => theme.primaryColor};
+		margin-right: 5rem;
+		margin-left: 5rem;
+		width: 100%;
+		height: 1.5rem;
+		transform: rotate(-2.5deg);
+		margin-top: 5rem;
+		border-radius: 0.5rem;
+		position: relative;
+		h1#brand {
+			position: absolute;
+			top: 0;
+			right: 0.5rem;
+			transform: translate(0, -40%);
+			color: ${({ theme }) => theme.white};
+			text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+				-0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+				0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+			animation: glitch1 2500ms infinite;
+		}
+		span#hyphen {
+			font-family: 'Roboto';
+			color: ${({ theme }) => theme.white};
+		}
+	}
 	.launch-wrapper {
 		background-color: ${({ theme }) => theme.primaryColor};
 		margin-left: 5rem;
+		width: 100%;
+		height: 1.5rem;
+		transform: rotate(-2.5deg);
+		margin-bottom: 5rem;
+		border-radius: 0.5rem;
+		position: relative;
+		.launch-btn {
+			position: absolute;
+			top: 0;
+			left: 0.5rem;
+			transform: translate(0, -30%);
+			color: ${({ theme }) => theme.white};
+			font-size: 3.6rem;
+			letter-spacing: 0.1rem;
+		}
+	}
+	.launch-wrapper-pc {
+		background-color: ${({ theme }) => theme.primaryColor};
+		margin-left: 5rem;
+		margin-right: 5rem;
 		width: 100%;
 		height: 1.5rem;
 		transform: rotate(-2.5deg);
@@ -173,8 +239,9 @@ const StyledLogin = styled(motion.div)`
 		text-align: center;
 		color: ${({ theme }) => theme.white};
 		a {
-			color: ${({ theme }) => theme.secondaryColor};
+			color: ${({ theme }) => theme.primaryColor};
 			text-decoration: none;
+			font-weight: bolder;
 		}
 	}
 	label,
