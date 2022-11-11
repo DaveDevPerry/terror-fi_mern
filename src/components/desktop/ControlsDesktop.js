@@ -314,7 +314,7 @@ const StyledControlsDesktop = styled.div`
 	border-radius: 10px;
 	z-index: 5;
 	position: relative;
-	margin: 0 1rem;
+	/* margin: 0 1rem; */
 	.upper-container {
 		display: flex;
 		flex-direction: row;

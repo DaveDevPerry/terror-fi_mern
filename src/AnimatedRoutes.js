@@ -9,7 +9,7 @@ import AudioPlayer from './pages/AudioPlayer';
 // import { StateContext } from '../lib/context';
 import { AnimatePresence } from 'framer-motion';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+// import Signup from './pages/Signup';
 // import Landing from './pages/Landing';
 import Library from './pages/Library';
 import Loader from './pages/Loader';
@@ -310,10 +310,11 @@ const AnimatedRoutes = ({ user, themeToggler, theme }) => {
 					path='/login'
 					element={!user ? <Login theme={theme} /> : <Navigate to='/' />}
 				/>
-				<Route
+				<Route path='/signup' element={<Navigate to='/' />} />
+				{/* <Route
 					path='/signup'
 					element={!user ? <Signup theme={theme} /> : <Navigate to='/' />}
-				/>
+				/> */}
 				<Route
 					path='/library'
 					element={

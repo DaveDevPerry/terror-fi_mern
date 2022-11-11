@@ -20,6 +20,7 @@ import FavouritesViewWidget from '../components/FavouritesViewWidget';
 import FavouritesListDesktop from '../components/desktop/FavouritesListDesktop';
 import { useViewport } from '../hooks/useViewport';
 import FavouritesViewWidgetDesktop from '../components/FavouritesViewWidgetDesktop';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
 // import { useSongsContext } from '../hooks/useSongsContext';
 // import { usePlayerContext } from '../hooks/usePlayerContext';
 
@@ -36,6 +37,7 @@ const Favourites = ({
 }) => {
 	const { dataLoaded, setShowOptions, showOptions } = useStateContext();
 	const { user } = useAuthContext();
+	const { dispatch: favouritesDispatch } = useFavouritesContext();
 
 	const { width } = useViewport();
 	const breakpoint = 620;
@@ -59,30 +61,26 @@ const Favourites = ({
 	const removeFavourite = async (songId) => {
 		// from front end
 		log(songId, 'song id to remove');
-		let songIndex = user.favourites.indexOf(songId);
-		user.favourites.splice(songIndex, 1);
-		const clonedFavs = [...user.favourites];
-		log(clonedFavs, 'cloned favs');
-		// const clonedSongsInFav = [...songs];
-		// const filteredFavs = clonedSongsInFav.filter((obj) =>
-		// 	clonedFavs.includes(obj._id)
-		// );
-		// log(filteredFavs, 'filtered favs');
-		// const playListData = {
-		// 	albumTracks: filteredFavs,
-		// 	playListName: 'favourites',
-		// };
-		// log(user, 'user id');
-		// from back end
+		// let songIndex = user.favourites.indexOf(songId);
+		// user.favourites.splice(songIndex, 1);
+		// const clonedFavs = [...user.favourites];
+		// log(clonedFavs, 'cloned favs');
+
+		const favouriteDataUpdate = {
+			favouriteID: user.favourites,
+			isAddFavourite: false,
+			songID: songId,
+		};
+
 		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URL}/api/user/${user.userId}`,
+			`${process.env.REACT_APP_BACKEND_URL}/api/favourites/${user.favourites}`,
 			{
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${user.token}`,
 				},
-				body: clonedFavs,
+				body: JSON.stringify({ favouriteDataUpdate }),
 			}
 		);
 		const json = await response.json();
@@ -90,28 +88,40 @@ const Favourites = ({
 		// json.reverse();
 		if (response.ok) {
 			log('ok');
+			favouritesDispatch({
+				type: 'UPDATE_FAVOURITES',
+				payload: favouriteDataUpdate,
+			});
+			// favouritesDispatch({
+			// 	type: 'UPDATE_FAVOURITES',
+			// 	payload: songId,
+			// });
 			// playlistDispatch({
 			// 	type: 'SET_PLAYLISTS',
 			// 	payload: json,
 			// });
 		}
-		// from front end
-		// log(songId, 'song id to remove');
-		// let songIndex = user.favourites.indexOf(songId);
-		// user.favourites.splice(songIndex, 1);
-		// const clonedFavs = [...user.favourites];
-		// log(clonedFavs, 'cloned favs');
-		// const clonedSongsInFav = [...songs];
-		// const filteredFavs = clonedSongsInFav.filter((obj) =>
-		// 	clonedFavs.includes(obj._id)
+		// const response = await fetch(
+		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/${user.userId}`,
+		// 	{
+		// 		method: 'PATCH',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			Authorization: `Bearer ${user.token}`,
+		// 		},
+		// 		body: clonedFavs,
+		// 	}
 		// );
-		// log(filteredFavs, 'filtered favs');
-		// const playListData = {
-		// 	albumTracks: filteredFavs,
-		// 	playListName: 'favourites',
-		// };
-
-		// dispatch({ type: 'SET_SONGS_ARRAY', data: playListData });
+		// const json = await response.json();
+		// log(json, 'user json');
+		// // json.reverse();
+		// if (response.ok) {
+		// 	log('ok');
+		// 	// playlistDispatch({
+		// 	// 	type: 'SET_PLAYLISTS',
+		// 	// 	payload: json,
+		// 	// });
+		// }
 	};
 
 	const handleOptions = (e, songTitle, i) => {

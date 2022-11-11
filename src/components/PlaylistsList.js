@@ -135,26 +135,15 @@ function PlaylistsList({
 	);
 }
 const StyledPlaylistsList = styled.div`
-	/* flex: 1; */
-	/* overflow-y: scroll; */
 	overflow-y: hidden;
 	z-index: 1;
-	/* border: 2px solid green; */
-	/* padding: 0 1rem; */
 	margin: 0 2rem;
-
 	&.no_drag {
 		-webkit-app-region: no-drag;
 	}
 	&.playlist {
-		/* background: ${({ theme }) => theme.bgGrey}; */
-		/* background: ${({ theme }) => theme.bgLightGrey}; */
-		/* background: #e3e3e3; */
-		/* flex: 1 1; */
 		display: flex;
 		flex-direction: column;
-		/* height: 20rem; */
-		/* margin-bottom: 2rem; */
 	}
 	.pltext {
 		display: inline-block;
@@ -170,11 +159,9 @@ const StyledPlaylistsList = styled.div`
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		/* flex: 1 1; */
 		padding: 0;
-		overflow-y: scroll;
-		/* margin: 0 2rem; */
-		/* row-gap: 0.2rem; */
+		overflow-y: auto;
+		/* overflow-y: scroll; */
 
 		li {
 			font-weight: 450;
@@ -188,10 +175,9 @@ const StyledPlaylistsList = styled.div`
 				display: flex;
 				flex-direction: column;
 				flex-wrap: wrap;
-				/* pointer-events: none; */
+				cursor: pointer;
 				.songname {
 					padding: 0 0.5rem;
-					/* font-weight: 600; */
 					font-size: 1.6rem;
 					color: ${({ theme }) => theme.white};
 					text-transform: capitalize;
@@ -200,8 +186,6 @@ const StyledPlaylistsList = styled.div`
 					padding: 0 0.5rem;
 					font-weight: normal;
 					color: ${({ theme }) => theme.primaryColor};
-
-					/* color: #555; */
 					font-size: 1.2rem;
 					text-transform: uppercase;
 					font-weight: bolder;
@@ -217,25 +201,19 @@ const StyledPlaylistsList = styled.div`
 				.options-playlist-btn {
 					color: ${({ theme }) => theme.white};
 					font-size: 2rem;
-					/* &.not-active {
-						color: ${({ theme }) => theme.borderLine};
-					
-					} */
+					cursor: pointer;
 				}
 				.play-playlist-btn {
-					/* color: ${({ theme }) => theme.white}; */
 					font-size: 1.6rem;
 					&.not-active {
 						color: ${({ theme }) => theme.borderLine};
-						/* font-size: 1.8rem; */
+						cursor: unset;
 					}
 				}
 				.shuffle-playlist-btn {
-					/* color: ${({ theme }) => theme.white}; */
-					/* font-size: 1.6rem; */
 					&.not-active {
 						color: ${({ theme }) => theme.borderLine};
-						/* font-size: 1.8rem; */
+						cursor: unset;
 					}
 				}
 			}

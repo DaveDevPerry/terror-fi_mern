@@ -170,90 +170,12 @@ const StyledPlaylists = styled(motion.section)`
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
-	/* align-items: center; */
 	flex-direction: column;
 	display: flex;
-	/* align-items: center; */
 	z-index: 5;
 	row-gap: 2rem;
 	margin: 0 auto;
 	max-width: 80rem;
-
-	/* .playlists-list {
-		margin: 0 1rem;
-		display: flex;
-		flex-direction: column;
-		row-gap: 1rem;
-		z-index: 5;
-
-		li#fav-list,
-		li#playlist-list {
-			display: flex;
-			justify-content: space-between;
-			column-gap: 1rem;
-			.li-wrapper {
-				display: flex;
-				justify-content: flex-start;
-				column-gap: 1rem;
-				padding: 1rem;
-				background-color: ${({ theme }) => theme.bgGrey};
-				border: 0.2rem solid ${({ theme }) => theme.primaryColor};
-				border-radius: 1rem;
-				cursor: pointer;
-				flex: 1;
-				.album-card-artwork-wrapper {
-					pointer-events: none;
-					display: grid;
-					place-content: center;
-					.fa-lg {
-						font-size: 3rem;
-						color: ${({ theme }) => theme.primaryColor};
-					}
-					.arrow-icon.hand {
-						font-size: 2.5rem;
-						color: ${({ theme }) => theme.gold};
-					}
-				}
-				.album-info-container {
-					flex: 1;
-					display: flex;
-					flex-direction: column;
-					pointer-events: none;
-
-					p {
-						color: ${({ theme }) => theme.white};
-						text-transform: capitalize;
-						&:last-of-type {
-							font-size: 1.2rem;
-							text-transform: uppercase;
-							font-weight: bold;
-							color: ${({ theme }) => theme.primaryColor};
-						}
-					}
-				}
-				.playlist-control-btns {
-					display: flex;
-					align-items: center;
-					column-gap: 2rem;
-					.shuffle-playlist-btn,
-					.play-playlist-btn,
-					.options-playlist-btn {
-						color: ${({ theme }) => theme.white};
-						font-size: 2.4rem;
-					}
-					.play-playlist-btn {
-						font-size: 2rem;
-					}
-				}
-			}
-		}
-	} */
-	/*  */
-
-	/* #sign-out-btn {
-		color: ${({ theme }) => theme.white};
-		background-color: ${({ theme }) => theme.primaryColor};
-	} */
 `;
 
 export default Playlists;

@@ -36,6 +36,7 @@ import AudioVisualizer from '../components/VisualyzerWidget';
 import ControlsDesktop from '../components/desktop/ControlsDesktop';
 import { useViewport } from '../hooks/useViewport';
 import SongProgressWidgetDesktop from '../components/desktop/SongProgressWidgetDesktop';
+import { useFavouritesContext } from '../hooks/useFavouritesContext';
 // import { useFavouritesContext } from '../hooks/useFavouritesContext';
 
 // import { AnimatePresence } from 'framer-motion';
@@ -55,12 +56,12 @@ function AudioPlayer({
 	setPlaylistFormDisplay,
 }) {
 	// const { user, dispatch: userDispatch } = useUsersContext();
-	const { user, dispatch: authDispatch } = useAuthContext();
+	const { user } = useAuthContext();
 	const { dataLoaded } = useStateContext();
 	// const { favourites } = useFavouritesContext();
 	const { width } = useViewport();
 	const breakpoint = 620;
-	const navigate = useNavigate();
+	let navigate = useNavigate();
 	// const navigate = useNavigate();
 	useEffect(() => {
 		if (dataLoaded === false) {
@@ -86,6 +87,7 @@ function AudioPlayer({
 		songslist,
 	} = usePlayerContext();
 	const { playing, dispatch } = usePlayerContext();
+	const { favourites, dispatch: favouritesDispatch } = useFavouritesContext();
 
 	const audio = useRef('audio_tag');
 
@@ -155,99 +157,6 @@ function AudioPlayer({
 		audio.current.currentTime = compute;
 	};
 
-	// const toggleFav = async (e) => {
-	// 	log(e.target, 'e target');
-	// 	log(currentSong, 'song this title');
-	// 	// log(this.song._id, 'song id?');
-	// 	const songId = songslist[currentSong]._id;
-	// 	log(songId, 'song id in mongo');
-
-	// 	// user details
-	// 	log(user, 'user in audio player toggle fav');
-
-	// 	// check if already a fav
-	// 	log(user.favourites, 'user favs');
-
-	// 	// log(favourites, 'favourites');
-	// 	// const clonedFavs = [...favourites];
-	// 	// const isFav = clonedFavs.filter((obj) => obj._id === songId);
-	// 	// log(isFav, 'is Fav value', songId);
-	// 	// // if (favourites.filter((obj) => obj._id === songId) {
-	// 	// // 	log(songId, 'songId is a fav');
-	// 	// // }){
-	// 	// if (isFav.length === 1) {
-	// 	// 	log('remove from favs', songId);
-	// 	// 	let songIndex = favourites.indexOf(songId);
-	// 	// 	favourites.splice(songIndex, 1);
-	// 	// 	log(favourites, 'favourites after remove');
-	// 	// } else {
-	// 	// 	log('add to favs', songId);
-
-	// 	// 	favourites.push(songId);
-	// 	// 	log(favourites, 'favourites after add');
-	// 	// }
-	// 	// // }
-	// 	// // if (favourites.filter((obj) => obj._id !== songId)) {
-	// 	// // 	log(songId, 'songId is not a fav');
-	// 	// // }
-	// 	// // add songId to users favourites
-	// 	// // userDispatch({ type: 'UPDATE_USER', payload: songId });
-	// 	// // authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
-	// 	// // http://localhost:4000/api/favourites/632741e355a6587b5e1db96a
-	// 	// const response = await fetch(
-	// 	// 	`${process.env.REACT_APP_BACKEND_URL}/api/favourites/632741e355a6587b5e1db96a`,
-	// 	// 	// `${process.env.REACT_APP_BACKEND_URL}/api/favourites/${user.favourites}`,
-	// 	// 	{
-	// 	// 		// const response = await fetch('/api/weights', {
-	// 	// 		method: 'PATCH',
-	// 	// 		headers: {
-	// 	// 			'Content-Type': 'application/json',
-	// 	// 			Authorization: `Bearer ${user.token}`,
-	// 	// 		},
-	// 	// 		body: favourites,
-	// 	// 	}
-	// 	// );
-	// 	// const json = await response.json();
-	// 	// log(json, 'json updating fav in toggle fav');
-	// 	// if (!response.ok) {
-	// 	// 	// setError(json.error);
-	// 	// 	log('error in patch');
-	// 	// }
-	// 	// if (response.ok) {
-	// 	// 	// setError(null);
-	// 	// 	log('fav updated?', json);
-	// 	// 	// authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
-	// 	// }
-	// 	// log('new band added', json);
-
-	// 	// const response = await fetch(
-	// 	// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`,
-	// 	// 	{
-	// 	// 		// const response = await fetch('/api/user/signup', {
-	// 	// 		method: 'PATCH',
-	// 	// 		headers: {
-	// 	// 			'Content-Type': 'application/json',
-	// 	// 		},
-	// 	// 		body: JSON.stringify({ email, password, username }),
-	// 	// 	}
-	// 	// );
-	// 	// // this will return the data as json or the error
-	// 	// const json = await response.json();
-
-	// 	// if (!response.ok) {
-	// 	// 	setIsLoading(false);
-	// 	// 	setError(json.error);
-	// 	// }
-	// 	// if (response.ok) {
-	// 	// 	// save the user to local storage
-	// 	// 	localStorage.setItem('user-terror-fi', JSON.stringify(json));
-	// 	// 	// update auth context with email
-	// 	// 	dispatch({ type: 'LOGIN', payload: json });
-	// 	// 	// update loading state to false as finished
-	// 	// 	setIsLoading(false);
-	// 	// }
-	// };
-
 	const toggleFav = async (e) => {
 		log(e.target, 'e target');
 		log(currentSong, 'song this title');
@@ -255,66 +164,73 @@ function AudioPlayer({
 		const songId = songslist[currentSong]._id;
 		log(songId, 'song id in mongo');
 
-		// user details
-		log(user, 'user in audio player toggle fav');
+		log(songId, 'song id to remove');
+		// let songIndex = user.favourites.indexOf(songId);
+		// user.favourites.splice(songIndex, 1);
+		// const clonedFavs = [...user.favourites];
+		// log(clonedFavs, 'cloned favs');
 
-		// check if already a fav
+		// check if song if fav
+		const isFav = favourites.find((Obj) => Obj._id === songId);
+		log(isFav, 'is fav status');
 
-		// add songId to users favourites
-		// userDispatch({ type: 'UPDATE_USER', payload: songId });
-		// authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+		const favouriteDataUpdate = {
+			favouriteID: user.favourites,
+			isAddFavourite: isFav === undefined ? true : false,
+			songID: songId,
+		};
 
 		const response = await fetch(
-			`${process.env.REACT_APP_BACKEND_URL}/api/user`,
+			`${process.env.REACT_APP_BACKEND_URL}/api/favourites/${user.favourites}`,
 			{
-				// const response = await fetch('/api/weights', {
 				method: 'PATCH',
-				body: songId,
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${user.token}`,
 				},
+				body: JSON.stringify({ favouriteDataUpdate }),
 			}
 		);
 		const json = await response.json();
-		log(json, 'json updating user in form post submit');
-		if (!response.ok) {
-			// setError(json.error);
-			log('error in patch');
-		}
+		log(json, 'user json');
 		if (response.ok) {
-			// setError(null);
-			log('user updated?', json);
-			authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
+			log('ok');
+			favouritesDispatch({
+				type: 'UPDATE_FAVOURITES',
+				payload: favouriteDataUpdate,
+			});
+			// favouritesDispatch({
+			// 	type: 'UPDATE_FAVOURITES',
+			// 	payload: songId,
+			// });
 		}
-		log('new band added', json);
+
+		// user details
+		// log(user, 'user in audio player toggle fav');
 
 		// const response = await fetch(
-		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user/signup`,
+		// 	`${process.env.REACT_APP_BACKEND_URL}/api/user`,
 		// 	{
-		// 		// const response = await fetch('/api/user/signup', {
 		// 		method: 'PATCH',
+		// 		body: songId,
 		// 		headers: {
 		// 			'Content-Type': 'application/json',
+		// 			Authorization: `Bearer ${user.token}`,
 		// 		},
-		// 		body: JSON.stringify({ email, password, username }),
 		// 	}
 		// );
-		// // this will return the data as json or the error
 		// const json = await response.json();
-
+		// log(json, 'json updating user in form post submit');
 		// if (!response.ok) {
-		// 	setIsLoading(false);
-		// 	setError(json.error);
+		// 	// setError(json.error);
+		// 	log('error in patch');
 		// }
 		// if (response.ok) {
-		// 	// save the user to local storage
-		// 	localStorage.setItem('user-terror-fi', JSON.stringify(json));
-		// 	// update auth context with email
-		// 	dispatch({ type: 'LOGIN', payload: json });
-		// 	// update loading state to false as finished
-		// 	setIsLoading(false);
+		// 	// setError(null);
+		// 	log('user updated?', json);
+		// 	authDispatch({ type: 'UPDATE_USER_FAVOURITE', payload: songId });
 		// }
+		// log('new band added', json);
 	};
 
 	const { menuStatus, setMenuStatus, viewMode } = useStateContext();
@@ -443,6 +359,7 @@ function AudioPlayer({
 			{/* </div> */}
 			{width < breakpoint ? (
 				<Controls
+					favourites={favourites}
 					dur={dur}
 					setDur={setDur}
 					currentTime={currentTime}

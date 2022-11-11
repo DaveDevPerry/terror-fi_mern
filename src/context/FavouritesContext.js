@@ -42,8 +42,23 @@ export const favouritesReducer = (state, action) => {
 			log(action.payload, 'favourite context');
 			log(state, 'state, update favourite');
 			return {
-				// users: state.users.filter((user) => user._id === action.payload._id),
+				favourites:
+					action.payload.isAddFavourite === false
+						? state.favourites.filter(
+								(favourite) => favourite._id !== action.payload.songID
+						  )
+						: state.favourites.filter(
+								(favourite) => favourite._id === action.payload.songID
+						  ),
 			};
+		// case 'UPDATE_FAVOURITES':
+		// 	log(action.payload, 'favourite context');
+		// 	log(state, 'state, update favourite');
+		// 	return {
+		// 		favourites: state.favourites.filter(
+		// 			(favourite) => favourite._id !== action.payload
+		// 		),
+		// 	};
 		case 'DELETE_FAVOURITES':
 			log(action.payload, 'delete favourite context');
 			log(state, 'state, delete favourite');
@@ -59,6 +74,21 @@ export const favouritesReducer = (state, action) => {
 					(favourite) => favourite._id !== action.payload._id
 				),
 			};
+		// case 'REMOVE_FAVOURITE':
+		// 	log(action.payload, 'delete favourite context');
+		// 	log(state, 'state, delete favourite');
+		// 	log(
+		// 		state.favourites.filter(
+		// 			(favourite) => favourite._id !== action.payload._id
+		// 		),
+		// 		'test'
+		// 	);
+		// 	return {
+		// 		// users: state.users.filter((user) => user._id === action.payload._id),
+		// 		favourites: state.favourites.filter(
+		// 			(favourite) => favourite._id !== action.payload._id
+		// 		),
+		// 	};
 
 		default:
 			return state;

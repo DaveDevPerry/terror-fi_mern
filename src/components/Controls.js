@@ -21,7 +21,7 @@ import { usePlayerContext } from '../hooks/usePlayerContext';
 import PlaylistOptions from './PlaylistOptions';
 import { useEffect } from 'react';
 import { log } from '../helper';
-import { useFavouritesContext } from '../hooks/useFavouritesContext';
+// import { useFavouritesContext } from '../hooks/useFavouritesContext';
 import { FaHeart } from 'react-icons/fa';
 // import PlaylistOptionsDesktop from './desktop/PlaylistOptionsDesktop';
 // import { useViewport } from '../hooks/useViewport';
@@ -60,6 +60,7 @@ function Controls({
 	addSongToPlaylist,
 	handlePlaylistFormDisplay,
 	playlistFormDisplay,
+	favourites,
 }) {
 	// Global State
 	const {
@@ -78,7 +79,7 @@ function Controls({
 		// dispatch,
 	} = usePlayerContext();
 
-	const { favourites } = useFavouritesContext();
+	// const { favourites } = useFavouritesContext();
 
 	// const { width } = useViewport();
 	// const breakpoint = 620;
@@ -216,7 +217,8 @@ function Controls({
 					onClick={toggleFav}
 					// className={'favourite ' + (random ? 'active' : '')}
 				>
-					{favourites.some(
+					{favourites &&
+					favourites.some(
 						(favourite) => favourite._id === songslist[currentSong]._id
 					) ? (
 						<FaHeart className='fas fa-favourite' />
@@ -331,6 +333,7 @@ const StyledControls = styled.div`
 	border-top: 0.4rem solid ${({ theme }) => theme.primaryColor};
 	z-index: 5;
 	position: relative;
+	/* margin: 10rem !important; */
 	.upper-container {
 		display: flex;
 		flex-direction: row;

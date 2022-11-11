@@ -2,12 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useLogin } from '../hooks/useLogin';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import AppDetails from '../components/AppDetails';
 import { useViewport } from '../hooks/useViewport';
 
 const Login = ({ theme }) => {
-	const [email, setEmail] = useState('');
+	const [email, setEmail] = useState('demo@dptf.com');
 	const [password, setPassword] = useState('');
 	const { login, error, isLoading } = useLogin();
 
@@ -67,9 +67,9 @@ const Login = ({ theme }) => {
 					{error && <div className='error'>{error}</div>}
 				</form>
 
-				<p>
+				{/* <p>
 					Need an account? Sign up<NavLink to='/signup'> here</NavLink>
-				</p>
+				</p> */}
 				<AppDetails theme={theme} />
 			</div>
 
@@ -218,7 +218,8 @@ const StyledLogin = styled(motion.div)`
 			padding: 0.8rem 1rem;
 			margin: 0;
 			font-size: 1.8rem;
-			color: ${({ theme }) => theme.white};
+			/* color: ${({ theme }) => theme.white}; */
+			color: ${({ theme }) => theme.black};
 			flex: 1;
 			&:focus {
 				outline: none;

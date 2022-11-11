@@ -44,25 +44,38 @@ const LibraryPlaylists = ({
 								</span>
 							</div>
 							<div className='playlist-control-btns'>
-								<ImShuffle
-									className='shuffle-playlist-btn'
-									onClick={() => {
-										handleShufflePlaylist(playlist._id);
-										// log('clicked');
-									}}
-								/>
-								<FaPlay
-									className='play-playlist-btn'
-									onClick={() => {
-										handlePlaylist(playlist._id);
-									}}
-								/>
-								{/* <FaEllipsisV
-									className='options-playlist-btn'
-									onClick={() => {
-										log('clicked');
-									}}
-								/> */}
+								{playlist.songs.length >= 1 ? (
+									<>
+										<ImShuffle
+											className='shuffle-playlist-btn'
+											onClick={() => {
+												handleShufflePlaylist(playlist._id);
+												// log('clicked');
+											}}
+										/>
+										<FaPlay
+											className='play-playlist-btn'
+											onClick={() => {
+												handlePlaylist(playlist._id);
+											}}
+										/>
+									</>
+								) : (
+									<>
+										<ImShuffle
+											className='shuffle-playlist-btn not-active'
+											// onClick={() => {
+											// 	handleShufflePlaylist(playlist._id);
+											// }}
+										/>
+										<FaPlay
+											className='play-playlist-btn not-active'
+											// onClick={() => {
+											// 	handlePlaylist(playlist._id);
+											// }}
+										/>
+									</>
+								)}
 							</div>
 							{/* <div className='playlist_btns_group'>
 							<button
@@ -152,7 +165,6 @@ const StyledLibraryPlaylists = styled.div`
 				flex-direction: column;
 				flex-wrap: wrap;
 				cursor: pointer;
-				/* pointer-events: none; */
 				.songname {
 					padding: 0 0.5rem;
 					/* font-weight: 600; */
@@ -184,9 +196,17 @@ const StyledLibraryPlaylists = styled.div`
 					cursor: pointer;
 				}
 				.play-playlist-btn {
-					/* color: ${({ theme }) => theme.white}; */
 					font-size: 1.6rem;
-					cursor: pointer;
+					&.not-active {
+						color: ${({ theme }) => theme.borderLine};
+						cursor: unset;
+					}
+				}
+				.shuffle-playlist-btn {
+					&.not-active {
+						color: ${({ theme }) => theme.borderLine};
+						cursor: unset;
+					}
 				}
 			}
 		}
