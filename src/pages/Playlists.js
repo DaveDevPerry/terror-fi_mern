@@ -159,6 +159,7 @@ const Playlists = ({
 				playlistFormDisplay={playlistFormDisplay}
 				setPlaylistFormDisplay={setPlaylistFormDisplay}
 				// handleCreatePlaylist={handleCreatePlaylist}
+				// handleCreatePlaylist={handleCreatePlaylist}
 			/>
 		</StyledPlaylists>
 	);
